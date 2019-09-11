@@ -9,6 +9,7 @@ A labor célja megismerni a Docker konténerek használatának alapjait, és a l
 - Docker Desktop
   - A laboron Windows platformot használunk, azonban a feladatok többnyire Linuxon és Mac-en is megoldhatóak.
 - Alap Linux parancsok ismerete. Érdemes átnézni pl.:
+  - <http://bmeaut.github.io/snippets/snippets/0700_LinuxBev/>
   - <https://maker.pro/linux/tutorial/basic-linux-commands-for-beginners>
   - <https://www.pcsuggest.com/basic-linux-commands/>
 
