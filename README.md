@@ -14,6 +14,10 @@ Jegyzetek és példa kódok [BMEVIAUAV42 Mikroszolgáltatások és konténeralap
 
 [Házi feladat leírása és megszerezhető pontok](Hazi-feladat/README.md)
 
+## Laborokhoz szoftverek
+
+[Szoftver lista a laborokhoz](szoftver-lista.md)
+
 ---
 
 Az itt található oktatási segédanyagok a BMEVIAUAV42 tárgy hallgatóinak készültek. Az anyagok oly módú felhasználása, amely a tárgy oktatásához nem szorosan kapcsolódik, csak a szerző(k) és a forrás megjelölésével történhet.
