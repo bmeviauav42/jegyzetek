@@ -4,6 +4,8 @@ Jegyzetek és példa kódok [BMEVIAUAV42 Mikroszolgáltatások és konténeralap
 
 ## Anyagrészek
 
+[Mikroszolgáltatások architektúra bevezető](https://www.aut.bme.hu/Upload/Course/VIAUAV42/hallgatoi_jegyzetek/01-Mikroszolg%c3%a1ltat%c3%a1sok%20architekt%c3%bara%20bevezet%c5%91.pdf)
+
 [Docker alapok](Docker/Docker-alapok.md)
 
 [Dockerfile és docker-compose](Docker/Dockerfile-compose.md)
