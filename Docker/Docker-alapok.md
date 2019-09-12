@@ -27,6 +27,7 @@ A labor célja megismerni a Docker konténerek használatának alapjait, és a l
 
 - Nyissunk egy _PowerShell_ konzolt, és adjuk ki a következő parancsokat.
 - `docker --version`
+  - Ezzel ellenőrizhetjük, hogy a docker CLI elérhető-e.
 - `docker run hello-world`
   - _hello-word_ egy image neve: <https://hub.docker.com/_/hello-world>
   - Image letöltődik, elindul, lefut a benne leírt program.
@@ -36,8 +37,8 @@ A labor célja megismerni a Docker konténerek használatának alapjait, és a l
 - Add ki a következő parancsot: `docker run -it ubuntu`
   - Nézzük meg a fájlrendszert: `ls`
   - Lépjünk ki az interaktív shell-ből: `exit`
-- Konténer terminált, mert a bash folyamat megállt az `exit` hatására. **Konténer addig fut, amíg a benne levő alkalmazás fut.**
-- Leállt konténer még meg van, tartalma még nem veszett el: `docker ps -a`. Nézzük meg a parancs eredményét. Keressük meg a konténerek id-ját.
+- Konténer terminált, mert a bash folyamat megállt az `exit` hatására. **Konténer addig fut, amíg a benne levő alkalmazás (folyamat) fut.**
+- Leállt konténer nem törlődik automatikusan, tartalma nem veszik el: `docker ps -a`. Nézzük meg a parancs eredményét. Keressük meg a konténerek id-ját.
 - Távolítsuk el a két konténert, amit mi indítottunk: `docker rmi <id1> <id2>`
 
 ### Docker CLI parancsok struktúrája
@@ -75,7 +76,7 @@ A labor célja megismerni a Docker konténerek használatának alapjait, és a l
 
 - Indítsunk el egy _nginx_ webszervert: `docker run -d -p 8085:80 nginx`
   - `-d` opció: háttérben fut, a konzolt "visszakaptunk", amint elindult a konténer, és kiírja az image id-t
-  - `-p` hely port _kettőspont_ konténeren belüli port
+  - `-p` helyi port _kettőspont_ konténeren belüli port
 - Nyissuk meg böngészőben ezt a címet: <http://localhost:8085>
 - Nézzük meg a konténer logjait: `docker logs <id>`
 - Állítsuk le a konténert: `docker stop <id>`
@@ -83,7 +84,7 @@ A labor célja megismerni a Docker konténerek használatának alapjait, és a l
 ### _Docker registry_
 
 - Korábban használt parancs: `docker run ubuntu` Az _ubuntu_ az image neve. Ez egy un. registry-ből jön.
-- Tipikus registry: <https://hub.docker.com>
+- Alapértelmezett registry: <https://hub.docker.com>
   - Tipikusan open-source szoftverek image-ei, és az általunk is használt alap image-ek.
   - Vannak továbbiak is (Azure, Google, stb.)
   - Analógia: NPM csomagkezelő, NuGet.org

@@ -19,7 +19,7 @@ A labor célja megismerni a Docker-alap fejlesztés módjait, a Dockerfile és d
 
 ### _Dockerfile_ készítése
 
-Előző laboron készítettünk már egy saját image-et. Az image elkészítésére azonban nem az a módszer a javasolt megoldás, hanem a _Dockerfile_ alapú "recept készítés."
+Előző laboron készítettünk már egy saját image-et. Az image elkészítésére azonban nem az a módszer a javasolt megoldás, hanem a _Dockerfile_ alapú "recept készítés".
 
 1. Készíts egy munkakönytárat, pl. `c:\work\<neptun>\dockerlab\pythonweb`
 1. Nyisd meg a mappát Visual Studio Code-ban.
@@ -74,6 +74,34 @@ Előző laboron készítettünk már egy saját image-et. Az image elkészítés
 1. Indíts el egy új konténert ebből az image-ből: `docker run -it --rm -p 8085:80 hellopython:v1`
 1. Nyisd meg böngészőben a <http://localhost:8085> oldalt.
 
+### Dockerignore és build contextus
+
+A `Dockerfile`-ban hivatkoztunk az aktuális könyvtárra a `.`-tal. Vizsgáljuk meg, hogy ez mit is jelent.
+
+1. Készítsünk az aktuális könyvtárunkba, az `app.py` mellé egy nagy fájlt. PowerShell-ben addjuk ki a következő parancsot.
+
+   ```powershell
+   $out = new-object byte[] 134217728; (new-object Random).NextBytes($out); [IO.File]::WriteAllBytes("$pwd\file.bin", $out)
+   ```
+
+1. Buildeljük le ismét a fenti image-et: `docker build -t hellopython:v1 .`
+
+   Menet közben látni fogjuk a következő sort a build logban: _Sending build context to Docker daemon 111.4MB_, és azt is tapasztalni fogjuk, hogy ez el tart egy kis ideig.
+
+   A `docker build` parancs végén a `.` az aktuális könyvtár. Ezzel tudatjuk a Docker-rel, hogy a buildeléshez ezt a _kontextust_ használja, azon fájlok legyenek elérhetőek a build során, amelyek ebben a kontextusban vannak. A `Dockerfile`-ban a `COPY` így **relatív** útvonallal hivatkozik a kontextusban levő fájlokra.
+
+   Ennek következménye az is, hogy csak a build kontextusban levő fájlokra tudunk hivatkozni. Tehát nem lehet pl. `COPY ..\..\file` használatával tetszőleges fájlt felmásolni a build közben.
+
+1. Ha a build kontextusból szeretnénk kihagyni fájlokat, hogy a build ne tartson sokáig, akkor egy `.dockerignore` fájlra lesz szükségünk (a `.gitignore` mintájára). Ide szokás például a build környezet saját könyvtárait (obj, bin, .vs, node_modules, stb.) is felvenni.
+
+   Készítsünk egy `.dockerignore`-t az alábbi tartalommal
+
+   ```txt
+   file.bin
+   ```
+
+1. Futtassuk ismét a buildet. Így már gyorsabb lesz.
+
 ### Docker-compose
 
 A fenti alkalmazás egy része még nem működik. A python alkalmazás mellett egy redis-re is szükségünk lenne. Futtassunk több konténert egyszerre.
@@ -110,6 +138,42 @@ A fenti alkalmazás egy része még nem működik. A python alkalmazás mellett 
 1. Egy új konzolban nézd meg a futó konténereket a `docker ps` parancs segítségével.
 
 > A Docker-compose alkalmas üzemeltetésre is. A `docker-compose.yml` fájl nem csak fejlesztői környezetet ír le, hanem üzemeltetéshez szükséges környezetet is. Ha a compose fájlt megfelelően írjuk meg (pl. használjuk a [`restart` direktívát](https://docs.docker.com/compose/compose-file/#restart) is), az elindított szolgáltatások automatikusan újraindulnak a rendszer indulásakor.
+
+### Több compose yaml fájl
+
+A docker-compose parancsnak nem adtuk meg, hogy milyen yaml fájlból dolgozzon. Alapértelmezésként a `docker-compose.yaml` kiterjesztésű fájlt **és** ezzel összefésülve a `docker-compose.override.yaml` fájlt használja.
+
+1. Készíts egy `docker-compose.override.yaml` fájlt a másik compose yaml mellé az alábbi tartalommal
+
+   ```yaml
+   version: "3"
+
+   services:
+     redis:
+       command: redis-server --loglevel verbose
+   ```
+
+1. Indítsd el a rendszert `docker-compose up` paranccsal. A redis konténer részletesebben fog naplózni a `command` direktívában megadott utasítás szerint. Állítsd le a rendszert.
+
+1. Nevezd át az előbbi override fájlt `docker-compose.debug.yaml`-re. Készíts egy új `docker-compose.prod.yaml` fájlt a többi yaml mellé az alábbi tartalommal
+
+   ```yaml
+   version: "3"
+
+   services:
+     redis:
+       command: redis-server --loglevel warning
+   ```
+
+1. Indítsuk el a rendszert az alábbi paranccsal
+
+   ```bash
+   docker-compose -f docker-compose.yml -f docker-compose.prod.yml up
+   ```
+
+   A `-f` kapcsolóval tudjuk kérni a megadott yaml fájlok összefésülését.
+
+> Általában a `docker-compose.yaml`-be kerülnek a közös konfigurációk, és további extra fájlokba a környezet specifikus konfigurációk.
 
 ### Tipikusan használt image-ek
 
@@ -186,6 +250,7 @@ A Microsoft Visual Studio a 2017-es verzió óta támogatja és megkönnyíti a 
 ## További olvasnivaló
 
 - _Dockerfile_ szintaktika: <https://docs.docker.com/engine/reference/builder/>
+- `.dockerignore` fájl szintaktika: <https://docs.docker.com/engine/reference/builder/#dockerignore-file>
 - _Dockerfile_ best practice-ek: <https://docs.docker.com/develop/develop-images/dockerfile_best-practices/>
 - _compose_ fájl szintaktika: <https://docs.docker.com/compose/compose-file/>
 - Több compose fájl használata: <https://docs.docker.com/compose/extends/#multiple-compose-files>
