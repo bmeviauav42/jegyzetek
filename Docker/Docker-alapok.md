@@ -81,6 +81,22 @@ A labor célja megismerni a Docker konténerek használatának alapjait, és a l
 - Nézzük meg a konténer logjait: `docker logs <id>`
 - Állítsuk le a konténert: `docker stop <id>`
 
+### Műveletvégzés futó konténerben
+
+- Indítsunk el egy _nginx_ webszervert: `docker run -d -p 8085:80 nginx`
+  - Jegyezzük meg a kiírt konténer id-t, alább használni fogjuk.
+- Futtassunk le egy parancsot a konténerben: `docker exec <id> ls /`
+  - A parancs kilistázta a konténer fájlrendszerének gyökerét.
+- Kérhetünk egy shell-t is a konténerbe ily módon: `docker exec -it <id> /bin/bash`
+  - Az `-it` opció az interaktivitásra utal, azaz a konzolunkat "hozzáköti" a konténerben futó shellhez.
+  - Tipikusan vagy `/bin/bash` vagy `/bin/sh` a Linux konténerekben a shell. Utóbbi az _alpine_ alapú konténerekben gyakori.
+  - Ebben az interaktív shell-ben bármit csinálhatunk, beléphetünk könyvtárakba, megnézhetünk fájlokat, stb. (Arra viszont ügyeljünk, hogy az így végzett módosításaink elvesznek, amikor a konténer törlésre kerül.)
+  - Például nézzük meg az nginx konfigurációját: `cat /etc/nginx/conf.d/default.conf`
+  - Lépjünk ki az `exit` utasítással.
+- Ha szükségünk van egy fájlra, akkor azt kimásolhatjuk a futó konténerből: `docker cp <id>:/etc/nginx/conf.d/default.conf d:\work\nginx.conf`
+  - Szintaktikája: `docker cp <id>:</full/path> <cél/hely>`
+  - A másolás az ellenkező irányba is működik, helyi gépről a konténerbe.
+
 ### _Docker registry_
 
 - Korábban használt parancs: `docker run ubuntu` Az _ubuntu_ az image neve. Ez egy un. registry-ből jön.

@@ -173,7 +173,7 @@ A docker-compose parancsnak nem adtuk meg, hogy milyen yaml fájlból dolgozzon.
 
    A `-f` kapcsolóval tudjuk kérni a megadott yaml fájlok összefésülését.
 
-> Általában a `docker-compose.yaml`-be kerülnek a közös konfigurációk, és további extra fájlokba a környezet specifikus konfigurációk.
+> Általában a `docker-compose.yaml`-be kerülnek a közös konfigurációk, és a további fájlokba a környezet specifikus konfigurációk.
 
 ### Tipikusan használt image-ek
 
