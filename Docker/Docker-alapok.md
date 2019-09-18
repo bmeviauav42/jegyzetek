@@ -150,7 +150,7 @@ Fejlesztés közben sok ideiglenes image keletkezik, és konténereket hagyunk h
 - Ekkor a bal oldalon láthatóak az események. Figyeljük meg, milyen metrikák találhatóak itt.  
 - Hogy olvashatóbb legyen, állítsuk le a processt, `CTRL-C`-vel, majd: `docker events | cut -c1-70`
 - Szimuláljunk konténer meghibásodást: `docker kill nginx`  
-- Adjuk ki a `docker rm -f nginx` parancsot, mit láhatunk? Vessük össze a mellékelt ábra eseményeivel.  
+- Adjuk ki a `docker rm -f nginx` parancsot, mit láthatunk? Vessük össze a mellékelt ábra eseményeivel.  
 
 
 
