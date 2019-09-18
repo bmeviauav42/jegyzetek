@@ -39,7 +39,7 @@ A labor célja megismerni a Docker konténerek használatának alapjait, és a l
   - Lépjünk ki az interaktív shell-ből: `exit`
 - Konténer terminált, mert a bash folyamat megállt az `exit` hatására. **Konténer addig fut, amíg a benne levő alkalmazás (folyamat) fut.**
 - Leállt konténer nem törlődik automatikusan, tartalma nem veszik el: `docker ps -a`. Nézzük meg a parancs eredményét. Keressük meg a konténerek id-ját.
-- Távolítsuk el a két konténert, amit mi indítottunk: `docker rmi <id1> <id2>`
+- Távolítsuk el a két konténert, amit mi indítottunk: `docker rm <id1> <id2>`
 
 ### Docker CLI parancsok struktúrája
 
