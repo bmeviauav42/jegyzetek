@@ -141,3 +141,17 @@ Fejlesztés közben sok ideiglenes image keletkezik, és konténereket hagyunk h
 
 - Digest-ek: <https://engineering.remind.com/docker-image-digests/>
 - Image layerek: <https://docs.docker.com/v17.09/engine/userguide/storagedriver/imagesandcontainers/>
+
+## Docker kontérek események megfigyelése  
+![Docker events lifecycle](https://miro.medium.com/max/1129/1*vca4e-SjpzSL5H401p4LCg.png)
+- Nyissunk meg 2 PowerShell konzolt egymást mellé.  
+- A bal oldali konzolon indítsuk el a docker eseményfigyelő szolgáltatását `docker events`  
+- A jobb oldali konzolon indítsunk el egy nginx konténert `docker run -d -p 8085:80 --name nginx nginx `
+- Ekkor a bal oldalon láthatóak az események. Figyeljük meg, milyen metrikák találhatóak itt.  
+- Hogy olvashatóbb legyen, állítsuk le a processt, `CTRL-C`-vel, majd: `docker events | cut -c1-70`
+- Szimuláljunk konténer meghibásodást: `docker kill nginx`  
+- Adjuk ki a `docker rm -f nginx` parancsot, mit láthatunk? Vessük össze a mellékelt ábra eseményeivel.  
+
+
+
+
