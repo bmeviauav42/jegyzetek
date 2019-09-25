@@ -121,15 +121,15 @@ A fenti alkalmazás egy része még nem működik. A python alkalmazás mellett 
      web:
        build: pythonweb
        ports:
-         - 5000:5000
+         - 5000:80
        depends_on:
          - redis
        networks:
          - mikroszolg_network
 
-     networks:
-       mikroszolg_network:
-         driver: bridge
+   networks:
+     mikroszolg_network:
+       driver: bridge
    ```
 
 1. Nyiss egy _PowerShell_ konzolt ugyanebbe a mappába. Indítsd el az alkalmazásokat az alábbi paranccsal: `docker-compose up --build`
