@@ -13,6 +13,10 @@ Jegyzetek és példa kódok [BMEVIAUAV42 Mikroszolgáltatások és konténeralap
   - [Adattárolás mikroszolgáltatásokban (elmélet)](https://www.aut.bme.hu/Upload/Course/VIAUAV42/hallgatoi_jegyzetek/04-Adatbazisok.pdf)
   - [Api Gateway (elmélet)](https://www.aut.bme.hu/Upload/Course/VIAUAV42/hallgatoi_jegyzetek/05-API%20Gateway.pdf)
   - ["Todoapp" mintaalkalmazás](https://github.com/bmeviauav42/todoapp)
+- Kommunikációs lehetőségek
+  - [Kommunikációs lehetőségek (elmélet)](https://www.aut.bme.hu/Upload/Course/VIAUAV42/hallgatoi_jegyzetek/Kommunik%c3%a1ci%c3%b3s%20lehet%c5%91s%c3%a9gek.pdf)
+  - [Gyakorlat anyag](https://github.com/bmeviauav42/jegyzetek/blob/master/Kommunik%C3%A1ci%C3%B3/kommunik%C3%A1ci%C3%B3s%20lehet%C5%91s%C3%A9gek.md)
+  - [Kiinduló projekt](https://github.com/bmeviauav42/komm-kiindulo)
 
 ## Házi feladat
 
