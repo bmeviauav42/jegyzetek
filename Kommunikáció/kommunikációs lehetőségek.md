@@ -5,11 +5,13 @@
 A laborfeladatok célja a mikroszolgáltatások fejlesztése során leggyakrabban felmerülő megoldások alapszintű gyakorlása.
 
 ## Előkövetelmények
-* Előadás anyaga: **link TODO**
+* Előadás anyaga: https://www.aut.bme.hu/Upload/Course/VIAUAV42/hallgatoi_jegyzetek/Kommunik%c3%a1ci%c3%b3s%20lehet%c5%91s%c3%a9gek.pdf
 * Docker Desktop
 * Visual Studio 2019 
     * min v16.3 (gRPC miatt)
     * ASP.NET Core 3.0 SDK (gRPC miatt)
+* Kiinduló projekt: https://github.com/bmeviauav42/komm-kiindulo
+* Postman vagy Fiddler
 
 ## REST webszolgáltatások készítése
 
@@ -28,7 +30,7 @@ Klónozzuk le a kiinduló projektet, és nyissuk meg a solutiont Visual Studio-v
 ``` cmd
 mkdir c:\munka\[neptun]\MSA\komm
 cd c:\munka\[neptun]\MSA\komm
-git clone TODO
+git clone https://github.com/bmeviauav42/komm-kiindulo
 ```
 
 Mind a két projekt már Dockerizált (Projekten jobb gomb / Add / Docker support), a teljes solutionhöz pedig tartozik egy Docker Compose leíró (Projekteken jobb gomb / Add / Docker Orchestrator support / Docker Compose), amit egyben a futtatandó projekt is.
@@ -426,7 +428,7 @@ Mivel a gRPC csak .NET Core 3.0-val működik, így szükségünk lesz az Order 
 
 Ezütán Order projekten jobb gomb / Add / Service Reference / gRPC / Add / File ahol tallózuk ki a másik projektben található .proto fájlt és **Client** módban generáljuk le a szükséges osztályokat. Ez a művelet a szükséges NuGet csomagokat is hozzáadja a projekthez.
 
-**TODO SEVICE REFERENCE**
+![image](https://user-images.githubusercontent.com/8333960/66718227-b87af080-ede1-11e9-8b45-48e8e06449fa.png)
 
 A `Startup` osztályban regisztráljuk be a DI konténerbe a gRPC kliensünket.
 
