@@ -423,7 +423,7 @@ public class CatalogService : Grpc.CatalogService.CatalogServiceBase
 
 Mivel a gRPC csak .NET Core 3.0-val működik, így szükségünk lesz az Order projekt felfrissítésére. 
 * A projekt fájlban írjuk át a target framework-öt `netcoreapp3.0`-ra
-* Töröljük a `Microsoft.AspNetCore.App` csomagot
+* Töröljük a `Microsoft.AspNetCore.App` és a `Microsoft.AspNetCore.Razor.Design` csomagot
 * A `Startup`-ban pedig most ideiglenesen egészítsük ki a következővel az MVC konfigurációját `services.AddMvc(o => o.EnableEndpointRouting = false)`
 
 Ezütán Order projekten jobb gomb / Add / Service Reference / gRPC / Add / File ahol tallózuk ki a másik projektben található .proto fájlt és **Client** módban generáljuk le a szükséges osztályokat. Ez a művelet a szükséges NuGet csomagokat is hozzáadja a projekthez.
