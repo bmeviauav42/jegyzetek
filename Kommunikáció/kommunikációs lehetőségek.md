@@ -456,11 +456,11 @@ public async Task<ActionResult<IEnumerable<Product>>> Get()
 }
 ```
 
-Próbáljuk ki! 
-
 Sajnos most nincs időnk a dockert felkonfigurálni a HTTPS-re, így, állítsuk át a következő módon a kiinduló projekteket:
 * Order legyen a Startup projekt, majd állítsuk át IIS Express futtatási módra a Play gomb legördülőjében
 * Majd a Solution-ben adjunk meg több startup projektet, mégpedig a **Catalog2**-t és az **Order**t.
+
+Próbáljuk ki! Hívjuk meg az Order szolgáltatás (IIS Expressben fut) test műveletét
 
 ## Összefoglalás
 
