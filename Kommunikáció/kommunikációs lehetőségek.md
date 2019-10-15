@@ -33,6 +33,8 @@ cd c:\munka\[neptun]\MSA\komm
 git clone https://github.com/bmeviauav42/komm-kiindulo
 ```
 
+A `master` branchen található a kiinduló, míg a megoldások külön brachre kerültek fel, ha valamelyik részfeladatnál lemaradtál volna.
+
 Mind a két projekt már Dockerizált (Projekten jobb gomb / Add / Docker support), a teljes solutionhöz pedig tartozik egy Docker Compose leíró (Projekteken jobb gomb / Add / Docker Orchestrator support / Docker Compose), amit egyben a futtatandó projekt is.
 
 Két ASP.NET Core projektünk van, nézzük meg jobban őket:
