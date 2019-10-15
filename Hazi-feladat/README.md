@@ -22,7 +22,7 @@ Az elkészített rendszer egyes képességeire az alábbiak szerint pontok kapha
 
 ### Pontok az alábbiakért kaphatóak
 
-#### Mikroszolgáltatatások architektúra: 7/10 pont
+#### Mikroszolgáltatatások architektúra: 5/8 pont
 
 A rendszer több, független mikroszolgáltatásból épül fel. Ebbe beleértendő a frontend is, amennyiben azt a többitől független webszerver szolgálja ki, de az adatbázis szerver(ek) külön nem számítanak bele.
 
@@ -47,9 +47,10 @@ Két eltérő technológiájú adatbázis használata perzisztenciára. Egyik le
 
 Redis használata cache-elésre legalább 1 művelet esetén.
 
-#### Http alapú kommunikáció mikroszolgáltatások között: 4 pont
+#### Http/gRPC alapú kommunikáció mikroszolgáltatások között: 4 pont
 
-Legalább egy olyan művelet, amelyben egy mikroszolgáltatás egy másikkal http alapon kommunikál.
+- Legalább egy olyan művelet, amelyben egy mikroszolgáltatás egy másikkal http alapon kommunikál: 4 pont
+- Legalább egy olyan művelet, amelyben egy mikroszolgáltatás egy másikkal gRPC alapon kommunikál: 4 pont
 
 #### Polly vagy hasonló technológia alkalmazása a mikroszolgáltatások közötti kommunikációra: 3 pont
 
@@ -57,7 +58,7 @@ Az előzővel együtt teljesíthető. A mikroszolgáltatások közötti kommunik
 
 #### Üzenetsor alapú kommunikáció mikroszolgáltatások között: 5 pont
 
-Legalább egy olyan művelet, amelyben egy mikroszolgáltatás egy másikkal üzenetsor alapon kommunikál (mind a termelő, mind a fogyasztó oldalt beleértve).
+Legalább egy olyan művelet, amelyben egy mikroszolgáltatás egy másikkal üzenetsor alapon kommunikál (mind a termelő, mind a fogyasztó oldalt beleértve). Kommunikációs platform lehet Redis, RabbitMQ, ill. bármely ismert message queue szolgáltatás.
 
 #### API Gateway használata: 5/8 pont
 
