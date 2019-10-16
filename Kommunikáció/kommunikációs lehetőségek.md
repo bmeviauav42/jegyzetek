@@ -25,13 +25,15 @@ A laborfeladat során két ASP.NET Core mikroszolgáltatás közötti REST-es ko
 
 ### Kiinduló projekt áttekintése
 
-Klónozzuk le a kiinduló projektet, és nyissuk meg a solutiont Visual Studio-val.
+Klónozzuk le a kiinduló projektet, és nyissuk meg a solutiont Visual Studio-val. **Fontos, hogy ne legyen az elérési útban speciális (és ékezetes) karakter**, különben nem tud a VS a docker-compose-hoz Debuggerrel csatlakozni.
 
 ``` cmd
 mkdir c:\munka\[neptun]\MSA\komm
 cd c:\munka\[neptun]\MSA\komm
 git clone https://github.com/bmeviauav42/komm-kiindulo
 ```
+
+A `master` branchen található a kiinduló, míg a megoldások külön brachre kerültek fel, ha valamelyik részfeladatnál lemaradtál volna.
 
 Mind a két projekt már Dockerizált (Projekten jobb gomb / Add / Docker support), a teljes solutionhöz pedig tartozik egy Docker Compose leíró (Projekteken jobb gomb / Add / Docker Orchestrator support / Docker Compose), amit egyben a futtatandó projekt is.
 
@@ -58,7 +60,7 @@ Két ASP.NET Core projektünk van, nézzük meg jobban őket:
     * Ha visszatekintünk az `Order` szolgáltatás `Startup` osztályára, akkor láthatjuk, hogy a szolgáltatás nevével hivatkozunk a másik konténerre. 
         * Ha ez nem tetszik, akkor a docker-compose fájlban a hostnevet felül is lehet definiálni.
         * Azt is megfigyelhetjük, hogy nem a localhostra kiajánlott portot kell használjuk, hanem egymás felé a tényleges portok vannak nyitva a konténereken. (80, 443).
-        * Most HTTP-t használjunk hogy a tanusítványokkal ne kelljen foglalkozzunk.
+        * Most HTTP-t használjunk, hogy egyrészt a tanusítványokkal ne kelljen foglalkozzunk, illetve a docker-compose-on belül lévő kommunikáció esetében nem ördögtől való a sima https sem.
         * Ha valamilyen összetettebb orchesztrátort használunk, akkor érdemes nem beégetni ezeket a hostneveket, hanem konfigurációból várni azokat. (most ezt nem nézzük meg)
     
 Próbáljuk futtatni a projekteket! Vizsgáljuk meg az elérhető hívás viselkedését! Azt tapasztaljuk, hogy a Catalog `Get()` kérése (`api/Product`) és így az Order `Get()` kérése is (`api/test`) véletlenszerűen elszáll. 
@@ -327,22 +329,19 @@ A feladat célja kipróbálni a contract-first megkozelítést: tehát előbb az
 
 Ezt REST-es API-val is meg tudnánk tenni a Swagger/OpenAPI leíróval, de mi most gRPC-n keresztül próváljuk ki. Feladatunkban a Catalog szolgáltatás `ProductController` két műveletét írjuk meg gRPC protokollal. Majd hívjuk meg ezeket az Order szolgáltatásból.
 
-> **Megj.:** A gRPC csak ,NET Core 3.0-tól támogatott, így érdemes a Visual Studio-t frissíteni legalább 16.3.x verzióra
+> **Megj.:** A gRPC csak .NET Core 3.0-tól támogatott, így érdemes a Visual Studio-t frissíteni legalább 16.3.x verzióra
 
 #### Szerver oldal
 
-Készítsünk a solutionbe egy új **gRPC Service** projektet `Msa.Comm.Lab.Services.Catalog2` néven. Docker támogatás most nem kell, mert a labor idejébe már nem férne bele a docker/kestrel HTTPS támogatásának a konfigurációja, viszont a gRPC számára ez egy kötelező elem.
+Lehetőség lenne egy Projektsablonból is dolgoznunk (File / New Project / gRPC Serice), ami szintén egy ASP.NET Core 3.0-ás projekt, de most a meglévő Catalog projektünkbe rakjuk bele ezt a funkcionalitást.
 
-Tekintsük át a generált projektet:
-* Ez is egy ASP.NET Core 3.0 projekt, amibe most csak a gRPC szolgáltatások vannak felkonfigurálva
-* gRPC-hez a `Grpc.AspNetCore` NuGet csomag szükséges szerver oldalon.
-* Kestrel webszerverben alapértelmezettként van beállítva a HTTP/2
-* A `Protos` mappában van a szolgáltatás leíró `.proto` állomány
-* A `.proto` fájlból a modellek és egy ősosztály is generálódik a fordítás során, amiből a `Services` mappában lévő osztály származik le. Nekünk csak felül kell definiálni a kívánt metódusokat.
+Vegyük fel a Catalog projektbe az alábbi NuGet csomagot. Fontos, hogy a **2.23.1**-es verzió legyen, mert én a 2.23.2-es verzióval belefutottam egy bugba.
 
-Készütsünk el egy saját szolgáltatásleírót a Catalog REST API-nk mintájára. A `Protos` mappában lévő fájlt nevezzük át `catalog.proto`-ra.
+```xml
+<PackageReference Include="Grpc.AspNetCore" Version="2.23.1" />
+```
 
-Tartalom a következő:
+A Catalog projektbe vegyünk fel egy `Protos` mappát, és abba egy Text fájlt `catalog.proto` néven, ami a szolgáltatásleírónk lesz. Készütsünk el egy saját szolgáltatásleírót a Catalog REST API-nk mintájára. Tartalom a következő:
 * Egy szolgáltatásunk lesz `CatalogService` néven
 * A szolgáltatásban `rpc` kulcsszóval tudunk műveleteket definiálni, megadva a bemenő paramétert és a visszatérési értéket.
     * Ezek külön definiált `message` típusok lehetnek.
@@ -357,7 +356,7 @@ Tartalom a következő:
 ```proto
 syntax = "proto3";
 
-option csharp_namespace = "Msa.Comm.Lab.Services.Catalog2.Grpc";
+option csharp_namespace = "Msa.Comm.Lab.Services.Catalog.Grpc";
 
 package Catalog;
 
@@ -385,7 +384,15 @@ message GetProductRequest {
 } 
 ```
 
-Fordítsuk le a projektet. Utána a `GreeterService`-t nevezzük át `CatalogService`-re (CTRL + R, CTRL + R a típuson állva), és írjuk át az ősosztályát a generált `Grpc.CatalogService.CatalogServiceBase`-re. Ide is vegyük fel az alábbi statikus listát, és ennek a segítségével valósítsuk meg az üzleti műveleteket. Figyeljük meg, hogy a .proto-ból generált típusokkal tudunk itt dolgozni.
+A `.proto` fájlból a modellek és egy ősosztály is generálódik a fordítás során. Ehhez viszont a Catalog projekt fájlban fel kell venni a következő elemet:
+
+```xml
+  <ItemGroup>
+    <Protobuf Include="Protos\catalog.proto" GrpcServices="Server" />
+  </ItemGroup>
+```
+
+ A Catalog projektbe hozzunk létre egy `Services` mappát, majd abba egy `CatalogService` osztályt, ami a  `Grpc.CatalogService.CatalogServiceBase`-ből származik le. Nekünk csak felül kell definiálni a kívánt metódusokat. Ide is vegyük fel az alábbi statikus listát, és ennek a segítségével valósítsuk meg az üzleti műveleteket. Figyeljük meg, hogy a .proto-ból generált típusokkal tudunk itt dolgozni.
 
 ```C#
 public class CatalogService : Grpc.CatalogService.CatalogServiceBase
@@ -419,48 +426,64 @@ public class CatalogService : Grpc.CatalogService.CatalogServiceBase
 }
 ```
 
+A Catalog `Startup` osztályban regisztráljuk be a gRPC szolgáltatásainkat.
+
+```C#
+services.AddGrpc();
+```
+
+```C#
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapGrpcService<Services.CatalogService>();
+    endpoints.MapControllers();
+});
+```
+
 #### Kliens oldal
 
-Mivel a gRPC csak .NET Core 3.0-val működik, így szükségünk lesz az Order projekt felfrissítésére. 
-* A projekt fájlban írjuk át a target framework-öt `netcoreapp3.0`-ra
-* Töröljük a `Microsoft.AspNetCore.App` csomagot
-* A `Startup`-ban pedig most ideiglenesen egészítsük ki a következővel az MVC konfigurációját `services.AddMvc(o => o.EnableEndpointRouting = false)`
-
-Ezütán Order projekten jobb gomb / Add / Service Reference / gRPC / Add / File ahol tallózuk ki a másik projektben található .proto fájlt és **Client** módban generáljuk le a szükséges osztályokat. Ez a művelet a szükséges NuGet csomagokat is hozzáadja a projekthez.
+Adjunk az Order projekthez egy szolgáltatás referenciát. Az Order projekten jobb gomb / Add / Service Reference / gRPC / Add / File ahol tallózuk ki a másik projektben található .proto fájlt és **Client** módban generáljuk le a szükséges osztályokat. Ez a művelet a szükséges NuGet csomagokat is hozzáadja a projekthez.
 
 ![image](https://user-images.githubusercontent.com/8333960/66718227-b87af080-ede1-11e9-8b45-48e8e06449fa.png)
 
-A `Startup` osztályban regisztráljuk be a DI konténerbe a gRPC kliensünket.
+A `Startup` osztályban regisztráljuk be a DI konténerbe a gRPC kliensünket. Mivel a gRPC-nek szüksége van HTTPS-re, viszont most a konténereink nem bíznak egymás tanusítványaiban, ezért most ideiglenesen kapcsoljuk ki a HTTPS hibákat a gRPC-t alatt lévő `HttpClient`-ben.
 
 ```C#
 services.AddGrpcClient<CatalogService.CatalogServiceClient>(o =>
 {
-    o.Address = new Uri("https://localhost:5001");
+    o.Address = new Uri("https://msa.comm.lab.services.catalog");
+}).ConfigurePrimaryHttpMessageHandler(p => new HttpClientHandler
+{
+    ServerCertificateCustomValidationCallback =     
+        HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
 });
 ```
 
-A `TestController`ben pedig cseéljük le A REST kliensünket a gRPC kliensre.
+> **Megj.:** megfigyelhetjük, hogy a gRPC kliens is az `IHttpClientFactory` megoldásra épít.
+
+A `TestController`ben cseréljük le A REST kliensünket a gRPC kliensre.
 
 ```C#
+//private readonly ICatalogApiClient _catalogApiClient;
+private readonly IBusControl _bus;
 private readonly CatalogService.CatalogServiceClient _catalogServiceClient;
 
-public TestController(CatalogService.CatalogServiceClient catalogServiceClient)
+public TestController(
+    //ICatalogApiClient catalogApiClient, 
+    IBusControl bus, 
+    CatalogService.CatalogServiceClient catalogServiceClient)
 {
+    //_catalogApiClient = catalogApiClient;
+    _bus = bus;
     _catalogServiceClient = catalogServiceClient;
 }
 
 [HttpGet]
-public async Task<ActionResult<IEnumerable<Product>>> Get()
+public async Task<ActionResult<IEnumerable<Catalog.Grpc.Product>>> Get()
 {
     return (await _catalogServiceClient.GetProductsAsync(new Empty())).Products;
 }
 ```
-
-Sajnos most nincs időnk a dockert felkonfigurálni a HTTPS-re, így, állítsuk át a következő módon a kiinduló projekteket:
-* Order legyen a Startup projekt, majd állítsuk át IIS Express futtatási módra a Play gomb legördülőjében
-* Majd a Solution-ben adjunk meg több startup projektet, mégpedig a **Catalog2**-t és az **Order**t.
-
-Próbáljuk ki! Hívjuk meg az Order szolgáltatás (IIS Expressben fut) test műveletét!
 
 ## Összefoglalás
 
