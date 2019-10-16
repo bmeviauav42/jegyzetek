@@ -485,6 +485,8 @@ public async Task<ActionResult<IEnumerable<Catalog.Grpc.Product>>> Get()
 }
 ```
 
+Próbáljuk ki!
+
 ## Összefoglalás
 
 A gyakorlat során néztünk példát REST-es kommunikáció esetében a hibatűrés növelésére egy Retry policy-vel. Majd Aszinkron kommunikációt implementáltunk egy RabbitMQ üzenetsor és MassTransit konyvtár segítségével a két szolgáltatásunk között. Végül Contract first megközelítéssel készítettünk szolgáltatást, most gRPC-n kipróbálva.
