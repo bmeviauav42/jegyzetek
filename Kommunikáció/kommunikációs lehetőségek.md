@@ -54,7 +54,7 @@ Két ASP.NET Core projektünk van, nézzük meg jobban őket:
         * Ez azért is jó, mert a [Polly](https://github.com/App-vNext/Polly) könyvtár egyszerűen tud ide integrálódni.
     * `TestController`
         * Csak a tesztelés céljából létrehozott végpontokat tartalmaz, amin keresztül az áthívást tudjuk majd tesztelni
-        * DI-ból elkérjük az `ICatalogApiClient` objektumotm és azon keresztül áthívunk a távoli szolgáltatásba, majd nagyon egyszerűen annak az eredményével térünk vissza.
+        * DI-ból elkérjük az `ICatalogApiClient` objektumot és azon keresztül áthívunk a távoli szolgáltatásba, majd nagyon egyszerűen annak az eredményével térünk vissza.
 * `docker-compose`
     * Figyeljük meg, hogy az `order` konténer függ a `catalog` konténertől (`depends_on`). Ez azért fontos, hogy közöttük felépüljön a hálózati kapcsolat
     * Ha visszatekintünk az `Order` szolgáltatás `Startup` osztályára, akkor láthatjuk, hogy a szolgáltatás nevével hivatkozunk a másik konténerre. 
@@ -89,7 +89,7 @@ services.AddRefitClient<ICatalogApiClient>()
         .Handle<HttpRequestException>()
         .OrResult<HttpResponseMessage>(msg => RetryableStatusCodesPredicate(msg.StatusCode))
         .RetryAsync(5)
-    ));
+    );
 ```
 
 Próbáljuk ki! Tapasztalatunk szerint szinte megszűntek a hibák.
@@ -104,14 +104,14 @@ Azonnali Retry helyett várjunk egy kicsit az újrapróbálkozások között, m�
 
 ``` C#
     //.RetryAsync(5)
-    .WaitAndRetryAsync(5, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt))
+    .WaitAndRetryAsync(5, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)))
 ```
 
 Próbáljuk ki!
 
 #### Több Policy használata
 
-Most laboron nem nézünk példát több Policy használatára, de szóbajöhetne még a Timeout, a Circuit breaker, Cache vagy akár a Fallback policy is. Az előadás anyagban találtok egy összetettebb szekvencia diagrammot, az ajánlott összetételről.
+Most laboron nem nézünk példát több Policy használatára, de szóbajöhetne még a Timeout, a Circuit breaker, Cache vagy akár a Fallback policy [is](https://github.com/App-vNext/Polly/blob/master/README.md). Az előadás anyagban találtok egy összetettebb szekvencia diagrammot, az ajánlott összetételről.
 
 ## Aszinkron kommunikáció RabbitMQ-val
 
@@ -133,7 +133,7 @@ A docker-compose konfigurációnkba vegyünk fel egy RabbitMQ image alapú kont�
     hostname: rabbitmq
 ```
 
-A RabbitMQ funkcióit a 5672 posrton érjük el, míg a 15672-n az admin felületet nézhetjük meg.  
+A RabbitMQ funkcióit a 5672 porton érjük el, míg a 15672-n az admin felületet nézhetjük meg.  
 Alapértelmezett felhasználónév: **guest**  jelszó: **guest**
 
 Adjuk meg, a másik két service esetében a rabbitmq-tól való függést.
@@ -484,8 +484,6 @@ public async Task<ActionResult<IEnumerable<Catalog.Grpc.Product>>> Get()
     return (await _catalogServiceClient.GetProductsAsync(new Empty())).Products;
 }
 ```
-
-Próbáljuk ki! 
 
 ## Összefoglalás
 
