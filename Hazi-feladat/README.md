@@ -37,17 +37,17 @@ A backend szolgáltatások legalább 2 különböző nyelven készültek. (A fro
 
 #### Konténerekben történő futtatás: 7 pont
 
-_Minden_ szolgáltatás konténerben fut. Részpontszám kapható, ha nem minden szolgáltatás konténerizált.
+_Minden_ szolgáltatás konténerben fut, beleértve a használt adatbázis rendszereket is. Részpontszám kapható, ha nem minden szolgáltatás konténerizált.
 
 #### Legalább két fajta adatbázis használata: 5 pont
 
-Két eltérő technológiájú adatbázis használata perzisztenciára. Egyik lehet relációs is.
+Két eltérő technológiájú adatbázis használata perzisztenciára. Egyik lehet relációs is. (Redis csak cache-ként való használata ebbe nem számít bele.)
 
 #### Redis alapú cache használata: 4 pont
 
-Redis használata cache-elésre legalább 1 művelet esetén.
+Redis használata kifejezetten cache-elésre legalább 1 művelet esetén.
 
-#### Http/gRPC alapú kommunikáció mikroszolgáltatások között: 4 pont
+#### Http/gRPC alapú kommunikáció mikroszolgáltatások között: 4+4 pont
 
 - Legalább egy olyan művelet, amelyben egy mikroszolgáltatás egy másikkal http alapon kommunikál: 4 pont
 - Legalább egy olyan művelet, amelyben egy mikroszolgáltatás egy másikkal gRPC alapon kommunikál: 4 pont
@@ -97,6 +97,6 @@ Az alkalmazásban követhetőek a kérések pl. Jaeger használatával.
 
 Az alkalmazás _teljes egésze_ CI rendszerben lefordul és konténerek készülnek belőle.
 
-#### Web/mobil felhasználói felület: 10 pont
+#### Web/mobil felhasználói felület: 5 pont
 
 Az alkalmazás rendelkezik modern webes / mobilos felhasználói felülettel. Teljesség és igényesség függvényében részpontszám is kapható.
