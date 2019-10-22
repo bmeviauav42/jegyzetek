@@ -79,7 +79,7 @@ A bemutatás során az alkalmazás Kubernetes-ben fut. (Akár helyben, akár fel
 
 #### Futtatás publikus felhőben Kubernetes-ben: 5 pont
 
-Az előzőn felül teljesíthető. Az alkalmazás publikus felhőben hostolt Kubernetes platformon fut, és publikus IP címen vagy domain néven keresztül elérhető.
+Az előzőn felül teljesíthető. Az alkalmazás publikus felhőben hostolt Kubernetes platformon fut, érvényes (nem self-signed) HTTPS tanusítvánnyal rendelkezik, és publikus domain néven keresztül elérhető.
 
 #### Helm chart Kubernetes-hez: 7 pont
 
