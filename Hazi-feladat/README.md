@@ -12,6 +12,10 @@ A rendszer egyetlen alkalmazást kell megvalósítson, ahol az alkalmazás funkc
 
 Az elkészített rendszer egyes képességeire az alábbiak szerint pontok kaphatóak. Részpontszám csak különleges esetben kapható. A végső jegy az összpontszámból adódik.
 
+Meglévő (pl. Microsoft-os) demók, mintaalkalmazások (elemei) felhasználhatók, de ezt külön jelezni kell bemutatáskor. A nem jelzett, de átvett részletek plágiumnak számítanak. Az eredeti demóban vagy mintaalkalmazásban megvalósított funkciókért pont nem adható.
+
+A pontrendszerbe általatok is módosítható/bővíthető. Ezt Pull Request formájában egy megfelelő indoklással nyújthatjátok be, dea PR benyújtása nem jelenti annak az automatikus elfogadását, arról minden esetben a tárgy oktatói döntenek.
+
 ### Jegy számítás
 
 - 0-24: nem teljesítette
@@ -100,3 +104,18 @@ Az alkalmazás _teljes egésze_ CI rendszerben lefordul és konténerek készül
 #### Web/mobil felhasználói felület: 5 pont
 
 Az alkalmazás rendelkezik modern webes / mobilos felhasználói felülettel. Teljesség és igényesség függvényében részpontszám is kapható.
+
+#### Eventually Consistent elosztott működés 8 pont
+
+- A mikroszolgáltatások között eventually consistent állapotkezelés megvalósítása a kapcsolódó tervezési mintákkal. (5 pont)
+- Gondoljunk a műveletek idempotens mivoltára is a tervezés során. (3 pont)
+
+#### Tervezás minták használata az implementáció során 5 pont
+
+Domain Driven Design (DDD), Command Query Segregation Principle (CQRS), stb. Ezeken felül előzetes egyeztetéssel a tárgy oktatóival.
+
+#### Feedback
+
+A véglegesített pontrendszer vagy tananyag javítása, bővítése, módosítása pull request-tel (0-1 pont, összesen max. 3 pont)
+    - Helyesírási hiba is lehet, de az oktatók döntenek, hogy pontot ér-e a módosítás
+    - Többször is megszerezhető
