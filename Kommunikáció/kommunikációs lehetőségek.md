@@ -4,6 +4,32 @@
 
 A laborfeladatok célja a mikroszolgáltatások fejlesztése során leggyakrabban felmerülő megoldások alapszintű gyakorlása.
 
+<details>
+<summary>Tartalomjegyzék</summary>
+
+- [Mikroszolgáltatások és konténer alapú szoftverfejlesztés](#mikroszolg%c3%a1ltat%c3%a1sok-%c3%a9s-kont%c3%a9ner-alap%c3%ba-szoftverfejleszt%c3%a9s)
+- [Kommunikációs lehetőségek - gyakorlat](#kommunik%c3%a1ci%c3%b3s-lehet%c5%91s%c3%a9gek---gyakorlat)
+  - [Előkövetelmények](#el%c5%91k%c3%b6vetelm%c3%a9nyek)
+  - [REST webszolgáltatások készítése](#rest-webszolg%c3%a1ltat%c3%a1sok-k%c3%a9sz%c3%adt%c3%a9se)
+  - [Hibatűrő kommunikációs módszerek](#hibat%c5%b1r%c5%91-kommunik%c3%a1ci%c3%b3s-m%c3%b3dszerek)
+    - [Kiinduló projekt áttekintése](#kiindul%c3%b3-projekt-%c3%a1ttekint%c3%a9se)
+    - [Polly használata](#polly-haszn%c3%a1lata)
+      - [Egyszerű Retry](#egyszer%c5%b1-retry)
+      - [Exponenciálisan növekvő Retry időköz](#exponenci%c3%a1lisan-n%c3%b6vekv%c5%91-retry-id%c5%91k%c3%b6z)
+      - [Több Policy használata](#t%c3%b6bb-policy-haszn%c3%a1lata)
+  - [Aszinkron kommunikáció RabbitMQ-val](#aszinkron-kommunik%c3%a1ci%c3%b3-rabbitmq-val)
+    - [RabbitMQ beüzemelése](#rabbitmq-be%c3%bczemel%c3%a9se)
+    - [Integrációs esemény](#integr%c3%a1ci%c3%b3s-esem%c3%a9ny)
+    - [MassTransit használata](#masstransit-haszn%c3%a1lata)
+      - [Küldő oldal](#k%c3%bcld%c5%91-oldal)
+      - [Fogadó oldal](#fogad%c3%b3-oldal)
+  - [Contract-First API készítés - gRPC](#contract-first-api-k%c3%a9sz%c3%adt%c3%a9s---grpc)
+      - [Szerver oldal](#szerver-oldal)
+      - [Kliens oldal](#kliens-oldal)
+  - [Összefoglalás](#%c3%96sszefoglal%c3%a1s)
+  
+</details>
+
 ## Előkövetelmények
 * Előadás anyaga: https://www.aut.bme.hu/Upload/Course/VIAUAV42/hallgatoi_jegyzetek/Kommunik%c3%a1ci%c3%b3s%20lehet%c5%91s%c3%a9gek.pdf
 * Docker Desktop
