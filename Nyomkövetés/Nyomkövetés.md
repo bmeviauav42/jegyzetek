@@ -25,7 +25,7 @@ A mintaalkalmazás neve "Hot R.O.D". Go nyelven íródott, kódja OpenTracing in
 
 A HotRod és a Jaeger konténerek egyszerre történő indítására docker-compose-t használunk:
 
-1. Töltsük le a `docker-compose.yml`-t innen https://github.com/jaegertracing/jaeger/blob/master/examples/hotrod/docker-compose.yml, ide mentsük: `c:\work\<sajátnév>`
+1. Töltsük le a `docker-compose.yml`-t innen `https://github.com/jaegertracing/jaeger/blob/master/examples/hotrod/docker-compose.yml`, ide mentsük: `c:\work\<sajátnév>`
 2. Nyissuk meg a fájlt VS Code-ban, tekintsük át a tartalmát
    * A `jaeger` szolgáltatás a 6831 (Jaeger agent spanfeltöltő) és a 16686 (Jaeger UI frontend) portokat mappeli.
    * A `hotrod` szolgáltatás számára környezeti változókban mondjuk meg, milyen hostnéven és milyen porton éri az a Jaeger agentet (span-ek felöltéséhez szükséges).
@@ -228,9 +228,18 @@ A kommunikációról szóló gyakorlat némiképpen továbbfejlesztett Order+Cus
 
 Kiinduló lépések:
 
-* GitHub-ról klónozzuk ki a kiinduló solution-t: xxx
+* GitHub-ról klónozzuk ki a kiinduló solution-t:
+  * Hozzunk létre egy `traicing` mappát a `c:\work\<sajátnév>` munkakönyvátrunkban és indítsunk egy command prompotot innen.
+  * `git clone https://github.com/bmeviauav42/nyomkovetes`
 * Indítsuk el VS alatt a szolgáltatásokat
 * A böngészőben hibaoldal jelenik meg. Frissítsük (ha kell többször is), a hiba eltűnik. Az oka: az OrderService hívja a CatalogService-t, de az először még nem állt fel teljesen, az Sqlite adatbázis seed-elése időt igényel.
+
+A megoldás a '' ágon található, a checkout lépései pl.:
+
+```
+git fetch
+git checkout megoldas/1-konfig-es-beepitett-instrumentalas
+```
 
 ### Projekt referenciák felvétele
 
@@ -327,7 +336,11 @@ Teszteljük a működést:
 
 ## Kód instrumentálás
 
-Checkoutoljuk ki Git-ben kész megoldást, "xxx" az ág neve.
+Checkoutoljuk ki Git-ben kész megoldást, a `megoldas/1-konfig-es-beepitett-instrumentalas` ágon található:
+
+```
+git checkout megoldas/2-kod-instrumentalas
+```
 
 ### Egyszerű naplózás (##Instr_Log)
 
