@@ -15,17 +15,19 @@ A laborfeladatok céljai:
 
 ## Bevezető
 
-A feladat keretében egy olyan mikroszolgáltatás alapú mintaalkalmazást vizsgálunk meg, mely az OpenTracing használatát illusztrálja, Jaeger alapú backenddel és megjelenítéssel. A feladat a [Take OpenTracing for a HotROD ride](https://medium.com/@YuriShkuro/take-opentracing-for-a-hotrod-ride-f6e3141f7941) blogbejegyzésen alapul, de néhány olyan Jaeger szolgáltatást is megvizsgálunk, melyet a cikk nem taglal.
+A feladat keretében egy olyan mikroszolgáltatás alapú mintaalkalmazást vizsgálunk meg, mely az OpenTracing használatát illusztrálja, Jaeger alapú backenddel és megjelenítéssel. A feladat a [Take OpenTracing for a HotROD ride](<https://medium.com/@YuriShkuro/take-opentracing-for-a-hotrod-ride-f6e3141f7941>) blogbejegyzésen alapul, de néhány olyan Jaeger szolgáltatást is megvizsgálunk, melyet a cikk nem taglal.
 
-A mintaalkalmazás neve "Hot R.O.D". Go nyelven íródott, kódja OpenTracing instrumentált. A forráskódja a Jaeger GitHub repository példák között található meg: https://github.com/jaegertracing/jaeger/tree/master/examples/hotrod. Itt találunk leírást arról, hogyan lehet a HotROD és Jaeger alkalmazásokat docker alapokon futtatni:
-* **A Jeager futattására** a `jaegertracing/all-in-one` docker image-et használjuk: ez valamennyi Jaeger backend komponenst tartalmaz (agent, collector, ingester, stb.), beleértve az adatmegjelenítő frontendet is. Ez az image ismerkedéshez, helyi környezetben teszteléshez ajánlott, production környezethez nem ajánlják. Bővebb leírást az image-ről többek között itt találhatunk: https://www.jaegertracing.io/docs/getting-started/. A számtalan portból számunkra kettő érdekes, a 6831 (Jaeger agent, span-eket itt fogadja UDP-n a kliens könyvtáraktól) és a 16686 (Jaeger UI frontend). Megjegyzések:
+A mintaalkalmazás neve "Hot R.O.D". Go nyelven íródott, kódja OpenTracing instrumentált. A forráskódja a Jaeger GitHub repository példák között található meg: <https://github.com/jaegertracing/jaeger/tree/master/examples/hotrod>. Itt találunk leírást arról, hogyan lehet a HotROD és Jaeger alkalmazásokat docker alapokon futtatni:
+
+* **A Jeager futattására** a `jaegertracing/all-in-one` docker image-et használjuk: ez valamennyi Jaeger backend komponenst tartalmaz (agent, collector, ingester, stb.), beleértve az adatmegjelenítő frontendet is. Ez az image ismerkedéshez, helyi környezetben teszteléshez ajánlott, production környezethez nem ajánlják. Bővebb leírást az image-ről többek között itt találhatunk: <https://www.jaegertracing.io/docs/getting-started>. A számtalan portból számunkra kettő érdekes, a 6831 (Jaeger agent, span-eket itt fogadja UDP-n a kliens könyvtáraktól) és a 16686 (Jaeger UI frontend).
+  Megjegyzések:
   * A "jaegertracing/all-in-one" image alapértelmezésben egy in-memory tárolót használ, így újraindítást követően elvesznek a korábban rögzített trace/span-ek.
-  * Leírás a további Jaeger image-ekről és konfigurációs lehetőségekről itt találgató: https://www.jaegertracing.io/docs/deployment/
+  * Leírás a további Jaeger image-ekről és konfigurációs lehetőségekről itt találgató: <https://www.jaegertracing.io/docs/deployment>
 * A **HotROD futtatására** a `jaegertracing/example-hotrod` docker image használható. Ez az image egyben tartalmazza valamennyi HotROD szolgáltatás kódját, futattásakor minden szükséges szolgáltatás elindul ugyanabban a konténerben, csak különböző portokon.
 
 A HotRod és a Jaeger konténerek egyszerre történő indítására docker-compose-t használunk:
 
-1. Töltsük le a `docker-compose.yml`-t innen `https://github.com/jaegertracing/jaeger/blob/master/examples/hotrod/docker-compose.yml`, ide mentsük: `c:\work\<sajátnév>`
+1. Töltsük le a `docker-compose.yml`-t innen <https://github.com/jaegertracing/jaeger/blob/master/examples/hotrod/docker-compose.yml>, ide mentsük: `c:\work\<sajátnév>`
 2. Nyissuk meg a fájlt VS Code-ban, tekintsük át a tartalmát
    * A `jaeger` szolgáltatás a 6831 (Jaeger agent spanfeltöltő) és a 16686 (Jaeger UI frontend) portokat mappeli.
    * A `hotrod` szolgáltatás számára környezeti változókban mondjuk meg, milyen hostnéven és milyen porton éri az a Jaeger agentet (span-ek felöltéséhez szükséges).
@@ -34,7 +36,7 @@ A HotRod és a Jaeger konténerek egyszerre történő indítására docker-comp
      * `docker-compose down`-nal állítsuk le a konténereket
      * A `docker-compose.yml`-ben mappeljünk más külső portra, pl.: 8090:8080
      * Indítsuk újra `docker-compose up`
-4. A HotRod frontend a http://localhost:8080, a Jaeger frontend a http://localhost:16686 címen érhető el.
+4. A HotRod frontend a <http://localhost:8080>, a Jaeger frontend a <http://localhost:16686> címen érhető el.
 5. Később a szolgáltatások leállítása a következő paranccsal lesz lehetséges (most még ne futtassuk): `docker-compose down`
 
 ## Ismerkedés a HotROD alkalmazással
@@ -47,7 +49,7 @@ A HotRod egy "Ride Sharing" alkalmazás. Uber-hez hasonló, személyek vagy egy�
   * driver
   * route
 
-* Kapcsolódjuk a HotROD frontendhez böngészőből, ha még nem tettük meg (http://localhost:8080).
+* Kapcsolódjuk a HotROD frontendhez böngészőből, ha még nem tettük meg (<http://localhost:8080>).
   
 Ismerkedjünk meg a felület működésével:
 
@@ -115,20 +117,22 @@ Span részletes nézet:
 * A mysql lekérdezéshez tartozó span (5. sor) tag-ben tartalmazza az SQL parancsot.
 * Nyissunk le egy piros felkiálltójellel dekorált spant. A tag-ek között szerepel az `error = true`: ez a tag használandó hibák jelzésére.
 * Bármilyen egyéni adatot hozzáfűzhetünk tag-ként a span-ekhez. Erre példa a redis FindDriverIDs esetén a `param.location = 728,326`, vagy Redis GetDriver esetén a `param.driverID=T707027C`.
-A "szabványos" span tag-ekről, illetve a rövidesen tárgyalásra kerülő log "szabványos" mezőiről itt találunk leírást: https://github.com/opentracing/specification/blob/master/semantic_conventions.md#span-tags-table (nyissuk meg az oldalt és nézzünk rá a táblázatra). Az OpenTracing nem köti ki a tag neveket, de mindenképpen célszerű a táblázat ajánlásait követni: ha nem tesszük, a trace/span megjelenítő eszközök nem tudnak szemantikát társítani hozzá (pl. error esetén speciális megjelentés).
+A "szabványos" span tag-ekről, illetve a rövidesen tárgyalásra kerülő log "szabványos" mezőiről itt találunk leírást: <https://github.com/opentracing/specification/blob/master/semantic_conventions.md#span-tags-table> (nyissuk meg az oldalt és nézzünk rá a táblázatra). Az OpenTracing nem köti ki a tag neveket, de mindenképpen célszerű a táblázat ajánlásait követni: ha nem tesszük, a trace/span megjelenítő eszközök nem tudnak szemantikát társítani hozzá (pl. error esetén speciális megjelentés).
 
 Megjegyzés: ha megnézzük, a mysql és redis spanek kliens odaliak (span.kind = client), ezek nem az adattárolóból erednek. A demóalkalmazásban az adatkezelők szimuláltak, de jellemzően a valós adattárolók sem instrumentáltak: ez esetben tárolóhoz való hozzáférést kliens oldalon vegyük körbe egy új spannel, és ehhez csapjuk hozzá az informatív tag-eket (pl. SQL parancs, Redis művelet  és paraméterek, stb.).
 
-A spanekhez **Log** bejegyzések is tartozhatnak. Keressünk meg párat.
-* A span részletes nézetében a Logs szekció alatt találhatók. 
+A spanekhez **Log** bejegyzések is tartozhatnak. Keressünk meg párat:
+
+* A span részletes nézetében a Logs szekció alatt találhatók.
 * A span csíkján is megjelennek a logbejegyzések vékony függőleges vonallal, az egeret fölé húzva tooltipben részletes információt kapunk az adott logbejegyzésről.
-* A Log bejegyzéseknek van időbélyege, plusz tetszőleges, debugolást segítő kulcs-érték párok tartozhatnak hozzá.  A "szabványosakat" itt tekinthetjük meg: https://github.com/opentracing/specification/blob/master/semantic_conventions.md#log-fields-table (nézzünk rá a táblázatra). A legfontosabb az `event` kulcs.
+* A Log bejegyzéseknek van időbélyege, plusz tetszőleges, debugolást segítő kulcs-érték párok tartozhatnak hozzá.  A "szabványosakat" itt tekinthetjük meg: <https://github.com/opentracing/specification/blob/master/semantic_conventions.md#log-fields-table> (nézzünk rá a táblázatra). A legfontosabb az `event` kulcs.
 * Nézzük meg az egyik hibás redis GetDriver művelet logját. Látjuk, hogy redis timeout történt, a `driver_id` is naplózásra került.
 
 ##  Kontextusba helyezett logok
 
 Egész jól látjuk, hogyan épül fel az alkalmazás. További kérdésekre keressük a választ, pl.: miért hívja a frontend a customer szolgáltatás /customer végpontját?
 Próbálhatnánk a szolgáltatások logjaiból megtudni:
+
 * Ez sokszor nagyon nehéz
 * Ha sok felhasználói kérés kiszolgálása történik egyszerre párhuzamosan, szinte lehetetlen kihámozni, mi tartozik egy adott felhasználói kéréshez.
 
@@ -145,6 +149,7 @@ Mikor használjunk tageket, és mikor logokat? Alapelv:
 ## Késleltetések okainak felderítése
 
 Vizsgáljuk meg az alkalmazás teljesítmény karakterisztikáit. Trace-ek alapán ezt látjuk:
+
 1. Az ügyféladatok lekérdezése (`customer` szolgáltatás) a kritikus útvonalon van, mert ez adja vissza az ügyfél koordinátáit.
 2. A `driver` szolgáltatás lekérdezi az ügyfél közelében levő 10 járművezetőt, majd egyesével SORBAN EGYMÁS UTÁN lekérdezi ezek adatait a Redistől: ezt mutatja a `redis GetDriver` lépcsőzetes mintája.
 3. Ezt követően a 10 útvonalszámítás (`route` szolgáltatás) művelete nem is szekvenciális és nem is teljesen párhuzamos. Azt látjuk, hogy maximum három kérés tud párhuzamosan futni, és amint ezekből egy véget ér, akkor indul a következő. Ez arra utal, hogy itt egy hármas végrehajtó pool futtatja a műveleteket.
@@ -164,7 +169,7 @@ Vizsgáljuk meg, mi történik, ha számos párhuzamos kérést futtatunk:
        * Maga az elosztott trace azért tud megvalósulni, mert a OpenTracing instrumentálás gondoskodik arról, hogy a kérésekhez kapcsolódó bizonyos metaadatok szálak, folyamatok és számítógépek között propagálódjanak és minden a kérés kiszolgálásában részt vevő szereplőhöz eljussanak. Ilyen a trace id és a span id is. Egy másik ilyen metainformáció a baggage. Ez egy általános kulcs-érték pár tároló. 
        * A példánkban a JavaScript UI beteszi a kérés azonosítót a baggagebe, és ez a kérés kiszolgálása során minden szereplőhöz eljut, anélkül, hogy explicit paraméterekben kellene kezelni. Az OpenTracing instrumentáció gondoskodik róla, pl. HTTP fejlécbe teszi a HTTP kérések kiszolgálása során). Nagyon hatékony és hasznos eszköz!
        * A példánkban lehetővé teszi, hogy a kérésazonosító alapján kikeressük és analizáljuk azokat a trace-eket, melyek feltartják a kérésünk kiszolgálását. A való életben is gyakori probléma: egy ügyfél kérés feltart/belassít számos másikat. Lehetőségünk van ezen kérések megtalálására és analizálására.
-11. A HotRod példában nincs igazi Mysql adatbázis, csak szimulálja a rendszer. Itt látható a mesterségesen szigorított zárolás (pl. egy rosszul konfigurált DB connection poolt szimulálva): https://github.com/jaegertracing/jaeger/blob/master/examples/hotrod/services/customer/database.go, ezen belül az `if !config.MySQLMutexDisabled` sor környékét nézzük.
+11. A HotRod példában nincs igazi Mysql adatbázis, csak szimulálja a rendszer. Itt látható a mesterségesen szigorított zárolás (pl. egy rosszul konfigurált DB connection poolt szimulálva): <https://github.com/jaegertracing/jaeger/blob/master/examples/hotrod/services/customer/database.go>, ezen belül az `if !config.MySQLMutexDisabled` sor környékét nézzük.
 12. Szimuláljuk a detektált probléma javítását. A forráskódhoz nem fogunk nyúlni, a HotROD alkalmazást kell speciális command line argumentummal futtatni ahhoz, hogy kikapcsoljuk a mesterségesen indukált szigorú zárolást, illetve ezen felül a mesterséges késleltetés mértékét is csökkenteni fogjuk:
     1. A docker-compose.yml-ben a hotrod szolgáltatás command line paramétereit bővítsük a "-M" kapcsolóval, ehhez egy sort kell módosítani, a `command:` után [] között ez kell álljon: `"-M", "-D", "100ms", "all"`
     2. Mentsük el a fájlt.
@@ -175,7 +180,7 @@ Vizsgáljuk meg, mi történik, ha számos párhuzamos kérést futtatunk:
 ### További teljesítmény optimalizáció
 
 1. Azt látjuk, hogy míg korábban a route szolgáltatás hívások közül három futott párhuzamosan, most már általában csak egy fut egyszerre. Sőt, olyan időszakok is vannak, amikor egy sem fut. Ebből arra következtetünk, hogy a végrehajtó goroutine más goroutine-okkal verseng közös erőforrásért (vagyis közös a végrehajtó pool). A probléma helye a frontend szolgáltatásban valószínű, mivel a route spanek a frontend spanek gyerekei, így azt valószínűsítjük, hogy a route műveleteket a frontend művelete hívja. Ha van időnk, nézzünk rá a frontend kódjára:
-   1. https://github.com/jaegertracing/jaeger/blob/master/examples/hotrod/services/frontend/best_eta.go, itt a getRoutes művelet az érdekes.
+   1. <https://github.com/jaegertracing/jaeger/blob/master/examples/hotrod/services/frontend/best_eta.go>, itt a getRoutes művelet az érdekes.
    2. Azt látjuk, hogy egy poolt használ az útvonalak megtervezéséhez (a legkorábbi várható érkezési idejű útvonalat keressük).
    3. Azt is látjuk, hogy ha a pool mérete kellően nagy, akár minden FindRoute művelet futhatna párhuzamosan.
    4. Arra következtetünk, hogy a pool mérete nem kellően nagy (a korábbi tesztjeink alapján a pool méretét 3-asnak véljük).
@@ -190,16 +195,19 @@ A driver szolgáltatáson is lehetne optimalizálni, a Redis `GetDriver` lekérd
 
 Gyakran merül fel arra **üzleti igény, hogy az erőforrás (pl. CPU) használatot valamilyen magasabb szintű paraméter alapján mérjük és attributáljuk**. A példánkban a route szolgáltatásban az útvonalkeresés relatíve CPU intenzív művelet, jó lenne mérni, hogy **ügyfelenként** (customer) mennyi CPU időt használ. Ugyanakkor a route szolgáltatás a függőségi gráfban mélyen van, itt már nincs információ az ügyfélről, akinek kapcsán az útvonalkeresés történik. Csak a mérés érdekében egy explicit customer id paramétert bevezetni a route szolgáltatás API-ján rossz tervezői döntés lenne. Itt lép képbe a tracing, illetve annak **baggage** mechanizmusa. Egy adott trace kontextusában már tudjuk, mely ügyfél számára történik az útvonalkeresés. A baggage pedig lehetőséget nyújt arra, hogy a **szolgáltatások kódjának módosítása nélkül** transzparens módon továbbítsunk a trace-hez kapcsolódó metaadatokat a szolgáltatások között. Esetünkban ez a customer id lesz, de ilyen lehet egy kérés/session/felhasználó azonosító is.
 
-A fenti koncepció demonstrálására a `route` szolgáltatás olyan kódot tartalmaz, mely méri az útvonalszámítás idejét és a Go `expvar` metrika "kezelő" standard library package segítségével összegyűjti, nyilvántartja és lekérdezhetővé teszi azt. A kód itt található: `https://github.com/jaegertracing/jaeger/blob/master/examples/hotrod/services/route/stats.go`. Alapelve:
+A fenti koncepció demonstrálására a `route` szolgáltatás olyan kódot tartalmaz, mely méri az útvonalszámítás idejét és a Go `expvar` metrika "kezelő" standard library package segítségével összegyűjti, nyilvántartja és lekérdezhetővé teszi azt. A kód itt található: <https://github.com/jaegertracing/jaeger/blob/master/examples/hotrod/services/route/stats.go>. Alapelve:
+
 * A `routeCalcByCustomer` és `routeCalcBySession` változók egy-egy `map` típusú metrikát definiálnak, adott kulcsokkal.
 * A `stats` egy struktúra tömb, két elemű. A struktúra objektumokban egy expvar metrika és egy baggage kulcs található.
 * Az `updateCalcStats` lekérdezi az aktuális spant, egy cikulsban végigmegy a `stats`-ban tárolt struktúra elemeken: minden elemre lekérdezi a baggage-ből a stuktúrban tárolt kulcs alapján a baggage elemet ("customer" és "sesion"), majd ez és a futási idő alapján frissíti a struktúrában tárolt metrikát.
 
 Az expvar metrikák lekérdezhetők a futó szolgáltatástól a 8083-as porton:
+
 1. A `docker-compose.yml` fájlban a hotrod szolgáltatásnál publikáljuk a 8083-os portot (vegyük fel a "8083:8083"-at a "ports:" alá), mentsük el, a `docker-compose up -d`-vel frissítsük a futó konténert.
 2. A HotROD frontendden generáljunk jópár kérést: az első gombon kattintsunk sokat, a másodikon párat, a többin ne kattintsunk.
-3. Böngészőből kapcsolódjunk a hotrod konténer expvar szolgáltatásához és kérdezzük le a metrikákat: `http://localhost:8083/debug/vars`
+3. Böngészőből kapcsolódjunk a hotrod konténer expvar szolgáltatásához és kérdezzük le a metrikákat: <http://localhost:8083/debug/vars>
 4. Keressünk rá szöveg szerint a `route.calc.by.customer.sec` és az alatta levő `route.calc.by.session.sec` kulcsokra és tekintsük meg a metrikák értékét. Az alábbihoz hasonló kimenetet kapunk:
+
 ```
 "route.calc.by.customer.sec": {"Amazing Coffee Roasters": 1.0790000000000002, "Japanese Desserts": 1.5280000000000002, "Rachel's Floral Designs": 19.54500000000001, "Trom Chocolatier": 0.46199999999999997},
 "route.calc.by.session.sec": {"8221": 22.61399999999999},
@@ -229,17 +237,19 @@ A kommunikációról szóló gyakorlat némiképpen továbbfejlesztett Order+Cus
 Kiinduló lépések:
 
 * GitHub-ról klónozzuk ki a kiinduló solution-t:
-  * Hozzunk létre egy `traicing` mappát a `c:\work\<sajátnév>` munkakönyvátrunkban és indítsunk egy command prompotot innen.
-  * `git clone https://github.com/bmeviauav42/nyomkovetes`
+  * Hozzunk létre egy `tracing` mappát a `c:\work\<sajátnév>` munkakönyvátrunkban és indítsunk egy command prompotot innen, futtasuk az alábbi parancsot:
+`git clone https://github.com/bmeviauav42/nyomkovetes`
 * Indítsuk el VS alatt a szolgáltatásokat
 * A böngészőben hibaoldal jelenik meg. Frissítsük (ha kell többször is), a hiba eltűnik. Az oka: az OrderService hívja a CatalogService-t, de az először még nem állt fel teljesen, az Sqlite adatbázis seed-elése időt igényel.
 
-A megoldás a '' ágon található, a checkout lépései pl.:
+Ha kevés az idő, nézhetjük a feladat megoldását: ez a `megoldas/1-konfig-es-beepitett-instrumentalas` ágon található, az ág checkout lépései:
 
 ```
 git fetch
 git checkout megoldas/1-konfig-es-beepitett-instrumentalas
 ```
+
+VS alatt startup projektnek állítsuk be a docker-compose projektet.
 
 ### Projekt referenciák felvétele
 
@@ -254,16 +264,16 @@ A solutionünk több projektből/szolgáltatásból áll. Mindegyiket hasonló m
 
 * **"OpenTracing"**
   * OpenTracing API a kód instrumentálásához.
-  * https://github.com/opentracing/opentracing-csharp
+  * <https://github.com/opentracing/opentracing-csharp>
 * **"OpenTracing.Contrib.NetCore"**
-  * https://github.com/opentracing-contrib/csharp-netcore
+  * <https://github.com/opentracing-contrib/csharp-netcore>
   * Nem kötelező, de .NET Core környezetben javasolt: anélkül tudunk a segítségével pl. REST hívásokat trace-elni, hogy a kódunkat instumentálni kellene.
   * Beépül az ASP.NET-be, Entity Framework-be, bizonyos .NET Core BCL típusokba,melyek közül a legfontosabb a HttpClient.
   * Minden .NET könyvtárat, keretrendszert, stb.-t  támogat, ami a  .NET DiagnosticSource-t használja (minden Activity-hez spant készít és span log-ot az egyéb eseményekhez).
   * Beregisztrálja magát a Microsoft.Extensions.Logging rendszerbe, és minden logba írás esetén span log-ot készít, de csak akkor, ha van aktív span.
   * Függőségként felteszi az OpenTracing package-et is!
 * **"Jaeger"**
-  *  https://github.com/jaegertracing/jaeger-client-csharp)
+  *  <https://github.com/jaegertracing/jaeger-client-csharp>
   *  Jaeger .NET kliens könyvtár
 
 Az `Msa.Comm.Lab.Shared` könyvtárba már fel vannak véve ezek a NuGet függőségek (az `OpenTracing` csak közvetve, az `OpenTracing.Contrib.NetCor`e alatt), így nekünk nem kell megtennünk.
@@ -329,7 +339,7 @@ services:
 Teszteljük a működést:
 
 * Indítsuk el a szolgáltatásokat VS alatt, frissítsük párszor a böngészőablakot
-* Jelenítsük meg Jaeger UI-t: `http://localhost:16686/`
+* Jelenítsük meg Jaeger UI-t: <http://localhost:16686/>
 * A szűrőpanelen válasszuk ki a `Msa.Comm.Lab.Services.Order` szolgáltatást, frissítsük a megjelenített trace.eket (Find traces gomb), válasszunk ki jobboldalt egy hibával nem rendelkező trace-t és nyissuk meg.
 * A részteles trace megjelenítőben látjuk span hierarchiát: Http hívások és DB ExecuteReader a mélyén. Az `Action Msa.Comm.Lab.Services.Catalog.Controllers.ProductController/Get` spanben számos log van, többek között EF-höz kapcsolódók is.
 * **Mindezt úgy értük el, hogy semmiféle OpenTracing instrumentálást nem végeztünk a saját kódunkban**.
@@ -365,9 +375,9 @@ Saját spant készítünk. Itt már explicit OpenTracing API instumentálást v�
   * Tag hozzáfűzése aktív spanhez
   * Log esemény felvétele aktív spanhez
 * Futtasuk az alkalmazást, böngészőben egymás után kérjük le az egyes termékek adatait a `Test` szolgáltatás segítségével, a különböző kód ágak teszteléséhez:
-  * 'https://localhost:44385/api/test/1', cache hibát generál
-  * 'https://localhost:44385/api/test/1', nincs cache találat
-  * 'https://localhost:44385/api/test/1', van cache találat
+  * <https://localhost:44385/api/test/1>, cache hibát generál
+  * <https://localhost:44385/api/test/1>, nincs cache találat
+  * <https://localhost:44385/api/test/1>, van cache találat
 * A Jaeger UI segítségével vizsgáljuk meg a három trace-t
 
 ### Baggage használata (##Instr_Baggage)
@@ -382,5 +392,5 @@ A megoldás elve:
   * `OrderService.TestController`-t nézzük meg, itt rtörténik az aktív span baggage-ébe a kulcs-érték párok felvétele (string-string).
   * `CatalogService.ProductRepository`-t nézzük meg, itt olvassuk ki az aktív span Bbaggage-éből az értékeket. Ezeket logban hozzáírjuk az aktív span-hez. (Nagyobb értelme lenne pl. valamilyen countert/merikát nyilvántartani ez alapján).
 * Futtassuk (böngészőben `https://localhost:44385/api/test`)
-* Jaeger UI-n a trace részletes nézetben az ablak tetején a keresőbe írjuk be: `Msa.Comm.Lab.Services.Catalog.Controllers.ProductController/Get`. A sárgával kiement spant nyissuk le, kb. a 10. logbejegyzés a 	
-`ProductRepository.GetProducts is executed`, látjuk a username és requestid kulcsokat és azok értékét.
+* Jaeger UI-n a trace részletes nézetben az ablak tetején a keresőbe írjuk be: `Msa.Comm.Lab.Services.Catalog.Controllers.ProductController/Get`. A sárgával kiement spant nyissuk le, kb. a 10. logbejegyzés a
+`ProductRepository.GetProducts is executed`, látjuk a `username` és `requestid` kulcsokat és azok értékét.
