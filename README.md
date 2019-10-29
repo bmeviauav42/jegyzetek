@@ -17,6 +17,10 @@ Jegyzetek és példa kódok [BMEVIAUAV42 Mikroszolgáltatások és konténeralap
   - [Kommunikációs lehetőségek (elmélet)](https://www.aut.bme.hu/Upload/Course/VIAUAV42/hallgatoi_jegyzetek/Kommunik%c3%a1ci%c3%b3s%20lehet%c5%91s%c3%a9gek.pdf)
   - [Gyakorlat anyag](https://github.com/bmeviauav42/jegyzetek/blob/master/Kommunik%C3%A1ci%C3%B3/kommunik%C3%A1ci%C3%B3s%20lehet%C5%91s%C3%A9gek.md)
   - [Kiinduló projekt](https://github.com/bmeviauav42/komm-kiindulo)
+- Elosztott nyomkövetés
+  - [Elosztott nyomkövetés elmélet](https://www.aut.bme.hu/Upload/Course/VIAUAV42/hallgatoi_jegyzetek/07-Nyomk%c3%b6vet%c3%a9s%20-%20clean.pdf)
+  - [Gyakorlat anyag](Kommunik%C3%A1ci%C3%B3/kommunik%C3%A1ci%C3%B3s%20lehet%C5%91s%C3%A9gek.md)
+  - [A 2. feladathoz kiinduló projekt és megoldások)](https://github.com/bmeviauav42/nyomkovetes)
 
 ## Házi feladat
 
