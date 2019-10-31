@@ -21,6 +21,10 @@ Jegyzetek és példa kódok [BMEVIAUAV42 Mikroszolgáltatások és konténeralap
   - [Elosztott nyomkövetés elmélet](https://www.aut.bme.hu/Upload/Course/VIAUAV42/hallgatoi_jegyzetek/07-Nyomk%c3%b6vet%c3%a9s%20-%20clean.pdf)
   - [Gyakorlat anyag](Nyomkövetés/Nyomkövetés.md)
   - [A 2. feladathoz kiinduló projekt és megoldások](https://github.com/bmeviauav42/nyomkovetes)
+- Kubernetes
+  - [Kubernetes ismertetése (előadás)](https://www.aut.bme.hu/Upload/Course/VIAUAV42/hallgatoi_jegyzetek/10-Kubernetes.pdf)
+  - [Kubernetes alapok (feladatok)](Kubernetes/Kubernetes-alapok.md)
+  - [Alkalmazás telepítése Kubernetes klaszterbe (feladatok)](Kubernetes/Kubernetes-alkalmazas-telepites.md)
 
 ## Házi feladat
 
