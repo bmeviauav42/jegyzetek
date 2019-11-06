@@ -206,7 +206,7 @@ A dashboard alapvetően felhasználó authentikáció után érhető el. Az egys
 
    - Értelemszerűen csak egyszer kell egy klaszterbe telepíteni.
 
-1. Adjunk egy pár másodpercet a felállásra. Nézzük meg, hogy rendben fut-e: `kubectl get pods -n kubernetes-dashboard`
+1. Adjunk egy pár másodpercet a felállásra. Nézzük meg, hogy rendben fut-e: `kubectl get pods -n kube-system -l k8s-app=kubernetes-dashboard`
 
    - Akkor jó, ha a pod _running_ állapotban van.
 
