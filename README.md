@@ -28,7 +28,7 @@ Jegyzetek és példa kódok [BMEVIAUAV42 Mikroszolgáltatások és konténeralap
 
 ## Házi feladat
 
-[Házi feladat leírása és megszerezhető pontok](Hazi-feladat/README.md)
+[Házi feladat leírása és megszerezhető pontok](hazi-feladat.md)
 
 ## Laborokhoz szoftverek
 

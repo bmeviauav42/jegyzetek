@@ -1,10 +1,6 @@
 # Házi feladat értékelése
 
----
-
-A pontozási rendszer még nem végleges!
-
----
+2019.11.08.: A házi feladat pontrendszere végleges. Módosítás csak hallgatóknak kedvező módon végezhető.
 
 A házi feladat otthon, önállóan elkészítendő mikroszolgáltatások architektúrára épülő és konténertechnológiát használó szoftverrendszer elkészítése és **működőképes állapotban való bemutatása**.
 
@@ -114,8 +110,6 @@ Az alkalmazás rendelkezik modern webes / mobilos felhasználói felülettel. Te
 
 Domain Driven Design (DDD), Command Query Segregation Principle (CQRS). Ezeken felül előzetes egyeztetéssel a tárgy oktatóival.
 
-#### Feedback
+#### Visszacsatolás: 0-1 pont, összesen max. 3 pont
 
-A véglegesített pontrendszer vagy tananyag javítása, bővítése, módosítása pull request-tel (0-1 pont, összesen max. 3 pont)
-    - Helyesírási hiba is lehet, de az oktatók döntenek, hogy pontot ér-e a módosítás.
-    - Többször is megszerezhető.
+A véglegesített pontrendszer vagy tananyag javítása, bővítése, módosítása pull request-tel. Helyesírási hiba is lehet, de az oktatók döntenek, hogy pontot ér-e a módosítás. Többször is megszerezhető.
