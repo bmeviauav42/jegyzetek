@@ -139,7 +139,7 @@ Az alkalmazás fent ismertetett frissítéséhez a yaml fájlokba minden alkalom
 
    A Helm egy olyan template nyelvet használ, amelyben változó behelyettesítések, ciklusok, egyszerű szövegműveletek támogatottak. Mi most csak a változó behelyettesítést fogjuk használni.
 
-1. Töröljük ki a `templates` könyvtárból az összes fájlt a `_helpers.yml` kivételével. Másoljuk helyette be ide a korábban a telepítéshez használt yaml fájljainkat (3 darab).
+1. Töröljük ki a `templates` könyvtárból az összes fájlt a `_helpers.tpl` kivételével. Másoljuk helyette be ide a korábban a telepítéshez használt yaml fájljainkat (3 darab).
 
 1. Szerkesszük meg a `todos.yaml` fájl tartalmát. Leegyszerűsítve az alábbiakra lesz szükség:
 
