@@ -145,9 +145,9 @@ Az alkalmazás fent ismertetett frissítéséhez a yaml fájlokba minden alkalom
 
    - Ha _Visual Studio Code_-ot használunk, akkor telepítsük a [`ms-kubernetes-tools.vscode-kubernetes-tools`](https://marketplace.visualstudio.com/items?itemName=ms-kubernetes-tools.vscode-kubernetes-tools) extension-t. Így kapunk némi segítséget a szintaktikával.
 
-   - Mindenhol, ahol _labels_ vagy _matchLabels_ szerepel, még egy sort fel kell vennünk: `app.kubernetes.io/instance: {{ .Release.Name }}` Ez egy implicit változót helyettesít be: a release nevét. Ezzel azonosítja a Helm a telepítés és frissítés során, hogy mely elemeket kell frissítenie, melyek tartoznak a fennhatósága alá. Mi most mindent egy névtérbe raktunk. A Helm telepítés ezt nem fogja tönkretenni, mert az eddigi elemeinket nem fogja érinteni ezen label miatt.
+   - Mindenhol, ahol _labels_ vagy _matchLabels_ szerepel, még egy sort fel kell vennünk: ```app.kubernetes.io/instance: {{ .Release.Name }}``` Ez egy implicit változót helyettesít be: a release nevét. Ezzel azonosítja a Helm a telepítés és frissítés során, hogy mely elemeket kell frissítenie, melyek tartoznak a fennhatósága alá. Mi most mindent egy névtérbe raktunk. A Helm telepítés ezt nem fogja tönkretenni, mert az eddigi elemeinket nem fogja érinteni ezen label miatt.
 
-   - A pod-ban az image beállításához használjunk változót: `image: todoapp/todos:{{ .Values.todos.tag }}`
+   - A pod-ban az image beállításához használjunk változót: ```image: todoapp/todos:{{ .Values.todos.tag }}```
 
 1. Definiáljuk az előbbi változó alapértelmezett értékét. A `values.yaml` fájlban (egy könyvtárral feljebb) töröljünk ki mindent, és vegyük fel ezt a kulcsot:
 
