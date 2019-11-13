@@ -12,7 +12,7 @@ A labor célja egy alkalmazás telepítése Kubernetes klaszterbe, valamint a fr
   - Windows platformon: Docker Desktop
 - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
   - A binárisa legyen elérhető PATH-on.
-- [heml](https://helm.sh/docs/using_helm/#installing-helm)
+- [helm](https://helm.sh/docs/using_helm/#installing-helm)
   - A binárisa legyen elérhető PATH-on.
 - Kubernetes dashboard
   - Telepítése és használata korábbi anyag szerint.
