@@ -38,7 +38,7 @@
     - `Initial Catalog=mhcdb` helyett `Initial Catalog=__SQLDB__`
  - ne felejtsünk el commitolni!
   
- ## Kitérő: terraform és multi tenant infrastruktúra
+ ## Kitérő: terraform és multitenant infrastruktúra
   - [terraform file](https://autsoft.sharepoint.com/:f:/g/shared/AUT/EumyvuEMcWVBlSvpxxtcnL4BThMYJ8D1yyfXQQAv1DjzAQ?e=UN9eiY) main.tf
     - Jelszó: a laborgép jelszava
     - Azure SQL Serverless változatot nem támogat még :(
