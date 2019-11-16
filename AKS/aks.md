@@ -54,3 +54,8 @@
  - Project Settings -> Pipelines részen belül Service Connection -> New Service Connection -> Azure Resource Manager -> alul váltsunk a linkkel a teljes verzióra (full version)
  - Töltsük ki a terraform file alapján
     - Subscription Name: **MSDN4**
+
+## 1. feladat
+- A laboranyag alapján, továbbá
+  - A build pipeline változók közé vegyük fel az `SQLDB`-t is
+  - A release pipeline utolsó (`Update image in AKS`) lépésében az `Arguments` részen `image deployments/mhc-front mhc-front=$(ACR)/myhealth.web:$(Build.BuildId)` -> `image deployments/mhc-front mhc-front=$(ACR)/<neptunkód>.myhealth.web:$(Build.BuildId)`
