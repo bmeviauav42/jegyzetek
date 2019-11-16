@@ -28,14 +28,24 @@
    - docker-compose.yml
    - mhc-aks.yaml
   
- ## 0. feladat - egyedi image név
+ ## 0. feladat - egyedi image név és adatbázis név
   - az image neve elé tegyük a neptunkódunkat
   - docker-compose.yml-ban
     - `image: myhealth.web` -> `image: <neptunkod>.myhealth.web`
   - mhc-aks.yaml-ban 93.sor körül
     -  `image: __ACR__/myhealth.web:latest` -> `image: __ACR__/<neptunkod>.myhealth.web:latest`
+  - src/MyHealth.Web/appsettings.json a connection string-ben
+    - `Initial Catalog=mhcdb` helyett `Initial Catalog=__SQLDB__`
  - ne felejtsünk el commitolni!
   
- 
- 
- 
+ ## Kitérő: terraform és multi tenant infrastruktúra
+  - [terraform file](https://autsoft.sharepoint.com/:f:/g/shared/AUT/EumyvuEMcWVBlSvpxxtcnL4BThMYJ8D1yyfXQQAv1DjzAQ?e=UN9eiY) main.tf
+    - Jelszó: a laborgép jelszava
+    - Azure SQL Serverless változatot nem támogat még :(
+  - Azure SQL Serverless adatbázisok batch-elt létrehozása Azure CLI-vel  
+  ```
+  For ($i=1; $i -le 5; $i++) { az sql db create -g AKSLab -s akssqlsrv -n akslabsql$i --compute-model Serverless --edition GeneralPurpose --family Gen5 --auto-pause-delay 120 --max-size 1GB --capacity 1 --min-capacity 0.5 }
+ ```
+ - Lépjünk be az [Azure portálra](https://portal.azure.com) a labuser@autsoft.hu userrel. Jelszó: a laborgép jelszava
+ - Főleg csak olvasási jogokkal rendelkezik
+    - Nézzük meg a létrejött erőforrásokat
