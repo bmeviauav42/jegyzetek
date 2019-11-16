@@ -28,7 +28,7 @@
    - docker-compose.yml
    - mhc-aks.yaml
   
- ## 0. feladat - egyedi image név és adatbázis név
+ ## -1. feladat - egyedi image név és adatbázis név
   - az image neve elé tegyük a neptunkódunkat
   - docker-compose.yml-ban
     - `image: myhealth.web` -> `image: <neptunkod>.myhealth.web`
@@ -49,3 +49,8 @@
  - Lépjünk be az [Azure portálra](https://portal.azure.com) a labuser@autsoft.hu userrel. Jelszó: a laborgép jelszava
  - Főleg csak olvasási jogokkal rendelkezik
     - Nézzük meg a létrejött erőforrásokat
+    
+ ## 0. feladat Azure és Azure DevOps összekötése
+ - Project Settings -> Pipelines részen belül Service Connection -> New Service Connection -> Azure Resource Manager -> alul váltsunk a linkkel a teljes verzióra (full version)
+ - Töltsük ki a terraform file alapján
+    - Subscription Name: **MSDN4**
