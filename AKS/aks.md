@@ -28,11 +28,13 @@
    - docker-compose.yml
    - mhc-aks.yaml
   
- ## 0. feladat - egyedi konténernév
+ ## 0. feladat - egyedi image név
+  - az image neve elé tegyük a neptunkódunkat
   - docker-compose.yml-ban
     - `image: myhealth.web` -> `image: <neptunkod>.myhealth.web`
-  - mhc-aks.yaml-ban 93.sor
-    -  `image: __ACR__/myhealth.web:latest` -> `image: <neptunkod>.myhealth.web`
+  - mhc-aks.yaml-ban 93.sor körül
+    -  `image: __ACR__/myhealth.web:latest` -> `image: __ACR__/<neptunkod>.myhealth.web:latest`
+ - ne felejtsünk el commitolni!
   
  
  
