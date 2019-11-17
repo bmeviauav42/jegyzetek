@@ -70,3 +70,7 @@ A laboranyag alapján, továbbá
 }
  ``` 
   - A release pipeline utolsó (`Update image in AKS`) lépésében az `Arguments` részen `image deployments/mhc-front mhc-front=$(ACR)/myhealth.web:$(Build.BuildId)` -> `image deployments/mhc-front mhc-front=$(ACR)/<neptunkód>.myhealth.web:$(Build.BuildId)`
+  
+## 2. feladat
+A laboranyag alapján, továbbá
+  - a kubcetl parancsok végére mindig írjuk `--namespace=<neptunkód>`
