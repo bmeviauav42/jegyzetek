@@ -53,9 +53,20 @@
  ## 0. feladat Azure és Azure DevOps összekötése
  - Project Settings -> Pipelines részen belül Service Connection -> New Service Connection -> Azure Resource Manager -> alul váltsunk a linkkel a teljes verzióra (full version)
  - Töltsük ki a terraform file alapján
-    - Subscription Name: **MSDN4**
+    - Subscription Name: **MSDN1**
 
 ## 1. feladat
-- A laboranyag alapján, továbbá
+A laboranyag alapján, továbbá
   - A build pipeline változók közé vegyük fel az `SQLDB`-t is
+  - Mindenhol, ahol Container Registry-t kell megadni, adjuk meg a teljes login server címet
+  - A release pipline-ban klónozzuk a `Create Deployments & Services in AKS` lépést, nevezzük át `Create Namespace`-re, a `Command` rész alatt állítsunk be inline configuration-t a következőre:
+```
+ {
+  "apiVersion": "v1",
+  "kind": "Namespace",
+  "metadata": {
+    "name": "<neptunkód>"
+  }
+}
+ ``` 
   - A release pipeline utolsó (`Update image in AKS`) lépésében az `Arguments` részen `image deployments/mhc-front mhc-front=$(ACR)/myhealth.web:$(Build.BuildId)` -> `image deployments/mhc-front mhc-front=$(ACR)/<neptunkód>.myhealth.web:$(Build.BuildId)`
