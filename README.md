@@ -25,6 +25,8 @@ Jegyzetek és példa kódok [BMEVIAUAV42 Mikroszolgáltatások és konténeralap
   - [Kubernetes ismertetése (előadás)](https://www.aut.bme.hu/Upload/Course/VIAUAV42/hallgatoi_jegyzetek/10-Kubernetes.pdf)
   - [Kubernetes alapok (feladatok)](Kubernetes/Kubernetes-alapok.md)
   - [Alkalmazás telepítése Kubernetes klaszterbe (feladatok)](Kubernetes/Kubernetes-alkalmazas-telepites.md)
+- AKS
+  - [Gyakorlat anyag](AKS/aks.md)
 
 ## Házi feladat
 
