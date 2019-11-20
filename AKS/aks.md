@@ -73,4 +73,4 @@ A laboranyag alapján, továbbá
   
 ## 2. feladat
 A laboranyag alapján, továbbá
-  - a kubcetl parancsok végére mindig írjuk `--namespace=<neptunkód>`
+  - a kubectl parancsok végére mindig írjuk `--namespace=<neptunkód>`
