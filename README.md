@@ -27,6 +27,9 @@ Jegyzetek és példa kódok [BMEVIAUAV42 Mikroszolgáltatások és konténeralap
   - [Alkalmazás telepítése Kubernetes klaszterbe (feladatok)](Kubernetes/Kubernetes-alkalmazas-telepites.md)
 - AKS
   - [Gyakorlat anyag](AKS/aks.md)
+- Naplózás, Health Checks
+  - [Naplózás, Health Checks (előadás)](TODO)
+  - [Gyakorlat anyag](Logging,&#32;Health&#32;Checks/Logging-Health-Checks.md)
 
 ## Házi feladat
 
