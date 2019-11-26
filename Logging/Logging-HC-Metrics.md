@@ -20,6 +20,8 @@
 <details>
 <summary>Előző alkalmak cheatsheet</summary>
 
+* Docker
+  * `docker rm -f $(docker ps -aq)`
 * K8S dashboard
   * `kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v1.10.1/src/deploy/alternative/kubernetes-dashboard.yaml`
   * `kubectl proxy`
