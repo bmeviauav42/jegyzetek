@@ -221,10 +221,9 @@ Vegyük fel a csekkolásokat.
 
 ```C#
 services.AddHealthChecks()
-    .AddCheck("readiness", () => HealthCheckResult.Healthy())
-    .AddRedis(Configuration.GetValue<string>("RedisUrl") ?? "redis:6379", tags: new[] { "liveness" })
-    .AddElasticsearch(Configuration.GetValue<string>("ElasticsearchUrl") ?? "http://elasticsearch:9200", tags: new[] { "liveness" });
-
+    .AddCheck("liveness", () => HealthCheckResult.Healthy())
+    .AddRedis(Configuration.GetValue<string>("RedisUrl") ?? "redis:6379", tags: new[] { "readiness" })
+    .AddElasticsearch(Configuration.GetValue<string>("ElasticsearchUrl") ?? "http://elasticsearch:9200", tags: new[] { "readiness" });
 ```
 
 Publikáljuk ki egy végponton őket.
@@ -235,30 +234,99 @@ app.UseEndpoints(endpoints =>
     //...
     endpoints.MapHealthChecks("/health/ready", new HealthCheckOptions
     {
-        Predicate = r => r.Name.Contains("readiness"),
+        Predicate = r => r.Name.Contains("liveness"),
         ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
     });
     endpoints.MapHealthChecks("/health/live", new HealthCheckOptions
     {
-        Predicate = r => r.Tags.Contains("liveness"),
+        Predicate = r => r.Tags.Contains("readiness"),
         ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
     });
 });
+```
 
+A health check UI-hoz az alábbi nuget csomagot kell felvegyük a projektbe. Mi most csak a sorosító komponensét fogjuk használni belőle (`UIResponseWriter`), idő hiányában a UI komponenst most nem lőjük össze.
+
+```xml
+<PackageReference Include="AspNetCore.HealthChecks.UI" Version="3.0.4" />
 ```
 
 Próbáljuk ki!
 
 > **Megj.:** az ASP.NET Core-os konfigurációk kezelésére itt is célszerűbb lenne az `IOptions<T>` mintát használni, de most az egyszerűség kedvéért ettől eltekintünk.
 
+Vegyük fel a kubernetes konfigurációba a liveness és a readiness próbákat.
 
-A health check UI-hoz az alábbi nuget csomagot kell felvegyük a projektbe
-
-```xml
-<PackageReference Include="AspNetCore.HealthChecks.UI" Version="3.0.4" />
+```yml
+    spec:
+      containers:
+        - name: todos
+          livenessProbe:
+            httpGet:
+              path: /health/live
+              port: 80
+              scheme: HTTP
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /health/ready
+              port: 80
+              scheme: HTTP
+            initialDelaySeconds: 5
+            periodSeconds: 10
 ```
 
-**TODO valamiért még nem jó a UI**
+Ha mi kívülről is meg akarjuk hívni a /health végpontokat, akkor vegyük fel őket az ingress konfigurációba.
 
-Próbáljuk ki az új végpontot és a UI-t.
+```yml
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /health/live
+            backend:
+              serviceName: todos # A service neve
+              servicePort: http # A service-ben a port neve (lehet a port szama is)
+          - path: /health/ready
+            backend:
+              serviceName: todos # A service neve
+              servicePort: http # A service-ben a port neve (lehet a port szama is)
+```
+
+Próbáljuk ki!
+
+Rontsuk el a readiness próbát úgy, hogy elírjuk az elasticsearch connection string-jét a környezeti változóban. Azt tapasztalhatjuk, hogy az új konténer elindult, de mivel nem ready ezért a régi szerepét nem tudja átvenni addig, amíg ready nem lesz. Sajnos ez a hiba nem tud kijavulni magától, így a kijavított config után fog indulni a pod.
+
+Készítsünk egy egyszerű módszert a liveness próba elrontására a Startup osztályban a healthcheck létrehozásakor.
+
+```C#
+public bool IsLive { get; private set; } = true;
+```
+
+```C#
+services.AddHealthChecks()
+    .AddCheck("liveness", () => IsLive ? HealthCheckResult.Healthy() : HealthCheckResult.Unhealthy())
+```
+
+```C#
+endpoints.MapGet("/health/switch", async r =>
+{
+    IsLive = !IsLive;
+    await r.Response.WriteAsync($"IsLive is now {IsLive}");
+});
+```
+
+Engedélyezzük kívülről ezt a végpontot is.
+
+```yml
+          - path: /health/switch
+            backend:
+              serviceName: todos # A service neve
+              servicePort: http # A service-ben a port neve (lehet a port szama is)
+```
+
+Telepítsük ki, majd rontsuk el a működést a végpontunkkal. Közben figyeljük a podok állapotát. Egy idő után láthatjuk, hogy a próba sérült, és a k8s megpróbálja újraindítani a pod-ot, mivel ott már az `IsLive` property érteke igaz lesz.
+
+Érdemes minden health check definiálása során megtervezni azt, hogy az most melyik próbába illik bele jobban. Ha van esély, hogy magától megjavuljon, akkor a readiness próbába érdemes rakni (pl. valamilyen külső szolgáltatás nem elérhető, persze ez lehet konfigurációs hiba is, ahogy láttuk), ha pedig újraindítás tud segíteni akkor a liveness próbába rakjuk.
 
