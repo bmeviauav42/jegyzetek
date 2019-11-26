@@ -28,7 +28,7 @@ Jegyzetek és példa kódok [BMEVIAUAV42 Mikroszolgáltatások és konténeralap
 - AKS
   - [Gyakorlat anyag](AKS/aks.md)
 - Naplózás, Health Checks
-  - [Naplózás, Health Checks (előadás)](TODO)
+  - [Naplózás, Health Checks (előadás)](https://www.aut.bme.hu/Upload/Course/VIAUAV42/hallgatoi_jegyzetek/Logging,%20health%20checks.pdf)
   - [Gyakorlat anyag](Logging,&#32;Health&#32;Checks/Logging-Health-Checks.md)
 
 ## Házi feladat
