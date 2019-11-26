@@ -2,6 +2,7 @@
 
 <details>
 <summary>Tartalomjegyzék</summary>
+
 - [Naplózás, Health checks](#napl%c3%b3z%c3%a1s-health-checks)
   - [Naplózás](#napl%c3%b3z%c3%a1s)
     - [Előkészület](#el%c5%91k%c3%a9sz%c3%bclet)
@@ -14,6 +15,26 @@
       - [Liveness](#liveness)
       - [Readiness](#readiness)
     - [Kubernetes probes](#kubernetes-probes)
+</details>
+
+<details>
+<summary>Előző alkalmak cheatsheet</summary>
+
+* K8S dashboard
+  * `kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v1.10.1/src/deploy/alternative/kubernetes-dashboard.yaml`
+  * `kubectl proxy`
+  * http://localhost:8001/api/v1/namespaces/kube-system/services/kubernetes-dashboard:/proxy
+* Traefic
+  * `helm version`
+  * `helm init`
+  * `helm install stable/traefik --name traefik --version "1.78.3" --set rbac.enabled=true --set logLevel=debug --set dashboard.enabled=true --set service.nodePorts.http=30080 --set serviceType=NodePort`
+* DB
+  * `kubectl apply -f db`
+* App
+  * `kubectl apply -f app`
+  * `$env:IMAGE_TAG="v1"` vagy írjuk át a yml-ben latest-re ideiglenesen
+  * `docker-compose build`
+  * http://localhost:30080
 </details>
 
 ## Naplózás
