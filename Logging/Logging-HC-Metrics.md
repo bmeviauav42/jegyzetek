@@ -1,8 +1,25 @@
-# Naplózás, Health checks, Metrikák implementálása
+# Naplózás, Health checks
+
+<details>
+<summary>Tartalomjegyzék</summary>
+- [Naplózás, Health checks](#napl%c3%b3z%c3%a1s-health-checks)
+  - [Naplózás](#napl%c3%b3z%c3%a1s)
+    - [Előkészület](#el%c5%91k%c3%a9sz%c3%bclet)
+    - [ELK](#elk)
+    - [Serilog](#serilog)
+    - [Kibana](#kibana)
+  - [Health Checks](#health-checks)
+    - [Előkészület](#el%c5%91k%c3%a9sz%c3%bclet-1)
+    - [Health Check implementáció](#health-check-implement%c3%a1ci%c3%b3)
+      - [Liveness](#liveness)
+      - [Readiness](#readiness)
+    - [Kubernetes probes](#kubernetes-probes)
+</details>
 
 ## Naplózás
 
-Az ASP.NET Core TODO webalkalmazásunkban implementáljunk szemantikus naplózást. A naplóbejegyzéseket az úgynevezett ELK technológiai stackkel fogjuk feldolgozni. 
+Az ASP.NET Core TODO webalkalmazásunkban implementáljunk szemantikus naplózást. A naplóbejegyzéseket az úgynevezett ELK technológiai stackkel fogjuk feldolgozni.
+
 * **E**: Elasticsearch
   * A naplóbejegyzések tárolásáért és indexeléséért/kereshetőség biztosításáért felelős
 * **L**: Logstash
@@ -26,7 +43,7 @@ Klónozzuk le a kiinduló projektet, ami ASP.NET Core 3.0-ra lett felmigrálva a
 git clone TODO
 ```
 
-Próbáljuk ki, hogy docker-compose-zal elindul-e az alkalmazásunk, és teszteljük az API GW-en keresztül a működést. **(TODO link)**
+Próbáljuk ki, hogy docker-compose-zal elindul-e az alkalmazásunk, és teszteljük az API GW-en keresztül a működést.
 
 ### ELK
 
@@ -152,21 +169,25 @@ Figyeljük meg, hogy nem használtuk a C# string interpoláció funkcióját (`$
 
 A template-ek esetében csak nem egyszerű `ToString()` hívást lehet végezni, hanem a fenti példában a `{@todoitem}` placeholder esetében a `@` jelentése az objektum sorosítására vonatkozik. lásd: https://github.com/serilog/serilog/wiki/Structured-Data
 
-Oda kell figyelni, hogy a template-ben lévő propertyknek a JSON típusa (int, string, obj, array stb) első beszúráskor fixálva lesznek az ES sémájában. Ha refaktoráljuk a template-et és mást próbálunk logolni, akkor szimplán nem fog beszúródni az ES-be.
+Oda kell figyelni, hogy a template-ben lévő propertyknek a JSON típusa (`int, string, obj, array` stb) első beszúráskor fixálva lesznek az ES sémájában. Ha refaktoráljuk a template-et és mást próbálunk logolni, akkor szimplán nem fog beszúródni az ES-be.
 
 ### Kibana
 
 Futtassuk az alkalmazásunkat és generáljunk egy bejegyzést a fenti funkcióval.
 
-Nyissuk meg a Kibana-t a TODO URL-en.
+Nyissuk meg a Kibana-t.
 
-A log nézetben még nem látunk semmit. A kibanának mondjuk meg, hogy milyen index-en keresse a bejegyzéseket. Esetünkben ez alapértelmezetten a `logstash-*` mintára fog illeszkedni. Második lépésként válasszuk ki a @timestamp mezőt a szűréshez.
+A log nézetben még nem látunk semmit. A kibanának mondjuk meg, hogy milyen index-en keresse a bejegyzéseket. Esetünkben ez alapértelmezetten a `logstash-*` mintára fog illeszkedni. Második lépésként válasszuk ki a `@timestamp` mezőt a szűréshez.
 
 Vizsgáljuk meg a logbejegyzéseket, kitüntetetten a saját TODO létrehozásával kapcsolatos bejegyzést. Figyeljük meg, hogy szinte minden mező kereshető és szépen strukturáltan kerülnek a bejegyzés adatai lementésre.
 
 ## Health Checks
 
-Implementáljunk a Todos.Api projektünkhöz health check-et, amit majd a kubernetes fog elsősorban felhasználni. Mivel Kubernetes-hez még nem konfiguráltuk fel a loggolás szolgáltatásait, ezért a jelenlegi munkánkat commitoljuk egy külön ágra, majd álljunk vissza a kiinduló ágra.
+Implementáljunk a Todos.Api projektünkhöz health check-et, amit majd a kubernetes fog elsősorban felhasználni.
+
+### Előkészület
+
+Mivel Kubernetes-hez még nem konfiguráltuk fel a loggolás szolgáltatásait, ezért a jelenlegi munkánkat commitoljuk egy külön ágra, majd álljunk vissza a kiinduló ágra.
 
 ```cmd
 git branch logging
@@ -176,16 +197,20 @@ git checkout kiindulóTODO
 
 Előző órák mintájára üzemeljük be a kubernetes verzióját az alkalmazásnak. Nézzük meg a dashboardon a rendszer állapotát és próbáljuk ki az alkalmazást.
 
+### Health Check implementáció
+
 Készítsünk readiness és liveness próbákat a kubernetes számára. Ehhez használjuk fel az ASP.NET Core 2.2 óta rendelkezésre álló beépített Health Check API-kat.
 
-Kezdjük az egyszerűbbel. Akkor lesz readiness egy szolgáltatás, ha az app felált és ki tudja szolgálni külső függőségek nélkül a readiness próbát. Ehhez vegyünk fel egy üres health checket a `/self` végpontra.
+#### Liveness
+
+Kezdjük az egyszerűbbel. Akkor lesz live egy szolgáltatás, ha az app felált és ki tudja szolgálni külső függőségek nélkül a liveness próbát. Ehhez vegyünk fel egy üres health checket a `/health/live` végpontra.
 
 ```C#
 public void ConfigureServices(IServiceCollection services)
 {
     // ...
     services.AddHealthChecks()
-        .AddCheck("readiness", () => HealthCheckResult.Healthy());
+        .AddCheck("liveness", () => HealthCheckResult.Healthy());
 }
 ```
 
@@ -196,15 +221,25 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     app.UseEndpoints(endpoints =>
     {
         endpoints.MapControllers();
-        endpoints.MapHealthChecks("/health/ready", new HealthCheckOptions 
+        endpoints.MapHealthChecks("/health/live", new HealthCheckOptions
         {
-            Predicate = r => r.Name.Contains("readiness"),
+            Predicate = r => r.Name.Contains("liveness"),
             ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
         });
     }
 ```
 
-Próbáljuk ki az új végpontot.
+A health check UI-hoz az alábbi NuGet csomagot kell felvegyük a projektbe.
+
+```xml
+<PackageReference Include="AspNetCore.HealthChecks.UI" Version="3.0.4" />
+```
+
+Mi most csak a sorosító komponensét fogjuk használni belőle (`UIResponseWriter`), idő hiányában a UI komponenst most nem üzemeljük be.
+
+Próbáljuk ki az új végpontot (F5).
+
+#### Readiness
 
 Vegyünk fel HC-t a külső szolgáltatásainkhoz is (Elasticsearch, Redis), majd ezt publikáljuk ki egy külön végponton.
 
@@ -226,34 +261,21 @@ services.AddHealthChecks()
     .AddElasticsearch(Configuration.GetValue<string>("ElasticsearchUrl") ?? "http://elasticsearch:9200", tags: new[] { "readiness" });
 ```
 
+> **Megj.:** az ASP.NET Core-os konfigurációk kezelésére itt is célszerűbb lenne az `IOptions<T>` mintát használni, de most az egyszerűség kedvéért ettől eltekintünk.
+
 Publikáljuk ki egy végponton őket.
 
 ```C#
-app.UseEndpoints(endpoints =>
+endpoints.MapHealthChecks("/health/ready", new HealthCheckOptions
 {
-    //...
-    endpoints.MapHealthChecks("/health/ready", new HealthCheckOptions
-    {
-        Predicate = r => r.Name.Contains("liveness"),
-        ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
-    });
-    endpoints.MapHealthChecks("/health/live", new HealthCheckOptions
-    {
-        Predicate = r => r.Tags.Contains("readiness"),
-        ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
-    });
+    Predicate = r => r.Tags.Contains("readiness"),
+    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
 });
-```
-
-A health check UI-hoz az alábbi nuget csomagot kell felvegyük a projektbe. Mi most csak a sorosító komponensét fogjuk használni belőle (`UIResponseWriter`), idő hiányában a UI komponenst most nem lőjük össze.
-
-```xml
-<PackageReference Include="AspNetCore.HealthChecks.UI" Version="3.0.4" />
 ```
 
 Próbáljuk ki!
 
-> **Megj.:** az ASP.NET Core-os konfigurációk kezelésére itt is célszerűbb lenne az `IOptions<T>` mintát használni, de most az egyszerűség kedvéért ettől eltekintünk.
+### Kubernetes probes
 
 Vegyük fel a kubernetes konfigurációba a liveness és a readiness próbákat.
 
@@ -277,7 +299,7 @@ Vegyük fel a kubernetes konfigurációba a liveness és a readiness próbákat.
             periodSeconds: 10
 ```
 
-Ha mi kívülről is meg akarjuk hívni a /health végpontokat, akkor vegyük fel őket az ingress konfigurációba.
+Ha mi kívülről is meg akarjuk hívni a `/health` végpontokat, akkor vegyük fel őket az ingress konfigurációba.
 
 ```yml
 spec:
@@ -298,7 +320,7 @@ Próbáljuk ki!
 
 Rontsuk el a readiness próbát úgy, hogy elírjuk az elasticsearch connection string-jét a környezeti változóban. Azt tapasztalhatjuk, hogy az új konténer elindult, de mivel nem ready ezért a régi szerepét nem tudja átvenni addig, amíg ready nem lesz. Sajnos ez a hiba nem tud kijavulni magától, így a kijavított config után fog indulni a pod.
 
-Készítsünk egy egyszerű módszert a liveness próba elrontására a Startup osztályban a healthcheck létrehozásakor.
+Készítsünk egy egyszerű módszert a liveness próba elrontására a `Startup` osztályban a healthcheck létrehozásakor.
 
 ```C#
 public bool IsLive { get; private set; } = true;
@@ -329,4 +351,3 @@ Engedélyezzük kívülről ezt a végpontot is.
 Telepítsük ki, majd rontsuk el a működést a végpontunkkal. Közben figyeljük a podok állapotát. Egy idő után láthatjuk, hogy a próba sérült, és a k8s megpróbálja újraindítani a pod-ot, mivel ott már az `IsLive` property érteke igaz lesz.
 
 Érdemes minden health check definiálása során megtervezni azt, hogy az most melyik próbába illik bele jobban. Ha van esély, hogy magától megjavuljon, akkor a readiness próbába érdemes rakni (pl. valamilyen külső szolgáltatás nem elérhető, persze ez lehet konfigurációs hiba is, ahogy láttuk), ha pedig újraindítás tud segíteni akkor a liveness próbába rakjuk.
-
