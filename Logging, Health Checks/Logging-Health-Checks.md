@@ -63,7 +63,7 @@ Használjuk a Serilog külső osztálykönyvtárat a naplózásra, ami a a fenti
 Klónozzuk le a kiinduló projektet, ami ASP.NET Core 3.0-ra lett felmigrálva az előző alkalmakhoz képest.
 
 ```cmd
-git clone TODO
+git clone https://github.com/bmeviauav42/todoapp-logging-hc.git
 ```
 
 Próbáljuk ki, hogy docker-compose-zal elindul-e az alkalmazásunk, és teszteljük az API GW-en keresztül a működést.
