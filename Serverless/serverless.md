@@ -1,4 +1,4 @@
-# Mikroszolgáltatások serverless arhcitektúra fölött
+# Mikroszolgáltatások serverless architektúra fölött
 
 ## Azure Functions referenciaarchitektúrák mikroszolgáltatásokhoz
 
