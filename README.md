@@ -30,6 +30,8 @@ Jegyzetek és példa kódok [BMEVIAUAV42 Mikroszolgáltatások és konténeralap
 - Naplózás, Health Checks
   - [Naplózás, Health Checks (előadás)](https://www.aut.bme.hu/Upload/Course/VIAUAV42/hallgatoi_jegyzetek/Logging,%20health%20checks.pdf)
   - [Gyakorlat anyag](Logging,&#32;Health&#32;Checks/Logging-Health-Checks.md)
+- Serverless
+  - [Gyakorlat anyag](Serverless/serverless.md)
 
 ## Házi feladat
 
