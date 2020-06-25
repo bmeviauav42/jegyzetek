@@ -10,7 +10,7 @@ Az elkészített rendszer egyes képességeire az alábbiak szerint pontok kapha
 
 Meglévő (pl. Microsoft-os) demók, mintaalkalmazások (elemei) felhasználhatók, de ezt külön jelezni kell bemutatáskor. A nem jelzett, de átvett részletek plágiumnak számítanak. Az órai demókban vagy mintaalkalmazásban megvalósított funkciók átvételéért pont nem adható, de azok tovább átdolgozhatóak saját implementációnak.
 
-A pontrendszerbe általatok is módosítható/bővíthető. Ezt Pull Request formájában egy megfelelő indoklással nyújthatjátok be, de a PR benyújtása nem jelenti annak az automatikus elfogadását, arról minden esetben a tárgy oktatói döntenek.
+A pontrendszer általatok is módosítható/bővíthető. Ezt Pull Request formájában egy megfelelő indoklással nyújthatjátok be, de a PR benyújtása nem jelenti annak az automatikus elfogadását, arról minden esetben a tárgy oktatói döntenek.
 
 ### Jegy számítás
 
