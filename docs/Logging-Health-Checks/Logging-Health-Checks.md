@@ -1,58 +1,42 @@
-# Naplózás, Health checks
+---
+title: Feladatok
+---
 
-<details>
-<summary>Tartalomjegyzék</summary>
+??? "Előző alkalmak cheatsheet"
 
-- [Naplózás, Health checks](#napl%c3%b3z%c3%a1s-health-checks)
-  - [Naplózás](#napl%c3%b3z%c3%a1s)
-    - [Előkészület](#el%c5%91k%c3%a9sz%c3%bclet)
-    - [ELK](#elk)
-    - [Serilog](#serilog)
-    - [Kibana](#kibana)
-  - [Health Checks](#health-checks)
-    - [Előkészület](#el%c5%91k%c3%a9sz%c3%bclet-1)
-    - [Health Check implementáció](#health-check-implement%c3%a1ci%c3%b3)
-      - [Liveness](#liveness)
-      - [Readiness](#readiness)
-    - [Kubernetes probes](#kubernetes-probes)
-</details>
-
-<details>
-<summary>Előző alkalmak cheatsheet</summary>
-
-* Docker
-  * `docker rm -f $(docker ps -aq)`
-* K8S dashboard
-  * `kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v1.10.1/src/deploy/alternative/kubernetes-dashboard.yaml`
-  * `kubectl proxy`
-  * http://localhost:8001/api/v1/namespaces/kube-system/services/kubernetes-dashboard:/proxy
-* Traefic
-  * `helm version`
-  * `helm init`
-  * `helm install stable/traefik --name traefik --version "1.78.3" --set rbac.enabled=true --set logLevel=debug --set dashboard.enabled=true --set service.nodePorts.http=30080 --set serviceType=NodePort`
-* DB
-  * `kubectl apply -f db`
-* App
-  * `kubectl apply -f app`
-  * `$env:IMAGE_TAG="v1"` vagy írjuk át a yml-ben latest-re ideiglenesen
-  * `docker-compose build`
-  * http://localhost:30080
-</details>
+    * Docker
+        * `docker rm -f $(docker ps -aq)`
+    * K8S dashboard
+        * `kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v1.10.1/src/deploy/alternative/kubernetes-dashboard.yaml`
+        * `kubectl proxy`
+        * http://localhost:8001/api/v1/namespaces/kube-system/services/kubernetes-dashboard:/proxy
+    * Traefic
+        * `helm version`
+        * `helm init`
+        * `helm install stable/traefik --name traefik --version "1.78.3" --set rbac.enabled=true --set logLevel=debug --set dashboard.enabled=true --set service.nodePorts.http=30080 --set serviceType=NodePort`
+    * DB
+        * `kubectl apply -f db`
+    * App
+        * `kubectl apply -f app`
+        * `$env:IMAGE_TAG="v1"` vagy írjuk át a yml-ben latest-re ideiglenesen
+        * `docker-compose build`
+        * http://localhost:30080
 
 ## Naplózás
 
 Az ASP.NET Core TODO webalkalmazásunkban implementáljunk szemantikus naplózást. A naplóbejegyzéseket az úgynevezett ELK technológiai stackkel fogjuk feldolgozni.
 
 * **E**: Elasticsearch
-  * A naplóbejegyzések tárolásáért és indexeléséért/kereshetőség biztosításáért felelős
+    * A naplóbejegyzések tárolásáért és indexeléséért/kereshetőség biztosításáért felelős
 * **L**: Logstash
-  * Transzformációs réteg az alkalmazás és a perzisztencia réteg között
+    * Transzformációs réteg az alkalmazás és a perzisztencia réteg között
 * **K**: Kibana
-  * Adatvizualizációért felelős komponens
+    * Adatvizualizációért felelős komponens
 
 A labor keretében most a Logstash transzformációs komponenst kihagyjuk a képből idő hiányában, és közvetlenül az Elasticsearch-be fog írni az alkalmazás.
 
-> **Megj.:** Ha az alkalmazásunkat Azure PaaS szolgáltatásokra építjük, akkor az ajánlott megoldás az Azure Application Insights. ELK-t akkor érdemes használni, ha az architektúránkat felhő szolgáltató függetlennek szeretnénk tartani (ami viszonylag ritka).
+!!! note
+    Ha az alkalmazásunkat Azure PaaS szolgáltatásokra építjük, akkor az ajánlott megoldás az Azure Application Insights. ELK-t akkor érdemes használni, ha az architektúránkat felhő szolgáltató függetlennek szeretnénk tartani (ami viszonylag ritka).
 
 Az (ASP).NET Core kiváló absztrakciós réteget nyújt nekünk a naplózáshoz az `ILogger<T>` és kapcsolódó interfészein keresztül. Egyszerűbb implementációi a keretrendszerben is megtalálhatóak, de ezek nem elégítik ki a szemantikus naplózáshoz kapcsolódó igényeket: mégpedig, hogy egyszerűen és egységesen parsolhatóak legyenek a naplóbejegyzések.
 
@@ -72,7 +56,7 @@ Próbáljuk ki, hogy docker-compose-zal elindul-e az alkalmazásunk, és tesztel
 
 Vegyünk fel a docker-compose.yml-be két új konténert az Elasticsearch-nek és a Kibana-nak. Fontos, hogy ne az OSS verziót használjuk az ES-ből, mert abban nincsenek alapértelmezetten a Kibana-hoz szükséges komponensek feltelepítve.
 
-```yml
+```yaml
   logs:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.4.2
     container_name: logs
@@ -103,7 +87,7 @@ Vegyünk fel a docker-compose.yml-be két új konténert az Elasticsearch-nek é
 
 A kötetek közé is fel kell vennünk egy bejegyzést.
 
-```yml
+```yaml
 volumes: # The volumes will store the database data; kept even after the containers are deleted
   todoapp-mongo-data:
     driver: local
@@ -145,7 +129,8 @@ public static IHostBuilder CreateWebHostBuilder(string[] args) =>
         });
 ```
 
-> **Megj.:** A Serilog ajánlások szerint a Main függvényben lenne érdemes a Serilog-ot inicializálni, hogy az app indulása során fellépő kivételeket is le lehessen logolni. Most ettől az aspektustól eltekintünk az egyszerűség kedvéért.
+!!! note
+    A Serilog ajánlások szerint a Main függvényben lenne érdemes a Serilog-ot inicializálni, hogy az app indulása során fellépő kivételeket is le lehessen logolni. Most ettől az aspektustól eltekintünk az egyszerűség kedvéért.
 
 * A kódrészletből láthatjuk, hogy a Serilog-ot konfigurálhatjuk az `IConfiguration`-ból is, de ezt most nem fogjuk kihasználni, és itt inline adjuk meg az alapértelmezéseket.
 * Két Sink-et használunk most
@@ -157,11 +142,12 @@ public static IHostBuilder CreateWebHostBuilder(string[] args) =>
 
 Fentebb is láthatjuk, hogy az Elasticsearch URL-jét  a konfigurációból nyerjük. Adjuk most ezt meg környezeti változóként a docker-compose.cs.debug.yml állományban.
 
-```yml
+```yaml
       - ASPNETCORE_LogsUrl=http://logs:9200
 ```
 
-> **Megj.:** A Serilog az appsetting.json és az appsettings.Development.json-ből nem használja fel a Logging szekciót. Ezeket az igényesség kedvéért törölhetjük. Ezek csak a Microsoft-os `ILogger` implementáció számára kellenek.
+!!! note
+    A Serilog az appsetting.json és az appsettings.Development.json-ből nem használja fel a Logging szekciót. Ezeket az igényesség kedvéért törölhetjük. Ezek csak a Microsoft-os `ILogger` implementáció számára kellenek.
 
 Logoljunk egy saját eseményt, most a példa kedvéért a TodosRepository-ban. Kérjünk el egy `ILogger<T>`-t
 
@@ -212,7 +198,7 @@ Implementáljunk a Todos.Api projektünkhöz health check-et, amit majd a kubern
 
 Mivel Kubernetes-hez még nem konfiguráltuk fel a loggolás szolgáltatásait, ezért a jelenlegi munkánkat commitoljuk egy külön ágra, majd álljunk vissza a kiinduló ágra.
 
-```cmd
+```bash
 git branch logging
 git commit -m "naplózás kész"
 git checkout kiindulóTODO
@@ -273,7 +259,8 @@ Vegyük fel az következő csomagokat a Todos.Api projekthez.
 <PackageReference Include="AspNetCore.HealthChecks.Redis" Version="2.2.1" />
 ```
 
-> **Megj.:** a `AspNetCore.HealthChecks.Redis` csomag direkt a 2.2.1-es mert összeakadna a `Microsoft.Extensions.Caching.Redis` csomaggal az újabb verzió.
+!!! note
+    `AspNetCore.HealthChecks.Redis` csomag direkt a 2.2.1-es mert összeakadna a `Microsoft.Extensions.Caching.Redis` csomaggal az újabb verzió.
 
 Vegyük fel a csekkolásokat.
 
@@ -284,7 +271,8 @@ services.AddHealthChecks()
     .AddElasticsearch(Configuration.GetValue<string>("ElasticsearchUrl") ?? "http://elasticsearch:9200", tags: new[] { "readiness" });
 ```
 
-> **Megj.:** az ASP.NET Core-os konfigurációk kezelésére itt is célszerűbb lenne az `IOptions<T>` mintát használni, de most az egyszerűség kedvéért ettől eltekintünk.
+!!! note
+    Az ASP.NET Core-os konfigurációk kezelésére itt is célszerűbb lenne az `IOptions<T>` mintát használni, de most az egyszerűség kedvéért ettől eltekintünk.
 
 Publikáljuk ki egy végponton őket.
 
@@ -302,7 +290,7 @@ Próbáljuk ki!
 
 Vegyük fel a kubernetes konfigurációba a liveness és a readiness próbákat.
 
-```yml
+```yaml
     spec:
       containers:
         - name: todos
@@ -324,7 +312,7 @@ Vegyük fel a kubernetes konfigurációba a liveness és a readiness próbákat.
 
 Ha mi kívülről is meg akarjuk hívni a `/health` végpontokat, akkor vegyük fel őket az ingress konfigurációba.
 
-```yml
+```yaml
 spec:
   rules:
     - http:
@@ -364,7 +352,7 @@ endpoints.MapGet("/health/switch", async r =>
 
 Engedélyezzük kívülről ezt a végpontot is.
 
-```yml
+```yaml
           - path: /health/switch
             backend:
               serviceName: todos # A service neve

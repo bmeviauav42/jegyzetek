@@ -1,42 +1,17 @@
-# Mikroszolgáltatások és konténer alapú szoftverfejlesztés
-
-# Kommunikációs lehetőségek - gyakorlat
+---
+title: Feladatok
+---
 
 A laborfeladatok célja a mikroszolgáltatások fejlesztése során leggyakrabban felmerülő megoldások alapszintű gyakorlása.
 
-<details>
-<summary>Tartalomjegyzék</summary>
-
-- [Mikroszolgáltatások és konténer alapú szoftverfejlesztés](#mikroszolg%c3%a1ltat%c3%a1sok-%c3%a9s-kont%c3%a9ner-alap%c3%ba-szoftverfejleszt%c3%a9s)
-- [Kommunikációs lehetőségek - gyakorlat](#kommunik%c3%a1ci%c3%b3s-lehet%c5%91s%c3%a9gek---gyakorlat)
-  - [Előkövetelmények](#el%c5%91k%c3%b6vetelm%c3%a9nyek)
-  - [REST webszolgáltatások készítése](#rest-webszolg%c3%a1ltat%c3%a1sok-k%c3%a9sz%c3%adt%c3%a9se)
-  - [Hibatűrő kommunikációs módszerek](#hibat%c5%b1r%c5%91-kommunik%c3%a1ci%c3%b3s-m%c3%b3dszerek)
-    - [Kiinduló projekt áttekintése](#kiindul%c3%b3-projekt-%c3%a1ttekint%c3%a9se)
-    - [Polly használata](#polly-haszn%c3%a1lata)
-      - [Egyszerű Retry](#egyszer%c5%b1-retry)
-      - [Exponenciálisan növekvő Retry időköz](#exponenci%c3%a1lisan-n%c3%b6vekv%c5%91-retry-id%c5%91k%c3%b6z)
-      - [Több Policy használata](#t%c3%b6bb-policy-haszn%c3%a1lata)
-  - [Aszinkron kommunikáció RabbitMQ-val](#aszinkron-kommunik%c3%a1ci%c3%b3-rabbitmq-val)
-    - [RabbitMQ beüzemelése](#rabbitmq-be%c3%bczemel%c3%a9se)
-    - [Integrációs esemény](#integr%c3%a1ci%c3%b3s-esem%c3%a9ny)
-    - [MassTransit használata](#masstransit-haszn%c3%a1lata)
-      - [Küldő oldal](#k%c3%bcld%c5%91-oldal)
-      - [Fogadó oldal](#fogad%c3%b3-oldal)
-  - [Contract-First API készítés - gRPC](#contract-first-api-k%c3%a9sz%c3%adt%c3%a9s---grpc)
-      - [Szerver oldal](#szerver-oldal)
-      - [Kliens oldal](#kliens-oldal)
-  - [Összefoglalás](#%c3%96sszefoglal%c3%a1s)
-  
-</details>
-
 ## Előkövetelmények
-* Előadás anyaga: https://www.aut.bme.hu/Upload/Course/VIAUAV42/hallgatoi_jegyzetek/Kommunik%c3%a1ci%c3%b3s%20lehet%c5%91s%c3%a9gek.pdf
+
+* [Előadás anyaga](https://www.aut.bme.hu/Upload/Course/VIAUAV42/hallgatoi_jegyzetek/Kommunik%c3%a1ci%c3%b3s%20lehet%c5%91s%c3%a9gek.pdf)
 * Docker Desktop
-* Visual Studio 2019 
+* Visual Studio 2019
     * min v16.3 (gRPC miatt)
     * ASP.NET Core 3.0 SDK (gRPC miatt)
-* Kiinduló projekt: https://github.com/bmeviauav42/komm-kiindulo
+* Kiinduló projekt: <https://github.com/bmeviauav42/komm-kiindulo>
 * Postman vagy Fiddler
 
 ## REST webszolgáltatások készítése
@@ -51,19 +26,23 @@ A laborfeladat során két ASP.NET Core mikroszolgáltatás közötti REST-es ko
 
 ### Kiinduló projekt áttekintése
 
-Klónozzuk le a kiinduló projektet, és nyissuk meg a solutiont Visual Studio-val. **Fontos, hogy ne legyen az elérési útban speciális (és ékezetes) karakter**, különben nem tud a VS a docker-compose-hoz Debuggerrel csatlakozni.
+Klónozzuk le a kiinduló projektet, és nyissuk meg a solutiont Visual Studio-val.
 
-``` cmd
+!!! important
+    Fontos, hogy ne legyen az elérési útban speciális (és ékezetes) karakter, különben nem tud a VS a docker-compose-hoz Debuggerrel csatlakozni.
+
+```cmd
 mkdir c:\munka\[neptun]\MSA\komm
 cd c:\munka\[neptun]\MSA\komm
 git clone https://github.com/bmeviauav42/komm-kiindulo
 ```
 
-A `master` branchen található a kiinduló, míg a megoldások külön brachre kerültek fel, ha valamelyik részfeladatnál lemaradtál volna.
+A `master` branchen található a kiinduló, míg a megoldások külön branchre kerültek fel, ha valamelyik részfeladatnál lemaradtál volna.
 
 Mind a két projekt már Dockerizált (Projekten jobb gomb / Add / Docker support), a teljes solutionhöz pedig tartozik egy Docker Compose leíró (Projekteken jobb gomb / Add / Docker Orchestrator support / Docker Compose), amit egyben a futtatandó projekt is.
 
 Két ASP.NET Core projektünk van, nézzük meg jobban őket:
+
 * `Catalog`: REST API, törekedve az egyszerűségre, hogy a labort ne ezzel bonyolítsuk el.
     * `ProductController`
         * `Get()`: `Product` listával tér vissza, az egyszerűség kedvéért az adatok egy statikus listában vannak
@@ -88,14 +67,14 @@ Két ASP.NET Core projektünk van, nézzük meg jobban őket:
         * Azt is megfigyelhetjük, hogy nem a localhostra kiajánlott portot kell használjuk, hanem egymás felé a tényleges portok vannak nyitva a konténereken. (80, 443).
         * Most HTTP-t használjunk, hogy egyrészt a tanusítványokkal ne kelljen foglalkozzunk, illetve a docker-compose-on belül lévő kommunikáció esetében nem ördögtől való a sima https sem.
         * Ha valamilyen összetettebb orchesztrátort használunk, akkor érdemes nem beégetni ezeket a hostneveket, hanem konfigurációból várni azokat. (most ezt nem nézzük meg)
-    
+
 Próbáljuk futtatni a projekteket! Vizsgáljuk meg az elérhető hívás viselkedését! Azt tapasztaljuk, hogy a Catalog `Get()` kérése (`api/Product`) és így az Order `Get()` kérése is (`api/test`) véletlenszerűen elszáll. 
 
 ### Polly használata
 
 Vegyük fel az Order projektbe az alábbi NuGet csomagot. Ez függőségként behúzza a [Polly](https://github.com/App-vNext/Polly)-t is, és támogatást ad az `IHttpClientFactory`val történő integrációra.
 
-``` xml
+```xml
 <PackageReference Include="Microsoft.Extensions.Http.Polly" Version="2.2.0" />
 ```
 
@@ -103,7 +82,7 @@ Vegyük fel az Order projektbe az alábbi NuGet csomagot. Ez függőségként be
 
 A Startup osztályba adjuk hozzá a Retry policy-t az `IHttpClientFactory`-hoz. Állítsuk be, hogy a kapcsolódási hibák és az általunk tranziens hibáknak vélt státuszkódok esetén próbálkozzon újra 5x.
 
-``` C#
+```C#
 bool RetryableStatusCodesPredicate(HttpStatusCode statusCode) =>
     statusCode == HttpStatusCode.BadGateway
         || statusCode == HttpStatusCode.ServiceUnavailable
@@ -122,13 +101,14 @@ Próbáljuk ki! Tapasztalatunk szerint szinte megszűntek a hibák.
 
 Ez a Policy gyakorlatilag beépül a `HttpClient` Handler Pipeline-jába, így a hívó számára transzparens lesz az újrapróbálkozási logika. Viszont éredemes odafigyelni a `HttpClient` `Timeout`jára is, mert az újrapróbálkozások során így az nem indul újra.
 
-> **Megj.:** A Polly-t nem csak `HttpClient`-tel lehet használni, hanem tetszőleges kódban: össze lehet rakni egy Policy láncot, és abba beburkolni a kívánt hívást. A Policy-ket akár karbantarthatjuk a DI konténerben is.
+!!! note
+    A Polly-t nem csak `HttpClient`-tel lehet használni, hanem tetszőleges kódban: össze lehet rakni egy Policy láncot, és abba beburkolni a kívánt hívást. A Policy-ket akár karbantarthatjuk a DI konténerben is.
 
 #### Exponenciálisan növekvő Retry időköz
 
 Azonnali Retry helyett várjunk egy kicsit az újrapróbálkozások között, mégpedig exponenciálisan egyre többet.
 
-``` C#
+```C#
     //.RetryAsync(5)
     .WaitAndRetryAsync(5, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)))
 ```
@@ -149,7 +129,7 @@ Az aszinkron kommunikációt most RabbitMQ-n keresztül valósítjuk meg, és a 
 
 A docker-compose konfigurációnkba vegyünk fel egy RabbitMQ image alapú konténert.
 
-``` yaml
+```yaml
   rabbitmq:
     image: rabbitmq:3-management
     ports:
@@ -164,7 +144,7 @@ Alapértelmezett felhasználónév: **guest**  jelszó: **guest**
 
 Adjuk meg, a másik két service esetében a rabbitmq-tól való függést.
 
-``` yaml
+```yaml
   msa.comm.lab.services.catalog:
     # ...
     depends_on:
@@ -203,7 +183,7 @@ public class OrderCreatedEvent : IOrderCreatedEvent
 }
 ```
 
-Ismételük meg ezt a Catalog szolgáltatásban is.
+Ismételjük meg ezt a Catalog szolgáltatásban is.
 
 ### MassTransit használata
 
@@ -238,7 +218,8 @@ services.AddMassTransit(x =>
 });
 ```
 
-> **Megj.:** Itt is érdemesebb lenne a rabbitmq hosztnevet és a bejelentkezési adatokat konfigurációból nyerni.
+!!! note
+    Itt is érdemesebb lenne a rabbitmq hosztnevet és a bejelentkezési adatokat konfigurációból nyerni.
 
 Süssük el az eseményt a `TestController`ben. Kérjük el az `IBusControl` objektumot, és azon hívjuk meg a `Publish` metódust. MassTransit esetében a `Publish` süti el a broadcast szerű eseményeket, míg a `Send` inkább a command típusú üzenetekre van kihegyezve.
 
@@ -258,7 +239,7 @@ public TestController(ICatalogApiClient catalogApiClient, IBusControl bus)
 public async Task<ActionResult> CreateOrder()
 {
     await _bus.Publish(new OrderCreatedEvent 
-    { 
+    {
         ProductId = 1,
         Quantity = 1,
         OrderPlaced = DateTimeOffset.UtcNow
@@ -280,7 +261,7 @@ Térjünk át a fogadó oldalra. A Catalog szolgáltatás projektbe vegyük fel 
 
 Szükségünk lesz egy az eseményt lekezelő osztályra is, aminek MassTransit esetben az `IConsumer<T>` interfészt kell megvalósítania.
 
- Vegyünk fel a Catalog projektbe egy `IntegrationEventHandlers` mappát, majd abba hozzunk létre egy új osztályt `OrderCreatedEventHandler` néven az alábbi tartommal. Itt csak a kapott adatok alapján frissítsük az adatainkat: a mi Móricka példánkban a `ProductController`ben lévő statikus listán dolgozunk.
+Vegyünk fel a Catalog projektbe egy `IntegrationEventHandlers` mappát, majd abba hozzunk létre egy új osztályt `OrderCreatedEventHandler` néven az alábbi tartommal. Itt csak a kapott adatok alapján frissítsük az adatainkat: a mi Móricka példánkban a `ProductController`ben lévő statikus listán dolgozunk.
 
 ```C#
 public class OrderCreatedEventHandler : IConsumer<IOrderCreatedEvent>
@@ -339,15 +320,19 @@ public void Configure(
 ```
 
 Próbáljuk ki!
+
 * Kérjük le a termékeket
 * Süssük el fiddlerből vagy Postmanből a `CreateOrder` Actiont
 * Nézzük meg, hogy frissült-e a termék raktárkészlete
 
-> **Tipp:** Ha nem frissült, akkor a logokból vagy a rabbitmq menedzsment felületéről lehet nyomozni. Ha azt tapasztaljuk hogy nem tud csatlakozni valamilyik szolgáltatás, akkor ellenőrízzük a docker-compose file-t és a connection string-eket. Ha azt tapasztaljuk, hogy `skipped` üzenetsorba kerülnek az üzenetek, akkor a küldő oldal rendben működött, de valamiért a fogadó oldal nem tudott a megadott üzenettípusra egyszer sem feliratkozni helyesen.
+!!! tip
+    Ha nem frissült, akkor a logokból vagy a rabbitmq menedzsment felületéről lehet nyomozni. Ha azt tapasztaljuk hogy nem tud csatlakozni valamilyik szolgáltatás, akkor ellenőrízzük a docker-compose file-t és a connection string-eket. Ha azt tapasztaljuk, hogy `skipped` üzenetsorba kerülnek az üzenetek, akkor a küldő oldal rendben működött, de valamiért a fogadó oldal nem tudott a megadott üzenettípusra egyszer sem feliratkozni helyesen.
 
-> **Megj.:** A fenti példában nem törődtünk az idempotens megvalósítással, ez mindig külön tervezést igényel, az üzleti logikánk függvényében, de mindenképpen érdemes a tervezés során figyelni erre.
+!!! note
+    A fenti példában nem törődtünk az idempotens megvalósítással, ez mindig külön tervezést igényel, az üzleti logikánk függvényében, de mindenképpen érdemes a tervezés során figyelni erre.
 
-> **Megj.:** Mi most broadcast jellegű integrációs eseményt sütöttünk el. Ne feledjünk van ennek egy másik variánsa is, amikor command szerű üzenetet küldünk egy másik szolgáltatásnak, és ott elvárjuk az esemény lefutását. Integrációs esemény során a fogadó félre van bízva, hogy mit kezd a kapott információval.
+!!! note
+    Mi most broadcast jellegű integrációs eseményt sütöttünk el. Ne feledjünk van ennek egy másik variánsa is, amikor command szerű üzenetet küldünk egy másik szolgáltatásnak, és ott elvárjuk az esemény lefutását. Integrációs esemény során a fogadó félre van bízva, hogy mit kezd a kapott információval.
 
 ## Contract-First API készítés - gRPC
 
@@ -355,7 +340,8 @@ A feladat célja kipróbálni a contract-first megkozelítést: tehát előbb az
 
 Ezt REST-es API-val is meg tudnánk tenni a Swagger/OpenAPI leíróval, de mi most gRPC-n keresztül próváljuk ki. Feladatunkban a Catalog szolgáltatás `ProductController` két műveletét írjuk meg gRPC protokollal. Majd hívjuk meg ezeket az Order szolgáltatásból.
 
-> **Megj.:** A gRPC csak .NET Core 3.0-tól támogatott, így érdemes a Visual Studio-t frissíteni legalább 16.3.x verzióra
+!!! note
+    A gRPC csak .NET Core 3.0-tól támogatott, így érdemes a Visual Studio-t frissíteni legalább 16.3.x verzióra
 
 #### Szerver oldal
 
@@ -368,6 +354,7 @@ Vegyük fel a Catalog projektbe az alábbi NuGet csomagot. Fontos, hogy a **2.23
 ```
 
 A Catalog projektbe vegyünk fel egy `Protos` mappát, és abba egy Text fájlt `catalog.proto` néven, ami a szolgáltatásleírónk lesz. Készütsünk el egy saját szolgáltatásleírót a Catalog REST API-nk mintájára. Tartalom a következő:
+
 * Egy szolgáltatásunk lesz `CatalogService` néven
 * A szolgáltatásban `rpc` kulcsszóval tudunk műveleteket definiálni, megadva a bemenő paramétert és a visszatérési értéket.
     * Ezek külön definiált `message` típusok lehetnek.
@@ -418,7 +405,7 @@ A `.proto` fájlból a modellek és egy ősosztály is generálódik a fordítá
   </ItemGroup>
 ```
 
- A Catalog projektbe hozzunk létre egy `Services` mappát, majd abba egy `CatalogService` osztályt, ami a  `Grpc.CatalogService.CatalogServiceBase`-ből származik le. Nekünk csak felül kell definiálni a kívánt metódusokat. Ide is vegyük fel az alábbi statikus listát, és ennek a segítségével valósítsuk meg az üzleti műveleteket. Figyeljük meg, hogy a .proto-ból generált típusokkal tudunk itt dolgozni.
+A Catalog projektbe hozzunk létre egy `Services` mappát, majd abba egy `CatalogService` osztályt, ami a  `Grpc.CatalogService.CatalogServiceBase`-ből származik le. Nekünk csak felül kell definiálni a kívánt metódusokat. Ide is vegyük fel az alábbi statikus listát, és ennek a segítségével valósítsuk meg az üzleti műveleteket. Figyeljük meg, hogy a .proto-ból generált típusokkal tudunk itt dolgozni.
 
 ```C#
 public class CatalogService : Grpc.CatalogService.CatalogServiceBase
@@ -485,7 +472,8 @@ services.AddGrpcClient<CatalogService.CatalogServiceClient>(o =>
 });
 ```
 
-> **Megj.:** megfigyelhetjük, hogy a gRPC kliens is az `IHttpClientFactory` megoldásra épít.
+!!! note
+    Megfigyelhetjük, hogy a gRPC kliens is az `IHttpClientFactory` megoldásra épít.
 
 A `TestController`ben cseréljük le A REST kliensünket a gRPC kliensre.
 

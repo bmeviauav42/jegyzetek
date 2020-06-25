@@ -1,4 +1,6 @@
-# Alkalmazás telepítése Kubernetes klaszterbe
+---
+title: Alkalmazás telepítése Kubernetes klaszterbe
+---
 
 ## Labor célja
 
@@ -7,18 +9,18 @@ A labor célja egy alkalmazás telepítése Kubernetes klaszterbe, valamint a fr
 ## Előkövetelmények
 
 - Kubernetes
-  - Bármely felhő platform által biztosított klaszter
-  - Linux platformon: [minikube](https://kubernetes.io/docs/tasks/tools/install-minikube)
-  - Windows platformon: Docker Desktop
+    - Bármely felhő platform által biztosított klaszter
+    - Linux platformon: [minikube](https://kubernetes.io/docs/tasks/tools/install-minikube)
+    - Windows platformon: Docker Desktop
 - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
-  - A binárisa legyen elérhető PATH-on.
+    - A binárisa legyen elérhető PATH-on.
 - [helm](https://helm.sh/docs/using_helm/#installing-helm)
-  - A binárisa legyen elérhető PATH-on.
+    - A binárisa legyen elérhető PATH-on.
 - Kubernetes dashboard
-  - Telepítése és használata korábbi anyag szerint.
+    - Telepítése és használata korábbi anyag szerint.
 - Telepítendő alkalmazás
-  - <https://github.com/bmeviauav42/todoapp/tree/megoldas/kubernetes>
-  - `git clone -b megoldas/kubernetes https://github.com/bmeviauav42/todoapp.git`
+    - <https://github.com/bmeviauav42/todoapp/tree/megoldas/kubernetes>
+    - `git clone -b megoldas/kubernetes https://github.com/bmeviauav42/todoapp.git`
 
 ## Feladatok
 
@@ -43,15 +45,15 @@ Mi a Helm 2-es verzióját fogjuk használni. (A 3-as verzió még csak release 
 
 1. Inicializáljuk a Helm-et, ami egyben telepíti a Tiller komponenst a Kubernetes klaszterbe: `helm init`
 
-   - Ez a parancs két dolgot végzett el.
-     1. Inicializálta a kliens oldalon, a gépünkön a Helm környezetét.
-     1. Telepítette a klaszterbe a Tiller-t.
+    - Ez a parancs két dolgot végzett el.
+        1. Inicializálta a kliens oldalon, a gépünkön a Helm környezetét.
+        1. Telepítette a klaszterbe a Tiller-t.
 
 1. Nézzük meg, hogy tényleg van a klaszterben egy Tiller pod: `kubectl get pod -n kube-system`
 
 1. Kérdezzük le ismét a verziót: `helm version`
 
-   - Most már nem csak a kliens oldali CLI, hanem a Kubernetes-ben futó szerver oldal verzióját is megkapjuk.
+     - Most már nem csak a kliens oldali CLI, hanem a Kubernetes-ben futó szerver oldal verzióját is megkapjuk.
 
 Megjegyzés: ha a Kubernetes klaszterben már fut Tiller, akkor is szükségünk lehet a Helm inicializálására egy új fejlesztői gépen. Ilyenkor a `--client-only` kapcsolóval kérhetjük csak a kliens oldal inicializálását. Új Tiller verzió telepítését pedig a `helm init --upgrade` paranccsal végezhetjük el.
 
@@ -65,12 +67,12 @@ A Traefik-et Helm charttal fogjuk telepíteni. [Ezen Helm chart](https://github.
 
 1. Telepítsük: `helm install stable/traefik --name traefik --version "1.78.3" --set rbac.enabled=true --set logLevel=debug --set dashboard.enabled=true --set service.nodePorts.http=30080 --set serviceType=NodePort`
 
-   - A `name` a Helm release nevét adja meg. Ezzel tudunk rá hivatkozni a jövőben.
-   - A `--set` kapcsolóval a chart változóit állítjuk be.
+     - A `name` a Helm release nevét adja meg. Ezzel tudunk rá hivatkozni a jövőben.
+     - A `--set` kapcsolóval a chart változóit állítjuk be.
 
 1. Ellenőrizzük, hogy fut-e: `kubectl get pod`
 
-   - Látunk kell egy traefik kezdetű podot.
+     - Látunk kell egy traefik kezdetű podot.
 
 A Traefik jelen konfigurációban _NodePort_ service típussal van konfigurálva, ami azt jelenti, lokálisan, helyben a megadott porton lesz csak elérhető. Ha publikusan elérhető klaszterben dolgozunk, akkor tipikusan _LoadBalancer_ service típust fogunk kérni, hogy publikus IP címet is kapjon a Traefik.
 
@@ -98,19 +100,19 @@ Az alkalmazásunk telepítéséhez szintén yaml leírókat találunk a _kuberne
 
 1. Navigáljunk el az `src/Docker` könyvtárba, és buildeljük le az alkalmazást docker-compose segítségével úgy, hogy a megfelelő taggel ellátjuk az image-eket. Ehhez a compose fájlunk az `IMAGE_TAG` környezeti változó beállítását várja.
 
-   - Powershell-ben
+    - Powershell-ben
 
-     ```powershell
-     $env:IMAGE_TAG="v1"
-     docker-compose build
-     ```
+        ```powershell
+        $env:IMAGE_TAG="v1"
+        docker-compose build
+        ```
 
-   - Windows Command Prompt-ban
+    - Windows Command Prompt-ban
 
-     ```cmd
-     setx IMAGE_TAG "v1"
-     docker-compose build
-     ```
+        ```cmd
+        setx IMAGE_TAG "v1"
+        docker-compose build
+        ```
 
 1. A build folyamat végén előállnak helyben az image-ek, pl. `todoapp/web:v1` taggel. Ha távoli registry-be szeretnénk feltölteni őket, akkor taggelhetnénk őket a registry-nek megfelelően. A helyi fejlesztéshez nincs szükségünk ehhez, mert a helyben elindított Kubernetes "látja" a Docker helyi image-eit.
 
@@ -132,63 +134,55 @@ Az alkalmazás fent ismertetett frissítéséhez a yaml fájlokba minden alkalom
 
 1. Nézzük meg a chart fájljait.
 
-   - `Chart.yaml` a metaadatokat írja le.
-   - `values.yaml` írja le a változóink alapértelmezett értékeit.
-   - `.helmignore` azon fájlokat listázza, amelyeket a chart értelmezésekor nem kell figyelembe venni.
-   - `templates` könyvtárban vannak a template fájlok, amik a generálás alapjául szolgálnak.
+    - `Chart.yaml` a metaadatokat írja le.
+    - `values.yaml` írja le a változóink alapértelmezett értékeit.
+    - `.helmignore` azon fájlokat listázza, amelyeket a chart értelmezésekor nem kell figyelembe venni.
+    - `templates` könyvtárban vannak a template fájlok, amik a generálás alapjául szolgálnak.
 
-   A Helm egy olyan template nyelvet használ, amelyben változó behelyettesítések, ciklusok, egyszerű szövegműveletek támogatottak. Mi most csak a változó behelyettesítést fogjuk használni.
+    A Helm egy olyan template nyelvet használ, amelyben változó behelyettesítések, ciklusok, egyszerű szövegműveletek támogatottak. Mi most csak a változó behelyettesítést fogjuk használni.
 
 1. Töröljük ki a `templates` könyvtárból az összes fájlt a `_helpers.tpl` kivételével. Másoljuk helyette be ide a korábban a telepítéshez használt yaml fájljainkat (3 darab).
 
 1. Szerkesszük meg a `todos.yaml` fájl tartalmát. Leegyszerűsítve az alábbiakra lesz szükség:
 
-   - Ha _Visual Studio Code_-ot használunk, akkor telepítsük a [`ms-kubernetes-tools.vscode-kubernetes-tools`](https://marketplace.visualstudio.com/items?itemName=ms-kubernetes-tools.vscode-kubernetes-tools) extension-t. Így kapunk némi segítséget a szintaktikával.
+    - Ha _Visual Studio Code_-ot használunk, akkor telepítsük a [`ms-kubernetes-tools.vscode-kubernetes-tools`](https://marketplace.visualstudio.com/items?itemName=ms-kubernetes-tools.vscode-kubernetes-tools) extension-t. Így kapunk némi segítséget a szintaktikával.
 
-   - Mindenhol, ahol _labels_ vagy _matchLabels_ szerepel, még egy sort fel kell vennünk:
+    - Mindenhol, ahol _labels_ vagy _matchLabels_ szerepel, még egy sort fel kell vennünk:
 
-     <!-- {% raw %} -->
+        `app.kubernetes.io/instance: {{ .Release.Name }}`
 
-     `app.kubernetes.io/instance: {{ .Release.Name }}`
+        Ez egy implicit változót helyettesít be: a _release_ nevét. Ezzel azonosítja a Helm a telepítés és frissítés során, hogy mely elemeket kell frissítenie, melyek tartoznak a fennhatósága alá. Mi most mindent egy névtérbe raktunk. A Helm telepítés ezt nem fogja tönkretenni, mert az eddigi elemeinket nem fogja érinteni ezen label miatt.
 
-     <!-- {% endraw %}) -->
+    - A pod-ban az image beállításához használjunk változót:
 
-     Ez egy implicit változót helyettesít be: a _release_ nevét. Ezzel azonosítja a Helm a telepítés és frissítés során, hogy mely elemeket kell frissítenie, melyek tartoznak a fennhatósága alá. Mi most mindent egy névtérbe raktunk. A Helm telepítés ezt nem fogja tönkretenni, mert az eddigi elemeinket nem fogja érinteni ezen label miatt.
-
-   - A pod-ban az image beállításához használjunk változót:
-
-     <!-- {% raw %} -->
-
-     `image: todoapp/todos:{{ .Values.todos.tag }}`
-
-     <!-- {% endraw %}) -->
+        `image: todoapp/todos: {{ .Values.todos.tag }}`
 
 1. Definiáljuk az előbbi változó alapértelmezett értékét. A `values.yaml` fájlban (egy könyvtárral feljebb) töröljünk ki mindent, és vegyük fel ezt a kulcsot:
 
-   ```yaml
-   todos:
-     tag: v1
-   ```
+    ```yaml
+    todos:
+      tag: v1
+    ```
 
 1. A másik két komponens yaml leíróival is hasonlóan kell eljárnunk.
 
 1. Nézzük meg a template-eket kiértékelve.
 
-   - A chartunk könyvtárából lépjünk eggyel feljebb, hogy a `todoapp` chart könyvtár az aktuális könyvtárban legyen.
-   - Futtassuk le csak a template generálást a telepítés nélkül: `helm install --debug --dry-run todoapp`
-   - Konzolra megkapjuk a kiértékelt yaml-öket.
+    - A chartunk könyvtárából lépjünk eggyel feljebb, hogy a `todoapp` chart könyvtár az aktuális könyvtárban legyen.
+    - Futtassuk le csak a template generálást a telepítés nélkül: `helm install --debug --dry-run todoapp`
+    - Konzolra megkapjuk a kiértékelt yaml-öket.
 
 1. Töröljük ki a telepített alkalmazásunkat, mert összeakadna a Helm-mel. Eyt a parancsot a telepítéshez korábban használt `app` könyvtárban adjuk ki: `kubectl delete -f app`
 
 1. Telepítsük újra az alkalmazást a chart segítségével: `helm upgrade todoapp-prod --install todoapp`
 
-   - A release-nek _todoapp-prod_ nevet választottunk. Ez a Helm release azonosítója.
+    - A release-nek _todoapp-prod_ nevet választottunk. Ez a Helm release azonosítója.
 
-   - Az _upgrade_ parancs és az _--install_ kapcsoló telepít, ha nem létezik, ill. frissít, ha már létezik ilyen telepítés.
+    - Az _upgrade_ parancs és az _--install_ kapcsoló telepít, ha nem létezik, ill. frissít, ha már létezik ilyen telepítés.
 
 1. Nézzük meg, hogy a Helm szerint létezik-e a release: `helm list`
 
-   - Azt, hogy létezik-e már egy release a klaszterben, és mi a verziója (saját belső verzió, tőlünk független), onnan tudja a Helm, hogy a telepítés végeztével elmenti az állapotát egy ConfigMap-be.
+    - Azt, hogy létezik-e már egy release a klaszterben, és mi a verziója (saját belső verzió, tőlünk független), onnan tudja a Helm, hogy a telepítés végeztével elmenti az állapotát egy ConfigMap-be.
 
 1. Próbáljuk ki az alkalmazást a <http://localhost:30080> címen.
 

@@ -1,0 +1,80 @@
+site_name: BME AUT Mikroszolgáltatások és konténeralapú szoftverfejlesztés
+site_author: Dudás Ákos
+copyright: Copyright &copy; BME AUT
+repo_name: bmeviauav42/jegyzetek
+repo_url: https://github.com/bmeviauav42/jegyzetek
+
+theme:
+  name: material
+  custom_dir: theme-overrides
+  language: hu
+  palette:
+    primary: red
+    accent: red
+  font:
+    text: Roboto
+    code: Roboto Mono
+  features:
+    - tabs
+
+extra_css:
+  - extra-material-theme.css
+
+markdown_extensions:
+  - admonition
+  - codehilite
+  - meta
+  - toc:
+      permalink: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.critic
+  - pymdownx.details
+  - pymdownx.inlinehilite
+  - pymdownx.magiclink
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tabbed
+  - pymdownx.tilde
+
+plugins:
+  - search:
+      prebuild_index: true
+
+nav:
+  - index.md
+  - "Bevezető előadás": https://www.aut.bme.hu/Upload/Course/VIAUAV42/hallgatoi_jegyzetek/01-Mikroszolg%c3%a1ltat%c3%a1sok%20architekt%c3%bara%20bevezet%c5%91.pdf
+  - hazi-feladat.md
+  - szoftver-lista.md
+  - Docker:
+      - Docker/Docker-alapok.md
+      - Docker/Dockerfile-compose.md
+      - "Konténer-technológiák és Docker alapok (előadás)": https://www.aut.bme.hu/Upload/Course/VIAUAV42/hallgatoi_jegyzetek/02-Kontenerek%20Docker.pdf
+  - Adattárolás, Api Gateway:
+      - AdatbazisApiGateway/AdatbazisApiGateway.md
+      - "Adattárolás mikroszolgáltatásokban (előadás)": https://www.aut.bme.hu/Upload/Course/VIAUAV42/hallgatoi_jegyzetek/04-Adatbazisok.pdf
+      - "Api Gateway (előadás)": https://www.aut.bme.hu/Upload/Course/VIAUAV42/hallgatoi_jegyzetek/05-API%20Gateway.pdf
+      - "Kiinduló projekt (GitHub repo)": https://github.com/bmeviauav42/todoapp
+  - Kommunikáció:
+      - Kommunikacio/Kommunikacio.md
+      - "Kommunikációs lehetőségek (előadás)": https://www.aut.bme.hu/Upload/Course/VIAUAV42/hallgatoi_jegyzetek/Kommunik%c3%a1ci%c3%b3s%20lehet%c5%91s%c3%a9gek.pdf
+      - "Kiinduló projekt (GitHub repo)": https://github.com/bmeviauav42/komm-kiindulo
+  - Nyomkövetés:
+      - Nyomkovetes/Nyomkovetes.md
+      - "Elosztott nyomkövetés (előadás)": https://www.aut.bme.hu/Upload/Course/VIAUAV42/hallgatoi_jegyzetek/07-Nyomk%c3%b6vet%c3%a9s%20-%20clean.pdf
+      - "2. feladathoz kiinduló projekt és megoldások (GitHub repo)": https://github.com/bmeviauav42/nyomkovetes
+  - Kubernetes:
+      - Kubernetes/Kubernetes-alapok.md
+      - Kubernetes/Kubernetes-alkalmazas-telepites.md
+      - "Kubernetes ismertetése (előadás)": https://www.aut.bme.hu/Upload/Course/VIAUAV42/hallgatoi_jegyzetek/10-Kubernetes.pdf
+  - AKS:
+      - "Gyakorlat anyag": AKS/aks.md
+  - Naplózás, Health Checks:
+      - Logging-Health-Checks/Logging-Health-Checks.md
+      - "Naplózás, Health Checks (előadás)": https://www.aut.bme.hu/Upload/Course/VIAUAV42/hallgatoi_jegyzetek/Logging,%20health%20checks.pdf
+  - Serverless:
+      - Serverless/serverless.md

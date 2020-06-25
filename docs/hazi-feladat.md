@@ -1,6 +1,6 @@
-# Házi feladat értékelése
-
-2019.11.08.: A házi feladat pontrendszere végleges. Módosítás csak hallgatóknak kedvező módon végezhető.
+---
+title: Házi feladat leírása és megszerezhető pontok
+---
 
 A házi feladat otthon, önállóan elkészítendő mikroszolgáltatások architektúrára épülő és konténertechnológiát használó szoftverrendszer elkészítése és **működőképes állapotban való bemutatása**.
 
@@ -22,12 +22,12 @@ A pontrendszerbe általatok is módosítható/bővíthető. Ezt Pull Request for
 
 ### Pontok az alábbiakért kaphatóak
 
-#### Mikroszolgáltatatások architektúra: 5/8 pont
+#### Mikroszolgáltatatások architektúra: 5+3 pont
 
 A rendszer több, független mikroszolgáltatásból épül fel. Ebbe beleértendő a frontend is, amennyiben azt a többitől független webszerver szolgálja ki, de az adatbázis szerver(ek) külön nem számítanak bele.
 
 - Minimum 3 szolgáltatással: 5 pont
-- Minimum 4 szolgáltatással: 8 pont
+- Minimum 4 szolgáltatással: +3 pont
 
 A pont a többnyire korrekt rendszer partícionálás esetében jár. (Egyszerű többrétegű architektúrára nem jár a pont, akkor se, ha a rétegek külön szolgáltatásokban kapnak helyet!)
 
@@ -60,10 +60,10 @@ Az előzővel együtt teljesíthető. A mikroszolgáltatások közötti kommunik
 
 Legalább egy olyan művelet, amelyben egy mikroszolgáltatás egy másikkal üzenetsor alapon kommunikál (mind a termelő, mind a fogyasztó oldalt beleértve). Kommunikációs platform lehet Redis, RabbitMQ, ill. bármely ismert message queue szolgáltatás.
 
-#### API Gateway használata: 5/8 pont
+#### API Gateway használata: 5+3 pont
 
 - Traefik használata útvonalválasztásra: 5 pont
-- Más API gateway használata: 8 pont
+- Más API gateway használata: +3 pont
 
 #### Forward authentikáció: 5 pont
 

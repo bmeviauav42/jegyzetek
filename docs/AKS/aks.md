@@ -3,19 +3,18 @@
 ## Témakörök
 
 - Azure szolgáltatások
-  - Azure DevOps
-  - Azure Kubernetes Service (multitenant)
-  - Azure SQL (multitenant)
+    - Azure DevOps
+    - Azure Kubernetes Service (multitenant)
+    - Azure SQL (multitenant)
 - Terraform
 - DevOps műveletek Azure DevOps-ban
-  - Forráskód kezelés Azure Repos-szal
-  - CI+CD Azure Pipelines-szal
-  - Monitorozás Azure Monitor-ral
+    - Forráskód kezelés Azure Repos-szal
+    - CI+CD Azure Pipelines-szal
+    - Monitorozás Azure Monitor-ral
 
 ## A labor menete
 
-A hivatalos Azure DevOps labor anyagot követi: https://www.azuredevopslabs.com/labs/vstsextend/kubernetes/
-Itt csak a kiegészítéseket, ill. egy vázlatot írunk le.
+A hivatalos Azure DevOps labor anyagot követi: <https://www.azuredevopslabs.com/labs/vstsextend/kubernetes/>. Itt csak a kiegészítéseket, ill. egy vázlatot írunk le.
 
 ## Előkészületek
 
@@ -27,25 +26,25 @@ Itt csak a kiegészítéseket, ill. egy vázlatot írunk le.
 - DevOps elmélet
   https://docs.microsoft.com/en-us/azure/devops/learn/what-is-devops
 - Azure Repos: projekt felfedezése konténer szempontból
-  - `docker-compose.yml`
-  - `mhc-aks.yaml`
+    - `docker-compose.yml`
+    - `mhc-aks.yaml`
 
 ## -1. feladat - egyedi image név és adatbázis név
 
 - az image neve elé tegyük a neptunkódunkat
 - docker-compose.yml-ban
-  - `image: myhealth.web` -> `image: <neptunkod>.myhealth.web`
+    - `image: myhealth.web` -> `image: <neptunkod>.myhealth.web`
 - mhc-aks.yaml-ban 93. sor körül
-  - `image: __ACR__/myhealth.web:latest` -> `image: __ACR__/<neptunkod>.myhealth.web:latest`
+    - `image: __ACR__/myhealth.web:latest` -> `image: __ACR__/<neptunkod>.myhealth.web:latest`
 - src/MyHealth.Web/appsettings.json a connection string-ben
-  - `Initial Catalog=mhcdb` helyett `Initial Catalog=__SQLDB__`
+    - `Initial Catalog=mhcdb` helyett `Initial Catalog=__SQLDB__`
 - ne felejtsünk el commitolni!
 
 ## Kitérő: terraform és multitenant infrastruktúra
 
 - [terraform file](https://autsoft.sharepoint.com/:f:/g/shared/AUT/EumyvuEMcWVBlSvpxxtcnL4BThMYJ8D1yyfXQQAv1DjzAQ?e=UN9eiY) main.tf
-  - Jelszó: a laborgép jelszava
-  - Azure SQL Serverless változatot nem támogat még :(
+    - Jelszó: a laborgép jelszava
+    - Azure SQL Serverless változatot nem támogat még :(
 - Azure SQL Serverless adatbázisok batch-elt létrehozása Azure CLI-vel
 
 ```
@@ -54,13 +53,13 @@ For ($i=1; $i -le 5; $i++) { az sql db create -g AKSLab -s akssqlsrv -n akslabsq
 
 - Lépjünk be az [Azure portálra](https://portal.azure.com) a labuser@autsoft.hu userrel. Jelszó: a laborgép jelszava
 - Főleg csak olvasási jogokkal rendelkezik
-  - Nézzük meg a létrejött erőforrásokat
+    - Nézzük meg a létrejött erőforrásokat
 
 ## 0. feladat Azure és Azure DevOps összekötése
 
 - Project Settings -> Pipelines részen belül Service Connection -> New Service Connection -> Azure Resource Manager -> alul váltsunk a linkkel a teljes verzióra (full version)
 - Töltsük ki a terraform file alapján
-  - Subscription Name: **MSDN1**
+    - Subscription Name: **MSDN1**
 
 ## 1. feladat
 
