@@ -2,6 +2,10 @@
 title: Kubernetes alapok
 ---
 
+## Előadás
+
+[Kubernetes bevezető](https://www.aut.bme.hu/Upload/Course/VIAUAV42/hallgatoi_jegyzetek/10-Kubernetes.pdf)
+
 ## Cél
 
 A labor célja megismerni a Kubernetes használatának alapjait, a _podok_, _Deployment-ek_ és _ReplicaSet-ek_ létrehozását és kezelését, valamint a leggyakrabban használt `kubectl` parancsokat.

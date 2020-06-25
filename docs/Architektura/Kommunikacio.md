@@ -1,12 +1,17 @@
 ---
-title: Feladatok
+title: Kommunikáció
 ---
+
+## Előadás
+
+[Kommunikációs lehetőségek](https://www.aut.bme.hu/Upload/Course/VIAUAV42/hallgatoi_jegyzetek/Kommunik%c3%a1ci%c3%b3s%20lehet%c5%91s%c3%a9gek.pdf)
+
+## Cél
 
 A laborfeladatok célja a mikroszolgáltatások fejlesztése során leggyakrabban felmerülő megoldások alapszintű gyakorlása.
 
 ## Előkövetelmények
 
-* [Előadás anyaga](https://www.aut.bme.hu/Upload/Course/VIAUAV42/hallgatoi_jegyzetek/Kommunik%c3%a1ci%c3%b3s%20lehet%c5%91s%c3%a9gek.pdf)
 * Docker Desktop
 * Visual Studio 2019
     * min v16.3 (gRPC miatt)

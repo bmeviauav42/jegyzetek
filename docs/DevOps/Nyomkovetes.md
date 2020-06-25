@@ -1,6 +1,10 @@
 ---
-title: Feladatok
+title: Elosztott nyomkövetés
 ---
+
+## Előadás
+
+[Elosztott nyomkövetés](https://www.aut.bme.hu/Upload/Course/VIAUAV42/hallgatoi_jegyzetek/07-Nyomk%c3%b6vet%c3%a9s%20-%20clean.pdf)
 
 ## Cél
 
@@ -226,6 +230,8 @@ Felmerül a kérdés, mennyit kellett a kód instrumentálásán dolgozni a HotR
 * A kódban a Mysql és Redis szimuláció esetén található explicit instrumentálás.
 
 ## Feladat 2 - OpenTracing és Jaeger alapú nyomkövetés .NET Core alapú alkalmazás esetén
+
+Kiinduló projekt és megoldás: <https://github.com/bmeviauav42/nyomkovetes>
 
 A feladat keretében .NET Core 3.0 környezetben dolgozunk, de az OpenTracing és Jaeger .NET kliens könyvtárak korábbi .NET Core verziókkal is használhatók, nincs bennük semmi .NET Core 3.0 specifikus.
 

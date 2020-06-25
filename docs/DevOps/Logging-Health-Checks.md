@@ -1,6 +1,10 @@
 ---
-title: Feladatok
+title: Naplózás, health check
 ---
+
+## Előadás
+
+[Naplózás, Health Checks](https://www.aut.bme.hu/Upload/Course/VIAUAV42/hallgatoi_jegyzetek/Logging,%20health%20checks.pdf)
 
 ??? "Előző alkalmak cheatsheet"
 

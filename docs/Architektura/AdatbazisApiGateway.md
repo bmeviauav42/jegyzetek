@@ -1,10 +1,26 @@
 ---
-title: Feladatok
+title: Adattárolás és Api Gateway
 ---
+
+## Előadás
+
+[Adattárolás mikroszolgáltatásokban](https://www.aut.bme.hu/Upload/Course/VIAUAV42/hallgatoi_jegyzetek/04-Adatbazisok.pdf)
+
+[Api Gateway](https://www.aut.bme.hu/Upload/Course/VIAUAV42/hallgatoi_jegyzetek/05-API%20Gateway.pdf)
 
 ## Cél
 
 A labor célja egy mikroszolgáltatás architektúrájú alkalmazás felépítésének megismerése, modern adattárolás módszerek kipróbálása, valamint az Api Gateway használatának megértése.
+
+## Előkövetelmény
+
+- Docker Desktop
+- Visual Studio 2019 legalább v16.6-ra felfrissítve az alábbi worklodokkal
+    - Web development
+    - .NET Core cross-platform development
+- Visual Studio Code
+- Postman
+- Kiinduló projekt: <https://github.com/bmeviauav42/todoapp>
 
 ## Feladat
 

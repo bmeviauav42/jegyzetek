@@ -2,6 +2,10 @@
 title: Docker alapok
 ---
 
+## Előadás
+
+[Konténer-technológiák és Docker alapok](https://www.aut.bme.hu/Upload/Course/VIAUAV42/hallgatoi_jegyzetek/02-Kontenerek%20Docker.pdf)
+
 ## Cél
 
 A labor célja megismerni a Docker konténerek használatának alapjait és a leggyakrabban használt Docker CLI parancsokat.
@@ -10,6 +14,7 @@ A labor célja megismerni a Docker konténerek használatának alapjait és a le
 
 - Docker Desktop
     - A laboron Windows platformot használunk, azonban a feladatok Linuxon és Mac-en is megoldhatóak (a könyvtár elérési útvonalakat megfelelően átírva).
+    - Verzió: 2.1 vagy 2.3+ (2.2 **nem** jó)
 - Alap Linux parancsok ismerete. Érdemes átnézni pl.:
     - <http://bmeaut.github.io/snippets/snippets/0700_LinuxBev/>
     - <https://maker.pro/linux/tutorial/basic-linux-commands-for-beginners>
