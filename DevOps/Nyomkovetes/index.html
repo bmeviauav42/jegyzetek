@@ -1,0 +1,1479 @@
+
+
+
+<!doctype html>
+<html lang="hu" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <meta name="author" content="Dudás Ákos">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.1.6">
+    
+    
+      
+        <title>Elosztott nyomkövetés</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.4b9ffd7b.min.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.b79bcd20.min.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#ef5350">
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../extra-material-theme.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="red" data-md-color-accent="red">
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#eloadas" class="md-skip">
+          Kihagyás
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="../.." title="BME AUT Mikroszolgáltatások és konténeralapú szoftverfejlesztés" class="md-header-nav__button md-logo" aria-label="BME AUT Mikroszolgáltatások és konténeralapú szoftverfejlesztés">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            BME AUT Mikroszolgáltatások és konténeralapú szoftverfejlesztés
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Elosztott nyomkövetés
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Keresés" placeholder="Keresés" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/bmeviauav42/jegyzetek/" title="Főoldalra ugrás" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    bmeviauav42/jegyzetek
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+          
+
+  
+
+<nav class="md-tabs md-tabs--active" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href="../.." class="md-tabs__link">
+        Tárgy ismertető
+      </a>
+    
+  </li>
+
+      
+        
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../Docker/Docker-alapok/" class="md-tabs__link">
+          Docker
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../Architektura/AdatbazisApiGateway/" class="md-tabs__link">
+          Architektúra
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="./" class="md-tabs__link md-tabs__link--active">
+          DevOps
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../Kubernetes/Kubernetes-alapok/" class="md-tabs__link">
+          Kubernetes
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../Serverless/serverless/" class="md-tabs__link">
+          Serverless
+        </a>
+      
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="BME AUT Mikroszolgáltatások és konténeralapú szoftverfejlesztés" class="md-nav__button md-logo" aria-label="BME AUT Mikroszolgáltatások és konténeralapú szoftverfejlesztés">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    BME AUT Mikroszolgáltatások és konténeralapú szoftverfejlesztés
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/bmeviauav42/jegyzetek/" title="Főoldalra ugrás" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    bmeviauav42/jegyzetek
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Tárgy ismertető" class="md-nav__link">
+      Tárgy ismertető
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../hazi-feladat/" title="Házi feladat leírása és megszerezhető pontok" class="md-nav__link">
+      Házi feladat leírása és megszerezhető pontok
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Docker
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Docker" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Docker
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Docker/Docker-alapok/" title="Docker alapok" class="md-nav__link">
+      Docker alapok
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Docker/Dockerfile-compose/" title="Dockerfile és docker-compose" class="md-nav__link">
+      Dockerfile és docker-compose
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Architektúra
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Architektúra" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Architektúra
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Architektura/AdatbazisApiGateway/" title="Adattárolás és Api Gateway" class="md-nav__link">
+      Adattárolás és Api Gateway
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Architektura/Kommunikacio/" title="Kommunikáció" class="md-nav__link">
+      Kommunikáció
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" checked>
+    
+    <label class="md-nav__link" for="nav-5">
+      DevOps
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="DevOps" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        DevOps
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Elosztott nyomkövetés
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9h14V7H3v2m0 4h14v-2H3v2m0 4h14v-2H3v2m16 0h2v-2h-2v2m0-10v2h2V7h-2m0 6h2v-2h-2v2z"/></svg>
+        </span>
+      </label>
+    
+    <a href="./" title="Elosztott nyomkövetés" class="md-nav__link md-nav__link--active">
+      Elosztott nyomkövetés
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Tartalomjegyzék">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Tartalomjegyzék
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#eloadas" class="md-nav__link">
+    Előadás
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cel" class="md-nav__link">
+    Cél
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#elokovetelmenyek" class="md-nav__link">
+    Előkövetelmények
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-feladat-opentracing-alapu-nyomkovetes-jaeger-kornyezetben" class="md-nav__link">
+    1. Feladat - OpenTracing alapú nyomkövetés Jaeger környezetben
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Feladat - OpenTracing alapú nyomkövetés Jaeger környezetben">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bevezeto" class="md-nav__link">
+    Bevezető
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ismerkedes-a-hotrod-alkalmazassal" class="md-nav__link">
+    Ismerkedés a HotROD alkalmazással
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architektura-szolgaltatasfuggosegek-felderitese" class="md-nav__link">
+    Architektúra, szolgáltatásfüggőségek felderítése
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trace-ek-es-spanek-megjelenitese" class="md-nav__link">
+    Trace-ek és spanek megjelenítése
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kontextusba-helyezett-logok" class="md-nav__link">
+    Kontextusba helyezett logok
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#span-tasgs-vs-logs" class="md-nav__link">
+    Span Tasgs vs. Logs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kesleltetesek-okainak-felderitese" class="md-nav__link">
+    Késleltetések okainak felderítése
+  </a>
+  
+    <nav class="md-nav" aria-label="Késleltetések okainak felderítése">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tovabbi-teljesitmeny-optimalizacio" class="md-nav__link">
+    További teljesítmény optimalizáció
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#eroforrashasznalat-attributalt-merese-baggage-segitsegevel" class="md-nav__link">
+    Erőforráshasználat attributált mérése baggage segítségével
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kodinstrumentalas" class="md-nav__link">
+    Kódinstrumentálás
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#feladat-2-opentracing-es-jaeger-alapu-nyomkovetes-net-core-alapu-alkalmazas-eseten" class="md-nav__link">
+    Feladat 2 - OpenTracing és Jaeger alapú nyomkövetés .NET Core alapú alkalmazás esetén
+  </a>
+  
+    <nav class="md-nav" aria-label="Feladat 2 - OpenTracing és Jaeger alapú nyomkövetés .NET Core alapú alkalmazás esetén">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#elokeszites-konfiguracio" class="md-nav__link">
+    Előkészítés, konfiguráció
+  </a>
+  
+    <nav class="md-nav" aria-label="Előkészítés, konfiguráció">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#projekt-referenciak-felvetele" class="md-nav__link">
+    Projekt referenciák felvétele
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#opentracing-es-jaeger-kliens-konyvtarak" class="md-nav__link">
+    OpenTracing és Jaeger kliens könyvtárak
+  </a>
+  
+    <nav class="md-nav" aria-label="OpenTracing és Jaeger kliens könyvtárak">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#jaeger-szolgaltatas-beepitese-docker-composeyml-be" class="md-nav__link">
+    Jaeger szolgáltatás beépítése docker-compose.yml-be
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kod-instrumentalas" class="md-nav__link">
+    Kód instrumentálás
+  </a>
+  
+    <nav class="md-nav" aria-label="Kód instrumentálás">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#egyszeru-naplozas-instr_log" class="md-nav__link">
+    Egyszerű naplózás (##Instr_Log)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sajat-span-keszitese-taggeles-instr_createspan" class="md-nav__link">
+    Saját span készítése, taggelés (##Instr_CreateSpan)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#baggage-hasznalata-instr_baggage" class="md-nav__link">
+    Baggage használata (##Instr_Baggage)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Logging-Health-Checks/" title="Naplózás, health check" class="md-nav__link">
+      Naplózás, health check
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      Kubernetes
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Kubernetes" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Kubernetes
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Kubernetes/Kubernetes-alapok/" title="Kubernetes alapok" class="md-nav__link">
+      Kubernetes alapok
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Kubernetes/Kubernetes-alkalmazas-telepites/" title="Alkalmazás telepítése Kubernetes klaszterbe" class="md-nav__link">
+      Alkalmazás telepítése Kubernetes klaszterbe
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../AKS/aks/" title="K8S DevOps Azure DevOps-ban és Azure Kubernetes Service-szel" class="md-nav__link">
+      K8S DevOps Azure DevOps-ban és Azure Kubernetes Service-szel
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      Serverless
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Serverless" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Serverless
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Serverless/serverless/" title="Mikroszolgáltatások serverless architektúra fölött" class="md-nav__link">
+      Mikroszolgáltatások serverless architektúra fölött
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Tartalomjegyzék">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Tartalomjegyzék
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#eloadas" class="md-nav__link">
+    Előadás
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cel" class="md-nav__link">
+    Cél
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#elokovetelmenyek" class="md-nav__link">
+    Előkövetelmények
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-feladat-opentracing-alapu-nyomkovetes-jaeger-kornyezetben" class="md-nav__link">
+    1. Feladat - OpenTracing alapú nyomkövetés Jaeger környezetben
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Feladat - OpenTracing alapú nyomkövetés Jaeger környezetben">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bevezeto" class="md-nav__link">
+    Bevezető
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ismerkedes-a-hotrod-alkalmazassal" class="md-nav__link">
+    Ismerkedés a HotROD alkalmazással
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architektura-szolgaltatasfuggosegek-felderitese" class="md-nav__link">
+    Architektúra, szolgáltatásfüggőségek felderítése
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trace-ek-es-spanek-megjelenitese" class="md-nav__link">
+    Trace-ek és spanek megjelenítése
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kontextusba-helyezett-logok" class="md-nav__link">
+    Kontextusba helyezett logok
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#span-tasgs-vs-logs" class="md-nav__link">
+    Span Tasgs vs. Logs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kesleltetesek-okainak-felderitese" class="md-nav__link">
+    Késleltetések okainak felderítése
+  </a>
+  
+    <nav class="md-nav" aria-label="Késleltetések okainak felderítése">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tovabbi-teljesitmeny-optimalizacio" class="md-nav__link">
+    További teljesítmény optimalizáció
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#eroforrashasznalat-attributalt-merese-baggage-segitsegevel" class="md-nav__link">
+    Erőforráshasználat attributált mérése baggage segítségével
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kodinstrumentalas" class="md-nav__link">
+    Kódinstrumentálás
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#feladat-2-opentracing-es-jaeger-alapu-nyomkovetes-net-core-alapu-alkalmazas-eseten" class="md-nav__link">
+    Feladat 2 - OpenTracing és Jaeger alapú nyomkövetés .NET Core alapú alkalmazás esetén
+  </a>
+  
+    <nav class="md-nav" aria-label="Feladat 2 - OpenTracing és Jaeger alapú nyomkövetés .NET Core alapú alkalmazás esetén">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#elokeszites-konfiguracio" class="md-nav__link">
+    Előkészítés, konfiguráció
+  </a>
+  
+    <nav class="md-nav" aria-label="Előkészítés, konfiguráció">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#projekt-referenciak-felvetele" class="md-nav__link">
+    Projekt referenciák felvétele
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#opentracing-es-jaeger-kliens-konyvtarak" class="md-nav__link">
+    OpenTracing és Jaeger kliens könyvtárak
+  </a>
+  
+    <nav class="md-nav" aria-label="OpenTracing és Jaeger kliens könyvtárak">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#jaeger-szolgaltatas-beepitese-docker-composeyml-be" class="md-nav__link">
+    Jaeger szolgáltatás beépítése docker-compose.yml-be
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kod-instrumentalas" class="md-nav__link">
+    Kód instrumentálás
+  </a>
+  
+    <nav class="md-nav" aria-label="Kód instrumentálás">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#egyszeru-naplozas-instr_log" class="md-nav__link">
+    Egyszerű naplózás (##Instr_Log)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sajat-span-keszitese-taggeles-instr_createspan" class="md-nav__link">
+    Saját span készítése, taggelés (##Instr_CreateSpan)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#baggage-hasznalata-instr_baggage" class="md-nav__link">
+    Baggage használata (##Instr_Baggage)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/bmeviauav42/jegyzetek/edit/master/docs/DevOps/Nyomkovetes.md" title="Oldal szerkesztése" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                  
+                
+                
+                  <h1>Elosztott nyomkövetés</h1>
+                
+                <h2 id="eloadas">Előadás<a class="headerlink" href="#eloadas" title="Permanent link">&para;</a></h2>
+<p><a href="https://www.aut.bme.hu/Upload/Course/VIAUAV42/hallgatoi_jegyzetek/07-Nyomk%c3%b6vet%c3%a9s%20-%20clean.pdf">Elosztott nyomkövetés</a></p>
+<h2 id="cel">Cél<a class="headerlink" href="#cel" title="Permanent link">&para;</a></h2>
+<ul>
+<li>OpenTracing és Jaeger alapú elosztott nyomkövetés eszköztárának megismerése</li>
+<li>OpenTracing és Jaeger alapú nyomkövetés alapok .NET Core alapú mikroszolgáltatások esetén</li>
+</ul>
+<h2 id="elokovetelmenyek">Előkövetelmények<a class="headerlink" href="#elokovetelmenyek" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Docker Desktop</li>
+<li>Visual Studio 2019<ul>
+<li>min v16.3</li>
+<li>ASP.NET Core 3.0 SDK</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-feladat-opentracing-alapu-nyomkovetes-jaeger-kornyezetben">1. Feladat - OpenTracing alapú nyomkövetés Jaeger környezetben<a class="headerlink" href="#1-feladat-opentracing-alapu-nyomkovetes-jaeger-kornyezetben" title="Permanent link">&para;</a></h2>
+<h3 id="bevezeto">Bevezető<a class="headerlink" href="#bevezeto" title="Permanent link">&para;</a></h3>
+<p>A feladat keretében egy olyan mikroszolgáltatás alapú mintaalkalmazást vizsgálunk meg, mely az OpenTracing használatát illusztrálja, Jaeger alapú backenddel és megjelenítéssel. A feladat a <a href="https://medium.com/@YuriShkuro/take-opentracing-for-a-hotrod-ride-f6e3141f7941">Take OpenTracing for a HotROD ride</a> blogbejegyzésen alapul, de néhány olyan Jaeger szolgáltatást is megvizsgálunk, melyet a cikk nem taglal.</p>
+<p>A mintaalkalmazás neve "Hot R.O.D". Go nyelven íródott, kódja OpenTracing instrumentált. A forráskódja a Jaeger GitHub repository példák között található meg: <a href="https://github.com/jaegertracing/jaeger/tree/master/examples/hotrod">https://github.com/jaegertracing/jaeger/tree/master/examples/hotrod</a>. Itt találunk leírást arról, hogyan lehet a HotROD és Jaeger alkalmazásokat docker alapokon futtatni:</p>
+<ul>
+<li><strong>A Jeager futattására</strong> a <code>jaegertracing/all-in-one</code> docker image-et használjuk: ez valamennyi Jaeger backend komponenst tartalmaz (agent, collector, ingester, stb.), beleértve az adatmegjelenítő frontendet is. Ez az image ismerkedéshez, helyi környezetben teszteléshez ajánlott, production környezethez nem ajánlják. Bővebb leírást az image-ről többek között itt találhatunk: <a href="https://www.jaegertracing.io/docs/getting-started">https://www.jaegertracing.io/docs/getting-started</a>. A számtalan portból számunkra kettő érdekes, a 6831 (Jaeger agent, span-eket itt fogadja UDP-n a kliens könyvtáraktól) és a 16686 (Jaeger UI frontend).
+  Megjegyzések:</li>
+<li>A "jaegertracing/all-in-one" image alapértelmezésben egy in-memory tárolót használ, így újraindítást követően elvesznek a korábban rögzített trace/span-ek.</li>
+<li>Leírás a további Jaeger image-ekről és konfigurációs lehetőségekről itt találgató: <a href="https://www.jaegertracing.io/docs/deployment">https://www.jaegertracing.io/docs/deployment</a></li>
+<li>A <strong>HotROD futtatására</strong> a <code>jaegertracing/example-hotrod</code> docker image használható. Ez az image egyben tartalmazza valamennyi HotROD szolgáltatás kódját, futattásakor minden szükséges szolgáltatás elindul ugyanabban a konténerben, csak különböző portokon.</li>
+</ul>
+<p>A HotRod és a Jaeger konténerek egyszerre történő indítására docker-compose-t használunk:</p>
+<ol>
+<li>Töltsük le a <code>docker-compose.yml</code>-t innen <a href="https://github.com/jaegertracing/jaeger/blob/master/examples/hotrod/docker-compose.yml">https://github.com/jaegertracing/jaeger/blob/master/examples/hotrod/docker-compose.yml</a>, ide mentsük: <code>c:\work\&lt;sajátnév&gt;</code></li>
+<li>Nyissuk meg a fájlt VS Code-ban, tekintsük át a tartalmát</li>
+<li>A <code>jaeger</code> szolgáltatás a 6831 (Jaeger agent spanfeltöltő) és a 16686 (Jaeger UI frontend) portokat mappeli.</li>
+<li>A <code>hotrod</code> szolgáltatás számára környezeti változókban mondjuk meg, milyen hostnéven és milyen porton éri az a Jaeger agentet (span-ek felöltéséhez szükséges).</li>
+<li>Indítsunk új command promptot, navigáljunk az első lépésben letöltött docker-compose.yml (c:\work\<sajátnév>) mappába, majd indítsuk a konténereket: <code>docker-compose up</code></li>
+<li>Ha nem indul a HotRod a 8080-as port ütközés miatt, akkor:<ul>
+<li><code>docker-compose down</code>-nal állítsuk le a konténereket</li>
+<li>A <code>docker-compose.yml</code>-ben mappeljünk más külső portra, pl.: 8090:8080</li>
+<li>Indítsuk újra <code>docker-compose up</code></li>
+</ul>
+</li>
+<li>A HotRod frontend a <a href="http://localhost:8080">http://localhost:8080</a>, a Jaeger frontend a <a href="http://localhost:16686">http://localhost:16686</a> címen érhető el.</li>
+<li>Később a szolgáltatások leállítása a következő paranccsal lesz lehetséges (most még ne futtassuk): <code>docker-compose down</code></li>
+</ol>
+<h3 id="ismerkedes-a-hotrod-alkalmazassal">Ismerkedés a HotROD alkalmazással<a class="headerlink" href="#ismerkedes-a-hotrod-alkalmazassal" title="Permanent link">&para;</a></h3>
+<p>A HotRod egy "Ride Sharing" alkalmazás. Uber-hez hasonló, személyek vagy egyéb kézbesítendő tárgyak járművekkel történő célba juttatásához. Egy Go alkalmazás, több szolgáltatásból áll. A docker image az "all" paraméterrel futtatja az alkalmazást, mely valamennyi szolgáltatását elindítja.</p>
+<ul>
+<li>
+<p>Nézzünk rá a command promptban a docker-compose up által megjelenített logokra, látszik, hogy négy szolgáltatásból áll, melyek a 8080-8083 portokon érhetők el:</p>
+<ul>
+<li>frontend</li>
+<li>customer</li>
+<li>driver</li>
+<li>route</li>
+</ul>
+</li>
+<li>
+<p>Kapcsolódjuk a HotROD frontendhez böngészőből, ha még nem tettük meg (<a href="http://localhost:8080">http://localhost:8080</a>).</p>
+</li>
+</ul>
+<p>Ismerkedjünk meg a felület működésével:</p>
+<ul>
+<li>Egy gomb megnyomásával az alkalmazás egy adott ügyfélhez (aki egy adott helyen tartózkodik) keres egy a közelében tartózkodó járművet, pl. egy csomag felvételéhez vagy egy személy felvételéhez.</li>
+<li>Bal felső sarokban egy a JavaScript frontend által generált véletlen session azonosítót látunk (F5-re más lesz).</li>
+<li>Gombnyomásra új keresést indít, mely kapcsán egy új sorban a következő adatokat naplózza a felület:<ul>
+<li>A keresés során a kéréshez rendelt jármű rendszáma és várható érkezési ideje</li>
+<li>Kérés azonosító (session id + sorszám)</li>
+<li>Kiszolgálási idő, a JavaScript könyvtár méri</li>
+</ul>
+</li>
+</ul>
+<h3 id="architektura-szolgaltatasfuggosegek-felderitese">Architektúra, szolgáltatásfüggőségek felderítése<a class="headerlink" href="#architektura-szolgaltatasfuggosegek-felderitese" title="Permanent link">&para;</a></h3>
+<p>Lépések:</p>
+<ul>
+<li>Kattintsunk valamelyik gombon a HotROD frontenden (ha még nem tettük meg)</li>
+<li>A Jaeger frontenden Dependencies menü, majd DAG tab kiválasztása</li>
+</ul>
+<p>A Jeager a hívások során begyűjtött trace/span adatok alapján a következőket jeleníti meg:</p>
+<ul>
+<li>a szolgáltatásokat</li>
+<li>a szolgáltatatások közötti függőségeket</li>
+<li>a szolgáltatások közötti hívások számát</li>
+</ul>
+<p>Az ábra az egérrel pan-elhető, illetve az egérgörgővel nagyítható (azon pontra vonatkozóan, ahol az egér éppen áll).</p>
+<p>Force Directed Graph tab: hasonló az előzőhöz, az egérrel az adott csomóponra állva az adott csomópont függőségeit emeli ki.</p>
+<p>Látjuk, hogy bár a HotROD egyetlen konténerben fut,  hat szolgáltatásból áll. Megjegyzés: a Mysql és a Redis nem valós szolgáltatások, a HotROD ezeket csak "szimulálja", ezek nem valódi adatkezelők.</p>
+<h3 id="trace-ek-es-spanek-megjelenitese">Trace-ek és spanek megjelenítése<a class="headerlink" href="#trace-ek-es-spanek-megjelenitese" title="Permanent link">&para;</a></h3>
+<p>A Jaeger frontenden válaszuk ki a "Search" menüt, itt van lehetőségünk a Jaeger által rögzített trace-ek listázására a megadott szűrési feltételeknek megfelelően. Lépések:</p>
+<ul>
+<li>A HotRod frontenden kattintsunk még egyszer-kétszer a gombokon, hogy több, mint egy trace-ünk legyen a rendszerben.</li>
+<li>A Jaeger frontend szűrőpaneljén a "Service" dropdown-ban válasszuk ki a "Frontend" elemet. Ha nincs a listában, akkor az F5 gombban frissítsük a böngésző oldalát.</li>
+<li>Kattintsunk a "Find traces" gombbon</li>
+</ul>
+<p>A jobb oldali panel felső részén az x időtengely mentén a trace-ek jelennek meg (az y tengely a végrehajtási idő). Minden kliens oldali kéréshez külön trace születik. Itt is lehetőségünk van az adott körre kattintva a trace részleteinek megjelenítésére. A diagram alatt a trace-ek listás nézete jelenik meg, <strong>minden trace egy külön sor</strong>, számos hasznos információval (többek között a trace-ben levő span-ek száma, ugyenez szolgáltatásonkénti lebontásban, hibaesemények száma, stb.) Lehetőség van a tételek sorrendezésére (pl. végrehajtási idő szerint is hasznos lehet). Kattintsunk az egyik trace-re a részletes nézetének megjelenítéséhez.</p>
+<p>Trace részletes nézet:</p>
+<ul>
+<li>A trace spanjeinek <strong>egymásba ágyazási hierarchiáját</strong> látjuk a vízszintes időtengely mentén.</li>
+<li>Egy span hossza arányos a végrehajtási idejével.</li>
+<li>Minden span külön sor, a legfelső sor a root span: a böngészőből kiadott JavaScript kérést fogadó <code>frontend</code> szolgáltatáshoz tartozik, a művelet neve <code>HTTP GET/dispatch</code>, először a <code>customer</code> szolgáltatást hívja, mely fogadja a kérést és a <code>mysql</code> szolgáltatásba hív tovább.</li>
+<li>Sokat segít az átláthatóságban a <strong>színkódolás</strong>: minden szolgáltatás adott színet kap, az összes spanje ugyanolyan színnel jelenik meg!</li>
+</ul>
+<p>A spanek alapján látjuk, hogy az alkalmazás hogyan szolgál ki egy kérést:</p>
+<ol>
+<li>A frontend szolgáltatás a külső HTTP GET kérést a <code>/dispatch</code> végpontjánál kapja meg.</li>
+<li>A frontend szolgáltatás HTTP GET kérést küld az <code>customer</code> szolgáltatás  <code>customer</code> végpontjának (ha összecsukjuk a szülő span sorát, akkor ezt sor elején a <code>frontend -&gt; customer</code> nyíl is mutatja).</li>
+<li>Az <code>customer</code> végrehajt egy SQL SELECT utasítást a MySQL hívásával. Az eredmények visszakerülnek a frontend szolgáltatáshoz.</li>
+<li>Ezután a frontend szolgáltatás RPC kérést indít (<code>Driver :: findNearest</code> művelet) a <code>driver</code> szolgáltatáshoz. Anélkül, hogy alaposabban belemélyednénk a nyomkövetési részletekbe, nem tudjuk megmondani, hogy mely RPC keretrendszert használják a kérések, de feltehetjük, hogy nem HTTP (valójában TChannel útján készül).</li>
+<li>A <code>driver</code> szolgáltatás számos hívást kezdeményez a Redis felé. A hívások közül néhány piros felkiáltójel ikonnal van megjelölve, jelezve a hibákat.</li>
+<li>Ezután a frontend szolgáltatás egy sor HTTP GET kérést intéz a <code>route</code> szolgáltatás <code>route</code> végpontjához.</li>
+<li>Végül, a frontend szolgáltatás visszaadja az eredményt a külső hívónak.</li>
+</ol>
+<p>Megjegyzés: az oldal tetején levő időablakban egérrel egy időszeletet kijelölve az adott időszeletre "nagyíthatunk" rá.</p>
+<p>Span részletes nézet:</p>
+<ul>
+<li>Egy sorra kattintva az adott span, "kinyílik", magassága megnő, további adatokat mutatva a spanről.</li>
+<li>Nyissunk le az első spant: látjuk a hozzárendelt <strong>Tag</strong>-eket. Ezek kulcs-érték párok a spanhez rögzítveve (bármilyen kulcs-érték pár lehet). Pl. különösen informatív  a <code>http.url</code>, <code>http.method</code>, és a <code>http.status_code</code>.<ul>
+<li><code>span.kind</code>: ha a "hívott" oldalon vagyunk, akkor a "server" értékkel kerül rögzítésre. A hívó oldalon "client" értékkel rögzített.</li>
+<li><code>sampler.type</code>: "const" - jelzi, hogy minden művelet/span rögzítendő, a mintavételezés során nem dobandó el semmi.</li>
+</ul>
+</li>
+<li>A mysql lekérdezéshez tartozó span (5. sor) tag-ben tartalmazza az SQL parancsot.</li>
+<li>Nyissunk le egy piros felkiálltójellel dekorált spant. A tag-ek között szerepel az <code>error = true</code>: ez a tag használandó hibák jelzésére.</li>
+<li>Bármilyen egyéni adatot hozzáfűzhetünk tag-ként a span-ekhez. Erre példa a redis FindDriverIDs esetén a <code>param.location = 728,326</code>, vagy Redis GetDriver esetén a <code>param.driverID=T707027C</code>.
+A "szabványos" span tag-ekről, illetve a rövidesen tárgyalásra kerülő log "szabványos" mezőiről itt találunk leírást: <a href="https://github.com/opentracing/specification/blob/master/semantic_conventions.md#span-tags-table">https://github.com/opentracing/specification/blob/master/semantic_conventions.md#span-tags-table</a> (nyissuk meg az oldalt és nézzünk rá a táblázatra). Az OpenTracing nem köti ki a tag neveket, de mindenképpen célszerű a táblázat ajánlásait követni: ha nem tesszük, a trace/span megjelenítő eszközök nem tudnak szemantikát társítani hozzá (pl. error esetén speciális megjelentés).</li>
+</ul>
+<p>Megjegyzés: ha megnézzük, a mysql és redis spanek kliens odaliak (span.kind = client), ezek nem az adattárolóból erednek. A demóalkalmazásban az adatkezelők szimuláltak, de jellemzően a valós adattárolók sem instrumentáltak: ez esetben tárolóhoz való hozzáférést kliens oldalon vegyük körbe egy új spannel, és ehhez csapjuk hozzá az informatív tag-eket (pl. SQL parancs, Redis művelet  és paraméterek, stb.).</p>
+<p>A spanekhez <strong>Log</strong> bejegyzések is tartozhatnak. Keressünk meg párat:</p>
+<ul>
+<li>A span részletes nézetében a Logs szekció alatt találhatók.</li>
+<li>A span csíkján is megjelennek a logbejegyzések vékony függőleges vonallal, az egeret fölé húzva tooltipben részletes információt kapunk az adott logbejegyzésről.</li>
+<li>A Log bejegyzéseknek van időbélyege, plusz tetszőleges, debugolást segítő kulcs-érték párok tartozhatnak hozzá.  A "szabványosakat" itt tekinthetjük meg: <a href="https://github.com/opentracing/specification/blob/master/semantic_conventions.md#log-fields-table">https://github.com/opentracing/specification/blob/master/semantic_conventions.md#log-fields-table</a> (nézzünk rá a táblázatra). A legfontosabb az <code>event</code> kulcs.</li>
+<li>Nézzük meg az egyik hibás redis GetDriver művelet logját. Látjuk, hogy redis timeout történt, a <code>driver_id</code> is naplózásra került.</li>
+</ul>
+<h3 id="kontextusba-helyezett-logok">Kontextusba helyezett logok<a class="headerlink" href="#kontextusba-helyezett-logok" title="Permanent link">&para;</a></h3>
+<p>Egész jól látjuk, hogyan épül fel az alkalmazás. További kérdésekre keressük a választ, pl.: miért hívja a frontend a customer szolgáltatás /customer végpontját?
+Próbálhatnánk a szolgáltatások logjaiból megtudni:</p>
+<ul>
+<li>Ez sokszor nagyon nehéz</li>
+<li>Ha sok felhasználói kérés kiszolgálása történik egyszerre párhuzamosan, szinte lehetetlen kihámozni, mi tartozik egy adott felhasználói kéréshez.</li>
+</ul>
+<p>Helyette nézzük a trace renszer által begyűjtött (span-ekhez kapcsolódó) logbejegyzéseket. Nézzük meg a <code>HTTP GET /dispatch</code> spanhez kapcsolódó logokat (18 bejegyzés lesz). <strong>A többi kéréstől izoláltan, jól áttekinthető módon, az adott trace és span kontextusába helyezve látjuk a logbejegyzéseket!</strong></p>
+<p>Megjegyzés: Valami furcsa okból kifolyóan a mintaalkalmazás több helyen is elég szegényesen naplózza az információkat. Pl. a <code>Found customer</code> nem írja ki, milyen adatok kerültek lekérdezésre (customer koordináták): pedig itt pont segítené a megértést, mert ezen koordináták által meghatározott ponthoz képest keresi a közelben levő vezetőket a FindNearestDriver műveletben.</p>
+<h3 id="span-tasgs-vs-logs">Span Tasgs vs. Logs<a class="headerlink" href="#span-tasgs-vs-logs" title="Permanent link">&para;</a></h3>
+<p>Mikor használjunk tageket, és mikor logokat? Alapelv:</p>
+<ul>
+<li>A tag olyan információ rögzítésére való, mely a span egészéhez tartozik.</li>
+<li>A log időbélyeggel rendelkező események rögzítésére való.</li>
+</ul>
+<h3 id="kesleltetesek-okainak-felderitese">Késleltetések okainak felderítése<a class="headerlink" href="#kesleltetesek-okainak-felderitese" title="Permanent link">&para;</a></h3>
+<p>Vizsgáljuk meg az alkalmazás teljesítmény karakterisztikáit. Trace-ek alapán ezt látjuk:</p>
+<ol>
+<li>Az ügyféladatok lekérdezése (<code>customer</code> szolgáltatás) a kritikus útvonalon van, mert ez adja vissza az ügyfél koordinátáit.</li>
+<li>A <code>driver</code> szolgáltatás lekérdezi az ügyfél közelében levő 10 járművezetőt, majd egyesével SORBAN EGYMÁS UTÁN lekérdezi ezek adatait a Redistől: ezt mutatja a <code>redis GetDriver</code> lépcsőzetes mintája.</li>
+<li>Ezt követően a 10 útvonalszámítás (<code>route</code> szolgáltatás) művelete nem is szekvenciális és nem is teljesen párhuzamos. Azt látjuk, hogy maximum három kérés tud párhuzamosan futni, és amint ezekből egy véget ér, akkor indul a következő. Ez arra utal, hogy itt egy hármas végrehajtó pool futtatja a műveleteket.</li>
+</ol>
+<p>Vizsgáljuk meg, mi történik, ha számos párhuzamos kérést futtatunk:</p>
+<ol>
+<li>A HotROD alkalmazásban gyorsan kattintsunk kb. 20-szor valamelyik gombon.</li>
+<li>A HotROD alkalmazás felületén is jól látható, hogy a kérések kiszolgálása belassul, a latency 800 ms helyett 2000 ms környéke lesz.</li>
+<li>A Jaeger alkalmazásban navigáljunk vissza a nyitóoldalra, frissítsük a trace listát (Find traces gomb), keressük ki és nyissuk meg az egyik leghosszabb lefutású trace-t: a trace listában ehhez tartozik a leghosszabb ciánkék színű sáv.</li>
+<li>A trace-t másként is kikereshetjük: a HotROD oldal logjában látszik, hogy mely járművezetőt rendelte a rendszer a legnagyobb duration paraméterű sornál a kéréshez (T795664C vagy egy hasonló formátumú sztring). A Jaeger nyitóoldalán a szűrőpaneleben a "Tags" mezőbe írjuk be ezt: "driver:T716217C" és aktiváljuk a szűrést. Azért találja meg a trace-t, mert az egyik span egyik logjában szerepel a driver:T716217C kulcs-érték pár. (Ha meg akarjuk nézni: a legelső spant lenyitva a spanhez tartozó utolsó log tartalmazza).</li>
+<li>Vizsgáljuk meg a trace-t: a legszembeötlőbb különbség a korábbi, gyors trace-ekhez képest, a mysql kérés lassú kiszolgálása. Próbáljuk meg kitalálni, miért:</li>
+<li>Nyissuk le a <code>mysql SQL SELECT</code> spant. Két logbejegyzés tartozik hozzá.</li>
+<li>Ezekből egyértelműen kiderül, hogy az idő nagy részét lock-ra várakozással töltöte a kérés.</li>
+<li>Az első log-ból még az is kiderül, mely kérések tartották fel (Waiting for lock behind 4 transactions"), ezeket meg is nevesíti, pl. : <code>[8221-10 8221-11 8221-12 8221-13]</code>. Ezek a kérés azonosítók a HotROD frontendről jönnek, nézzük meg őket a felületen!</li>
+<li>Ami itt igazán izgalmas: honnan tudja a mysql "kliens", hogy mik a kérés azonosítók, hogy jut el hozzá? Paraméterben NEM passzolja végig a rendszer a hívási láncon (pl. a HTTP GET customer kérések paraméterében sem szerepel, megnézhetjük a span-eket).</li>
+<li>A "varázslat" mögött az OpenTracing <strong>baggage</strong> koncepciója és mechanizmusa áll.<ul>
+<li>Maga az elosztott trace azért tud megvalósulni, mert a OpenTracing instrumentálás gondoskodik arról, hogy a kérésekhez kapcsolódó bizonyos metaadatok szálak, folyamatok és számítógépek között propagálódjanak és minden a kérés kiszolgálásában részt vevő szereplőhöz eljussanak. Ilyen a trace id és a span id is. Egy másik ilyen metainformáció a baggage. Ez egy általános kulcs-érték pár tároló. </li>
+<li>A példánkban a JavaScript UI beteszi a kérés azonosítót a baggagebe, és ez a kérés kiszolgálása során minden szereplőhöz eljut, anélkül, hogy explicit paraméterekben kellene kezelni. Az OpenTracing instrumentáció gondoskodik róla, pl. HTTP fejlécbe teszi a HTTP kérések kiszolgálása során). Nagyon hatékony és hasznos eszköz!</li>
+<li>A példánkban lehetővé teszi, hogy a kérésazonosító alapján kikeressük és analizáljuk azokat a trace-eket, melyek feltartják a kérésünk kiszolgálását. A való életben is gyakori probléma: egy ügyfél kérés feltart/belassít számos másikat. Lehetőségünk van ezen kérések megtalálására és analizálására.</li>
+</ul>
+</li>
+<li>A HotRod példában nincs igazi Mysql adatbázis, csak szimulálja a rendszer. Itt látható a mesterségesen szigorított zárolás (pl. egy rosszul konfigurált DB connection poolt szimulálva): <a href="https://github.com/jaegertracing/jaeger/blob/master/examples/hotrod/services/customer/database.go">https://github.com/jaegertracing/jaeger/blob/master/examples/hotrod/services/customer/database.go</a>, ezen belül az <code>if !config.MySQLMutexDisabled</code> sor környékét nézzük.</li>
+<li>Szimuláljuk a detektált probléma javítását. A forráskódhoz nem fogunk nyúlni, a HotROD alkalmazást kell speciális command line argumentummal futtatni ahhoz, hogy kikapcsoljuk a mesterségesen indukált szigorú zárolást, illetve ezen felül a mesterséges késleltetés mértékét is csökkenteni fogjuk:<ol>
+<li>A docker-compose.yml-ben a hotrod szolgáltatás command line paramétereit bővítsük a "-M" kapcsolóval, ehhez egy sort kell módosítani, a <code>command:</code> után [] között ez kell álljon: <code>"-M", "-D", "100ms", "all"</code></li>
+<li>Mentsük el a fájlt.</li>
+<li>Tegyük fel, hogy production környezetben vagyuk, csak a módosult szolgáltatást (esetünkben HotROD) kívánjuk újraindítani, a többit (esetünkben Jaeger) nem. Így nem adjuk ki a <code>docker compose down</code> parancsot!</li>
+<li>Egy új command line ablakban navigáljunk el a docker-compose.yml-t tartalmazó mappába (<code>c:\work\&lt;sajátnév&gt;</code>). Futtassuk a következő parancsot: <code>docker-compose up -d</code>. A '-d háttérben futtat, az up parancs pedig csak a módosult konténereket állítja le és indítja újra. A kimeneten ez jól követhető. Közben a korábbi, a konténerekre még mindig rácsatolt command promptunkban látszik, hogy újraindult a HotROD szolgáltatás, 'fix: disabling db connection mutex' üzemmódban.</li>
+</ol>
+</li>
+<li>Teszteljük a javított megoldást: generáljunk kb. 20 párhuzamos kérést, ellenőrizzük a duration-t: egyik sem megy 2000ms környékére (kb. 900 ms környékére kúszik csak fel), és a trace-ekben látszódik, hogy a mysql span-ek hossza 100 ms körül marad.</li>
+</ol>
+<h4 id="tovabbi-teljesitmeny-optimalizacio">További teljesítmény optimalizáció<a class="headerlink" href="#tovabbi-teljesitmeny-optimalizacio" title="Permanent link">&para;</a></h4>
+<ol>
+<li>Azt látjuk, hogy míg korábban a route szolgáltatás hívások közül három futott párhuzamosan, most már általában csak egy fut egyszerre. Sőt, olyan időszakok is vannak, amikor egy sem fut. Ebből arra következtetünk, hogy a végrehajtó goroutine más goroutine-okkal verseng közös erőforrásért (vagyis közös a végrehajtó pool). A probléma helye a frontend szolgáltatásban valószínű, mivel a route spanek a frontend spanek gyerekei, így azt valószínűsítjük, hogy a route műveleteket a frontend művelete hívja. Ha van időnk, nézzünk rá a frontend kódjára:</li>
+<li><a href="https://github.com/jaegertracing/jaeger/blob/master/examples/hotrod/services/frontend/best_eta.go">https://github.com/jaegertracing/jaeger/blob/master/examples/hotrod/services/frontend/best_eta.go</a>, itt a getRoutes művelet az érdekes.</li>
+<li>Azt látjuk, hogy egy poolt használ az útvonalak megtervezéséhez (a legkorábbi várható érkezési idejű útvonalat keressük).</li>
+<li>Azt is látjuk, hogy ha a pool mérete kellően nagy, akár minden FindRoute művelet futhatna párhuzamosan.</li>
+<li>Arra következtetünk, hogy a pool mérete nem kellően nagy (a korábbi tesztjeink alapján a pool méretét 3-asnak véljük).</li>
+<li>Növeljük meg a pool méretét 100-ra:</li>
+<li>A docker-compose.yml fájlban változtassunk a command line paramétereken: <code>"-M", "-D", "100ms", "-W", "100", "all"</code> legyen az új halmaz, mentsük el a változtatást</li>
+<li>Indítsuk újra a hotrod szolgáltatást: <code>docker-compose up -d</code></li>
+<li>Teszteljük a javított megoldást: generáljunk kb. 20 párhuzamos kérést és ellenőrizzük az egyik friss trace-t, a route spanek párhuzamosan kell fussanak.</li>
+</ol>
+<p>A driver szolgáltatáson is lehetne optimalizálni, a Redis <code>GetDriver</code> lekérdezések szekvenciálisak, ezzel most nem foglalkozunk.</p>
+<h3 id="eroforrashasznalat-attributalt-merese-baggage-segitsegevel">Erőforráshasználat attributált mérése baggage segítségével<a class="headerlink" href="#eroforrashasznalat-attributalt-merese-baggage-segitsegevel" title="Permanent link">&para;</a></h3>
+<p>Gyakran merül fel arra <strong>üzleti igény, hogy az erőforrás (pl. CPU) használatot valamilyen magasabb szintű paraméter alapján mérjük és attributáljuk</strong>. A példánkban a route szolgáltatásban az útvonalkeresés relatíve CPU intenzív művelet, jó lenne mérni, hogy <strong>ügyfelenként</strong> (customer) mennyi CPU időt használ. Ugyanakkor a route szolgáltatás a függőségi gráfban mélyen van, itt már nincs információ az ügyfélről, akinek kapcsán az útvonalkeresés történik. Csak a mérés érdekében egy explicit customer id paramétert bevezetni a route szolgáltatás API-ján rossz tervezői döntés lenne. Itt lép képbe a tracing, illetve annak <strong>baggage</strong> mechanizmusa. Egy adott trace kontextusában már tudjuk, mely ügyfél számára történik az útvonalkeresés. A baggage pedig lehetőséget nyújt arra, hogy a <strong>szolgáltatások kódjának módosítása nélkül</strong> transzparens módon továbbítsunk a trace-hez kapcsolódó metaadatokat a szolgáltatások között. Esetünkban ez a customer id lesz, de ilyen lehet egy kérés/session/felhasználó azonosító is.</p>
+<p>A fenti koncepció demonstrálására a <code>route</code> szolgáltatás olyan kódot tartalmaz, mely méri az útvonalszámítás idejét és a Go <code>expvar</code> metrika "kezelő" standard library package segítségével összegyűjti, nyilvántartja és lekérdezhetővé teszi azt. A kód itt található: <a href="https://github.com/jaegertracing/jaeger/blob/master/examples/hotrod/services/route/stats.go">https://github.com/jaegertracing/jaeger/blob/master/examples/hotrod/services/route/stats.go</a>. Alapelve:</p>
+<ul>
+<li>A <code>routeCalcByCustomer</code> és <code>routeCalcBySession</code> változók egy-egy <code>map</code> típusú metrikát definiálnak, adott kulcsokkal.</li>
+<li>A <code>stats</code> egy struktúra tömb, két elemű. A struktúra objektumokban egy expvar metrika és egy baggage kulcs található.</li>
+<li>Az <code>updateCalcStats</code> lekérdezi az aktuális spant, egy cikulsban végigmegy a <code>stats</code>-ban tárolt struktúra elemeken: minden elemre lekérdezi a baggage-ből a stuktúrban tárolt kulcs alapján a baggage elemet ("customer" és "sesion"), majd ez és a futási idő alapján frissíti a struktúrában tárolt metrikát.</li>
+</ul>
+<p>Az expvar metrikák lekérdezhetők a futó szolgáltatástól a 8083-as porton:</p>
+<ol>
+<li>A <code>docker-compose.yml</code> fájlban a hotrod szolgáltatásnál publikáljuk a 8083-os portot (vegyük fel a "8083:8083"-at a "ports:" alá), mentsük el, a <code>docker-compose up -d</code>-vel frissítsük a futó konténert.</li>
+<li>A HotROD frontendden generáljunk jópár kérést: az első gombon kattintsunk sokat, a másodikon párat, a többin ne kattintsunk.</li>
+<li>Böngészőből kapcsolódjunk a hotrod konténer expvar szolgáltatásához és kérdezzük le a metrikákat: <a href="http://localhost:8083/debug/vars">http://localhost:8083/debug/vars</a></li>
+<li>Keressünk rá szöveg szerint a <code>route.calc.by.customer.sec</code> és az alatta levő <code>route.calc.by.session.sec</code> kulcsokra és tekintsük meg a metrikák értékét. Az alábbihoz hasonló kimenetet kapunk:</li>
+</ol>
+<div class="highlight"><pre><span></span><code>&quot;route.calc.by.customer.sec&quot;: {&quot;Amazing Coffee Roasters&quot;: 1.0790000000000002, &quot;Japanese Desserts&quot;: 1.5280000000000002, &quot;Rachel&#39;s Floral Designs&quot;: 19.54500000000001, &quot;Trom Chocolatier&quot;: 0.46199999999999997},
+&quot;route.calc.by.session.sec&quot;: {&quot;8221&quot;: 22.61399999999999},
+</code></pre></div>
+
+<h3 id="kodinstrumentalas">Kódinstrumentálás<a class="headerlink" href="#kodinstrumentalas" title="Permanent link">&para;</a></h3>
+<p>Felmerül a kérdés, mennyit kellett a kód instrumentálásán dolgozni a HotROD alkalmazás fejlesztése során. Meglepően keveset:</p>
+<ul>
+<li>Be kell konfigurálni, össze kell kötni Jaegerrel.</li>
+<li>Az intrumentálás a kommunikációt végző librarykben van: a Go hoz rendelkezésre álló REST és TChannel kommunikációt támogató open source könyvtárak instrumentáltak, ezzel nekünk nem kell foglalkozni.</li>
+<li>A kódban a Mysql és Redis szimuláció esetén található explicit instrumentálás.</li>
+</ul>
+<h2 id="feladat-2-opentracing-es-jaeger-alapu-nyomkovetes-net-core-alapu-alkalmazas-eseten">Feladat 2 - OpenTracing és Jaeger alapú nyomkövetés .NET Core alapú alkalmazás esetén<a class="headerlink" href="#feladat-2-opentracing-es-jaeger-alapu-nyomkovetes-net-core-alapu-alkalmazas-eseten" title="Permanent link">&para;</a></h2>
+<p>Kiinduló projekt és megoldás: <a href="https://github.com/bmeviauav42/nyomkovetes">https://github.com/bmeviauav42/nyomkovetes</a></p>
+<p>A feladat keretében .NET Core 3.0 környezetben dolgozunk, de az OpenTracing és Jaeger .NET kliens könyvtárak korábbi .NET Core verziókkal is használhatók, nincs bennük semmi .NET Core 3.0 specifikus.</p>
+<p>Vannak kliens könyvtárak, melyek azt várják, hogy a <code>jaeger-agent</code> a helyi gépen (pl. ugyanabban a docker containerben) fut, az agenttel UDP protokollon történik a kommunikáció. A tapasztalatok szerint számos kliens könyvtár tud más gépen/containerben futó agenttel kommunikálni, konfigurálható a kliensben az agent címe (host és a port). Ez lehetővé teszi a <code>jaegertracing/all-in-one</code> kényelmes használatát, a szolgáltatásokat futtató konténetben nem kell jaeger agentet telepíteni. Éles környezetben ez a megoldás korlátozottan ajánlott: az UDP megbízhatóan működik localhost esetén, de egy valódi hálózaton veszhetnek el csomagok. A legtöbb kliens könyvtár azt is támogatja, hogy az agent kihagyásával, közvetlen a collectornak tölténjen az adatküldés, akár HTTP protokollon.</p>
+<p>A kommunikációról szóló gyakorlat némiképpen továbbfejlesztett Order+Customer kiindulási példáját instrumentáljuk kötjük össze Jaegerrel és instrumentáljuk OpenTracing alapokon és. Miben más a kiinduló kód, mint a korábbi kommunikációs órán szereplő kiinduló gyakorlat?</p>
+<ul>
+<li>Repository mintát használ.</li>
+<li>A Catalog szolgáltatás Sqlite adatbázisban tárolja az adatokat (in-memory üzemmódra konfiguráltan), induláskori seed-et, vagyis tesztadat generálást követően. Ez éles környezetben nem használható, a célja mindössze a nyomkövetés demonstrálása. A választás azért esett az Sqlite-ra az Entity Framework In Memory Database-zel szemben, mert részletesebb nyomkövetési információt szolgáltat.</li>
+</ul>
+<h3 id="elokeszites-konfiguracio">Előkészítés, konfiguráció<a class="headerlink" href="#elokeszites-konfiguracio" title="Permanent link">&para;</a></h3>
+<p>Kiinduló lépések:</p>
+<ul>
+<li>GitHub-ról klónozzuk ki a kiinduló solution-t:<ul>
+<li>Hozzunk létre egy <code>tracing</code> mappát a <code>c:\work\&lt;sajátnév&gt;</code> munkakönyvátrunkban és indítsunk egy command prompotot innen, futtasuk az alábbi parancsot:
+<code>git clone https://github.com/bmeviauav42/nyomkovetes</code></li>
+</ul>
+</li>
+<li>Indítsuk el VS alatt a szolgáltatásokat</li>
+<li>A böngészőben hibaoldal jelenik meg. Frissítsük (ha kell többször is), a hiba eltűnik. Az oka: az OrderService hívja a CatalogService-t, de az először még nem állt fel teljesen, az Sqlite adatbázis seed-elése időt igényel.</li>
+</ul>
+<p>Ha kevés az idő, nézhetjük a feladat megoldását: ez a <code>megoldas/1-konfig-es-beepitett-instrumentalas</code> ágon található, az ág checkout lépései:</p>
+<div class="highlight"><pre><span></span><code>git fetch
+git checkout megoldas/1-konfig-es-beepitett-instrumentalas
+</code></pre></div>
+
+<p>VS alatt startup projektnek állítsuk be a docker-compose projektet.</p>
+<h4 id="projekt-referenciak-felvetele">Projekt referenciák felvétele<a class="headerlink" href="#projekt-referenciak-felvetele" title="Permanent link">&para;</a></h4>
+<p>A solutionünk több projektből/szolgáltatásból áll. Mindegyiket hasonló módon kell OpenTracing és Jaeger vonatkozásában inicializálni, illetve ugyanarra a Jaeger "kiszolgálóra" kell rákötni. Ezt a kódot ne copy-paste-tel szaporítsuk, hanem tegyük ki egy külön megosztott könyvtárba. Ez a kiinduló megoldásban elő van készítve, már van egy ilyen projekt (Msa.Comm.Lab.Shared), csak a projekt referenciák nincsenek felvéve. Tegyük ezt meg minden projektnél, ahol a nyomkövetést használni akarjuk:</p>
+<ul>
+<li><code>Msa.Comm.Lab.Services.Catalog</code> -&gt; <code>Msa.Comm.Lab.Shared</code> projekt referencia felvétele</li>
+<li><code>Msa.Comm.Lab.Services.Order</code> -&gt; <code>Msa.Comm.Lab.Shared</code> projekt referencia felvétele</li>
+</ul>
+<h3 id="opentracing-es-jaeger-kliens-konyvtarak">OpenTracing és Jaeger kliens könyvtárak<a class="headerlink" href="#opentracing-es-jaeger-kliens-konyvtarak" title="Permanent link">&para;</a></h3>
+<p>.NET Core környezetben az alábbi NuGet csomagok használatára van szükség:</p>
+<ul>
+<li><strong>"OpenTracing"</strong><ul>
+<li>OpenTracing API a kód instrumentálásához.</li>
+<li><a href="https://github.com/opentracing/opentracing-csharp">https://github.com/opentracing/opentracing-csharp</a></li>
+</ul>
+</li>
+<li><strong>"OpenTracing.Contrib.NetCore"</strong><ul>
+<li><a href="https://github.com/opentracing-contrib/csharp-netcore">https://github.com/opentracing-contrib/csharp-netcore</a></li>
+<li>Nem kötelező, de .NET Core környezetben javasolt: anélkül tudunk a segítségével pl. REST hívásokat trace-elni, hogy a kódunkat instumentálni kellene.</li>
+<li>Beépül az ASP.NET-be, Entity Framework-be, bizonyos .NET Core BCL típusokba,melyek közül a legfontosabb a HttpClient.</li>
+<li>Minden .NET könyvtárat, keretrendszert, stb.-t  támogat, ami a  .NET DiagnosticSource-t használja (minden Activity-hez spant készít és span log-ot az egyéb eseményekhez).</li>
+<li>Beregisztrálja magát a Microsoft.Extensions.Logging rendszerbe, és minden logba írás esetén span log-ot készít, de csak akkor, ha van aktív span.</li>
+<li>Függőségként felteszi az OpenTracing package-et is!</li>
+</ul>
+</li>
+<li><strong>"Jaeger"</strong><ul>
+<li><a href="https://github.com/jaegertracing/jaeger-client-csharp">https://github.com/jaegertracing/jaeger-client-csharp</a></li>
+<li>Jaeger .NET kliens könyvtár</li>
+</ul>
+</li>
+</ul>
+<p>Az <code>Msa.Comm.Lab.Shared</code> könyvtárba már fel vannak véve ezek a NuGet függőségek (az <code>OpenTracing</code> csak közvetve, az <code>OpenTracing.Contrib.NetCor</code>e alatt), így nekünk nem kell megtennünk.
+A szolgáltatás projektekben nem fogunk első körben közvetlen OpenTracing instrumentálást végezni, csak használjuk a <code>Msa.Comm.Lab.Shared</code> könyvtár egyetelen osztályát/műveletét a szolgáltatások konfigurálásakor: vegyük fel a <code>Msa.Comm.Lab.Services.Catalog</code> projekt <code>Startup.ConfigureServices</code> műveletének elejére:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Registers and starts Jaeger (see Shared.JaegerServiceCollectionExtensions)</span>
+<span class="c1">// Also registers OpenTracing</span>
+<span class="n">services</span><span class="p">.</span><span class="n">AddJaeger</span><span class="p">(</span><span class="n">currentEnvironment</span><span class="p">);</span>
+</code></pre></div>
+
+<p>A szolgáltatás projektekbe így (egyelőre legalábbis) egyetlen OpenTracing/NuGet  package-et sem vettünk/veszünk fel, csak közvetett függés van!</p>
+<p>Tekintsük át a <code>JaegerServiceCollectionExtensions.AddJaeger</code> műveletet, a legfontosabbak:</p>
+<ul>
+<li>A DI konténerbe egy <code>ITrace</code>r implementációt regisztrálunk be singletonként.</li>
+<li>Ez esetünkben egy Jaeger tracer lesz, amit a példában környezeti változók alapján inicializálunk (docker környezetben praktikus megközelítés): <code>Jaeger.Configuration.FromEnv(loggerFactory)</code></li>
+<li>A környezeti változók közül a <code>JAEGER_SERVICE_NAME</code>, <code>JAEGER_AGENT_HOST</code>, <code>JAEGER_AGENT_PORT</code> és <code>JAEGER_SAMPLER_TYPE</code> a fontosabbak.</li>
+<li>A <code>GlobalTracer</code> egy klasszikus sigleton hozzáférést biztosít bárhol a kódban a tracer-hez, ezt is állítsuk be: <code>GlobalTracer.Register(tracer)</code>. Ez azon kód számára fontos, mely nem tud DI alapokon működni.</li>
+<li>A végén fontos az OpenTracing szolgáltatások regisztrálása is, eddig csak Jaegerrel foglalkoztunk: <code>services.AddOpenTracing();</code></li>
+</ul>
+<h4 id="jaeger-szolgaltatas-beepitese-docker-composeyml-be">Jaeger szolgáltatás beépítése docker-compose.yml-be<a class="headerlink" href="#jaeger-szolgaltatas-beepitese-docker-composeyml-be" title="Permanent link">&para;</a></h4>
+<p>Egészítsük ki a <code>docker-compose.yml</code> fájlt (időhiány esetén másoljuk be az egészet):</p>
+<ul>
+<li>jaeger szolgáltatás felvétele</li>
+<li>a már meglévő két szolgáltatásnál depends_on alatt <code>jaeger</code> megadása</li>
+<li>környezeti változók felvétele (ez eetünkben nem kötelező, mert ha nem adjuk meg, az <code>Msa.Comm.Lab.Shared</code> által beállított alapértékek megfelelők)</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="nt">version</span><span class="p">:</span> <span class="s">&#39;3.7&#39;</span>
+
+<span class="nt">services</span><span class="p">:</span>
+  <span class="nt">msa.comm.lab.services.catalog</span><span class="p">:</span>
+    <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">${DOCKER_REGISTRY-}msacommlabservicescatalog</span>
+    <span class="nt">build</span><span class="p">:</span>
+      <span class="nt">context</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">.</span>
+      <span class="nt">dockerfile</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Msa.Comm.Lab.Services.Catalog/Dockerfile</span>
+<span class="hll">    <span class="nt">environment</span><span class="p">:</span>
+</span><span class="hll">      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">JAEGER_AGENT_HOST=jaeger</span>
+</span><span class="hll">      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">JAEGER_AGENT_PORT=6831</span>
+</span><span class="hll">      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">JAEGER_SAMPLER_TYPE=const</span>
+</span><span class="hll">    <span class="nt">depends_on</span><span class="p">:</span>
+</span><span class="hll">      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">jaeger</span>
+</span>  <span class="nt">msa.comm.lab.services.order</span><span class="p">:</span>
+    <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">${DOCKER_REGISTRY-}msacommlabservicesorder</span>
+    <span class="nt">build</span><span class="p">:</span>
+      <span class="nt">context</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">.</span>
+      <span class="nt">dockerfile</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Msa.Comm.Lab.Services.Order/Dockerfile</span>
+<span class="hll">    <span class="nt">environment</span><span class="p">:</span>
+</span><span class="hll">      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">JAEGER_AGENT_HOST=jaeger</span>
+</span><span class="hll">      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">JAEGER_AGENT_PORT=6831</span>
+</span><span class="hll">      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">JAEGER_SAMPLER_TYPE=const</span>
+</span>    <span class="nt">depends_on</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">msa.comm.lab.services.catalog</span>
+<span class="hll">      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">jaeger</span>
+</span><span class="hll">  <span class="nt">jaeger</span><span class="p">:</span>
+</span><span class="hll">    <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">jaegertracing/all-in-one:latest</span>
+</span><span class="hll">    <span class="nt">ports</span><span class="p">:</span>
+</span><span class="hll">      <span class="p p-Indicator">-</span> <span class="s">&quot;16686:16686&quot;</span>  <span class="c1"># For Jaeger web UI</span>
+</span></code></pre></div>
+
+<p>Teszteljük a működést:</p>
+<ul>
+<li>Indítsuk el a szolgáltatásokat VS alatt, frissítsük párszor a böngészőablakot</li>
+<li>Jelenítsük meg Jaeger UI-t: <a href="http://localhost:16686/">http://localhost:16686/</a></li>
+<li>A szűrőpanelen válasszuk ki a <code>Msa.Comm.Lab.Services.Order</code> szolgáltatást, frissítsük a megjelenített trace.eket (Find traces gomb), válasszunk ki jobboldalt egy hibával nem rendelkező trace-t és nyissuk meg.</li>
+<li>A részteles trace megjelenítőben látjuk span hierarchiát: Http hívások és DB ExecuteReader a mélyén. Az <code>Action Msa.Comm.Lab.Services.Catalog.Controllers.ProductController/Get</code> spanben számos log van, többek között EF-höz kapcsolódók is.</li>
+<li><strong>Mindezt úgy értük el, hogy semmiféle OpenTracing instrumentálást nem végeztünk a saját kódunkban</strong>.</li>
+</ul>
+<h3 id="kod-instrumentalas">Kód instrumentálás<a class="headerlink" href="#kod-instrumentalas" title="Permanent link">&para;</a></h3>
+<p>Checkoutoljuk ki Git-ben kész megoldást, a <code>megoldas/1-konfig-es-beepitett-instrumentalas</code> ágon található:</p>
+<div class="highlight"><pre><span></span><code>git checkout megoldas/2-kod-instrumentalas
+</code></pre></div>
+
+<h4 id="egyszeru-naplozas-instr_log">Egyszerű naplózás (##Instr_Log)<a class="headerlink" href="#egyszeru-naplozas-instr_log" title="Permanent link">&para;</a></h4>
+<p>Itt még nem használunk OpenTracing specifikus instrumentálást, az <code>Microsoft.Extensions.Logging ILogger</code> segítségével naplózunk.</p>
+<ul>
+<li>Az <code>Order</code> szolgáltatás <code>TestController</code> osztályt nézzük</li>
+<li>DI-vel kap egy <code>ILogger&lt;TestController&gt;</code> objektumot. Ezt a <code>Microsoft.Extensions.Logging</code> beépítve támogatja.</li>
+<li>A <code>Get()</code> műveletben a <code>log.LogInformation</code> hívással naplózunk. Strukturált naplózást használunk, az első paraméterben a <code>{ProdCount}</code> definiál egy kulcsot, az értéke a count paraméter lesz. Ez nemcsak mint string, hanem egy kulcs-érték párként is megjelenik a naplózás során: a spanhez fűzött log-ban lesz egy ilyen kulcs-érték pár.</li>
+<li>Futtassuk az alkalmazást, generáljunk pár nem hibás hívást.</li>
+<li>Jager UI frontenden nyissunk meg egy nem hibás trace-t. A felső Find keresőbe írjuk be: ProdCount és keressünk rá. Azon spanek, ahol van találat, sárga színnel jelennek meg. Egy találatunk van. Nyissuk le a spant, és keressük ki szemmel a számunkra érdekes logbejegyzést. Itt látjuk, hogy a logon megjelenik a <code>ProdCount = 3</code> kulcs-érték pár, így lehet(ne) erre is értelmesen keresni (a nyitóoldalon a trace keresőben igen, a trace részletes oldalon a span keresőben nem).</li>
+<li>Tipp: A span kereső egyelőre elég béna: ha valamit nem találunk, a jobb felső sarokban levő gombbal váltsunk JSON nézetre és keressünk abban szöveg szerint.</li>
+</ul>
+<h4 id="sajat-span-keszitese-taggeles-instr_createspan">Saját span készítése, taggelés (##Instr_CreateSpan)<a class="headerlink" href="#sajat-span-keszitese-taggeles-instr_createspan" title="Permanent link">&para;</a></h4>
+<p>Saját spant készítünk. Itt már explicit OpenTracing API instumentálást végzünk. Ehhez "logikailag" fel kellene vegyük az érintett projektben az <strong><code>OpenTracing</code></strong> NuGet package hivatkozást (<code>Jager</code> és <code>OpenTracing.Contrib.NetCore</code> nem kell, hiszen mi csak az API-t használjuk). Esetünkben nem kell megtenni, mert az <code>Msa.Comm.Lab.Shared</code> projektre van referencia, aminek már van (közvetett) <code>OpenTracing</code>  függése, a .NET Core 3.0 esetében ez már elég a megfelelő működéshez.</p>
+<p><strong>Feladat</strong>: a <code>Catalog</code> szolgáltatás <code>ProductController</code> osztályban a repository-hoz való hozzárés előtt cache-ben való keresést szimulálunk, ezt egy <strong>új span</strong> hatókörében trace-eljük.</p>
+<ul>
+<li>A <code>ProductController</code> függőséginjektálással kap egy <code>ITracer</code> objektumot</li>
+<li>A <code>Get(int id)</code>-ban levő kódot értelmezzük<ul>
+<li>Új span létrehozása, paraméterben műveletnév</li>
+<li>Tag hozzáfűzése aktív spanhez</li>
+<li>Log esemény felvétele aktív spanhez</li>
+</ul>
+</li>
+<li>Futtasuk az alkalmazást, böngészőben egymás után kérjük le az egyes termékek adatait a <code>Test</code> szolgáltatás segítségével, a különböző kód ágak teszteléséhez:<ul>
+<li><a href="https://localhost:44385/api/test/1">https://localhost:44385/api/test/1</a>, cache hibát generál</li>
+<li><a href="https://localhost:44385/api/test/1">https://localhost:44385/api/test/1</a>, nincs cache találat</li>
+<li><a href="https://localhost:44385/api/test/1">https://localhost:44385/api/test/1</a>, van cache találat</li>
+</ul>
+</li>
+<li>A Jaeger UI segítségével vizsgáljuk meg a három trace-t</li>
+</ul>
+<h4 id="baggage-hasznalata-instr_baggage">Baggage használata (##Instr_Baggage)<a class="headerlink" href="#baggage-hasznalata-instr_baggage" title="Permanent link">&para;</a></h4>
+<p>A <code>Catalog</code> szolgáltatás <code>ProductRepositor</code>y osztályban írjuk ki a felhasználónevet és kérést azonosítót Log-ba, melyet a példánkban az <code>Order</code> szolgáltatás generál.</p>
+<p>A megoldás elve:</p>
+<ul>
+<li>Nem szennyezzük az API-t, nem vesszük fel explicit paraméterként</li>
+<li>Helyette <strong>baggage</strong>-ben továbbítjuk. Pontosabban rábízzuk az OpenTracing instrumentált HttpClient-re (az bepakolja http headerbe a baggage tartalmát).</li>
+<li>Lépések<ul>
+<li><code>OrderService.TestController</code>-t nézzük meg, itt rtörténik az aktív span baggage-ébe a kulcs-érték párok felvétele (string-string).</li>
+<li><code>CatalogService.ProductRepository</code>-t nézzük meg, itt olvassuk ki az aktív span Bbaggage-éből az értékeket. Ezeket logban hozzáírjuk az aktív span-hez. (Nagyobb értelme lenne pl. valamilyen countert/merikát nyilvántartani ez alapján).</li>
+</ul>
+</li>
+<li>Futtassuk (böngészőben <code>https://localhost:44385/api/test</code>)</li>
+<li>Jaeger UI-n a trace részletes nézetben az ablak tetején a keresőbe írjuk be: <code>Msa.Comm.Lab.Services.Catalog.Controllers.ProductController/Get</code>. A sárgával kiement spant nyissuk le, kb. a 10. logbejegyzés a <code>ProductRepository.GetProducts is executed</code>, látjuk a <code>username</code> és <code>requestid</code> kulcsokat és azok értékét.</li>
+</ul>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+
+<!-- Application footer -->
+<footer class="md-footer">
+
+  <!-- Further information -->
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+
+      <!-- Copyright and theme information -->
+      <div class="md-footer-copyright">
+        
+        <div class="md-footer-copyright__highlight">
+          Copyright &copy; BME AUT
+        </div>
+        
+      </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/vendor.a0c4167b.min.js"></script>
+      <script src="../../assets/javascripts/bundle.fb26dd1d.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "M\u00e1sol\u00e1s v\u00e1g\u00f3lapra", "clipboard.copied": "V\u00e1g\u00f3lapra m\u00e1solva", "search.config.lang": "hu", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Keres\u00e9shez \u00edrj ide valamit", "search.result.none": "Nincs tal\u00e1lat", "search.result.one": "1 egyez\u0151 dokumentum", "search.result.other": "# egyez\u0151 dokumentum"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../..",
+          features: ["tabs"],
+          search: Object.assign({
+            worker: "../../assets/javascripts/worker/search.37585f48.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>

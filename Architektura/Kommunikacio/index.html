@@ -1,0 +1,1493 @@
+
+
+
+<!doctype html>
+<html lang="hu" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <meta name="author" content="Dudás Ákos">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.1.6">
+    
+    
+      
+        <title>Kommunikáció</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.4b9ffd7b.min.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.b79bcd20.min.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#ef5350">
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../extra-material-theme.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="red" data-md-color-accent="red">
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#eloadas" class="md-skip">
+          Kihagyás
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="../.." title="BME AUT Mikroszolgáltatások és konténeralapú szoftverfejlesztés" class="md-header-nav__button md-logo" aria-label="BME AUT Mikroszolgáltatások és konténeralapú szoftverfejlesztés">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            BME AUT Mikroszolgáltatások és konténeralapú szoftverfejlesztés
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Kommunikáció
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Keresés" placeholder="Keresés" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/bmeviauav42/jegyzetek/" title="Főoldalra ugrás" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    bmeviauav42/jegyzetek
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+          
+
+  
+
+<nav class="md-tabs md-tabs--active" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href="../.." class="md-tabs__link">
+        Tárgy ismertető
+      </a>
+    
+  </li>
+
+      
+        
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../Docker/Docker-alapok/" class="md-tabs__link">
+          Docker
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../AdatbazisApiGateway/" class="md-tabs__link md-tabs__link--active">
+          Architektúra
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../DevOps/Nyomkovetes/" class="md-tabs__link">
+          DevOps
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../Kubernetes/Kubernetes-alapok/" class="md-tabs__link">
+          Kubernetes
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../Serverless/serverless/" class="md-tabs__link">
+          Serverless
+        </a>
+      
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="BME AUT Mikroszolgáltatások és konténeralapú szoftverfejlesztés" class="md-nav__button md-logo" aria-label="BME AUT Mikroszolgáltatások és konténeralapú szoftverfejlesztés">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    BME AUT Mikroszolgáltatások és konténeralapú szoftverfejlesztés
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/bmeviauav42/jegyzetek/" title="Főoldalra ugrás" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    bmeviauav42/jegyzetek
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Tárgy ismertető" class="md-nav__link">
+      Tárgy ismertető
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../hazi-feladat/" title="Házi feladat leírása és megszerezhető pontok" class="md-nav__link">
+      Házi feladat leírása és megszerezhető pontok
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Docker
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Docker" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Docker
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Docker/Docker-alapok/" title="Docker alapok" class="md-nav__link">
+      Docker alapok
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Docker/Dockerfile-compose/" title="Dockerfile és docker-compose" class="md-nav__link">
+      Dockerfile és docker-compose
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
+    
+    <label class="md-nav__link" for="nav-4">
+      Architektúra
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Architektúra" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Architektúra
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../AdatbazisApiGateway/" title="Adattárolás és Api Gateway" class="md-nav__link">
+      Adattárolás és Api Gateway
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Kommunikáció
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9h14V7H3v2m0 4h14v-2H3v2m0 4h14v-2H3v2m16 0h2v-2h-2v2m0-10v2h2V7h-2m0 6h2v-2h-2v2z"/></svg>
+        </span>
+      </label>
+    
+    <a href="./" title="Kommunikáció" class="md-nav__link md-nav__link--active">
+      Kommunikáció
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Tartalomjegyzék">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Tartalomjegyzék
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#eloadas" class="md-nav__link">
+    Előadás
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cel" class="md-nav__link">
+    Cél
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#elokovetelmenyek" class="md-nav__link">
+    Előkövetelmények
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rest-webszolgaltatasok-keszitese" class="md-nav__link">
+    REST webszolgáltatások készítése
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hibaturo-kommunikacios-modszerek" class="md-nav__link">
+    Hibatűrő kommunikációs módszerek
+  </a>
+  
+    <nav class="md-nav" aria-label="Hibatűrő kommunikációs módszerek">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#kiindulo-projekt-attekintese" class="md-nav__link">
+    Kiinduló projekt áttekintése
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#polly-hasznalata" class="md-nav__link">
+    Polly használata
+  </a>
+  
+    <nav class="md-nav" aria-label="Polly használata">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#egyszeru-retry" class="md-nav__link">
+    Egyszerű Retry
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exponencialisan-novekvo-retry-idokoz" class="md-nav__link">
+    Exponenciálisan növekvő Retry időköz
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tobb-policy-hasznalata" class="md-nav__link">
+    Több Policy használata
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aszinkron-kommunikacio-rabbitmq-val" class="md-nav__link">
+    Aszinkron kommunikáció RabbitMQ-val
+  </a>
+  
+    <nav class="md-nav" aria-label="Aszinkron kommunikáció RabbitMQ-val">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rabbitmq-beuzemelese" class="md-nav__link">
+    RabbitMQ beüzemelése
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integracios-esemeny" class="md-nav__link">
+    Integrációs esemény
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#masstransit-hasznalata" class="md-nav__link">
+    MassTransit használata
+  </a>
+  
+    <nav class="md-nav" aria-label="MassTransit használata">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#kuldo-oldal" class="md-nav__link">
+    Küldő oldal
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fogado-oldal" class="md-nav__link">
+    Fogadó oldal
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contract-first-api-keszites-grpc" class="md-nav__link">
+    Contract-First API készítés - gRPC
+  </a>
+  
+    <nav class="md-nav" aria-label="Contract-First API készítés - gRPC">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#szerver-oldal" class="md-nav__link">
+    Szerver oldal
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kliens-oldal" class="md-nav__link">
+    Kliens oldal
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#osszefoglalas" class="md-nav__link">
+    Összefoglalás
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      DevOps
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="DevOps" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        DevOps
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../DevOps/Nyomkovetes/" title="Elosztott nyomkövetés" class="md-nav__link">
+      Elosztott nyomkövetés
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../DevOps/Logging-Health-Checks/" title="Naplózás, health check" class="md-nav__link">
+      Naplózás, health check
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      Kubernetes
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Kubernetes" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Kubernetes
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Kubernetes/Kubernetes-alapok/" title="Kubernetes alapok" class="md-nav__link">
+      Kubernetes alapok
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Kubernetes/Kubernetes-alkalmazas-telepites/" title="Alkalmazás telepítése Kubernetes klaszterbe" class="md-nav__link">
+      Alkalmazás telepítése Kubernetes klaszterbe
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../AKS/aks/" title="K8S DevOps Azure DevOps-ban és Azure Kubernetes Service-szel" class="md-nav__link">
+      K8S DevOps Azure DevOps-ban és Azure Kubernetes Service-szel
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      Serverless
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Serverless" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Serverless
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Serverless/serverless/" title="Mikroszolgáltatások serverless architektúra fölött" class="md-nav__link">
+      Mikroszolgáltatások serverless architektúra fölött
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Tartalomjegyzék">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Tartalomjegyzék
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#eloadas" class="md-nav__link">
+    Előadás
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cel" class="md-nav__link">
+    Cél
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#elokovetelmenyek" class="md-nav__link">
+    Előkövetelmények
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rest-webszolgaltatasok-keszitese" class="md-nav__link">
+    REST webszolgáltatások készítése
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hibaturo-kommunikacios-modszerek" class="md-nav__link">
+    Hibatűrő kommunikációs módszerek
+  </a>
+  
+    <nav class="md-nav" aria-label="Hibatűrő kommunikációs módszerek">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#kiindulo-projekt-attekintese" class="md-nav__link">
+    Kiinduló projekt áttekintése
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#polly-hasznalata" class="md-nav__link">
+    Polly használata
+  </a>
+  
+    <nav class="md-nav" aria-label="Polly használata">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#egyszeru-retry" class="md-nav__link">
+    Egyszerű Retry
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exponencialisan-novekvo-retry-idokoz" class="md-nav__link">
+    Exponenciálisan növekvő Retry időköz
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tobb-policy-hasznalata" class="md-nav__link">
+    Több Policy használata
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aszinkron-kommunikacio-rabbitmq-val" class="md-nav__link">
+    Aszinkron kommunikáció RabbitMQ-val
+  </a>
+  
+    <nav class="md-nav" aria-label="Aszinkron kommunikáció RabbitMQ-val">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rabbitmq-beuzemelese" class="md-nav__link">
+    RabbitMQ beüzemelése
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integracios-esemeny" class="md-nav__link">
+    Integrációs esemény
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#masstransit-hasznalata" class="md-nav__link">
+    MassTransit használata
+  </a>
+  
+    <nav class="md-nav" aria-label="MassTransit használata">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#kuldo-oldal" class="md-nav__link">
+    Küldő oldal
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fogado-oldal" class="md-nav__link">
+    Fogadó oldal
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contract-first-api-keszites-grpc" class="md-nav__link">
+    Contract-First API készítés - gRPC
+  </a>
+  
+    <nav class="md-nav" aria-label="Contract-First API készítés - gRPC">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#szerver-oldal" class="md-nav__link">
+    Szerver oldal
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kliens-oldal" class="md-nav__link">
+    Kliens oldal
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#osszefoglalas" class="md-nav__link">
+    Összefoglalás
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/bmeviauav42/jegyzetek/edit/master/docs/Architektura/Kommunikacio.md" title="Oldal szerkesztése" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                  
+                
+                
+                  <h1>Kommunikáció</h1>
+                
+                <h2 id="eloadas">Előadás<a class="headerlink" href="#eloadas" title="Permanent link">&para;</a></h2>
+<p><a href="https://www.aut.bme.hu/Upload/Course/VIAUAV42/hallgatoi_jegyzetek/Kommunik%c3%a1ci%c3%b3s%20lehet%c5%91s%c3%a9gek.pdf">Kommunikációs lehetőségek</a></p>
+<h2 id="cel">Cél<a class="headerlink" href="#cel" title="Permanent link">&para;</a></h2>
+<p>A laborfeladatok célja a mikroszolgáltatások fejlesztése során leggyakrabban felmerülő megoldások alapszintű gyakorlása.</p>
+<h2 id="elokovetelmenyek">Előkövetelmények<a class="headerlink" href="#elokovetelmenyek" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Docker Desktop</li>
+<li>Visual Studio 2019<ul>
+<li>min v16.3 (gRPC miatt)</li>
+<li>ASP.NET Core 3.0 SDK (gRPC miatt)</li>
+</ul>
+</li>
+<li>Kiinduló projekt: <a href="https://github.com/bmeviauav42/komm-kiindulo">https://github.com/bmeviauav42/komm-kiindulo</a></li>
+<li>Postman vagy Fiddler</li>
+</ul>
+<h2 id="rest-webszolgaltatasok-keszitese">REST webszolgáltatások készítése<a class="headerlink" href="#rest-webszolgaltatasok-keszitese" title="Permanent link">&para;</a></h2>
+<p>A labor külön nem tér ki a REST szerű webszolgáltatások készítésének módszereire, arra a szakirányos képzés és a Szoftverfejlesztés .NET platformra című választható tárgy ASP.NET Core anyaga az ajánlott irodalom.</p>
+<h2 id="hibaturo-kommunikacios-modszerek">Hibatűrő kommunikációs módszerek<a class="headerlink" href="#hibaturo-kommunikacios-modszerek" title="Permanent link">&para;</a></h2>
+<p>Az előadáson tárgyalt tervezési minták nem csak a kommunikáció implementációja során hasznos, hanem bármilyen olyan komponens hívása során, ami nem várt tranziens hibajelenséget produkálhat. Tény, hogy leggyakrabban egy távoli hívás kommunikációja során történhet ilyen, így ott mindenképpen érdemes a hibatűrést valamilyen módon megvalósítani.</p>
+<p>A laborfeladat során két ASP.NET Core mikroszolgáltatás közötti REST-es kommunikációt szeretnénk hibatűrőbbé tenni. Ehhez a Polly osztálykönyvtárat hívjuk segítségül, ami a leggyakoribb mintákat valósítja meg, nekünk csak felkonfigurálnunk kell. Az egyszerűség kedvéért most a Retry mintát valósítsuk meg.</p>
+<h3 id="kiindulo-projekt-attekintese">Kiinduló projekt áttekintése<a class="headerlink" href="#kiindulo-projekt-attekintese" title="Permanent link">&para;</a></h3>
+<p>Klónozzuk le a kiinduló projektet, és nyissuk meg a solutiont Visual Studio-val.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Fontos, hogy ne legyen az elérési útban speciális (és ékezetes) karakter, különben nem tud a VS a docker-compose-hoz Debuggerrel csatlakozni.</p>
+</div>
+<div class="highlight"><pre><span></span><code>mkdir c:\munka\[neptun]\MSA\komm
+cd c:\munka\[neptun]\MSA\komm
+git clone https://github.com/bmeviauav42/komm-kiindulo
+</code></pre></div>
+
+<p>A <code>master</code> branchen található a kiinduló, míg a megoldások külön branchre kerültek fel, ha valamelyik részfeladatnál lemaradtál volna.</p>
+<p>Mind a két projekt már Dockerizált (Projekten jobb gomb / Add / Docker support), a teljes solutionhöz pedig tartozik egy Docker Compose leíró (Projekteken jobb gomb / Add / Docker Orchestrator support / Docker Compose), amit egyben a futtatandó projekt is.</p>
+<p>Két ASP.NET Core projektünk van, nézzük meg jobban őket:</p>
+<ul>
+<li><code>Catalog</code>: REST API, törekedve az egyszerűségre, hogy a labort ne ezzel bonyolítsuk el.<ul>
+<li><code>ProductController</code><ul>
+<li><code>Get()</code>: <code>Product</code> listával tér vissza, az egyszerűség kedvéért az adatok egy statikus listában vannak</li>
+<li><code>Get(int id)</code>: Egy adott azonosítóval rendelkező terméket ad vissza a listából</li>
+<li>A listás <code>Get()</code> kérés véletlenszerűen hibával (503-as hibakóddal) tér vissza. Ezzel szimuláljuk a szolgáltatás esetleges kimaradását.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>Order</code>: szintén egy egyszerű REST-es webszolgáltatás, most csak tesztelés céljából<ul>
+<li><code>ApiClients/ICatalogApiClient</code><ul>
+<li><a href="https://github.com/reactiveui/refit">Refit</a> alapú erősen típusos HTTP kliens szolgáltatás<ul>
+<li>Refit könyvtár azért is jó, mert elég csak az interfészt megírni a hívások metaadataival felattributálva, és az implementácót a Refit legenerálja a háttérben.</li>
+<li>(Persze egy contract-first megközelítést is választhattunk volna, de most ne ezzel bonyolítsuk a labort)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>Startup</code><ul>
+<li>A Refit klienst beregisztráljuk a DI konténerbe az <code>AddRefitClient</code> hívással, ahol megadjuk a távoli szolgáltatás base URL-jét is. </li>
+<li>Az  <code>AddRefitClient</code> hívás az <code>IHttpClientFactory</code> mintára épül: modern .NET alkalmazásokban már ez az ajánlott módszer, és nem a <code>HttpClient</code> kézi megpéldányosítása. <a href="https://docs.microsoft.com/en-us/aspnet/core/fundamentals/http-requests?view=aspnetcore-3.0">https://docs.microsoft.com/en-us/aspnet/core/fundamentals/http-requests?view=aspnetcore-3.0</a></li>
+<li>Ez azért is jó, mert a <a href="https://github.com/App-vNext/Polly">Polly</a> könyvtár egyszerűen tud ide integrálódni.</li>
+</ul>
+</li>
+<li><code>TestController</code><ul>
+<li>Csak a tesztelés céljából létrehozott végpontokat tartalmaz, amin keresztül az áthívást tudjuk majd tesztelni</li>
+<li>DI-ból elkérjük az <code>ICatalogApiClient</code> objektumot és azon keresztül áthívunk a távoli szolgáltatásba, majd nagyon egyszerűen annak az eredményével térünk vissza.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>docker-compose</code><ul>
+<li>Figyeljük meg, hogy az <code>order</code> konténer függ a <code>catalog</code> konténertől (<code>depends_on</code>). Ez azért fontos, hogy közöttük felépüljön a hálózati kapcsolat</li>
+<li>Ha visszatekintünk az <code>Order</code> szolgáltatás <code>Startup</code> osztályára, akkor láthatjuk, hogy a szolgáltatás nevével hivatkozunk a másik konténerre. <ul>
+<li>Ha ez nem tetszik, akkor a docker-compose fájlban a hostnevet felül is lehet definiálni.</li>
+<li>Azt is megfigyelhetjük, hogy nem a localhostra kiajánlott portot kell használjuk, hanem egymás felé a tényleges portok vannak nyitva a konténereken. (80, 443).</li>
+<li>Most HTTP-t használjunk, hogy egyrészt a tanusítványokkal ne kelljen foglalkozzunk, illetve a docker-compose-on belül lévő kommunikáció esetében nem ördögtől való a sima https sem.</li>
+<li>Ha valamilyen összetettebb orchesztrátort használunk, akkor érdemes nem beégetni ezeket a hostneveket, hanem konfigurációból várni azokat. (most ezt nem nézzük meg)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>Próbáljuk futtatni a projekteket! Vizsgáljuk meg az elérhető hívás viselkedését! Azt tapasztaljuk, hogy a Catalog <code>Get()</code> kérése (<code>api/Product</code>) és így az Order <code>Get()</code> kérése is (<code>api/test</code>) véletlenszerűen elszáll. </p>
+<h3 id="polly-hasznalata">Polly használata<a class="headerlink" href="#polly-hasznalata" title="Permanent link">&para;</a></h3>
+<p>Vegyük fel az Order projektbe az alábbi NuGet csomagot. Ez függőségként behúzza a <a href="https://github.com/App-vNext/Polly">Polly</a>-t is, és támogatást ad az <code>IHttpClientFactory</code>val történő integrációra.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;PackageReference</span> <span class="na">Include=</span><span class="s">&quot;Microsoft.Extensions.Http.Polly&quot;</span> <span class="na">Version=</span><span class="s">&quot;2.2.0&quot;</span> <span class="nt">/&gt;</span>
+</code></pre></div>
+
+<h4 id="egyszeru-retry">Egyszerű Retry<a class="headerlink" href="#egyszeru-retry" title="Permanent link">&para;</a></h4>
+<p>A Startup osztályba adjuk hozzá a Retry policy-t az <code>IHttpClientFactory</code>-hoz. Állítsuk be, hogy a kapcsolódási hibák és az általunk tranziens hibáknak vélt státuszkódok esetén próbálkozzon újra 5x.</p>
+<div class="highlight"><pre><span></span><code><span class="kt">bool</span> <span class="nf">RetryableStatusCodesPredicate</span><span class="p">(</span><span class="n">HttpStatusCode</span> <span class="n">statusCode</span><span class="p">)</span> <span class="p">=&gt;</span>
+    <span class="n">statusCode</span> <span class="p">==</span> <span class="n">HttpStatusCode</span><span class="p">.</span><span class="n">BadGateway</span>
+        <span class="p">||</span> <span class="n">statusCode</span> <span class="p">==</span> <span class="n">HttpStatusCode</span><span class="p">.</span><span class="n">ServiceUnavailable</span>
+        <span class="p">||</span> <span class="n">statusCode</span> <span class="p">==</span> <span class="n">HttpStatusCode</span><span class="p">.</span><span class="n">GatewayTimeout</span><span class="p">;</span>
+
+<span class="n">services</span><span class="p">.</span><span class="n">AddRefitClient</span><span class="p">&lt;</span><span class="n">ICatalogApiClient</span><span class="p">&gt;()</span>
+    <span class="p">.</span><span class="n">ConfigureHttpClient</span><span class="p">(</span><span class="n">c</span> <span class="p">=&gt;</span> <span class="n">c</span><span class="p">.</span><span class="n">BaseAddress</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Uri</span><span class="p">(</span><span class="s">&quot;http://msa.comm.lab.services.catalog&quot;</span><span class="p">))</span>
+    <span class="p">.</span><span class="n">AddPolicyHandler</span><span class="p">(</span><span class="n">Policy</span>
+        <span class="p">.</span><span class="n">Handle</span><span class="p">&lt;</span><span class="n">HttpRequestException</span><span class="p">&gt;()</span>
+        <span class="p">.</span><span class="n">OrResult</span><span class="p">&lt;</span><span class="n">HttpResponseMessage</span><span class="p">&gt;(</span><span class="n">msg</span> <span class="p">=&gt;</span> <span class="n">RetryableStatusCodesPredicate</span><span class="p">(</span><span class="n">msg</span><span class="p">.</span><span class="n">StatusCode</span><span class="p">))</span>
+        <span class="p">.</span><span class="n">RetryAsync</span><span class="p">(</span><span class="m">5</span><span class="p">)</span>
+    <span class="p">);</span>
+</code></pre></div>
+
+<p>Próbáljuk ki! Tapasztalatunk szerint szinte megszűntek a hibák.</p>
+<p>Ez a Policy gyakorlatilag beépül a <code>HttpClient</code> Handler Pipeline-jába, így a hívó számára transzparens lesz az újrapróbálkozási logika. Viszont éredemes odafigyelni a <code>HttpClient</code> <code>Timeout</code>jára is, mert az újrapróbálkozások során így az nem indul újra.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A Polly-t nem csak <code>HttpClient</code>-tel lehet használni, hanem tetszőleges kódban: össze lehet rakni egy Policy láncot, és abba beburkolni a kívánt hívást. A Policy-ket akár karbantarthatjuk a DI konténerben is.</p>
+</div>
+<h4 id="exponencialisan-novekvo-retry-idokoz">Exponenciálisan növekvő Retry időköz<a class="headerlink" href="#exponencialisan-novekvo-retry-idokoz" title="Permanent link">&para;</a></h4>
+<p>Azonnali Retry helyett várjunk egy kicsit az újrapróbálkozások között, mégpedig exponenciálisan egyre többet.</p>
+<div class="highlight"><pre><span></span><code>    <span class="c1">//.RetryAsync(5)</span>
+    <span class="p">.</span><span class="n">WaitAndRetryAsync</span><span class="p">(</span><span class="m">5</span><span class="p">,</span> <span class="n">retryAttempt</span> <span class="p">=&gt;</span> <span class="n">TimeSpan</span><span class="p">.</span><span class="n">FromSeconds</span><span class="p">(</span><span class="n">Math</span><span class="p">.</span><span class="n">Pow</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="n">retryAttempt</span><span class="p">)))</span>
+</code></pre></div>
+
+<p>Próbáljuk ki!</p>
+<h4 id="tobb-policy-hasznalata">Több Policy használata<a class="headerlink" href="#tobb-policy-hasznalata" title="Permanent link">&para;</a></h4>
+<p>Most laboron nem nézünk példát több Policy használatára, de szóbajöhetne még a Timeout, a Circuit breaker, Cache vagy akár a Fallback policy <a href="https://github.com/App-vNext/Polly/blob/master/README.md">is</a>. Az előadás anyagban találtok egy összetettebb szekvencia diagrammot, az ajánlott összetételről.</p>
+<h2 id="aszinkron-kommunikacio-rabbitmq-val">Aszinkron kommunikáció RabbitMQ-val<a class="headerlink" href="#aszinkron-kommunikacio-rabbitmq-val" title="Permanent link">&para;</a></h2>
+<p>A laboron egy esemény alapú aszinkron kommunikációt valósítunk meg. Az Order szolgáltatás fog publikálni egy <code>OrderCreated</code> integrációs eseményt, amit egy üzenetsorba rak. Erre tetszőleges szolgáltatás feliratkozhat és reagálhat rá. Esetünkben a Catalog szolgáltatás fogja a megrendelt termék raktárkészletét csökkenteni. Most az egyszerűség kedvéért ne foglalkozzunk az idempotens megvalósítással.</p>
+<p>Az aszinkron kommunikációt most RabbitMQ-n keresztül valósítjuk meg, és a MassTransit osztálykönyvtár segítségével fedjük el, hogy ne kelljen az akacsonyszintű implementációval foglalkoznunk.</p>
+<h3 id="rabbitmq-beuzemelese">RabbitMQ beüzemelése<a class="headerlink" href="#rabbitmq-beuzemelese" title="Permanent link">&para;</a></h3>
+<p>A docker-compose konfigurációnkba vegyünk fel egy RabbitMQ image alapú konténert.</p>
+<div class="highlight"><pre><span></span><code>  <span class="nt">rabbitmq</span><span class="p">:</span>
+    <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">rabbitmq:3-management</span>
+    <span class="nt">ports</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="s">&quot;5672:5672&quot;</span>
+      <span class="p p-Indicator">-</span> <span class="s">&quot;15672:15672&quot;</span>
+    <span class="nt">container_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">rabbitmq</span>
+    <span class="nt">hostname</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">rabbitmq</span>
+</code></pre></div>
+
+<p>A RabbitMQ funkcióit a 5672 porton érjük el, míg a 15672-n az admin felületet nézhetjük meg.<br />
+Alapértelmezett felhasználónév: <strong>guest</strong>  jelszó: <strong>guest</strong></p>
+<p>Adjuk meg, a másik két service esetében a rabbitmq-tól való függést.</p>
+<div class="highlight"><pre><span></span><code>  <span class="nt">msa.comm.lab.services.catalog</span><span class="p">:</span>
+    <span class="c1"># ...</span>
+    <span class="nt">depends_on</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">rabbitmq</span>
+
+  <span class="nt">msa.comm.lab.services.order</span><span class="p">:</span>
+    <span class="c1"># ...</span>
+    <span class="nt">depends_on</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">msa.comm.lab.services.catalog</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">rabbitmq</span>
+</code></pre></div>
+
+<h3 id="integracios-esemeny">Integrációs esemény<a class="headerlink" href="#integracios-esemeny" title="Permanent link">&para;</a></h3>
+<p>Hozzunk létre egy új .NET Standard projektet <code>Msa.Comm.Lab.Events</code> néven, ami lényegében a kommunikáció contractja lesz. Ebbe vegyünk fel egy interfészt <code>IOrderCreatedEvent</code> néven az alábbi tartalommal. Ez fog majd utazni az üzenetsorban.</p>
+<div class="highlight"><pre><span></span><code><span class="k">public</span> <span class="k">interface</span> <span class="n">IOrderCreatedEvent</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">ProductId</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="p">}</span>
+    <span class="n">DateTimeOffset</span> <span class="n">OrderPlaced</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="p">}</span>
+    <span class="kt">int</span> <span class="n">Quantity</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>Az Order projektben adjunk referenciát az előzőleg létrehozott projektre.</p>
+<p>Hozzunk létre egy <code>IntegrationEvents</code> mappát az Order projektben, majd abba implementáljuk egy osztályba az <code>IOrderCreatedEvent</code> interfészt.</p>
+<div class="highlight"><pre><span></span><code><span class="k">public</span> <span class="k">class</span> <span class="nc">OrderCreatedEvent</span> <span class="p">:</span> <span class="n">IOrderCreatedEvent</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="kt">int</span> <span class="n">ProductId</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+    <span class="k">public</span> <span class="n">DateTimeOffset</span> <span class="n">OrderPlaced</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+    <span class="k">public</span> <span class="kt">int</span> <span class="n">Quantity</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>Ismételjük meg ezt a Catalog szolgáltatásban is.</p>
+<h3 id="masstransit-hasznalata">MassTransit használata<a class="headerlink" href="#masstransit-hasznalata" title="Permanent link">&para;</a></h3>
+<h4 id="kuldo-oldal">Küldő oldal<a class="headerlink" href="#kuldo-oldal" title="Permanent link">&para;</a></h4>
+<p>Kezdjük a a küldő oldallal. Vegyük fel az Order szolgáltatásba a következő NuGet csomagokat.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;PackageReference</span> <span class="na">Include=</span><span class="s">&quot;MassTransit.Extensions.DependencyInjection&quot;</span> <span class="na">Version=</span><span class="s">&quot;5.5.5&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;PackageReference</span> <span class="na">Include=</span><span class="s">&quot;MassTransit.Extensions.Logging&quot;</span> <span class="na">Version=</span><span class="s">&quot;5.5.5&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;PackageReference</span> <span class="na">Include=</span><span class="s">&quot;MassTransit.RabbitMQ&quot;</span> <span class="na">Version=</span><span class="s">&quot;5.5.5&quot;</span> <span class="nt">/&gt;</span>
+</code></pre></div>
+
+<p>Konfiguráljuk be a <code>Startup</code> osztályban a MassTransit-ot, hogy RabbitMQ-t használjon, adjuk meg a logolás módját, és hogy melyik üzenetsorba rakja az <code>IOrderCreatedEvent</code> eseményünket.</p>
+<div class="highlight"><pre><span></span><code><span class="n">services</span><span class="p">.</span><span class="n">AddMassTransit</span><span class="p">(</span><span class="n">x</span> <span class="p">=&gt;</span>
+<span class="p">{</span>
+    <span class="n">x</span><span class="p">.</span><span class="n">AddBus</span><span class="p">(</span><span class="n">provider</span> <span class="p">=&gt;</span>
+        <span class="n">Bus</span><span class="p">.</span><span class="n">Factory</span><span class="p">.</span><span class="n">CreateUsingRabbitMq</span><span class="p">(</span><span class="n">cfg</span> <span class="p">=&gt;</span>
+        <span class="p">{</span>
+            <span class="n">cfg</span><span class="p">.</span><span class="n">Host</span><span class="p">(</span><span class="k">new</span> <span class="n">Uri</span><span class="p">(</span><span class="err">$</span><span class="s">&quot;rabbitmq://rabbitmq:/&quot;</span><span class="p">),</span>
+                <span class="n">hostConfig</span> <span class="p">=&gt;</span>
+                <span class="p">{</span>
+                    <span class="n">hostConfig</span><span class="p">.</span><span class="n">Username</span><span class="p">(</span><span class="s">&quot;guest&quot;</span><span class="p">);</span>
+                    <span class="n">hostConfig</span><span class="p">.</span><span class="n">Password</span><span class="p">(</span><span class="s">&quot;guest&quot;</span><span class="p">);</span>
+                <span class="p">});</span>
+            <span class="n">cfg</span><span class="p">.</span><span class="n">UseExtensionsLogging</span><span class="p">(</span><span class="n">provider</span><span class="p">.</span><span class="n">GetRequiredService</span><span class="p">&lt;</span><span class="n">ILoggerFactory</span><span class="p">&gt;());</span>
+        <span class="p">}));</span>
+
+    <span class="n">EndpointConvention</span><span class="p">.</span><span class="n">Map</span><span class="p">&lt;</span><span class="n">IOrderCreatedEvent</span><span class="p">&gt;(</span><span class="k">new</span> <span class="n">Uri</span><span class="p">(</span><span class="s">&quot;rabbitmq://rabbitmq:/integration&quot;</span><span class="p">));</span>
+<span class="p">});</span>
+</code></pre></div>
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Itt is érdemesebb lenne a rabbitmq hosztnevet és a bejelentkezési adatokat konfigurációból nyerni.</p>
+</div>
+<p>Süssük el az eseményt a <code>TestController</code>ben. Kérjük el az <code>IBusControl</code> objektumot, és azon hívjuk meg a <code>Publish</code> metódust. MassTransit esetében a <code>Publish</code> süti el a broadcast szerű eseményeket, míg a <code>Send</code> inkább a command típusú üzenetekre van kihegyezve.</p>
+<div class="highlight"><pre><span></span><code><span class="k">private</span> <span class="k">readonly</span> <span class="n">ICatalogApiClient</span> <span class="n">_catalogApiClient</span><span class="p">;</span>
+<span class="k">private</span> <span class="k">readonly</span> <span class="n">IBusControl</span> <span class="n">_bus</span><span class="p">;</span>
+
+<span class="k">public</span> <span class="nf">TestController</span><span class="p">(</span><span class="n">ICatalogApiClient</span> <span class="n">catalogApiClient</span><span class="p">,</span> <span class="n">IBusControl</span> <span class="n">bus</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">_catalogApiClient</span> <span class="p">=</span> <span class="n">catalogApiClient</span><span class="p">;</span>
+    <span class="n">_bus</span> <span class="p">=</span> <span class="n">bus</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// ...</span>
+
+<span class="na">[HttpPost(&quot;[action]</span><span class="s">&quot;)]</span>
+<span class="k">public</span> <span class="k">async</span> <span class="n">Task</span><span class="p">&lt;</span><span class="n">ActionResult</span><span class="p">&gt;</span> <span class="n">CreateOrder</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">await</span> <span class="n">_bus</span><span class="p">.</span><span class="n">Publish</span><span class="p">(</span><span class="k">new</span> <span class="n">OrderCreatedEvent</span> 
+    <span class="p">{</span>
+        <span class="n">ProductId</span> <span class="p">=</span> <span class="m">1</span><span class="p">,</span>
+        <span class="n">Quantity</span> <span class="p">=</span> <span class="m">1</span><span class="p">,</span>
+        <span class="n">OrderPlaced</span> <span class="p">=</span> <span class="n">DateTimeOffset</span><span class="p">.</span><span class="n">UtcNow</span>
+    <span class="p">});</span>
+
+    <span class="k">return</span> <span class="nf">Ok</span><span class="p">(</span><span class="k">new</span> <span class="p">{</span> <span class="n">Message</span> <span class="p">=</span> <span class="s">&quot;Megrendelés sikeres!&quot;</span> <span class="p">});</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h4 id="fogado-oldal">Fogadó oldal<a class="headerlink" href="#fogado-oldal" title="Permanent link">&para;</a></h4>
+<p>Térjünk át a fogadó oldalra. A Catalog szolgáltatás projektbe vegyük fel szintén az alábbi NuGet csomagokat.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;PackageReference</span> <span class="na">Include=</span><span class="s">&quot;MassTransit.Extensions.DependencyInjection&quot;</span> <span class="na">Version=</span><span class="s">&quot;5.5.5&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;PackageReference</span> <span class="na">Include=</span><span class="s">&quot;MassTransit.Extensions.Logging&quot;</span> <span class="na">Version=</span><span class="s">&quot;5.5.5&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;PackageReference</span> <span class="na">Include=</span><span class="s">&quot;MassTransit.RabbitMQ&quot;</span> <span class="na">Version=</span><span class="s">&quot;5.5.5&quot;</span> <span class="nt">/&gt;</span>
+</code></pre></div>
+
+<p>Szükségünk lesz egy az eseményt lekezelő osztályra is, aminek MassTransit esetben az <code>IConsumer&lt;T&gt;</code> interfészt kell megvalósítania.</p>
+<p>Vegyünk fel a Catalog projektbe egy <code>IntegrationEventHandlers</code> mappát, majd abba hozzunk létre egy új osztályt <code>OrderCreatedEventHandler</code> néven az alábbi tartommal. Itt csak a kapott adatok alapján frissítsük az adatainkat: a mi Móricka példánkban a <code>ProductController</code>ben lévő statikus listán dolgozunk.</p>
+<div class="highlight"><pre><span></span><code><span class="k">public</span> <span class="k">class</span> <span class="nc">OrderCreatedEventHandler</span> <span class="p">:</span> <span class="n">IConsumer</span><span class="p">&lt;</span><span class="n">IOrderCreatedEvent</span><span class="p">&gt;</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="n">Task</span> <span class="nf">Consume</span><span class="p">(</span><span class="n">ConsumeContext</span><span class="p">&lt;</span><span class="n">IOrderCreatedEvent</span><span class="p">&gt;</span> <span class="n">context</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kt">var</span> <span class="n">product</span> <span class="p">=</span> <span class="n">ProductController</span><span class="p">.</span><span class="n">Products</span>
+            <span class="p">.</span><span class="n">SingleOrDefault</span><span class="p">(</span><span class="n">p</span> <span class="p">=&gt;</span> <span class="n">p</span><span class="p">.</span><span class="n">ProductId</span> <span class="p">==</span> <span class="n">context</span><span class="p">.</span><span class="n">Message</span><span class="p">.</span><span class="n">ProductId</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">product</span> <span class="p">!=</span> <span class="k">null</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">product</span><span class="p">.</span><span class="n">Stock</span> <span class="p">-=</span> <span class="n">context</span><span class="p">.</span><span class="n">Message</span><span class="p">.</span><span class="n">Quantity</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="n">Task</span><span class="p">.</span><span class="n">CompletedTask</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>Konfiguráljuk be a <code>Startup</code>-ban a MassTransit-ot, hogy RabbitMQ-t használjon, adjuk meg a logolás módját, illetve hogy melyik üzenetsorból várja az <code>IOrderCreatedEvent</code> eseményünket, és azt melyik <code>IConsumer</code> megvalósítás kezelje le. </p>
+<div class="highlight"><pre><span></span><code><span class="n">services</span><span class="p">.</span><span class="n">AddMassTransit</span><span class="p">(</span><span class="n">x</span> <span class="p">=&gt;</span>
+<span class="p">{</span>
+    <span class="n">x</span><span class="p">.</span><span class="n">AddConsumer</span><span class="p">&lt;</span><span class="n">OrderCreatedEventHandler</span><span class="p">&gt;();</span>
+    <span class="n">x</span><span class="p">.</span><span class="n">AddBus</span><span class="p">(</span><span class="n">provider</span> <span class="p">=&gt;</span> <span class="n">Bus</span><span class="p">.</span><span class="n">Factory</span><span class="p">.</span><span class="n">CreateUsingRabbitMq</span><span class="p">(</span><span class="n">cfg</span> <span class="p">=&gt;</span>
+    <span class="p">{</span>
+        <span class="kt">var</span> <span class="n">host</span> <span class="p">=</span> <span class="n">cfg</span><span class="p">.</span><span class="n">Host</span><span class="p">(</span><span class="k">new</span> <span class="n">Uri</span><span class="p">(</span><span class="err">$</span><span class="s">&quot;rabbitmq://rabbitmq:&quot;</span><span class="p">),</span> <span class="n">hostConfig</span> <span class="p">=&gt;</span>
+        <span class="p">{</span>
+            <span class="n">hostConfig</span><span class="p">.</span><span class="n">Username</span><span class="p">(</span><span class="s">&quot;guest&quot;</span><span class="p">);</span>
+            <span class="n">hostConfig</span><span class="p">.</span><span class="n">Password</span><span class="p">(</span><span class="s">&quot;guest&quot;</span><span class="p">);</span>
+        <span class="p">});</span>
+        <span class="n">cfg</span><span class="p">.</span><span class="n">UseExtensionsLogging</span><span class="p">(</span><span class="n">provider</span><span class="p">.</span><span class="n">GetRequiredService</span><span class="p">&lt;</span><span class="n">ILoggerFactory</span><span class="p">&gt;());</span>
+        <span class="n">cfg</span><span class="p">.</span><span class="n">ReceiveEndpoint</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="s">&quot;integration&quot;</span><span class="p">,</span> <span class="n">ep</span> <span class="p">=&gt;</span>
+        <span class="p">{</span>
+            <span class="n">ep</span><span class="p">.</span><span class="n">ConfigureConsumer</span><span class="p">&lt;</span><span class="n">OrderCreatedEventHandler</span><span class="p">&gt;(</span><span class="n">provider</span><span class="p">);</span>
+        <span class="p">});</span>
+    <span class="p">}));</span>
+<span class="p">});</span>
+</code></pre></div>
+
+<p>Fogadó oldalon még szükséges elindítani egy háttérfolyamatot is, ami figyeli az üzenetsorokat. Ezt most tegyük meg a <code>Startup.Configure()</code> metódus végén.</p>
+<div class="highlight"><pre><span></span><code><span class="k">public</span> <span class="k">void</span> <span class="nf">Configure</span><span class="p">(</span>
+    <span class="n">IApplicationBuilder</span> <span class="n">app</span><span class="p">,</span>
+    <span class="n">IHostingEnvironment</span> <span class="n">env</span><span class="p">,</span>
+    <span class="n">IApplicationLifetime</span> <span class="n">lifetime</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="n">app</span><span class="p">.</span><span class="n">UseMvc</span><span class="p">();</span>
+
+    <span class="kt">var</span> <span class="n">bus</span> <span class="p">=</span> <span class="n">app</span><span class="p">.</span><span class="n">ApplicationServices</span><span class="p">.</span><span class="n">GetService</span><span class="p">&lt;</span><span class="n">IBusControl</span><span class="p">&gt;();</span>
+    <span class="kt">var</span> <span class="n">busHandle</span> <span class="p">=</span> <span class="n">TaskUtil</span><span class="p">.</span><span class="n">Await</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="n">bus</span><span class="p">.</span><span class="n">StartAsync</span><span class="p">());</span>
+    <span class="n">lifetime</span><span class="p">.</span><span class="n">ApplicationStopping</span><span class="p">.</span><span class="n">Register</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="n">busHandle</span><span class="p">.</span><span class="n">Stop</span><span class="p">());</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>Próbáljuk ki!</p>
+<ul>
+<li>Kérjük le a termékeket</li>
+<li>Süssük el fiddlerből vagy Postmanből a <code>CreateOrder</code> Actiont</li>
+<li>Nézzük meg, hogy frissült-e a termék raktárkészlete</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Ha nem frissült, akkor a logokból vagy a rabbitmq menedzsment felületéről lehet nyomozni. Ha azt tapasztaljuk hogy nem tud csatlakozni valamilyik szolgáltatás, akkor ellenőrízzük a docker-compose file-t és a connection string-eket. Ha azt tapasztaljuk, hogy <code>skipped</code> üzenetsorba kerülnek az üzenetek, akkor a küldő oldal rendben működött, de valamiért a fogadó oldal nem tudott a megadott üzenettípusra egyszer sem feliratkozni helyesen.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A fenti példában nem törődtünk az idempotens megvalósítással, ez mindig külön tervezést igényel, az üzleti logikánk függvényében, de mindenképpen érdemes a tervezés során figyelni erre.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Mi most broadcast jellegű integrációs eseményt sütöttünk el. Ne feledjünk van ennek egy másik variánsa is, amikor command szerű üzenetet küldünk egy másik szolgáltatásnak, és ott elvárjuk az esemény lefutását. Integrációs esemény során a fogadó félre van bízva, hogy mit kezd a kapott információval.</p>
+</div>
+<h2 id="contract-first-api-keszites-grpc">Contract-First API készítés - gRPC<a class="headerlink" href="#contract-first-api-keszites-grpc" title="Permanent link">&para;</a></h2>
+<p>A feladat célja kipróbálni a contract-first megkozelítést: tehát előbb az interfész leírót készítjük el egy Domain Specific Language (DSL) segítésével, majd abból generálunk kliens és szerver oldali kódot. </p>
+<p>Ezt REST-es API-val is meg tudnánk tenni a Swagger/OpenAPI leíróval, de mi most gRPC-n keresztül próváljuk ki. Feladatunkban a Catalog szolgáltatás <code>ProductController</code> két műveletét írjuk meg gRPC protokollal. Majd hívjuk meg ezeket az Order szolgáltatásból.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A gRPC csak .NET Core 3.0-tól támogatott, így érdemes a Visual Studio-t frissíteni legalább 16.3.x verzióra</p>
+</div>
+<h4 id="szerver-oldal">Szerver oldal<a class="headerlink" href="#szerver-oldal" title="Permanent link">&para;</a></h4>
+<p>Lehetőség lenne egy Projektsablonból is dolgoznunk (File / New Project / gRPC Serice), ami szintén egy ASP.NET Core 3.0-ás projekt, de most a meglévő Catalog projektünkbe rakjuk bele ezt a funkcionalitást.</p>
+<p>Vegyük fel a Catalog projektbe az alábbi NuGet csomagot. Fontos, hogy a <strong>2.23.1</strong>-es verzió legyen, mert én a 2.23.2-es verzióval belefutottam egy bugba.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;PackageReference</span> <span class="na">Include=</span><span class="s">&quot;Grpc.AspNetCore&quot;</span> <span class="na">Version=</span><span class="s">&quot;2.23.1&quot;</span> <span class="nt">/&gt;</span>
+</code></pre></div>
+
+<p>A Catalog projektbe vegyünk fel egy <code>Protos</code> mappát, és abba egy Text fájlt <code>catalog.proto</code> néven, ami a szolgáltatásleírónk lesz. Készütsünk el egy saját szolgáltatásleírót a Catalog REST API-nk mintájára. Tartalom a következő:</p>
+<ul>
+<li>Egy szolgáltatásunk lesz <code>CatalogService</code> néven</li>
+<li>A szolgáltatásban <code>rpc</code> kulcsszóval tudunk műveleteket definiálni, megadva a bemenő paramétert és a visszatérési értéket.<ul>
+<li>Ezek külön definiált <code>message</code> típusok lehetnek.</li>
+</ul>
+</li>
+<li>Az első legyen a <code>GetProducts</code><ul>
+<li>Sajnos a proto szabványban nincs <code>void</code> típusú üzenet, ezért szükséges felvennünk egy üres üzenetet <code>Empty</code> néven, ez fogja majd a <code>void</code> típust reprezentálni</li>
+<li>A visszatérési érték típusát a <code>ProductsResponse</code> üzenet írja le, amiben több <code>Product</code> típusú üzenet lesz (nevezhetnénk tömbnek is, itt <code>repeated</code> kulcsszó)</li>
+<li>Az üzenetekben meg kell adnunk a mezők sorrendjét az egyenlőség mögött a bináris sorosítás miatt</li>
+<li><code>Product</code> üzenet az eddig megszokott propertykkel rendelkezzen a proto-s típusokkal (sajnos itt nincs <code>decimal</code>)</li>
+</ul>
+</li>
+<li>A <code>GetProduct</code> művelet egy azonosítót vár, és egy <code>Product</code>-tal tér vissza.<ul>
+<li>Az id-t is szükséges becsomagolni egy üzenettípusba: <code>GetProductRequest</code></li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="na">syntax</span> <span class="o">=</span> <span class="s">&quot;proto3&quot;</span><span class="p">;</span>
+
+<span class="k">option</span> <span class="na">csharp_namespace</span> <span class="o">=</span> <span class="s">&quot;Msa.Comm.Lab.Services.Catalog.Grpc&quot;</span><span class="p">;</span>
+
+<span class="kn">package</span> <span class="nn">Catalog</span><span class="p">;</span>
+
+<span class="kd">service</span> <span class="n">CatalogService</span> <span class="p">{</span>
+  <span class="k">rpc</span> <span class="n">GetProducts</span> <span class="p">(</span><span class="n">Empty</span><span class="p">)</span> <span class="k">returns</span> <span class="p">(</span><span class="n">ProductsResponse</span><span class="p">);</span>
+  <span class="k">rpc</span> <span class="n">GetProduct</span> <span class="p">(</span><span class="n">GetProductRequest</span><span class="p">)</span> <span class="k">returns</span> <span class="p">(</span><span class="n">Product</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">message</span> <span class="nc">Empty</span> <span class="p">{</span>
+<span class="p">}</span>
+
+<span class="kd">message</span> <span class="nc">ProductsResponse</span> <span class="p">{</span>
+    <span class="k">repeated</span> <span class="n">Product</span> <span class="na">Products</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">message</span> <span class="nc">Product</span> <span class="p">{</span>
+    <span class="kt">int32</span> <span class="na">ProductId</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="kt">string</span> <span class="na">Name</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="kt">double</span> <span class="na">UnitPrice</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+    <span class="kt">int32</span> <span class="na">Stock</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">message</span> <span class="nc">GetProductRequest</span> <span class="p">{</span>
+    <span class="kt">int32</span> <span class="na">ProductId</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span> 
+</code></pre></div>
+
+<p>A <code>.proto</code> fájlból a modellek és egy ősosztály is generálódik a fordítás során. Ehhez viszont a Catalog projekt fájlban fel kell venni a következő elemet:</p>
+<div class="highlight"><pre><span></span><code>  <span class="nt">&lt;ItemGroup&gt;</span>
+    <span class="nt">&lt;Protobuf</span> <span class="na">Include=</span><span class="s">&quot;Protos\catalog.proto&quot;</span> <span class="na">GrpcServices=</span><span class="s">&quot;Server&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/ItemGroup&gt;</span>
+</code></pre></div>
+
+<p>A Catalog projektbe hozzunk létre egy <code>Services</code> mappát, majd abba egy <code>CatalogService</code> osztályt, ami a  <code>Grpc.CatalogService.CatalogServiceBase</code>-ből származik le. Nekünk csak felül kell definiálni a kívánt metódusokat. Ide is vegyük fel az alábbi statikus listát, és ennek a segítségével valósítsuk meg az üzleti műveleteket. Figyeljük meg, hogy a .proto-ból generált típusokkal tudunk itt dolgozni.</p>
+<div class="highlight"><pre><span></span><code><span class="k">public</span> <span class="k">class</span> <span class="nc">CatalogService</span> <span class="p">:</span> <span class="n">Grpc</span><span class="p">.</span><span class="n">CatalogService</span><span class="p">.</span><span class="n">CatalogServiceBase</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="n">ILogger</span><span class="p">&lt;</span><span class="n">CatalogService</span><span class="p">&gt;</span> <span class="n">_logger</span><span class="p">;</span>
+
+    <span class="k">internal</span> <span class="k">static</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Product</span><span class="p">&gt;</span> <span class="n">_products</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Product</span><span class="p">&gt;</span>
+    <span class="p">{</span>
+        <span class="k">new</span> <span class="n">Product</span> <span class="p">{</span> <span class="n">ProductId</span> <span class="p">=</span> <span class="m">1</span><span class="p">,</span> <span class="n">Name</span> <span class="p">=</span> <span class="s">&quot;Sör&quot;</span><span class="p">,</span> <span class="n">Stock</span> <span class="p">=</span> <span class="m">10</span><span class="p">,</span> <span class="n">UnitPrice</span> <span class="p">=</span> <span class="m">250</span> <span class="p">},</span>
+        <span class="k">new</span> <span class="n">Product</span> <span class="p">{</span> <span class="n">ProductId</span> <span class="p">=</span> <span class="m">2</span><span class="p">,</span> <span class="n">Name</span> <span class="p">=</span> <span class="s">&quot;Bor&quot;</span><span class="p">,</span> <span class="n">Stock</span> <span class="p">=</span> <span class="m">5</span><span class="p">,</span> <span class="n">UnitPrice</span> <span class="p">=</span> <span class="m">890</span> <span class="p">},</span>
+        <span class="k">new</span> <span class="n">Product</span> <span class="p">{</span> <span class="n">ProductId</span> <span class="p">=</span> <span class="m">3</span><span class="p">,</span> <span class="n">Name</span> <span class="p">=</span> <span class="s">&quot;Csoki&quot;</span><span class="p">,</span> <span class="n">Stock</span> <span class="p">=</span> <span class="m">15</span><span class="p">,</span> <span class="n">UnitPrice</span> <span class="p">=</span> <span class="m">200</span> <span class="p">},</span>
+    <span class="p">};</span>
+
+    <span class="k">public</span> <span class="nf">CatalogService</span><span class="p">(</span><span class="n">ILogger</span><span class="p">&lt;</span><span class="n">CatalogService</span><span class="p">&gt;</span> <span class="n">logger</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">_logger</span> <span class="p">=</span> <span class="n">logger</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">override</span> <span class="n">Task</span><span class="p">&lt;</span><span class="n">ProductsResponse</span><span class="p">&gt;</span> <span class="n">GetProducts</span><span class="p">(</span><span class="n">Empty</span> <span class="n">request</span><span class="p">,</span> <span class="n">ServerCallContext</span> <span class="n">context</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kt">var</span> <span class="n">response</span> <span class="p">=</span> <span class="k">new</span> <span class="n">ProductsResponse</span><span class="p">();</span>
+        <span class="n">response</span><span class="p">.</span><span class="n">Products</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">_products</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">Task</span><span class="p">.</span><span class="n">FromResult</span><span class="p">(</span><span class="n">response</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">override</span> <span class="n">Task</span><span class="p">&lt;</span><span class="n">Product</span><span class="p">&gt;</span> <span class="n">GetProduct</span><span class="p">(</span><span class="n">GetProductRequest</span> <span class="n">request</span><span class="p">,</span> <span class="n">ServerCallContext</span> <span class="n">context</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kt">var</span> <span class="n">product</span> <span class="p">=</span> <span class="n">_products</span><span class="p">.</span><span class="n">SingleOrDefault</span><span class="p">(</span><span class="n">p</span> <span class="p">=&gt;</span> <span class="n">p</span><span class="p">.</span><span class="n">ProductId</span> <span class="p">==</span> <span class="n">request</span><span class="p">.</span><span class="n">ProductId</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">Task</span><span class="p">.</span><span class="n">FromResult</span><span class="p">(</span><span class="n">product</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>A Catalog <code>Startup</code> osztályban regisztráljuk be a gRPC szolgáltatásainkat.</p>
+<div class="highlight"><pre><span></span><code><span class="n">services</span><span class="p">.</span><span class="n">AddGrpc</span><span class="p">();</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="n">app</span><span class="p">.</span><span class="n">UseEndpoints</span><span class="p">(</span><span class="n">endpoints</span> <span class="p">=&gt;</span>
+<span class="p">{</span>
+    <span class="n">endpoints</span><span class="p">.</span><span class="n">MapGrpcService</span><span class="p">&lt;</span><span class="n">Services</span><span class="p">.</span><span class="n">CatalogService</span><span class="p">&gt;();</span>
+    <span class="n">endpoints</span><span class="p">.</span><span class="n">MapControllers</span><span class="p">();</span>
+<span class="p">});</span>
+</code></pre></div>
+
+<h4 id="kliens-oldal">Kliens oldal<a class="headerlink" href="#kliens-oldal" title="Permanent link">&para;</a></h4>
+<p>Adjunk az Order projekthez egy szolgáltatás referenciát. Az Order projekten jobb gomb / Add / Service Reference / gRPC / Add / File ahol tallózuk ki a másik projektben található .proto fájlt és <strong>Client</strong> módban generáljuk le a szükséges osztályokat. Ez a művelet a szükséges NuGet csomagokat is hozzáadja a projekthez.</p>
+<p><img alt="image" src="https://user-images.githubusercontent.com/8333960/66718227-b87af080-ede1-11e9-8b45-48e8e06449fa.png" /></p>
+<p>A <code>Startup</code> osztályban regisztráljuk be a DI konténerbe a gRPC kliensünket. Mivel a gRPC-nek szüksége van HTTPS-re, viszont most a konténereink nem bíznak egymás tanusítványaiban, ezért most ideiglenesen kapcsoljuk ki a HTTPS hibákat a gRPC-t alatt lévő <code>HttpClient</code>-ben.</p>
+<div class="highlight"><pre><span></span><code><span class="n">services</span><span class="p">.</span><span class="n">AddGrpcClient</span><span class="p">&lt;</span><span class="n">CatalogService</span><span class="p">.</span><span class="n">CatalogServiceClient</span><span class="p">&gt;(</span><span class="n">o</span> <span class="p">=&gt;</span>
+<span class="p">{</span>
+    <span class="n">o</span><span class="p">.</span><span class="n">Address</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Uri</span><span class="p">(</span><span class="s">&quot;https://msa.comm.lab.services.catalog&quot;</span><span class="p">);</span>
+<span class="p">}).</span><span class="n">ConfigurePrimaryHttpMessageHandler</span><span class="p">(</span><span class="n">p</span> <span class="p">=&gt;</span> <span class="k">new</span> <span class="n">HttpClientHandler</span>
+<span class="p">{</span>
+    <span class="n">ServerCertificateCustomValidationCallback</span> <span class="p">=</span>     
+        <span class="n">HttpClientHandler</span><span class="p">.</span><span class="n">DangerousAcceptAnyServerCertificateValidator</span>
+<span class="p">});</span>
+</code></pre></div>
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Megfigyelhetjük, hogy a gRPC kliens is az <code>IHttpClientFactory</code> megoldásra épít.</p>
+</div>
+<p>A <code>TestController</code>ben cseréljük le A REST kliensünket a gRPC kliensre.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">//private readonly ICatalogApiClient _catalogApiClient;</span>
+<span class="k">private</span> <span class="k">readonly</span> <span class="n">IBusControl</span> <span class="n">_bus</span><span class="p">;</span>
+<span class="k">private</span> <span class="k">readonly</span> <span class="n">CatalogService</span><span class="p">.</span><span class="n">CatalogServiceClient</span> <span class="n">_catalogServiceClient</span><span class="p">;</span>
+
+<span class="k">public</span> <span class="nf">TestController</span><span class="p">(</span>
+    <span class="c1">//ICatalogApiClient catalogApiClient, </span>
+    <span class="n">IBusControl</span> <span class="n">bus</span><span class="p">,</span> 
+    <span class="n">CatalogService</span><span class="p">.</span><span class="n">CatalogServiceClient</span> <span class="n">catalogServiceClient</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">//_catalogApiClient = catalogApiClient;</span>
+    <span class="n">_bus</span> <span class="p">=</span> <span class="n">bus</span><span class="p">;</span>
+    <span class="n">_catalogServiceClient</span> <span class="p">=</span> <span class="n">catalogServiceClient</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="na">[HttpGet]</span>
+<span class="k">public</span> <span class="k">async</span> <span class="n">Task</span><span class="p">&lt;</span><span class="n">ActionResult</span><span class="p">&lt;</span><span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">Catalog</span><span class="p">.</span><span class="n">Grpc</span><span class="p">.</span><span class="n">Product</span><span class="p">&gt;&gt;&gt;</span> <span class="n">Get</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span><span class="k">await</span> <span class="n">_catalogServiceClient</span><span class="p">.</span><span class="n">GetProductsAsync</span><span class="p">(</span><span class="k">new</span> <span class="n">Empty</span><span class="p">())).</span><span class="n">Products</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>Próbáljuk ki!</p>
+<h2 id="osszefoglalas">Összefoglalás<a class="headerlink" href="#osszefoglalas" title="Permanent link">&para;</a></h2>
+<p>A gyakorlat során néztünk példát REST-es kommunikáció esetében a hibatűrés növelésére egy Retry policy-vel. Majd Aszinkron kommunikációt implementáltunk egy RabbitMQ üzenetsor és MassTransit konyvtár segítségével a két szolgáltatásunk között. Végül Contract first megközelítéssel készítettünk szolgáltatást, most gRPC-n kipróbálva.</p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+
+<!-- Application footer -->
+<footer class="md-footer">
+
+  <!-- Further information -->
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+
+      <!-- Copyright and theme information -->
+      <div class="md-footer-copyright">
+        
+        <div class="md-footer-copyright__highlight">
+          Copyright &copy; BME AUT
+        </div>
+        
+      </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/vendor.a0c4167b.min.js"></script>
+      <script src="../../assets/javascripts/bundle.fb26dd1d.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "M\u00e1sol\u00e1s v\u00e1g\u00f3lapra", "clipboard.copied": "V\u00e1g\u00f3lapra m\u00e1solva", "search.config.lang": "hu", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Keres\u00e9shez \u00edrj ide valamit", "search.result.none": "Nincs tal\u00e1lat", "search.result.one": "1 egyez\u0151 dokumentum", "search.result.other": "# egyez\u0151 dokumentum"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../..",
+          features: ["tabs"],
+          search: Object.assign({
+            worker: "../../assets/javascripts/worker/search.37585f48.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>

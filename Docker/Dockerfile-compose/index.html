@@ -1,0 +1,1144 @@
+
+
+
+<!doctype html>
+<html lang="hu" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <meta name="author" content="Dudás Ákos">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.1.6">
+    
+    
+      
+        <title>Dockerfile és docker-compose</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.4b9ffd7b.min.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.b79bcd20.min.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#ef5350">
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../extra-material-theme.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="red" data-md-color-accent="red">
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#cel" class="md-skip">
+          Kihagyás
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="../.." title="BME AUT Mikroszolgáltatások és konténeralapú szoftverfejlesztés" class="md-header-nav__button md-logo" aria-label="BME AUT Mikroszolgáltatások és konténeralapú szoftverfejlesztés">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            BME AUT Mikroszolgáltatások és konténeralapú szoftverfejlesztés
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Dockerfile és docker-compose
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Keresés" placeholder="Keresés" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/bmeviauav42/jegyzetek/" title="Főoldalra ugrás" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    bmeviauav42/jegyzetek
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+          
+
+  
+
+<nav class="md-tabs md-tabs--active" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href="../.." class="md-tabs__link">
+        Tárgy ismertető
+      </a>
+    
+  </li>
+
+      
+        
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../Docker-alapok/" class="md-tabs__link md-tabs__link--active">
+          Docker
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../Architektura/AdatbazisApiGateway/" class="md-tabs__link">
+          Architektúra
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../DevOps/Nyomkovetes/" class="md-tabs__link">
+          DevOps
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../Kubernetes/Kubernetes-alapok/" class="md-tabs__link">
+          Kubernetes
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../Serverless/serverless/" class="md-tabs__link">
+          Serverless
+        </a>
+      
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="BME AUT Mikroszolgáltatások és konténeralapú szoftverfejlesztés" class="md-nav__button md-logo" aria-label="BME AUT Mikroszolgáltatások és konténeralapú szoftverfejlesztés">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    BME AUT Mikroszolgáltatások és konténeralapú szoftverfejlesztés
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/bmeviauav42/jegyzetek/" title="Főoldalra ugrás" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    bmeviauav42/jegyzetek
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Tárgy ismertető" class="md-nav__link">
+      Tárgy ismertető
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../hazi-feladat/" title="Házi feladat leírása és megszerezhető pontok" class="md-nav__link">
+      Házi feladat leírása és megszerezhető pontok
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+    
+    <label class="md-nav__link" for="nav-3">
+      Docker
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Docker" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Docker
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Docker-alapok/" title="Docker alapok" class="md-nav__link">
+      Docker alapok
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Dockerfile és docker-compose
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9h14V7H3v2m0 4h14v-2H3v2m0 4h14v-2H3v2m16 0h2v-2h-2v2m0-10v2h2V7h-2m0 6h2v-2h-2v2z"/></svg>
+        </span>
+      </label>
+    
+    <a href="./" title="Dockerfile és docker-compose" class="md-nav__link md-nav__link--active">
+      Dockerfile és docker-compose
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Tartalomjegyzék">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Tartalomjegyzék
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#cel" class="md-nav__link">
+    Cél
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#elokovetelmenyek" class="md-nav__link">
+    Előkövetelmények
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#feladatok" class="md-nav__link">
+    Feladatok
+  </a>
+  
+    <nav class="md-nav" aria-label="Feladatok">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dockerfile-keszitese" class="md-nav__link">
+    Dockerfile készítése
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dockerignore-es-build-kontextus" class="md-nav__link">
+    Dockerignore és build kontextus
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docker-compose" class="md-nav__link">
+    Docker-compose
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tobb-compose-yaml-fajl" class="md-nav__link">
+    Több compose yaml fájl
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipikusan-hasznalt-image-ek" class="md-nav__link">
+    Tipikusan használt image-ek
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kesz-image-testreszabasa" class="md-nav__link">
+    Kész image testreszabása
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#microsoft-visual-studio-tamogatas-docker-alapu-fejleszteshez" class="md-nav__link">
+    Microsoft Visual Studio támogatás Docker-alapú fejlesztéshez
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tovabbi-olvasnivalo" class="md-nav__link">
+    További olvasnivaló
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Architektúra
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Architektúra" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Architektúra
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Architektura/AdatbazisApiGateway/" title="Adattárolás és Api Gateway" class="md-nav__link">
+      Adattárolás és Api Gateway
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Architektura/Kommunikacio/" title="Kommunikáció" class="md-nav__link">
+      Kommunikáció
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      DevOps
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="DevOps" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        DevOps
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../DevOps/Nyomkovetes/" title="Elosztott nyomkövetés" class="md-nav__link">
+      Elosztott nyomkövetés
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../DevOps/Logging-Health-Checks/" title="Naplózás, health check" class="md-nav__link">
+      Naplózás, health check
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      Kubernetes
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Kubernetes" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Kubernetes
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Kubernetes/Kubernetes-alapok/" title="Kubernetes alapok" class="md-nav__link">
+      Kubernetes alapok
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Kubernetes/Kubernetes-alkalmazas-telepites/" title="Alkalmazás telepítése Kubernetes klaszterbe" class="md-nav__link">
+      Alkalmazás telepítése Kubernetes klaszterbe
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../AKS/aks/" title="K8S DevOps Azure DevOps-ban és Azure Kubernetes Service-szel" class="md-nav__link">
+      K8S DevOps Azure DevOps-ban és Azure Kubernetes Service-szel
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      Serverless
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Serverless" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Serverless
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Serverless/serverless/" title="Mikroszolgáltatások serverless architektúra fölött" class="md-nav__link">
+      Mikroszolgáltatások serverless architektúra fölött
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Tartalomjegyzék">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Tartalomjegyzék
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#cel" class="md-nav__link">
+    Cél
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#elokovetelmenyek" class="md-nav__link">
+    Előkövetelmények
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#feladatok" class="md-nav__link">
+    Feladatok
+  </a>
+  
+    <nav class="md-nav" aria-label="Feladatok">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dockerfile-keszitese" class="md-nav__link">
+    Dockerfile készítése
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dockerignore-es-build-kontextus" class="md-nav__link">
+    Dockerignore és build kontextus
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docker-compose" class="md-nav__link">
+    Docker-compose
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tobb-compose-yaml-fajl" class="md-nav__link">
+    Több compose yaml fájl
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipikusan-hasznalt-image-ek" class="md-nav__link">
+    Tipikusan használt image-ek
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kesz-image-testreszabasa" class="md-nav__link">
+    Kész image testreszabása
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#microsoft-visual-studio-tamogatas-docker-alapu-fejleszteshez" class="md-nav__link">
+    Microsoft Visual Studio támogatás Docker-alapú fejlesztéshez
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tovabbi-olvasnivalo" class="md-nav__link">
+    További olvasnivaló
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/bmeviauav42/jegyzetek/edit/master/docs/Docker/Dockerfile-compose.md" title="Oldal szerkesztése" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                  
+                
+                
+                  <h1>Dockerfile és docker-compose</h1>
+                
+                <h2 id="cel">Cél<a class="headerlink" href="#cel" title="Permanent link">&para;</a></h2>
+<p>A labor célja megismerni a Docker-alap fejlesztés módjait, a <em>Dockerfile</em> és <em>docker-compose</em> alapú megközelítéseket, valamint a Microsoft Visual Studio fejlesztőkörnyezet konténerfejlesztést támogató szolgáltatásait.</p>
+<h2 id="elokovetelmenyek">Előkövetelmények<a class="headerlink" href="#elokovetelmenyek" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Docker Desktop</li>
+<li>Docker-compose<ul>
+<li>Csak Linux esetén szükséges <a href="https://docs.docker.com/compose/install/">külön telepíteni</a></li>
+</ul>
+</li>
+<li>Microsoft Visual Studio Code<ul>
+<li>Javasolt: <a href="https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker">Docker extension</a></li>
+</ul>
+</li>
+<li>Microsoft Visual Studio 2017/2019<ul>
+<li>2017 esetén legalább 15.6 verzió</li>
+<li>A <em>.NET Core cross-platform development</em> nevű <a href="https://visualstudio.microsoft.com/vs/visual-studio-workloads/">workload</a> szükséges</li>
+</ul>
+</li>
+</ul>
+<h2 id="feladatok">Feladatok<a class="headerlink" href="#feladatok" title="Permanent link">&para;</a></h2>
+<h3 id="dockerfile-keszitese"><em>Dockerfile</em> készítése<a class="headerlink" href="#dockerfile-keszitese" title="Permanent link">&para;</a></h3>
+<p>Előző laboron készítettünk már egy saját image-et. Az image elkészítésére azonban nem az a módszer a javasolt megoldás, hanem a <em>Dockerfile</em> alapú "recept készítés".</p>
+<ol>
+<li>Készíts egy munkakönytárat, pl. <code>c:\work\&lt;neptun&gt;\dockerlab\pythonweb</code></li>
+<li>Nyisd meg a mappát Visual Studio Code-ban.</li>
+<li>
+<p>Készíts egy <code>Dockerfile</code> nevű fájt (kiterjesztés nélkül!) az alábbi tartalommal.</p>
+<div class="highlight"><pre><span></span><code><span class="k">FROM</span> <span class="s">python:3.8-slim</span>
+<span class="k">WORKDIR</span><span class="s"> /app</span>
+<span class="k">COPY</span> . /app
+<span class="k">RUN</span> pip install --trusted-host pypi.python.org -r requirements.txt
+<span class="k">EXPOSE</span><span class="s"> 80</span>
+<span class="k">ENV</span> NAME NEPTUN # Ide a saját Neptun kódodat írd
+<span class="k">CMD</span> <span class="p">[</span><span class="s2">&quot;python&quot;</span><span class="p">,</span> <span class="s2">&quot;app.py&quot;</span><span class="p">]</span>
+</code></pre></div>
+
+</li>
+<li>
+<p>Készíts egy <code>requirements.txt</code> fájlt az alábbi tartalommal</p>
+<div class="highlight"><pre><span></span><code>Flask
+Redis
+</code></pre></div>
+
+</li>
+<li>
+<p>Készíts egy <code>app.py</code> fájlt az alábbi tartalommal</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
+<span class="kn">from</span> <span class="nn">redis</span> <span class="kn">import</span> <span class="n">Redis</span><span class="p">,</span> <span class="n">RedisError</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">socket</span>
+
+<span class="c1"># Connect to Redis</span>
+<span class="n">redis</span> <span class="o">=</span> <span class="n">Redis</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s2">&quot;redis&quot;</span><span class="p">,</span> <span class="n">db</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">socket_connect_timeout</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">socket_timeout</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">hello</span><span class="p">():</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">visits</span> <span class="o">=</span> <span class="n">redis</span><span class="o">.</span><span class="n">incr</span><span class="p">(</span><span class="s2">&quot;counter&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">RedisError</span><span class="p">:</span>
+        <span class="n">visits</span> <span class="o">=</span> <span class="s2">&quot;&lt;i&gt;cannot connect to Redis, counter disabled&lt;/i&gt;&quot;</span>
+
+    <span class="n">html</span> <span class="o">=</span> <span class="s2">&quot;&lt;h3&gt;Hello </span><span class="si">{name}</span><span class="s2">!&lt;/h3&gt;&lt;b&gt;Visits:&lt;/b&gt; </span><span class="si">{visits}</span><span class="s2">&quot;</span>
+    <span class="k">return</span> <span class="n">html</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;NAME&quot;</span><span class="p">,</span> <span class="s2">&quot;world&quot;</span><span class="p">),</span> <span class="n">visits</span><span class="o">=</span><span class="n">visits</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s1">&#39;0.0.0.0&#39;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">80</span><span class="p">)</span>
+</code></pre></div>
+
+</li>
+<li>
+<p>Készítsd el a fenti fájlokból az image-et. Konzolból a munkakönyvtárban add ki a következő parancsot: <code>docker build -t hellopython:v1 .</code> (a végén egy pont van, az is a parancs része!)</p>
+</li>
+<li>Ellenőrizd, hogy tényleg létrejött-e az image.</li>
+<li>Indíts el egy új konténert ebből az image-ből: <code>docker run -it --rm -p 8085:80 hellopython:v1</code></li>
+<li>Nyisd meg böngészőben a <a href="http://localhost:8085">http://localhost:8085</a> oldalt.</li>
+</ol>
+<div class="admonition success">
+<p class="admonition-title">Success</p>
+<p>A weboldal ki kell írja a neptun kódodat, és egy hibaüzenetet a Redis-szel kapcsolatban.</p>
+</div>
+<h3 id="dockerignore-es-build-kontextus">Dockerignore és build kontextus<a class="headerlink" href="#dockerignore-es-build-kontextus" title="Permanent link">&para;</a></h3>
+<p>A <code>Dockerfile</code>-ban hivatkoztunk az aktuális könyvtárra a <code>.</code>-tal. Vizsgáljuk meg, hogy ez mit is jelent.</p>
+<ol>
+<li>
+<p>Készítsünk az aktuális könyvtárunkba, az <code>app.py</code> mellé egy nagy fájlt. PowerShell-ben addjuk ki a következő parancsot.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">$out</span> <span class="p">=</span> <span class="nb">new-object</span> <span class="n">byte</span><span class="p">[]</span> <span class="n">134217728</span><span class="p">;</span> <span class="p">(</span><span class="nb">new-object</span> <span class="n">Random</span><span class="p">).</span><span class="n">NextBytes</span><span class="p">(</span><span class="nv">$out</span><span class="p">);</span> <span class="no">[IO.File]</span><span class="p">::</span><span class="n">WriteAllBytes</span><span class="p">(</span><span class="s2">&quot;$pwd\file.bin&quot;</span><span class="p">,</span> <span class="nv">$out</span><span class="p">)</span>
+</code></pre></div>
+
+</li>
+<li>
+<p>Buildeljük le ismét a fenti image-et: <code>docker build -t hellopython:v1 .</code></p>
+<p>Menet közben látni fogjuk a következő sort a build logban: <em>Sending build context to Docker daemon 111.4MB</em>, és azt is tapasztalni fogjuk, hogy ez el tart egy kis ideig.</p>
+<p>A <code>docker build</code> parancs végén a <code>.</code> az aktuális könyvtár. Ezzel tudatjuk a Docker-rel, hogy a buildeléshez ezt a <em>kontextust</em> használja, azon fájlok legyenek elérhetőek a build során, amelyek ebben a kontextusban vannak. A <code>Dockerfile</code>-ban a <code>COPY</code> így <strong>relatív</strong> útvonallal hivatkozik a kontextusban levő fájlokra.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Ennek következménye az is, hogy csak a build kontextusban levő fájlokra tudunk hivatkozni. Tehát nem lehet pl. <code>COPY ..\..\file</code> használatával tetszőleges fájlt felmásolni a build közben.</p>
+</div>
+</li>
+<li>
+<p>Ha a build kontextusból szeretnénk kihagyni fájlokat, hogy a build ne tartson sokáig, akkor egy <code>.dockerignore</code> fájlra lesz szükségünk (a <code>.gitignore</code> mintájára). Ide szokás például a build környezet saját könyvtárait (<code>obj</code>, <code>bin</code>, <code>.vs</code>, <code>node_modules</code>, stb.) is felvenni.</p>
+<p>Készítsünk egy <code>.dockerignore</code>-t az alábbi tartalommal</p>
+<div class="highlight"><pre><span></span><code>file.bin
+</code></pre></div>
+
+</li>
+<li>
+<p>Futtassuk ismét a buildet. Így már gyorsabb lesz.</p>
+</li>
+</ol>
+<h3 id="docker-compose">Docker-compose<a class="headerlink" href="#docker-compose" title="Permanent link">&para;</a></h3>
+<p>A fenti alkalmazás egy része még nem működik. A Python alkalmazás mellett egy Redis-re is szükségünk lenne. Futtassunk több konténert egyszerre.</p>
+<ol>
+<li>
+<p>Visual Studio Code-ban nyisd meg a mappát, amiben az előző feladat során használt <em>pythonweb</em> mappa van. Tehát nem az előzőleg használt mappa kell, hanem egy szinttel feljebb (pl. <code>c:\work\&lt;neptun&gt;\dockerlab</code>).</p>
+</li>
+<li>
+<p>Készíts ide egy <code>docker-compose.yml</code> nevű fájlt az alábbi tartalommal.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">version</span><span class="p">:</span> <span class="s">&quot;3&quot;</span>
+
+<span class="nt">services</span><span class="p">:</span>
+  <span class="nt">redis</span><span class="p">:</span>
+    <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">redis:5.0.5-alpine</span>
+    <span class="nt">networks</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">mikroszolg_network</span>
+  <span class="nt">web</span><span class="p">:</span>
+    <span class="nt">build</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">pythonweb</span>
+    <span class="nt">ports</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">5000:80</span>
+    <span class="nt">depends_on</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">redis</span>
+    <span class="nt">networks</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">mikroszolg_network</span>
+
+<span class="nt">networks</span><span class="p">:</span>
+  <span class="nt">mikroszolg_network</span><span class="p">:</span>
+    <span class="nt">driver</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">bridge</span>
+</code></pre></div>
+
+</li>
+<li>
+<p>Nyiss egy <em>PowerShell</em> konzolt ugyanebbe a mappába. Indítsd el az alkalmazásokat az alábbi paranccsal: <code>docker-compose up --build</code></p>
+<ul>
+<li>Két lépésben a parancs: <code>docker-compose build</code> és <code>docker-compose up</code></li>
+</ul>
+</li>
+<li>
+<p>Nyisd meg böngészőben a <a href="http://localhost:8085">http://localhost:8085</a> oldalt.</p>
+</li>
+<li>Egy új konzolban nézd meg a futó konténereket a <code>docker ps</code> parancs segítségével.</li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A Docker-compose alkalmas üzemeltetésre is. A <code>docker-compose.yml</code> fájl nem csak fejlesztői környezetet ír le, hanem üzemeltetéshez szükséges környezetet is. Ha a compose fájlt megfelelően írjuk meg (pl. használjuk a <a href="https://docs.docker.com/compose/compose-file/#restart"><code>restart</code> direktívát</a> is), az elindított szolgáltatások automatikusan újraindulnak a rendszer indulásakor.</p>
+</div>
+<h3 id="tobb-compose-yaml-fajl">Több compose yaml fájl<a class="headerlink" href="#tobb-compose-yaml-fajl" title="Permanent link">&para;</a></h3>
+<p>A docker-compose parancsnak nem adtuk meg, hogy milyen yaml fájlból dolgozzon. Alapértelmezésként a <code>docker-compose.yaml</code> kiterjesztésű fájlt <strong>és</strong> ezzel összefésülve a <code>docker-compose.override.yaml</code> fájlt használja.</p>
+<ol>
+<li>
+<p>Készíts egy <code>docker-compose.override.yaml</code> fájlt a másik compose yaml mellé az alábbi tartalommal</p>
+<div class="highlight"><pre><span></span><code><span class="nt">version</span><span class="p">:</span> <span class="s">&quot;3&quot;</span>
+
+<span class="nt">services</span><span class="p">:</span>
+  <span class="nt">redis</span><span class="p">:</span>
+    <span class="nt">command</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">redis-server --loglevel verbose</span>
+</code></pre></div>
+
+</li>
+<li>
+<p>Indítsd el a rendszert <code>docker-compose up</code> paranccsal. A redis konténer részletesebben fog naplózni a <code>command</code> direktívában megadott utasítás szerint. Állítsd le a rendszert.</p>
+</li>
+<li>
+<p>Nevezd át az előbbi override fájlt <code>docker-compose.debug.yaml</code>-re. Készíts egy új <code>docker-compose.prod.yaml</code> fájlt a többi yaml mellé az alábbi tartalommal</p>
+<div class="highlight"><pre><span></span><code><span class="nt">version</span><span class="p">:</span> <span class="s">&quot;3&quot;</span>
+
+<span class="nt">services</span><span class="p">:</span>
+  <span class="nt">redis</span><span class="p">:</span>
+    <span class="nt">command</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">redis-server --loglevel warning</span>
+</code></pre></div>
+
+</li>
+<li>
+<p>Indítsuk el a rendszert az alábbi paranccsal</p>
+<div class="highlight"><pre><span></span><code>docker-compose -f docker-compose.yml -f docker-compose.prod.yml up
+</code></pre></div>
+
+<p>A <code>-f</code> kapcsolóval tudjuk kérni a megadott yaml fájlok összefésülését.</p>
+</li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Általában a <code>docker-compose.yaml</code>-be kerülnek a közös konfigurációk, és a további fájlokba a környezet specifikus konfigurációk.</p>
+</div>
+<h3 id="tipikusan-hasznalt-image-ek">Tipikusan használt image-ek<a class="headerlink" href="#tipikusan-hasznalt-image-ek" title="Permanent link">&para;</a></h3>
+<p>Konténer alapú fejlesztésnél tehát két féle image-et használunk:</p>
+<ul>
+<li>amit magunk készítünk egy adott alap image-re épülve,</li>
+<li>illetve kész image-eket, amiket csak futtatunk (és esetleg konfigurálunk).</li>
+</ul>
+<p>Alap image-ek, amikre tipikusan saját alkalmazást építünk:</p>
+<ul>
+<li>Linux disztribúciók<ul>
+<li><a href="https://hub.docker.com/_/ubuntu">Ubuntu</a>, pl. <code>ubuntu:18.04</code></li>
+<li><a href="https://hub.docker.com/_/debian">Debian</a>, pl. <code>debian:stretch</code></li>
+<li><a href="https://hub.docker.com/_/alpine">Alpine</a>, pl. <code>alpine:3.10</code></li>
+</ul>
+</li>
+<li>Futtató platformok<ul>
+<li><a href="https://hub.docker.com/_/microsoft-dotnet-core">.NET Core</a>, pl. <code>mcr.microsoft.com/dotnet/core/runtime:2.1.12-bionic</code></li>
+<li><a href="https://hub.docker.com/_/openjdk">OpenJDK</a> pl. <code>openjdk:11-jre-stretch</code></li>
+<li><a href="https://hub.docker.com/_/node">NodeJS</a> pl. <code>node:12.7.0-alpine</code></li>
+<li><a href="https://hub.docker.com/_/python">Python</a> pl. <code>python:2.7-slim</code></li>
+</ul>
+</li>
+<li><a href="https://hub.docker.com/_/scratch">scratch</a>: üres image, speciális esetek, pl. go</li>
+</ul>
+<p>A kész image-ek, amiket pedig felhasználunk:</p>
+<ul>
+<li>Adatbázis szerverek, webszerverek, gyakran használt szolgáltatások</li>
+<li>MSSQL Server, redis, mongodb, mysql, nginx, ...</li>
+<li>Termérdek elérhető image: <a href="https://hub.docker.com">https://hub.docker.com</a></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Az image-ek verziózását minden esetben meg kell érteni! Minden image más-más megközelítést alkalmaz.</p>
+</div>
+<h3 id="kesz-image-testreszabasa">Kész image testreszabása<a class="headerlink" href="#kesz-image-testreszabasa" title="Permanent link">&para;</a></h3>
+<p>Az előbb a <em>Redis</em> memória alapú adatbázist minden konfiguráció nélkül felhasználtuk. Gyakran az ilyen image-ek "majdnem" jók közvetlen felhasználásra, de azért szükség van egy kevés testreszabásra. Ilyen esetben a következő lehetőségeink vannak:</p>
+<ul>
+<li>
+<p>Saját image-et készítünk kiindulva a számunkra megfelelő alap image-ből. A saját image-ben módosíthatunk a konfigurációs fájlokat, avagy további fájlokat adhatunk az image-be. Ezt a megoldást alkalmazhatjuk például tipikusan weboldal kiszolgálásánál, ahol is a kiinduló image a webszerver, viszont a kiszolgálandó fájlokat még mellé kell tennünk.</p>
+</li>
+<li>
+<p>Környezeti változókon keresztül konfiguráljuk a futtatandó szolgáltatást. Az alap image-ek általában elég jó konfigurációval rendelkeznek, csak keveset kell rajta módosítanunk. Erre tökéletesen alkalmas egy-egy környezeti változó. A jól felépített Docker image-ek előre meghatározott környezeti változókon keresztül testreszabhatóak.</p>
+<p>Erre egy jó példa a <a href="https://hub.docker.com/_/microsoft-mssql-server">Microsoft SQL Server Docker változata</a>. Az alábbi parancsban a <code>-e</code> argumentumokban adunk át környezeti változókat:</p>
+<div class="highlight"><pre><span></span><code>docker run
+  -e <span class="s1">&#39;ACCEPT_EULA=Y&#39;</span>
+  -e <span class="s1">&#39;SA_PASSWORD=yourStrong(!)Password&#39;</span>
+  -p <span class="m">1433</span>:1433
+  mcr.microsoft.com/mssql/server:2017-CU8-ubuntu
+</code></pre></div>
+
+</li>
+<li>
+<p>Becsatolhatjuk a saját konfigurációs fájljainkat a konténerbe. Korábban láttuk, hogy lehetőségünk van egy mappát a host géptről a konténerbe csatolni. Ha elkészítjük a testreszabott konfigurációs fájlt, akkor a <code>docker-compose.yml</code> leírásban a következő módon tudjuk ezt a fájlt becsatolni a konténer indulásakor.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
+  <span class="nt">redis</span><span class="p">:</span>
+    <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">redis:5.0.5-alpine</span>
+    <span class="nt">volumes</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">my-redis.conf:/usr/local/etc/redis/redis.conf</span>
+</code></pre></div>
+
+<p>Ezen megoldás előnye, hogy nincs szükség saját image-et készíteni, tárolni, kezelni. Amikor a környezeti változó már nem elegendő a testreszabáshoz, ez a javasolt megoldás.</p>
+</li>
+</ul>
+<h3 id="microsoft-visual-studio-tamogatas-docker-alapu-fejleszteshez">Microsoft Visual Studio támogatás Docker-alapú fejlesztéshez<a class="headerlink" href="#microsoft-visual-studio-tamogatas-docker-alapu-fejleszteshez" title="Permanent link">&para;</a></h3>
+<p>A Microsoft Visual Studio a 2017-es verzió óta támogatja és megkönnyíti a konténer alapú szoftverfejlesztést. Segíti a fejlesztőt a fejlesztett alkalmazás konténerizálásában, és támogatja a konténerben való debuggolást is.</p>
+<ol>
+<li>Engedélyezzük Docker-ben a volume sharing-et!</li>
+<li>Indítsuk el a Visual Studio-t (nem a Code-ot!).</li>
+<li>Készítsünk egy új <em>ASP.NET Core Web Application</em> típusú projektet a <em>Web application</em> sablonnal, és engedélyezzük a Linux-alapú konténer támogatást a projektben. (A pontos lépések Visual Studio verzió függőek, lásd <a href="https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/docker/visual-studio-tools-for-docker">itt</a>.)</li>
+<li>Nézzük meg és értsük meg az elkészült solution struktúrát, valamint a <em>Dockerfile</em>-t és a <em>docker-compose</em> fájlokat is.</li>
+<li>Indítsuk el az alkalmazást Docker-compose használatával: legyen a <em>docker-compose</em> a startup projektünk, és F5-tel indítsuk debug módban az alkalmazást.</li>
+<li>Egy konzolból listázzuk ki a futó konténereket: <code>docker ps</code></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A Visual Studio Code is támogatja a konténerek debuggolását. Erről részletesen lásd <a href="https://code.visualstudio.com/docs/remote/containers">itt</a>.</p>
+</div>
+<h2 id="tovabbi-olvasnivalo">További olvasnivaló<a class="headerlink" href="#tovabbi-olvasnivalo" title="Permanent link">&para;</a></h2>
+<ul>
+<li><em>Dockerfile</em> szintaktika: <a href="https://docs.docker.com/engine/reference/builder/">https://docs.docker.com/engine/reference/builder/</a></li>
+<li><code>.dockerignore</code> fájl szintaktika: <a href="https://docs.docker.com/engine/reference/builder/#dockerignore-file">https://docs.docker.com/engine/reference/builder/#dockerignore-file</a></li>
+<li><em>Dockerfile</em> best practice-ek: <a href="https://docs.docker.com/develop/develop-images/dockerfile_best-practices/">https://docs.docker.com/develop/develop-images/dockerfile_best-practices/</a></li>
+<li><em>compose</em> fájl szintaktika: <a href="https://docs.docker.com/compose/compose-file/">https://docs.docker.com/compose/compose-file/</a></li>
+<li>Több compose fájl használata: <a href="https://docs.docker.com/compose/extends/#multiple-compose-files">https://docs.docker.com/compose/extends/#multiple-compose-files</a></li>
+<li>Multistage build-ek: <a href="https://docs.docker.com/develop/develop-images/multistage-build/">https://docs.docker.com/develop/develop-images/multistage-build/</a></li>
+</ul>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+
+<!-- Application footer -->
+<footer class="md-footer">
+
+  <!-- Further information -->
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+
+      <!-- Copyright and theme information -->
+      <div class="md-footer-copyright">
+        
+        <div class="md-footer-copyright__highlight">
+          Copyright &copy; BME AUT
+        </div>
+        
+      </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/vendor.a0c4167b.min.js"></script>
+      <script src="../../assets/javascripts/bundle.fb26dd1d.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "M\u00e1sol\u00e1s v\u00e1g\u00f3lapra", "clipboard.copied": "V\u00e1g\u00f3lapra m\u00e1solva", "search.config.lang": "hu", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Keres\u00e9shez \u00edrj ide valamit", "search.result.none": "Nincs tal\u00e1lat", "search.result.one": "1 egyez\u0151 dokumentum", "search.result.other": "# egyez\u0151 dokumentum"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../..",
+          features: ["tabs"],
+          search: Object.assign({
+            worker: "../../assets/javascripts/worker/search.37585f48.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>

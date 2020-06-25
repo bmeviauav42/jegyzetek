@@ -1,0 +1,1132 @@
+
+
+
+<!doctype html>
+<html lang="hu" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <meta name="author" content="Dudás Ákos">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.1.6">
+    
+    
+      
+        <title>Docker alapok</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.4b9ffd7b.min.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.b79bcd20.min.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#ef5350">
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../extra-material-theme.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="red" data-md-color-accent="red">
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#eloadas" class="md-skip">
+          Kihagyás
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="../.." title="BME AUT Mikroszolgáltatások és konténeralapú szoftverfejlesztés" class="md-header-nav__button md-logo" aria-label="BME AUT Mikroszolgáltatások és konténeralapú szoftverfejlesztés">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            BME AUT Mikroszolgáltatások és konténeralapú szoftverfejlesztés
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Docker alapok
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Keresés" placeholder="Keresés" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/bmeviauav42/jegyzetek/" title="Főoldalra ugrás" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    bmeviauav42/jegyzetek
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+          
+
+  
+
+<nav class="md-tabs md-tabs--active" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href="../.." class="md-tabs__link">
+        Tárgy ismertető
+      </a>
+    
+  </li>
+
+      
+        
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="./" class="md-tabs__link md-tabs__link--active">
+          Docker
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../Architektura/AdatbazisApiGateway/" class="md-tabs__link">
+          Architektúra
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../DevOps/Nyomkovetes/" class="md-tabs__link">
+          DevOps
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../Kubernetes/Kubernetes-alapok/" class="md-tabs__link">
+          Kubernetes
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../Serverless/serverless/" class="md-tabs__link">
+          Serverless
+        </a>
+      
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="BME AUT Mikroszolgáltatások és konténeralapú szoftverfejlesztés" class="md-nav__button md-logo" aria-label="BME AUT Mikroszolgáltatások és konténeralapú szoftverfejlesztés">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    BME AUT Mikroszolgáltatások és konténeralapú szoftverfejlesztés
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/bmeviauav42/jegyzetek/" title="Főoldalra ugrás" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    bmeviauav42/jegyzetek
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Tárgy ismertető" class="md-nav__link">
+      Tárgy ismertető
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../hazi-feladat/" title="Házi feladat leírása és megszerezhető pontok" class="md-nav__link">
+      Házi feladat leírása és megszerezhető pontok
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+    
+    <label class="md-nav__link" for="nav-3">
+      Docker
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Docker" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Docker
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Docker alapok
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9h14V7H3v2m0 4h14v-2H3v2m0 4h14v-2H3v2m16 0h2v-2h-2v2m0-10v2h2V7h-2m0 6h2v-2h-2v2z"/></svg>
+        </span>
+      </label>
+    
+    <a href="./" title="Docker alapok" class="md-nav__link md-nav__link--active">
+      Docker alapok
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Tartalomjegyzék">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Tartalomjegyzék
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#eloadas" class="md-nav__link">
+    Előadás
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cel" class="md-nav__link">
+    Cél
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#elokovetelmenyek" class="md-nav__link">
+    Előkövetelmények
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#feladatok" class="md-nav__link">
+    Feladatok
+  </a>
+  
+    <nav class="md-nav" aria-label="Feladatok">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#docker-desktop" class="md-nav__link">
+    Docker Desktop
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docker-hello-world" class="md-nav__link">
+    Docker hello world
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kontener-futtatasa-interaktiv-modon" class="md-nav__link">
+    Konténer futtatása interaktív módon
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docker-cli-parancsok-strukturaja" class="md-nav__link">
+    Docker CLI parancsok struktúrája
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#volume-csatolasa-bind-mount" class="md-nav__link">
+    Volume csatolása (bind mount)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#port-mappeles" class="md-nav__link">
+    Port mappelés
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#muveletvegzes-futo-kontenerben" class="md-nav__link">
+    Műveletvégzés futó konténerben
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docker-registry" class="md-nav__link">
+    Docker registry
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#keszitsunk-sajat-image-et" class="md-nav__link">
+    Készítsünk saját image-et
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#takaritas" class="md-nav__link">
+    Takarítás
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#docker-konterek-esemenyek-megfigyelese" class="md-nav__link">
+    Docker kontérek események megfigyelése
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tovabbi-olvasnivalo" class="md-nav__link">
+    További olvasnivaló
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Dockerfile-compose/" title="Dockerfile és docker-compose" class="md-nav__link">
+      Dockerfile és docker-compose
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Architektúra
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Architektúra" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Architektúra
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Architektura/AdatbazisApiGateway/" title="Adattárolás és Api Gateway" class="md-nav__link">
+      Adattárolás és Api Gateway
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Architektura/Kommunikacio/" title="Kommunikáció" class="md-nav__link">
+      Kommunikáció
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      DevOps
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="DevOps" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        DevOps
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../DevOps/Nyomkovetes/" title="Elosztott nyomkövetés" class="md-nav__link">
+      Elosztott nyomkövetés
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../DevOps/Logging-Health-Checks/" title="Naplózás, health check" class="md-nav__link">
+      Naplózás, health check
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      Kubernetes
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Kubernetes" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Kubernetes
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Kubernetes/Kubernetes-alapok/" title="Kubernetes alapok" class="md-nav__link">
+      Kubernetes alapok
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Kubernetes/Kubernetes-alkalmazas-telepites/" title="Alkalmazás telepítése Kubernetes klaszterbe" class="md-nav__link">
+      Alkalmazás telepítése Kubernetes klaszterbe
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../AKS/aks/" title="K8S DevOps Azure DevOps-ban és Azure Kubernetes Service-szel" class="md-nav__link">
+      K8S DevOps Azure DevOps-ban és Azure Kubernetes Service-szel
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      Serverless
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Serverless" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Serverless
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Serverless/serverless/" title="Mikroszolgáltatások serverless architektúra fölött" class="md-nav__link">
+      Mikroszolgáltatások serverless architektúra fölött
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Tartalomjegyzék">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Tartalomjegyzék
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#eloadas" class="md-nav__link">
+    Előadás
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cel" class="md-nav__link">
+    Cél
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#elokovetelmenyek" class="md-nav__link">
+    Előkövetelmények
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#feladatok" class="md-nav__link">
+    Feladatok
+  </a>
+  
+    <nav class="md-nav" aria-label="Feladatok">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#docker-desktop" class="md-nav__link">
+    Docker Desktop
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docker-hello-world" class="md-nav__link">
+    Docker hello world
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kontener-futtatasa-interaktiv-modon" class="md-nav__link">
+    Konténer futtatása interaktív módon
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docker-cli-parancsok-strukturaja" class="md-nav__link">
+    Docker CLI parancsok struktúrája
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#volume-csatolasa-bind-mount" class="md-nav__link">
+    Volume csatolása (bind mount)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#port-mappeles" class="md-nav__link">
+    Port mappelés
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#muveletvegzes-futo-kontenerben" class="md-nav__link">
+    Műveletvégzés futó konténerben
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docker-registry" class="md-nav__link">
+    Docker registry
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#keszitsunk-sajat-image-et" class="md-nav__link">
+    Készítsünk saját image-et
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#takaritas" class="md-nav__link">
+    Takarítás
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#docker-konterek-esemenyek-megfigyelese" class="md-nav__link">
+    Docker kontérek események megfigyelése
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tovabbi-olvasnivalo" class="md-nav__link">
+    További olvasnivaló
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/bmeviauav42/jegyzetek/edit/master/docs/Docker/Docker-alapok.md" title="Oldal szerkesztése" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                  
+                
+                
+                  <h1>Docker alapok</h1>
+                
+                <h2 id="eloadas">Előadás<a class="headerlink" href="#eloadas" title="Permanent link">&para;</a></h2>
+<p><a href="https://www.aut.bme.hu/Upload/Course/VIAUAV42/hallgatoi_jegyzetek/02-Kontenerek%20Docker.pdf">Konténer-technológiák és Docker alapok</a></p>
+<h2 id="cel">Cél<a class="headerlink" href="#cel" title="Permanent link">&para;</a></h2>
+<p>A labor célja megismerni a Docker konténerek használatának alapjait és a leggyakrabban használt Docker CLI parancsokat.</p>
+<h2 id="elokovetelmenyek">Előkövetelmények<a class="headerlink" href="#elokovetelmenyek" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Docker Desktop<ul>
+<li>A laboron Windows platformot használunk, azonban a feladatok Linuxon és Mac-en is megoldhatóak (a könyvtár elérési útvonalakat megfelelően átírva).</li>
+<li>Verzió: 2.1 vagy 2.3+ (2.2 <strong>nem</strong> jó)</li>
+</ul>
+</li>
+<li>Alap Linux parancsok ismerete. Érdemes átnézni pl.:<ul>
+<li><a href="http://bmeaut.github.io/snippets/snippets/0700_LinuxBev/">http://bmeaut.github.io/snippets/snippets/0700_LinuxBev/</a></li>
+<li><a href="https://maker.pro/linux/tutorial/basic-linux-commands-for-beginners">https://maker.pro/linux/tutorial/basic-linux-commands-for-beginners</a></li>
+<li><a href="https://www.pcsuggest.com/basic-linux-commands/">https://www.pcsuggest.com/basic-linux-commands/</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="feladatok">Feladatok<a class="headerlink" href="#feladatok" title="Permanent link">&para;</a></h2>
+<h3 id="docker-desktop"><em>Docker Desktop</em><a class="headerlink" href="#docker-desktop" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Indítsuk el a <em>Docker Desktop</em>-ot.</li>
+<li>Keressük meg a tálcán az ikont.</li>
+<li>Nézzük meg a beállítási lehetőségeit.</li>
+<li>Keressük meg a <em>Switch to Linux containers / Switch to Windows containers</em> parancsokat.</li>
+<li>Csak Windows-on: keressük meg a háttérben futó Hyper-V VM-et.</li>
+<li>Csak Windows-on: Ha tudjuk, kapcsoljuk be a WSL2-t.</li>
+</ul>
+<h3 id="docker-hello-world">Docker <em>hello world</em><a class="headerlink" href="#docker-hello-world" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Nyissunk egy <em>PowerShell</em> konzolt, és adjuk ki a következő parancsokat.</li>
+<li><code>docker --version</code><ul>
+<li>Ezzel ellenőrizhetjük, hogy a docker CLI elérhető-e.</li>
+</ul>
+</li>
+<li><code>docker run hello-world</code><ul>
+<li><em>hello-word</em> egy image neve: <a href="https://hub.docker.com/_/hello-world">https://hub.docker.com/_/hello-world</a></li>
+<li>Image letöltődik, elindul, lefut a benne leírt program.</li>
+</ul>
+</li>
+</ul>
+<h3 id="kontener-futtatasa-interaktiv-modon">Konténer futtatása interaktív módon<a class="headerlink" href="#kontener-futtatasa-interaktiv-modon" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Add ki a következő parancsot: <code>docker run -it ubuntu</code><ul>
+<li>Nézzük meg a fájlrendszert: <code>ls</code></li>
+<li>Lépjünk ki az interaktív shell-ből: <code>exit</code></li>
+</ul>
+</li>
+<li>Konténer terminált, mert a bash folyamat megállt az <code>exit</code> hatására. <strong>Konténer addig fut, amíg a benne levő alkalmazás (folyamat) fut.</strong></li>
+<li>Leállt konténer nem törlődik automatikusan, tartalma nem veszik el: <code>docker ps -a</code>. Nézzük meg a parancs eredményét. Keressük meg a konténerek id-ját.</li>
+<li>Távolítsuk el a két konténert, amit mi indítottunk: <code>docker rm &lt;id1&gt; &lt;id2&gt;</code></li>
+</ul>
+<h3 id="docker-cli-parancsok-strukturaja">Docker CLI parancsok struktúrája<a class="headerlink" href="#docker-cli-parancsok-strukturaja" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Adjuk ki a <code>docker</code> parancsot a help-hez.</li>
+<li>Adminisztratív parancsok: <em>mivel mit</em>, pl. <code>docker image ls</code></li>
+<li>Kezelő parancsok: <em>parancs argumentumok</em>, pl. <code>docker rmi &lt;id&gt;</code></li>
+<li>Gyakran használtak:<ul>
+<li>Konténerek kezelése<ul>
+<li><code>docker container ls [-all]</code> avagy <code>docker ps [-a]</code></li>
+<li><code>docker run [opciók] &lt;image&gt;</code></li>
+<li><code>docker stop &lt;id&gt;</code></li>
+<li><code>docker rm &lt;id&gt;</code></li>
+</ul>
+</li>
+<li>Image-ek kezelése<ul>
+<li><code>docker pull &lt;image&gt;</code></li>
+<li><code>docker image ls</code> avagy <code>docker images</code></li>
+<li><code>docker rmi &lt;image&gt;</code></li>
+<li><code>docker tag &lt;id&gt; &lt;tag&gt;</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Konkrét parancshoz segítség: <code>docker &lt;parancs&gt; --help</code></li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Minden konténer (futó is!) eltávolítása <code>docker rm -f $(docker ps -aq)</code> (PowerShell)</p>
+</div>
+<h3 id="volume-csatolasa-bind-mount"><em>Volume</em> csatolása (<em>bind mount</em>)<a class="headerlink" href="#volume-csatolasa-bind-mount" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Hozzunk létre egy munkakönyvtárat, pl. <code>c:\work\&lt;neptun&gt;\foo</code></li>
+<li>Indítsunk el egy konténert úgy, hogy ezt a könyvtárat felcsatoljuk<ul>
+<li><code>docker run -it --rm -v c:\work\&lt;neptun&gt;\foo:/bar ubuntu</code></li>
+<li>szintaktika: helyi teljes elérési útvonal <em>kettőspont</em> konténeren belüli teljes elérési útvonal</li>
+<li>Konténeren belül: <code>ls</code>, látjuk a /bar könyvtárat</li>
+<li>Írjunk bele: <code>echo "hello" &gt; /bar/a.txt</code></li>
+<li><code>exit</code></li>
+</ul>
+</li>
+<li>Nézzük meg a munkakönyvtárunkat.</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><code>--rm</code> opció törli a konténert leállás után; pl. teszteléshez hasznos, mint most.</p>
+</div>
+<h3 id="port-mappeles">Port mappelés<a class="headerlink" href="#port-mappeles" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Indítsunk el egy <em>nginx</em> webszervert: <code>docker run -d -p 8085:80 nginx</code><ul>
+<li><code>-d</code> opció: háttérben fut, a konzolt "visszakaptunk", amint elindult a konténer, és kiírja az image id-t</li>
+<li><code>-p</code> helyi port <em>kettőspont</em> konténeren belüli port</li>
+</ul>
+</li>
+<li>Nyissuk meg böngészőben ezt a címet: <a href="http://localhost:8085">http://localhost:8085</a></li>
+<li>Nézzük meg a konténer logjait: <code>docker logs &lt;id&gt;</code></li>
+<li>Állítsuk le a konténert: <code>docker stop &lt;id&gt;</code></li>
+</ul>
+<h3 id="muveletvegzes-futo-kontenerben">Műveletvégzés futó konténerben<a class="headerlink" href="#muveletvegzes-futo-kontenerben" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Indítsunk el egy <em>nginx</em> webszervert: <code>docker run -d -p 8085:80 nginx</code><ul>
+<li>Jegyezzük meg a kiírt konténer id-t, alább használni fogjuk.</li>
+</ul>
+</li>
+<li>Futtassunk le egy parancsot a konténerben: <code>docker exec &lt;id&gt; ls /</code><ul>
+<li>A parancs kilistázta a konténer fájlrendszerének gyökerét.</li>
+</ul>
+</li>
+<li>Kérhetünk egy shell-t is a konténerbe ily módon: <code>docker exec -it &lt;id&gt; /bin/bash</code><ul>
+<li>Az <code>-it</code> opció az interaktivitásra utal, azaz a konzolunkat "hozzáköti" a konténerben futó shellhez.</li>
+<li>Tipikusan vagy <code>/bin/bash</code> vagy <code>/bin/sh</code> a Linux konténerekben a shell. Utóbbi az <em>alpine</em> alapú konténerekben gyakori.</li>
+<li>Ebben az interaktív shell-ben bármit csinálhatunk, beléphetünk könyvtárakba, megnézhetünk fájlokat, stb. (Arra viszont ügyeljünk, hogy az így végzett módosításaink elvesznek, amikor a konténer törlésre kerül.)</li>
+<li>Például nézzük meg az nginx konfigurációját: <code>cat /etc/nginx/conf.d/default.conf</code></li>
+<li>Lépjünk ki az <code>exit</code> utasítással. Ez csak a "második" shellt állítja le, a konténer még fut, mert az eredeti indítási pont is még fut.</li>
+</ul>
+</li>
+<li>Ha szükségünk van egy fájlra, akkor azt kimásolhatjuk a futó konténerből: <code>docker cp &lt;id&gt;:/etc/nginx/conf.d/default.conf c:\work\nginx.conf</code><ul>
+<li>Szintaktikája: <code>docker cp &lt;id&gt;:&lt;/full/path&gt; &lt;cél/hely&gt;</code></li>
+<li>A másolás az ellenkező irányba is működik, helyi gépről a konténerbe.</li>
+</ul>
+</li>
+</ul>
+<h3 id="docker-registry"><em>Docker registry</em><a class="headerlink" href="#docker-registry" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Korábban használt parancs: <code>docker run ubuntu</code> Az <em>ubuntu</em> az image neve. Ez egy un. registry-ből jön.</li>
+<li>Alapértelmezett registry: <a href="https://hub.docker.com">https://hub.docker.com</a><ul>
+<li>Tipikusan open-source szoftverek image-ei, és az általunk is használt alap image-ek.</li>
+<li>Vannak továbbiak is (Azure, Google, stb.)</li>
+<li>Analógia: NPM csomagkezelő, NuGet.org</li>
+</ul>
+</li>
+<li>Image neve valójában nem <code>ubuntu</code>, hanem <code>index.docker.io/ubuntu:latest</code><ul>
+<li><code>index.docker.io</code> registry szerver elérési útvonala</li>
+<li><code>ubuntu</code> image neve (lehet többszintű is)</li>
+<li><code>:latest</code> tag neve</li>
+</ul>
+</li>
+<li>Hasonló példa: <code>mcr.microsoft.com/dotnet/core/runtime:2.1</code></li>
+<li>Két fajta registry: publikus (pl. Docker Hub) és privát<ul>
+<li>Privát registry esetén: <code>docker login &lt;url&gt;</code> és <code>docker logout &lt;url&gt;</code></li>
+</ul>
+</li>
+<li>Letöltés a registry-ből: <code>docker pull mcr.microsoft.com/dotnet/core/runtime:2.1</code><ul>
+<li>Ugyan a <em>run</em> parancs is letölti, de csak akkor, ha még nem létezik. Nem ellenőrzi viszont, hogy nincs-e újabb image verzió publikálva. A <em>pull</em> mindig frisset szed le.</li>
+</ul>
+</li>
+</ul>
+<h3 id="keszitsunk-sajat-image-et">Készítsünk saját image-et<a class="headerlink" href="#keszitsunk-sajat-image-et" title="Permanent link">&para;</a></h3>
+<p>Kövesd az alábbi lépéseket egy saját image elkészítéséhez.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Az alábbinál lesz jobb megoldás, lásd következő órán.</p>
+</div>
+<ol>
+<li>Indíts el egy nginx image-et: <code>docker run -d -p 8085:80 nginx</code> Jegyezd meg az image id-t, alább többször is használni fogjuk.</li>
+<li>"Lépj be" a futó konténerbe egy interaktív bash shellben: <code>docker exec -it &lt;id&gt; /bin/bash</code></li>
+<li>A bash shellben lépj be az nginx által kiszolgált index html-t tartalmazó mappába: <code>cd /usr/share/nginx/html/</code></li>
+<li>Nézd meg a mappa tartalmát: <code>ls</code></li>
+<li>Írd felül az <code>index.html</code> tartalmát: <code>echo "hello from nginx" &gt; index.html</code></li>
+<li>Lépj ki a shellből: <code>exit</code></li>
+<li>Ellenőrizd meg, hogy a konténer még fut: <code>docker ps</code></li>
+<li>Nyisd meg böngészőből a <a href="http://localhost:8085">http://localhost:8085</a> címet, ellenőrizd, hogy megjelenik a saját tartalom</li>
+<li>Készíts egy pillanatmentést a konténer jelenlegi állapotáról: <code>docker commit &lt;id&gt;</code></li>
+<li>Az előbbi parancs készített egy image-et, aminek kiírta a hash-ét. Ellenőrizd, hogy tényleg létezik-e ez az image: <code>docker images</code></li>
+<li>Állítsd le a háttérben futó konténert: <code>docker stop &lt;id&gt;</code></li>
+<li>Taggeld meg az image-et: <code>docker tag &lt;imageid&gt; mynginx</code> (itt már az image id-ja kell)</li>
+<li>Indíts el egy új konténert az előbb létrehozott saját image-ből: <code>docker run -it --rm -p 8086:80 mynginx</code> (A portszám szándékosan más, hogy biztosan legyünk benne, nem a korábban futóhoz csatlakozunk - ha mégse állítottuk volna azt le.)</li>
+<li>Nyisd meg böngészőből a <a href="http://localhost:8086">http://localhost:8086</a> címet. Látható, hogy ez a módosított tartalmat jeleníti meg. Tehát <code>mynginx</code> néven létrehoztunk egy saját image-et.</li>
+</ol>
+<h3 id="takaritas">Takarítás<a class="headerlink" href="#takaritas" title="Permanent link">&para;</a></h3>
+<p>Fejlesztés közben sok ideiglenes image keletkezik, és konténereket hagyunk hátra. Add ki a következő parancsot a nem futó konténerek törléséhez és az ideiglenes (címke nélküli) image-ek törléséhez: <code>docker system prune</code></p>
+<h2 id="docker-konterek-esemenyek-megfigyelese">Docker kontérek események megfigyelése<a class="headerlink" href="#docker-konterek-esemenyek-megfigyelese" title="Permanent link">&para;</a></h2>
+<p><img alt="Docker events lifecycle" src="https://miro.medium.com/max/1129/1*vca4e-SjpzSL5H401p4LCg.png" /></p>
+<ul>
+<li>Nyissunk meg 2 PowerShell konzolt egymást mellé.  </li>
+<li>A bal oldali konzolon indítsuk el a docker eseményfigyelő szolgáltatását <code>docker events</code>  </li>
+<li>A jobb oldali konzolon indítsunk el egy nginx konténert <code>docker run -d -p 8085:80 --name nginx nginx</code></li>
+<li>Ekkor a bal oldalon láthatóak az események. Figyeljük meg, milyen metrikák találhatóak itt.  </li>
+<li>Hogy olvashatóbb legyen, állítsuk le a processt, <code>CTRL-C</code>-vel, majd: <code>docker events | cut -c1-70</code></li>
+<li>Szimuláljunk konténer meghibásodást: <code>docker kill nginx</code>  </li>
+<li>Adjuk ki a <code>docker rm -f nginx</code> parancsot, mit láthatunk? Vessük össze a mellékelt ábra eseményeivel.  </li>
+</ul>
+<h2 id="tovabbi-olvasnivalo">További olvasnivaló<a class="headerlink" href="#tovabbi-olvasnivalo" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Digest-ek: <a href="https://engineering.remind.com/docker-image-digests/">https://engineering.remind.com/docker-image-digests/</a></li>
+<li>Image layerek: <a href="https://docs.docker.com/v17.09/engine/userguide/storagedriver/imagesandcontainers/">https://docs.docker.com/v17.09/engine/userguide/storagedriver/imagesandcontainers/</a></li>
+</ul>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+
+<!-- Application footer -->
+<footer class="md-footer">
+
+  <!-- Further information -->
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+
+      <!-- Copyright and theme information -->
+      <div class="md-footer-copyright">
+        
+        <div class="md-footer-copyright__highlight">
+          Copyright &copy; BME AUT
+        </div>
+        
+      </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/vendor.a0c4167b.min.js"></script>
+      <script src="../../assets/javascripts/bundle.fb26dd1d.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "M\u00e1sol\u00e1s v\u00e1g\u00f3lapra", "clipboard.copied": "V\u00e1g\u00f3lapra m\u00e1solva", "search.config.lang": "hu", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Keres\u00e9shez \u00edrj ide valamit", "search.result.none": "Nincs tal\u00e1lat", "search.result.one": "1 egyez\u0151 dokumentum", "search.result.other": "# egyez\u0151 dokumentum"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../..",
+          features: ["tabs"],
+          search: Object.assign({
+            worker: "../../assets/javascripts/worker/search.37585f48.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>
