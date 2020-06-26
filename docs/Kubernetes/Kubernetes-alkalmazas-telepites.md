@@ -19,8 +19,8 @@ A labor célja egy alkalmazás telepítése Kubernetes klaszterbe, valamint a fr
 - Kubernetes dashboard
     - Telepítése és használata korábbi anyag szerint.
 - Telepítendő alkalmazás
-    - <https://github.com/bmeviauav42/todoapp/tree/megoldas/kubernetes>
-    - `git clone -b megoldas/kubernetes https://github.com/bmeviauav42/todoapp.git`
+    - <https://github.com/bmeviauav42/todoapp>
+    - `git clone https://github.com/bmeviauav42/todoapp.git`
 
 ## Feladatok
 
