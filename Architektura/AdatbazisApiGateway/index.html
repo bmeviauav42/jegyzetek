@@ -726,7 +726,7 @@
 </li>
 <li>
 <p>Ismerjük meg a <code>users</code> mikroszolgáltatás funkcióit:</p>
-</li>
+<ul>
 <li>
 <p>Indítsunk el egy mongodb-t a <em>compose</em> fájlban.</p>
 </li>
@@ -736,38 +736,46 @@
 <li>
 <p>Próbáljuk ki a lekérdezéseket Postmanból (a szolgáltatás a <a href="http://localhost:5083/api/users">http://localhost:5083/api/users</a> címen érhető el).</p>
 </li>
+</ul>
+</li>
 <li>
 <p>Ismerjük meg a<code>todos</code> mikroszolgáltatás funkcióit:</p>
-</li>
+<ul>
 <li>
 <p>Nézzük meg a <code>/api/todos</code> címeket kiszolgáló kérések C# kódját és a mögöttes repository-t, valamint a Redis-alapú cache-elést.</p>
 </li>
 <li>
 <p>Próbáljuk ki a lekérdezéseket Postmanból (a szolgáltatás a <a href="http://localhost:5081/api/todos">http://localhost:5081/api/todos</a> címen érhető el.).</p>
 </li>
+</ul>
+</li>
 <li>
 <p>Ismertjük meg a user törlés folyamatát. A törlési kérés a <code>users</code> mikroszolgáltatáshoz érkezzen, de a törölt userhez tartozó note-okat is töröljük.</p>
-</li>
+<ul>
 <li>
 <p>A <code>users</code> szolgáltatásban törlés esetén értesíti a <code>todos</code>-nak Redis-en keresztül.</p>
 </li>
 <li>
 <p>A <code>todos</code> szolgáltatás háttérben futó pollozással dolgozza fel a törlés feladatokat.</p>
 </li>
+</ul>
+</li>
 <li>
 <p>Ismerjük meg a Traefik API Gateway-t.</p>
-</li>
+<ul>
 <li>
 <p>Nézzük meg a Traefik konténer elindítását és a többi konténeren a label-öket.</p>
 </li>
 <li>
 <p>A gatway-en keresztül egy porton érhető el a teljes alkalmazás a <a href="http://localhost:5080">http://localhost:5080</a> címen.</p>
 </li>
-<li>
-<p>Konfiguráljuk be a <em>forward authentication</em>-t.</p>
+</ul>
 </li>
 <li>
-<p>Próbáljuk ki, hogyan működik a REST API, ha a <code>users</code> mikroszolgáltatás kódjában a <code>/api/auth</code> válaszát lecseréljük.</p>
+<p>Konfiguráljuk be a <em>forward authentication</em>-t.</p>
+<ul>
+<li>Próbáljuk ki, hogyan működik a REST API, ha a <code>users</code> mikroszolgáltatás kódjában a <code>/api/auth</code> válaszát lecseréljük.</li>
+</ul>
 </li>
 </ol>
                 
