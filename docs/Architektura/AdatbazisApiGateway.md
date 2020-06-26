@@ -28,32 +28,32 @@ A labor célja egy mikroszolgáltatás architektúrájú alkalmazás felépíté
 
 2. Nyissuk meg Visual Studion-ban a solution-t és ismerjük meg a forráskód felépítését.
 
-3. Implementáljuk a `users` mikroszolgáltatásban a `GET /api/users` és `GET /api/users/<id>` címeket kiszolgáló kéréseket.
+3. Ismerjük meg a `users` mikroszolgáltatás funkcióit:
 
-   - Indítsunk el egy mongodb-t a _compose_ fájlban.
+    - Indítsunk el egy mongodb-t a _compose_ fájlban.
 
-   - Próbáljuk ki a lekérdezéseket Postmanból (a szolgáltatás a <http://localhost:5083/api/users> címen érhető el.).
+    - Nézzük meg a `/api/users` címeket kiszolgáló kérések Python kódját.
 
-4. Implementáljuk a `todos` mikroszolgáltatásban a `GET /api/todos` és `GET /api/todos/<id>` címeket kiszolgáló kéréseket.
+    - Próbáljuk ki a lekérdezéseket Postmanból (a szolgáltatás a <http://localhost:5083/api/users> címen érhető el).
 
-   - A repository hiányzó kódját is írjuk meg.
+4. Ismerjük meg a`todos` mikroszolgáltatás funkcióit:
 
-   - Használjuk ki a Redis cache-t az utóbbi lekérdezéshez.
+    - Nézzük meg a `/api/todos` címeket kiszolgáló kérések C# kódját és a mögöttes repository-t, valamint a Redis-alapú cache-elést.
 
-   - Próbáljuk ki a lekérdezéseket Postmanból (a szolgáltatás a <http://localhost:5081/api/todos> címen érhető el.).
+    - Próbáljuk ki a lekérdezéseket Postmanból (a szolgáltatás a <http://localhost:5081/api/todos> címen érhető el.).
 
-5. Implementáljuk user törlést. A törlési kérés a `users` mikroszolgáltatáshoz érkezzen, de a törölt userhez tartozó note-okat is töröljük.
+5. Ismertjük meg a user törlés folyamatát. A törlési kérés a `users` mikroszolgáltatáshoz érkezzen, de a törölt userhez tartozó note-okat is töröljük.
 
-   - Írjuk meg a `users` szolgáltatásban a törlést.
+    - A `users` szolgáltatásban törlés esetén értesíti a `todos`-nak Redis-en keresztül.
 
-   - Szóljunk a `todos`-nak Redis-en keresztül.
+    - A `todos` szolgáltatás háttérben futó pollozással dolgozza fel a törlés feladatokat.
 
-   - A `todos` szolgáltatás háttérben futó pollozással dolgozza fel a törlés feladatokat.
+6. Ismerjük meg a Traefik API Gateway-t.
 
-6. Tegyünk egy Traefik API Gateway-t az összes mikroszolgáltatás elé.
+    - Nézzük meg a Traefik konténer elindítását és a többi konténeren a label-öket.
 
-   - Most már használható lesz a web frontend a <http://localhost:5080> címen.
+    - A gatway-en keresztül egy porton érhető el a teljes alkalmazás a <http://localhost:5080> címen.
 
 7. Konfiguráljuk be a _forward authentication_-t.
 
-   - Próbáljuk ki, hogyan működik a REST API, ha a `users` mikroszolgáltatás kódjában a `/api/auth` válaszát lecseréljük.
+    - Próbáljuk ki, hogyan működik a REST API, ha a `users` mikroszolgáltatás kódjában a `/api/auth` válaszát lecseréljük.
