@@ -725,43 +725,43 @@
 <p>Nyissuk meg Visual Studion-ban a solution-t és ismerjük meg a forráskód felépítését.</p>
 </li>
 <li>
-<p>Implementáljuk a <code>users</code> mikroszolgáltatásban a <code>GET /api/users</code> és <code>GET /api/users/&lt;id&gt;</code> címeket kiszolgáló kéréseket.</p>
+<p>Ismerjük meg a <code>users</code> mikroszolgáltatás funkcióit:</p>
 </li>
 <li>
 <p>Indítsunk el egy mongodb-t a <em>compose</em> fájlban.</p>
 </li>
 <li>
-<p>Próbáljuk ki a lekérdezéseket Postmanból (a szolgáltatás a <a href="http://localhost:5083/api/users">http://localhost:5083/api/users</a> címen érhető el.).</p>
+<p>Nézzük meg a <code>/api/users</code> címeket kiszolgáló kérések Python kódját.</p>
 </li>
 <li>
-<p>Implementáljuk a <code>todos</code> mikroszolgáltatásban a <code>GET /api/todos</code> és <code>GET /api/todos/&lt;id&gt;</code> címeket kiszolgáló kéréseket.</p>
+<p>Próbáljuk ki a lekérdezéseket Postmanból (a szolgáltatás a <a href="http://localhost:5083/api/users">http://localhost:5083/api/users</a> címen érhető el).</p>
 </li>
 <li>
-<p>A repository hiányzó kódját is írjuk meg.</p>
+<p>Ismerjük meg a<code>todos</code> mikroszolgáltatás funkcióit:</p>
 </li>
 <li>
-<p>Használjuk ki a Redis cache-t az utóbbi lekérdezéshez.</p>
+<p>Nézzük meg a <code>/api/todos</code> címeket kiszolgáló kérések C# kódját és a mögöttes repository-t, valamint a Redis-alapú cache-elést.</p>
 </li>
 <li>
 <p>Próbáljuk ki a lekérdezéseket Postmanból (a szolgáltatás a <a href="http://localhost:5081/api/todos">http://localhost:5081/api/todos</a> címen érhető el.).</p>
 </li>
 <li>
-<p>Implementáljuk user törlést. A törlési kérés a <code>users</code> mikroszolgáltatáshoz érkezzen, de a törölt userhez tartozó note-okat is töröljük.</p>
+<p>Ismertjük meg a user törlés folyamatát. A törlési kérés a <code>users</code> mikroszolgáltatáshoz érkezzen, de a törölt userhez tartozó note-okat is töröljük.</p>
 </li>
 <li>
-<p>Írjuk meg a <code>users</code> szolgáltatásban a törlést.</p>
-</li>
-<li>
-<p>Szóljunk a <code>todos</code>-nak Redis-en keresztül.</p>
+<p>A <code>users</code> szolgáltatásban törlés esetén értesíti a <code>todos</code>-nak Redis-en keresztül.</p>
 </li>
 <li>
 <p>A <code>todos</code> szolgáltatás háttérben futó pollozással dolgozza fel a törlés feladatokat.</p>
 </li>
 <li>
-<p>Tegyünk egy Traefik API Gateway-t az összes mikroszolgáltatás elé.</p>
+<p>Ismerjük meg a Traefik API Gateway-t.</p>
 </li>
 <li>
-<p>Most már használható lesz a web frontend a <a href="http://localhost:5080">http://localhost:5080</a> címen.</p>
+<p>Nézzük meg a Traefik konténer elindítását és a többi konténeren a label-öket.</p>
+</li>
+<li>
+<p>A gatway-en keresztül egy porton érhető el a teljes alkalmazás a <a href="http://localhost:5080">http://localhost:5080</a> címen.</p>
 </li>
 <li>
 <p>Konfiguráljuk be a <em>forward authentication</em>-t.</p>
