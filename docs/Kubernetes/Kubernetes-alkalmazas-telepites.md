@@ -2,7 +2,7 @@
 title: Alkalmazás telepítése Kubernetes klaszterbe
 ---
 
-## Labor célja
+## Cél
 
 A labor célja egy alkalmazás telepítése Kubernetes klaszterbe, valamint a frissítés módjának megismerése. A telepítéshez és frissítéshez részben Helm chartot, részben magunk által elkészített yaml erőforrás leírókat használunk.
 

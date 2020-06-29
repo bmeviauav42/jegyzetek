@@ -57,6 +57,7 @@ nav:
   - DevOps:
       - DevOps/Nyomkovetes.md
       - DevOps/Logging-Health-Checks.md
+      - DevOps/Prometheus-monitoring.md
   - Kubernetes:
       - Kubernetes/Kubernetes-alapok.md
       - Kubernetes/Kubernetes-alkalmazas-telepites.md
