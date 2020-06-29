@@ -209,12 +209,29 @@ A [_Web UI_ / _Dashboard_](https://kubernetes.io/docs/tasks/access-application-c
 
 A dashboard alapvetően felhasználó authentikáció után érhető el. Az egyszerűség végett mi ezt most kikapcsoljuk, és authentikáció nélkül fogjuk használni.
 
-1. Telepítsük a dashboard-ot: `kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v1.10.1/src/deploy/alternative/kubernetes-dashboard.yaml`
+1. Telepítsük a dashboard-ot:
+
+    - Telepítsük alapbeállításokkal: `kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/aio/deploy/alternative.yaml`
+
+    - Szerkesszünk bele a konténer argumentumaiba, hogy engedélyezzük az anonim belépést: `kubectl edit deployment kubernetes-dashboard --namespace kubernetes-dashboard`
+
+        A parancs letölti és megnyitja a _deployment_ leíróját. Keressük meg a konténer indítási argumentumait, és adjunk hozzá még két sort (ügyeljünk a megfelelő behúzásra):
+
+        ```yaml hl_lines="4-5"
+        - args:
+          - --namespace=kubernetes-dashboard
+          - --enable-insecure-login
+          - --enable-skip-login
+          - --authentication-mode=basic
+        ```
+
+        !!! important
+            Ez csak helyi működési módban javasolt! Most szándékosan kikerültük az authentikációt!
 
     !!! note
         Értelemszerűen a dashboard-ot csak egyszer kell egy klaszterbe telepíteni.
 
-1. Adjunk egy pár másodpercet a felállásra. Nézzük meg, hogy rendben fut-e: `kubectl get pods -n kube-system -l k8s-app=kubernetes-dashboard`
+1. Adjunk egy pár másodpercet a felállásra. Nézzük meg, hogy rendben fut-e: `kubectl get pods -n kubernetes-dashboard`
 
     !!! success
         Akkor jó, ha a _kubernetes-dashboard-..._ nevű pod _running_ állapotban van.
@@ -225,14 +242,14 @@ A dashboard alapvetően felhasználó authentikáció után érhető el. Az egys
 
     - Ez a proxy nem csak helyben futtatott klaszterrel használható. Ha a felhőben, tőlünk távol fut a klaszter, ugyanígy tudunk vele kommunikálni.
 
-1. Nyissuk meg böngészőben: <http://localhost:8001/api/v1/namespaces/kube-system/services/kubernetes-dashboard:/proxy/>
+1. Nyissuk meg böngészőben: <http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/kubernetes-dashboard:/proxy/>
 
     - Értelmezzük az URL-t:
 
         - `localhost:8001`: a proxy helyi portja
         - `/api/v1`: Kubernetes Api verzió, ez mindig így néz ki
-        - `/namespaces/kube-system`: a _kube-system_ névtérben szeretnénk elérni egy elemet
-        - `/services/kubernetes-dashboard:` a névtéren belül a service-ek közül a "kubernetes-dashboard" nevű szolgáltatást szeretnénk elérni
+        - `/namespaces/kubernetes-dashboard`: a _kubernetes-dashboard_ névtérben szeretnénk elérni egy elemet
+        - `/services/kubernetes-dashboard:` a névtéren belül a service-ek közül a _kubernetes-dashboard_ nevű szolgáltatást szeretnénk elérni
         - `/proxy`: kérjük az erőforrás proxy-zását (ez mindig így néz ki)
 
 1. Ismerkedjünk meg a dashboard webes felületével:
