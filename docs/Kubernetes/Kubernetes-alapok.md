@@ -65,7 +65,7 @@ A labor célja megismerni a Kubernetes használatának alapjait, a _podok_, _Dep
 
 A futtatás elemi egysége a pod. Indítsunk el egy podot.
 
-1. A létrehozáshoz podot yaml leíróban definiáljuk, és a `kubectl create` parancsnak átadjuk stdin-ről olvasva:
+1. A létrehozáshoz podot yaml leíróban definiáljuk, és a `kubectl create` parancsnak átadjuk stdin-ről olvasva (_Windows Command promptban_ adjuk ki a parancsot):
 
     ```bash
     kubectl create -f -
@@ -86,13 +86,15 @@ A futtatás elemi egysége a pod. Indítsunk el egy podot.
 
 1. Nézzük meg a pod logjait: `kubectl logs counter`
 
-   - Ha akarjuk, tegyük hozzá a `-f` kapcsolót is (`kubectl logs -f counter`) a log követéséhez. Ctrl-C-vel léphetünk ki a log folyamatos követéséből.
+    !!! tip
+        Ha gondoljuk, tegyük hozzá a `-f` kapcsolót is (`kubectl logs -f counter`) a log követéséhez. Ctrl-C-vel léphetünk ki a log folyamatos követéséből.
 
 1. Töröljük a podot: `kubectl delete pod counter`
 
 1. Ellenőrizzük, hogy a pod tényleg eltűnik egy kis idő múlva: `kubectl get pod`
 
-   - A pod törlése nem azonnali. A benne futó konténerek leállás jelzést kapnak, és ők maguk terminálhatnak. Ha ez nem történik, meg, akkor kis idő múlva megszűnteti őket a rendszer.
+    !!! note
+        A pod törlése nem azonnali. A benne futó konténerek leállás jelzést kapnak, és ők maguk terminálhatnak. Ha ez nem történik, meg, akkor kis idő múlva megszűnteti őket a rendszer.
 
 ### Yaml leíró fájl
 
@@ -100,64 +102,62 @@ A yaml leíró begépelése a fentiek szerint nem kényelmes. Tipikusan komplex 
 
 1. Hozzunk létre egy új yaml fájt `createpod.yml` néven.
 
-    - Használhatjuk például Visual Studio Code-ot. Érdemes olyan szövegszerkesztővel dolgozni, amely ismeri a yaml szintaktikát.
+    !!! tip
+        Használhatjuk például Visual Studio Code-ot. Érdemes olyan szövegszerkesztővel dolgozni, amely ismeri a yaml szintaktikát.
 
 1. Másoljuk be a yaml fájlba az alábbiakat.
 
-      ```yaml
-      apiVersion: v1
-      kind: Pod
-      metadata:
-        name: counter
-      spec:
-        containers:
-          - name: count
-            image: ubuntu:16.04
-            args:
-              [bash, -c, 'for ((i=0; ;i++));do echo "$i: $(date)";sleep 5;done']
-      ```
+    ```yaml
+    apiVersion: v1
+    kind: Pod
+    metadata:
+      name: counter
+    spec:
+      containers:
+        - name: count
+          image: ubuntu:16.04
+          args:
+            [bash, -c, 'for ((i=0; ;i++));do echo "$i: $(date)";sleep 5;done']
+    ```
 
 1. A konzolunkban navigáljunk el abba a könyvtárba, ahol a yaml fájl van.
 
 1. Hozzuk létre a podot: `kubectl create -f createpod.yml`
 
-1. A pod létrejött. Ellenőrizzük: `kubectl get pod`, majd töröljük a podot: `kubectl delete pod counter`.
+1. A pod létrejött. Ellenőrizzük: `kubectl get pod`, majd töröljük a podot: `kubectl delete pod counter`
 
 ### Deployment létrehozása
 
-A podokat nem szoktuk közvetlenük létrehozni, hanem Deployment-re és ReplicaSet-re szoktunk bízni a kezelésüket és létrehozásukat.
+A podokat nem szoktuk közvetlenük létrehozni, hanem _Deployment_-re és _ReplicaSet_-re szoktunk bízni a kezelésüket és létrehozásukat.
 
 1. Hozzunk létre egy új yaml fájl `createdepl.yml` néven az alábbi tartalommal.
 
-      ```yaml
-      apiVersion: apps/v1
-      kind: Deployment
-      metadata:
-        name: counter
-      spec:
-        replicas: 1
-        selector:
-          matchLabels:
+    ```yaml
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: counter
+    spec:
+      replicas: 1
+      selector:
+        matchLabels:
+          app: counter
+      template:
+        metadata:
+          labels:
             app: counter
-        template:
-          metadata:
-            labels:
-              app: counter
-          spec:
-            containers:
-              - name: count
-                image: ubuntu:16.04
-                args:
-                  [
-                    bash,
-                    -c,
-                    'for ((i=0; ;i++));do echo "$i: $(date)";sleep 10;done',
-                  ]
-      ```
+        spec:
+          containers:
+            - name: count
+              image: ubuntu:16.04
+              args:
+                [bash, -c, 'for ((i=0; ;i++));do echo "$i: $(date)";sleep 5;done']
+    ```
 
 1. Hozzuk létre a Deployment-et: `kubectl apply -f createdepl.yml`
 
-   - Ezúttal nem `create`, hanem `apply` parancsot használunk. Az apply létrehozza, ha nem létezik, és módosítja az erőforrást, ha már létezik.
+    !!! info
+        Ezúttal nem `create`, hanem `apply` parancsot használunk. Az apply létrehozza, ha nem létezik, és módosítja az erőforrást, ha már létezik.
 
 1. Listázzuk a Deployment-eket, ReplicaSet-eket és a podokat:
 
@@ -165,27 +165,27 @@ A podokat nem szoktuk közvetlenük létrehozni, hanem Deployment-re és Replica
     - `kubectl get replicaset`
     - `kubectl get pod`
 
-    Vegyük észre, hogy a pod neve generált, a Deployment és a ReplicaSet alapján kap automatikusan egyet.
+    Vegyük észre, hogy a pod neve generált, a _Deployment_ és a _ReplicaSet_ alapján kap automatikusan egyet.
 
-1. Változtassuk meg a program futását: ne 5, hanem 10 másodpercenként írjuk ki az időt. Ezt a Deployment módosításával fogjuk megtenni. Gondolhatunk arra is, hogy a podot szerkesszük, de azt nem tehetjük meg. Egy futó pod nem cserélhető le. Ehelyett valójában egy új podot fogunk létrehozni indirekten.
+1. Változtassuk meg a program futását: ne 5, hanem 10 másodpercenként írjuk ki az időt. Ezt a _Deployment_ módosításával fogjuk megtenni. Gondolhatunk arra is, hogy a podot szerkesszük, de azt nem tehetjük meg. Egy futó pod nem cserélhető le. Ehelyett valójában egy új podot fogunk létrehozni indirekten.
 
     - Írjuk át a yaml fájlban a bash parancsban a sleep-et 10-re.
     - Mentsük a fájlt.
     - Alkalmazzuk a változtatásokat: `kubectl apply -f createdepl.yml`
     - Nézzük a podok változását: `kubectl get pod`
-        - Időzítés függően jó eséllyel látni fogjuk a régi leálló podot, és az újat is.
+    - Időzítés függően jó eséllyel látni fogjuk a régi leálló podot, és az újat is.
 
 1. "Lépjünk be" a futó podba egy új, interaktív shellben. Másoljuk ki a futó pod nevét, és adjuk ki a következő parancsot: `kubectl exec -it <podnév> /bin/bash`
 
     - Ahogy a docker-nél már láthattuk, egy új shell indul a pod konténerében, és ehhez csatlakozunk.
     - Ebben a shellben, ahogy natív docker esetében is, bármit megtehetünk.
 
-1. Töröljük a Deployment-et: `kubectl delete deployment counter`
+1. Töröljük a _Deployment_-et: `kubectl delete deployment counter`
 
-    - Ez a ReplicaSet-et és a podokat is törölni fogja.
+    - Ez a _ReplicaSet_-et és a podokat is törölni fogja.
 
 !!! info
-    A Deployment szolgál az alkalmazás verziónak frissítésére, kiadására. Podok helyett leggyakrabban Deploymenteket definiálunk.
+    A _Deployment_ szolgál az alkalmazás verziónak frissítésére, kiadására. Podok helyett leggyakrabban _Deployment_-eket definiálunk.
 
 ### Kubectl parancsok
 
@@ -205,17 +205,19 @@ A parancsokról `-h` kapcsolóval kaphatunk segítséget, pl. `kubectl describe 
 
 ### Dashboard és proxy-zás
 
-A [_Web UI_ / _Dashobard_](https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/) egy webalkalmazás, amely maga is Kubernetes alatt fut. Az alkalmazás a klaszter tartalmát jeleníti meg egy egyszerű, de könnyen áttekinthető webes felületen. (Mi az alkalmazás stabil 1.10-es verzióját fogjuk használni. A kettes verzió még béta állapotú, és bugos.)
+A [_Web UI_ / _Dashboard_](https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/) egy webalkalmazás, amely maga is Kubernetes alatt fut. Az alkalmazás a klaszter tartalmát jeleníti meg egy egyszerű, de könnyen áttekinthető webes felületen. (Mi az alkalmazás stabil 1.10-es verzióját fogjuk használni. A kettes verzió még béta állapotú, és bugos.)
 
 A dashboard alapvetően felhasználó authentikáció után érhető el. Az egyszerűség végett mi ezt most kikapcsoljuk, és authentikáció nélkül fogjuk használni.
 
 1. Telepítsük a dashboard-ot: `kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v1.10.1/src/deploy/alternative/kubernetes-dashboard.yaml`
 
-    - Értelemszerűen csak egyszer kell egy klaszterbe telepíteni.
+    !!! note
+        Értelemszerűen a dashboard-ot csak egyszer kell egy klaszterbe telepíteni.
 
 1. Adjunk egy pár másodpercet a felállásra. Nézzük meg, hogy rendben fut-e: `kubectl get pods -n kube-system -l k8s-app=kubernetes-dashboard`
 
-    - Akkor jó, ha a pod _running_ állapotban van.
+    !!! success
+        Akkor jó, ha a _kubernetes-dashboard-..._ nevű pod _running_ állapotban van.
 
 1. A webalkalmazás csak a klaszteren belül érhető el egyelőre. Látni fogjuk később, hogyan tudunk a klaszteren kívülre "publikálni". Egyelőre azonban egy másik, fejlesztéshez kényelmesen használható megoldást alkalmazunk. Nyissunk egy **új** konzolt, és adjuk ki a `kubectl proxy` parancsot.
 
@@ -261,7 +263,7 @@ Használjuk a dashboard-ot a következőkhöz. A feladatban végig a _kubernetes
     - Nézzük meg a service leíróját. A webes felületen a kék sárban a ceruza ikonra kattintsunk.
     - Keressük meg a `spec` leíróban a `selector`-t.
 
-        ```yaml
+        ```yaml hl_lines="9"
         kind: Service
         apiVersion: v1
         metadata:
@@ -273,11 +275,11 @@ Használjuk a dashboard-ot a következőkhöz. A feladatban végig a _kubernetes
             k8s-app: kubernetes-dashboard # label, amelyet a podokon keres
         ```
 
-      Ez a service azon podok felé osztja szét a kéréseket, amelyek a _k8s-app_ címkében _kubernetes-dashboard_ értékkel rendelkeznek.
+        Ez a service azon podok felé osztja szét a kéréseket, amelyek a _k8s-app_ címkében _kubernetes-dashboard_ értékkel rendelkeznek.
 
     - Nézzük meg a podban ugyanezt. A service alatt bármelyik podra kattintva navigáljunk el a podhoz, és kérjük le a leíróját az előbbiek szerint. Keressük meg a pod metaadataiban a fenti labelt.
 
-        ```yaml
+        ```yaml hl_lines="6"
         kind: Pod
         apiVersion: v1
         metadata:
@@ -309,7 +311,7 @@ Használjuk a dashboard-ot a következőkhöz. A feladatban végig a _kubernetes
           spec:
             containers: # leírja a podban a konténert
               - name: kubernetes-dashboard
-                image: "kubernetesui/dashboard:v2.0.0-beta4"
+                image: "kubernetesui/dashboard:v2.0.3"
                 args:
                   - "--namespace=kubernetes-dashboard"
                 ports:
