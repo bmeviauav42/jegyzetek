@@ -14,7 +14,7 @@ A labor célja egy alkalmazás telepítése Kubernetes klaszterbe, valamint a fr
     - Windows platformon: Docker Desktop
 - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
     - A binárisa legyen elérhető PATH-on.
-- [helm](https://helm.sh/docs/using_helm/#installing-helm)
+- [helm v3](https://helm.sh/docs/intro/install/)
     - A binárisa legyen elérhető PATH-on.
 - Kubernetes dashboard
     - Telepítése és használata korábbi anyag szerint.
@@ -37,46 +37,48 @@ Célunk nem csak az egyszeri telepítés, hanem az alkalmazás naprakészen tart
 1. Az api gateway-t és az adatbázisokat egyszer telepítjük.
 1. Az alkalmazásunk saját komponenseihez yaml alapú leírókat készítünk, amit `kubectl apply` segítségével fogunk telepíteni.
 
-### Helm inicializálása
+### Helm
 
-Mi a Helm 2-es verzióját fogjuk használni. (A 3-as verzió még csak release candidate állapotban van.) Ezen verzióban a Helm egy un. Tiller komponenst használt, amely a Kubernetes klaszterben fut. A Helm CLI ezzel a Tiller-rel beszélgetve éri el a klasztert. Ezért első feladatunk ezen Tiller telepítése. Ezt egy klaszter esetében csak egyetlen egyszer kell megtenni.
+Ellenőrizzük, hogy a `helm` CLI elérhető-e: `helm version`
 
-1. Ellenőrizzük, hogy a `helm` CLI elérhető-e: `helm version`
-
-1. Inicializáljuk a Helm-et, ami egyben telepíti a Tiller komponenst a Kubernetes klaszterbe: `helm init`
-
-    - Ez a parancs két dolgot végzett el.
-        1. Inicializálta a kliens oldalon, a gépünkön a Helm környezetét.
-        1. Telepítette a klaszterbe a Tiller-t.
-
-1. Nézzük meg, hogy tényleg van a klaszterben egy Tiller pod: `kubectl get pod -n kube-system`
-
-1. Kérdezzük le ismét a verziót: `helm version`
-
-     - Most már nem csak a kliens oldali CLI, hanem a Kubernetes-ben futó szerver oldal verzióját is megkapjuk.
-
-Megjegyzés: ha a Kubernetes klaszterben már fut Tiller, akkor is szükségünk lehet a Helm inicializálására egy új fejlesztői gépen. Ilyenkor a `--client-only` kapcsolóval kérhetjük csak a kliens oldal inicializálását. Új Tiller verzió telepítését pedig a `helm init --upgrade` paranccsal végezhetjük el.
+!!! note
+    A feladat során a Helm 3-as verzióját fogjuk használni. A korábbi verziója koncepcióban azonos, de működésében eltérő.
 
 ### Ingress Controller (api gateway) telepítése Helm charttal
 
-A Traefik-et Helm charttal fogjuk telepíteni. [Ezen Helm chart](https://github.com/helm/charts/tree/master/stable/traefik) **nem hivatalos**, harmadik féltől származik, ezért a használat előtt mindig érdemes alaposan megnézni a tartalmát. Nekünk most az egyszerűség végett praktikus lesz a Helm chart, mert a Traefik helyes működéséhez a Traefik konténer (Deployment) mellett egyéb elemekre is szükség lesz (klaszteren belüli hozzáférés szabályzás miatt).
+A Traefik-et [Helm charttal](https://github.com/containous/traefik-helm-chart) fogjuk telepíteni, mert a Traefik helyes működéséhez a Traefik konténer (Deployment) mellett egyéb elemekre is szükség lesz (klaszteren belüli hozzáférés szabályzás miatt).
 
-(Jelen pillanatban a Traefik Helm chart-ja csak az 1.7-es verziót támogatja. Készül egy [hivatalos Helm chart is a Traefik 2-es verziójához](https://github.com/containous/traefik-helm-chart), de ez még nem production ready, ezért most maradunk az 1.7-es Traefik verziónál.)
+!!! important
+    A Helm chartok nagy része harmadik féltől származik, így a klaszterünbe való telepítés előtt a tartalmukat érdemes alaposan megnézni.
 
-1. Frissítsük be a Helm repository-nkat: `helm repo update`.
+1. A Helm is repository-kkal dolgozik, ahonnan a chart-okat letölti. Ezeket regisztrálni kell. Regisztráljuk a Traefik hivatalos chart-ját tartalmazó repository-t, majd frissítsük az elérhető char-okat:
 
-1. Telepítsük: `helm install stable/traefik --name traefik --version "1.78.3" --set rbac.enabled=true --set logLevel=debug --set dashboard.enabled=true --set service.nodePorts.http=30080 --set serviceType=NodePort`
+    ```bash
+    helm repo add traefik https://containous.github.io/traefik-helm-chart
+    helm repo update
+    ```
 
-     - A `name` a Helm release nevét adja meg. Ezzel tudunk rá hivatkozni a jövőben.
+1. Telepítsük: `helm install traefik traefik/traefik --set ports.web.nodePort=32080 --set service.type=NodePort`
+
+     - A legelső `traefik` a Helm release nevét adja meg. Ezzel tudunk rá hivatkozni a jövőben.
+     - A `traefik/traefik` azonosítha a telepítendő chartot (repository/chartnév).
      - A `--set` kapcsolóval a chart változóit állítjuk be.
+
+    !!! info
+        A Traefik jelen konfigurációban _NodePort_ service típussal van konfigurálva, ami azt jelenti, lokálisan, helyben a megadott porton lesz csak elérhető. Ha publikusan elérhető klaszterben dolgozunk, akkor tipikusan _LoadBalancer_ service típust fogunk kérni, hogy publikus IP címet is kapjon a Traefik.
 
 1. Ellenőrizzük, hogy fut-e: `kubectl get pod`
 
      - Látunk kell egy traefik kezdetű podot.
 
-A Traefik jelen konfigurációban _NodePort_ service típussal van konfigurálva, ami azt jelenti, lokálisan, helyben a megadott porton lesz csak elérhető. Ha publikusan elérhető klaszterben dolgozunk, akkor tipikusan _LoadBalancer_ service típust fogunk kérni, hogy publikus IP címet is kapjon a Traefik.
+1. A Traefik dashboard-ja nem elérhető "kívülről". A dashboard segít minket látni a Traefik konfigurációját és működését. Mivel ez a klaszter belső állapotát publikálja, production üzemben valamilyen módon authentikálnunk kellene. Ezt most megkerülve `kubect` segítségével egy helyi portra továbbítjuk a Traefik dashboard-ot. A következő parancsot egy **új** konzolban adjuk ki, és utána hagyjuk nyitva a konzolt:
 
-Ha frissíteni szeretnénk később a Traefik-et, akkor azt a `helm upgrade traefik stable/traefik ...` paranccsal tudjuk megtenni.
+    ```bash
+    kubectl port-forward $(kubectl get pods --selector "app.kubernetes.io/name=traefik" --output=name) 9000:9000
+    ```
+
+!!! note
+    Ha frissíteni szeretnénk később a Traefik-et, akkor azt a `helm upgrade traefik traefik/traefik ...` paranccsal tudjuk megtenni.
 
 ### Adatbázisok telepítése
 
@@ -151,7 +153,7 @@ Az alkalmazás fent ismertetett frissítéséhez a yaml fájlokba minden alkalom
 
         `app.kubernetes.io/instance: {{ .Release.Name }}`
 
-        Ez egy implicit változót helyettesít be: a _release_ nevét. Ezzel azonosítja a Helm a telepítés és frissítés során, hogy mely elemeket kell frissítenie, melyek tartoznak a fennhatósága alá. Mi most mindent egy névtérbe raktunk. A Helm telepítés ezt nem fogja tönkretenni, mert az eddigi elemeinket nem fogja érinteni ezen label miatt.
+        Ez egy implicit változót helyettesít be: a _release_ nevét. Ezzel azonosítja a Helm a telepítés és frissítés során, hogy mely elemeket kell frissítenie, melyek tartoznak a fennhatósága alá.
 
     - A pod-ban az image beállításához használjunk változót:
 
@@ -166,24 +168,22 @@ Az alkalmazás fent ismertetett frissítéséhez a yaml fájlokba minden alkalom
 
 1. A másik két komponens yaml leíróival is hasonlóan kell eljárnunk.
 
+1. A továbbiakhoz el kell távolítanunk az előbb telepített alkalmazásunkat, mert összeakadna a Helm-mel. Ezt a parancsot a telepítéshez korábban használt `app` könyvtárban adjuk ki: `kubectl delete -f app`
+
 1. Nézzük meg a template-eket kiértékelve.
 
     - A chartunk könyvtárából lépjünk eggyel feljebb, hogy a `todoapp` chart könyvtár az aktuális könyvtárban legyen.
-    - Futtassuk le csak a template generálást a telepítés nélkül: `helm install --debug --dry-run todoapp`
+    - Futtassuk le csak a template generálást a telepítés nélkül: `helm install todoapp --debug --dry-run todoapp`
     - Konzolra megkapjuk a kiértékelt yaml-öket.
 
-1. Töröljük ki a telepített alkalmazásunkat, mert összeakadna a Helm-mel. Eyt a parancsot a telepítéshez korábban használt `app` könyvtárban adjuk ki: `kubectl delete -f app`
+1. Telepítsük újra az alkalmazást a chart segítségével: `helm upgrade todoapp --install todoapp`
 
-1. Telepítsük újra az alkalmazást a chart segítségével: `helm upgrade todoapp-prod --install todoapp`
-
-    - A release-nek _todoapp-prod_ nevet választottunk. Ez a Helm release azonosítója.
+    - A release-nek _todoapp_ nevet választottunk. Ez a Helm release azonosítója.
 
     - Az _upgrade_ parancs és az _--install_ kapcsoló telepít, ha nem létezik, ill. frissít, ha már létezik ilyen telepítés.
 
 1. Nézzük meg, hogy a Helm szerint létezik-e a release: `helm list`
 
-    - Azt, hogy létezik-e már egy release a klaszterben, és mi a verziója (saját belső verzió, tőlünk független), onnan tudja a Helm, hogy a telepítés végeztével elmenti az állapotát egy ConfigMap-be.
-
 1. Próbáljuk ki az alkalmazást a <http://localhost:30080> címen.
 
-1. Ezen chart segítségével a Docker image tag-et telepítési paraméterben adhatjuk át, pl. ha a "v2" az új tag, akkor egy paraccsal tudjuk frissíteni: `helm upgrade todoapp-prod --install todoapp --set todos.tag=v2`.
+1. Ezen chart segítségével a Docker image tag-et telepítési paraméterben adhatjuk át, pl. ha a "v2" az új tag, akkor egy paranccsal tudjuk frissíteni: `helm upgrade todoapp --install todoapp --set todos.tag=v2`
