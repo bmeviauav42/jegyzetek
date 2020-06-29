@@ -60,7 +60,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#labor-celja" class="md-skip">
+        <a href="#cel" class="md-skip">
           Kihagyás
         </a>
       
@@ -452,6 +452,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../DevOps/Prometheus-monitoring/" title="Prometheus monitorozás Kubernetes-ben" class="md-nav__link">
+      Prometheus monitorozás Kubernetes-ben
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -533,8 +545,8 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#labor-celja" class="md-nav__link">
-    Labor célja
+  <a href="#cel" class="md-nav__link">
+    Cél
   </a>
   
 </li>
@@ -562,8 +574,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#helm-inicializalasa" class="md-nav__link">
-    Helm inicializálása
+  <a href="#helm" class="md-nav__link">
+    Helm
   </a>
   
 </li>
@@ -698,8 +710,8 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#labor-celja" class="md-nav__link">
-    Labor célja
+  <a href="#cel" class="md-nav__link">
+    Cél
   </a>
   
 </li>
@@ -727,8 +739,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#helm-inicializalasa" class="md-nav__link">
-    Helm inicializálása
+  <a href="#helm" class="md-nav__link">
+    Helm
   </a>
   
 </li>
@@ -795,7 +807,7 @@
                 
                   <h1>Alkalmazás telepítése Kubernetes klaszterbe</h1>
                 
-                <h2 id="labor-celja">Labor célja<a class="headerlink" href="#labor-celja" title="Permanent link">&para;</a></h2>
+                <h2 id="cel">Cél<a class="headerlink" href="#cel" title="Permanent link">&para;</a></h2>
 <p>A labor célja egy alkalmazás telepítése Kubernetes klaszterbe, valamint a frissítés módjának megismerése. A telepítéshez és frissítéshez részben Helm chartot, részben magunk által elkészített yaml erőforrás leírókat használunk.</p>
 <h2 id="elokovetelmenyek">Előkövetelmények<a class="headerlink" href="#elokovetelmenyek" title="Permanent link">&para;</a></h2>
 <ul>
@@ -809,7 +821,7 @@
 <li>A binárisa legyen elérhető PATH-on.</li>
 </ul>
 </li>
-<li><a href="https://helm.sh/docs/using_helm/#installing-helm">helm</a><ul>
+<li><a href="https://helm.sh/docs/intro/install/">helm v3</a><ul>
 <li>A binárisa legyen elérhető PATH-on.</li>
 </ul>
 </li>
@@ -836,46 +848,37 @@
 <li>Az api gateway-t és az adatbázisokat egyszer telepítjük.</li>
 <li>Az alkalmazásunk saját komponenseihez yaml alapú leírókat készítünk, amit <code>kubectl apply</code> segítségével fogunk telepíteni.</li>
 </ol>
-<h3 id="helm-inicializalasa">Helm inicializálása<a class="headerlink" href="#helm-inicializalasa" title="Permanent link">&para;</a></h3>
-<p>Mi a Helm 2-es verzióját fogjuk használni. (A 3-as verzió még csak release candidate állapotban van.) Ezen verzióban a Helm egy un. Tiller komponenst használt, amely a Kubernetes klaszterben fut. A Helm CLI ezzel a Tiller-rel beszélgetve éri el a klasztert. Ezért első feladatunk ezen Tiller telepítése. Ezt egy klaszter esetében csak egyetlen egyszer kell megtenni.</p>
-<ol>
-<li>
+<h3 id="helm">Helm<a class="headerlink" href="#helm" title="Permanent link">&para;</a></h3>
 <p>Ellenőrizzük, hogy a <code>helm</code> CLI elérhető-e: <code>helm version</code></p>
-</li>
-<li>
-<p>Inicializáljuk a Helm-et, ami egyben telepíti a Tiller komponenst a Kubernetes klaszterbe: <code>helm init</code></p>
-<ul>
-<li>Ez a parancs két dolgot végzett el.<ol>
-<li>Inicializálta a kliens oldalon, a gépünkön a Helm környezetét.</li>
-<li>Telepítette a klaszterbe a Tiller-t.</li>
-</ol>
-</li>
-</ul>
-</li>
-<li>
-<p>Nézzük meg, hogy tényleg van a klaszterben egy Tiller pod: <code>kubectl get pod -n kube-system</code></p>
-</li>
-<li>
-<p>Kérdezzük le ismét a verziót: <code>helm version</code></p>
-<ul>
-<li>Most már nem csak a kliens oldali CLI, hanem a Kubernetes-ben futó szerver oldal verzióját is megkapjuk.</li>
-</ul>
-</li>
-</ol>
-<p>Megjegyzés: ha a Kubernetes klaszterben már fut Tiller, akkor is szükségünk lehet a Helm inicializálására egy új fejlesztői gépen. Ilyenkor a <code>--client-only</code> kapcsolóval kérhetjük csak a kliens oldal inicializálását. Új Tiller verzió telepítését pedig a <code>helm init --upgrade</code> paranccsal végezhetjük el.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A feladat során a Helm 3-as verzióját fogjuk használni. A korábbi verziója koncepcióban azonos, de működésében eltérő.</p>
+</div>
 <h3 id="ingress-controller-api-gateway-telepitese-helm-charttal">Ingress Controller (api gateway) telepítése Helm charttal<a class="headerlink" href="#ingress-controller-api-gateway-telepitese-helm-charttal" title="Permanent link">&para;</a></h3>
-<p>A Traefik-et Helm charttal fogjuk telepíteni. <a href="https://github.com/helm/charts/tree/master/stable/traefik">Ezen Helm chart</a> <strong>nem hivatalos</strong>, harmadik féltől származik, ezért a használat előtt mindig érdemes alaposan megnézni a tartalmát. Nekünk most az egyszerűség végett praktikus lesz a Helm chart, mert a Traefik helyes működéséhez a Traefik konténer (Deployment) mellett egyéb elemekre is szükség lesz (klaszteren belüli hozzáférés szabályzás miatt).</p>
-<p>(Jelen pillanatban a Traefik Helm chart-ja csak az 1.7-es verziót támogatja. Készül egy <a href="https://github.com/containous/traefik-helm-chart">hivatalos Helm chart is a Traefik 2-es verziójához</a>, de ez még nem production ready, ezért most maradunk az 1.7-es Traefik verziónál.)</p>
+<p>A Traefik-et <a href="https://github.com/containous/traefik-helm-chart">Helm charttal</a> fogjuk telepíteni, mert a Traefik helyes működéséhez a Traefik konténer (Deployment) mellett egyéb elemekre is szükség lesz (klaszteren belüli hozzáférés szabályzás miatt).</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>A Helm chartok nagy része harmadik féltől származik, így a klaszterünbe való telepítés előtt a tartalmukat érdemes alaposan megnézni.</p>
+</div>
 <ol>
 <li>
-<p>Frissítsük be a Helm repository-nkat: <code>helm repo update</code>.</p>
+<p>A Helm is repository-kkal dolgozik, ahonnan a chart-okat letölti. Ezeket regisztrálni kell. Regisztráljuk a Traefik hivatalos chart-ját tartalmazó repository-t, majd frissítsük az elérhető char-okat:</p>
+<div class="highlight"><pre><span></span><code>helm repo add traefik https://containous.github.io/traefik-helm-chart
+helm repo update
+</code></pre></div>
+
 </li>
 <li>
-<p>Telepítsük: <code>helm install stable/traefik --name traefik --version "1.78.3" --set rbac.enabled=true --set logLevel=debug --set dashboard.enabled=true --set service.nodePorts.http=30080 --set serviceType=NodePort</code></p>
+<p>Telepítsük: <code>helm install traefik traefik/traefik --set ports.web.nodePort=32080 --set service.type=NodePort</code></p>
 <ul>
-<li>A <code>name</code> a Helm release nevét adja meg. Ezzel tudunk rá hivatkozni a jövőben.</li>
+<li>A legelső <code>traefik</code> a Helm release nevét adja meg. Ezzel tudunk rá hivatkozni a jövőben.</li>
+<li>A <code>traefik/traefik</code> azonosítha a telepítendő chartot (repository/chartnév).</li>
 <li>A <code>--set</code> kapcsolóval a chart változóit állítjuk be.</li>
 </ul>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>A Traefik jelen konfigurációban <em>NodePort</em> service típussal van konfigurálva, ami azt jelenti, lokálisan, helyben a megadott porton lesz csak elérhető. Ha publikusan elérhető klaszterben dolgozunk, akkor tipikusan <em>LoadBalancer</em> service típust fogunk kérni, hogy publikus IP címet is kapjon a Traefik.</p>
+</div>
 </li>
 <li>
 <p>Ellenőrizzük, hogy fut-e: <code>kubectl get pod</code></p>
@@ -883,9 +886,17 @@
 <li>Látunk kell egy traefik kezdetű podot.</li>
 </ul>
 </li>
+<li>
+<p>A Traefik dashboard-ja nem elérhető "kívülről". A dashboard segít minket látni a Traefik konfigurációját és működését. Mivel ez a klaszter belső állapotát publikálja, production üzemben valamilyen módon authentikálnunk kellene. Ezt most megkerülve <code>kubect</code> segítségével egy helyi portra továbbítjuk a Traefik dashboard-ot. A következő parancsot egy <strong>új</strong> konzolban adjuk ki, és utána hagyjuk nyitva a konzolt:</p>
+<div class="highlight"><pre><span></span><code>kubectl port-forward <span class="k">$(</span>kubectl get pods --selector <span class="s2">&quot;app.kubernetes.io/name=traefik&quot;</span> --output<span class="o">=</span>name<span class="k">)</span> <span class="m">9000</span>:9000
+</code></pre></div>
+
+</li>
 </ol>
-<p>A Traefik jelen konfigurációban <em>NodePort</em> service típussal van konfigurálva, ami azt jelenti, lokálisan, helyben a megadott porton lesz csak elérhető. Ha publikusan elérhető klaszterben dolgozunk, akkor tipikusan <em>LoadBalancer</em> service típust fogunk kérni, hogy publikus IP címet is kapjon a Traefik.</p>
-<p>Ha frissíteni szeretnénk később a Traefik-et, akkor azt a <code>helm upgrade traefik stable/traefik ...</code> paranccsal tudjuk megtenni.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Ha frissíteni szeretnénk később a Traefik-et, akkor azt a <code>helm upgrade traefik traefik/traefik ...</code> paranccsal tudjuk megtenni.</p>
+</div>
 <h3 id="adatbazisok-telepitese">Adatbázisok telepítése<a class="headerlink" href="#adatbazisok-telepitese" title="Permanent link">&para;</a></h3>
 <p>Az adatbázisainkat saját magunk által megírt yaml leíróval telepítjük. Ez a leíró fájl már rendelkezésünkre áll a todoapp alkalmazás repositoryjában.</p>
 <ol>
@@ -969,7 +980,7 @@ docker-compose build
 <li>
 <p>Mindenhol, ahol <em>labels</em> vagy <em>matchLabels</em> szerepel, még egy sort fel kell vennünk:</p>
 <p><code>app.kubernetes.io/instance: {{ .Release.Name }}</code></p>
-<p>Ez egy implicit változót helyettesít be: a <em>release</em> nevét. Ezzel azonosítja a Helm a telepítés és frissítés során, hogy mely elemeket kell frissítenie, melyek tartoznak a fennhatósága alá. Mi most mindent egy névtérbe raktunk. A Helm telepítés ezt nem fogja tönkretenni, mert az eddigi elemeinket nem fogja érinteni ezen label miatt.</p>
+<p>Ez egy implicit változót helyettesít be: a <em>release</em> nevét. Ezzel azonosítja a Helm a telepítés és frissítés során, hogy mely elemeket kell frissítenie, melyek tartoznak a fennhatósága alá.</p>
 </li>
 <li>
 <p>A pod-ban az image beállításához használjunk változót:</p>
@@ -988,21 +999,21 @@ docker-compose build
 <p>A másik két komponens yaml leíróival is hasonlóan kell eljárnunk.</p>
 </li>
 <li>
+<p>A továbbiakhoz el kell távolítanunk az előbb telepített alkalmazásunkat, mert összeakadna a Helm-mel. Ezt a parancsot a telepítéshez korábban használt <code>app</code> könyvtárban adjuk ki: <code>kubectl delete -f app</code></p>
+</li>
+<li>
 <p>Nézzük meg a template-eket kiértékelve.</p>
 <ul>
 <li>A chartunk könyvtárából lépjünk eggyel feljebb, hogy a <code>todoapp</code> chart könyvtár az aktuális könyvtárban legyen.</li>
-<li>Futtassuk le csak a template generálást a telepítés nélkül: <code>helm install --debug --dry-run todoapp</code></li>
+<li>Futtassuk le csak a template generálást a telepítés nélkül: <code>helm install todoapp --debug --dry-run todoapp</code></li>
 <li>Konzolra megkapjuk a kiértékelt yaml-öket.</li>
 </ul>
 </li>
 <li>
-<p>Töröljük ki a telepített alkalmazásunkat, mert összeakadna a Helm-mel. Eyt a parancsot a telepítéshez korábban használt <code>app</code> könyvtárban adjuk ki: <code>kubectl delete -f app</code></p>
-</li>
-<li>
-<p>Telepítsük újra az alkalmazást a chart segítségével: <code>helm upgrade todoapp-prod --install todoapp</code></p>
+<p>Telepítsük újra az alkalmazást a chart segítségével: <code>helm upgrade todoapp --install todoapp</code></p>
 <ul>
 <li>
-<p>A release-nek <em>todoapp-prod</em> nevet választottunk. Ez a Helm release azonosítója.</p>
+<p>A release-nek <em>todoapp</em> nevet választottunk. Ez a Helm release azonosítója.</p>
 </li>
 <li>
 <p>Az <em>upgrade</em> parancs és az <em>--install</em> kapcsoló telepít, ha nem létezik, ill. frissít, ha már létezik ilyen telepítés.</p>
@@ -1011,15 +1022,12 @@ docker-compose build
 </li>
 <li>
 <p>Nézzük meg, hogy a Helm szerint létezik-e a release: <code>helm list</code></p>
-<ul>
-<li>Azt, hogy létezik-e már egy release a klaszterben, és mi a verziója (saját belső verzió, tőlünk független), onnan tudja a Helm, hogy a telepítés végeztével elmenti az állapotát egy ConfigMap-be.</li>
-</ul>
 </li>
 <li>
 <p>Próbáljuk ki az alkalmazást a <a href="http://localhost:30080">http://localhost:30080</a> címen.</p>
 </li>
 <li>
-<p>Ezen chart segítségével a Docker image tag-et telepítési paraméterben adhatjuk át, pl. ha a "v2" az új tag, akkor egy paraccsal tudjuk frissíteni: <code>helm upgrade todoapp-prod --install todoapp --set todos.tag=v2</code>.</p>
+<p>Ezen chart segítségével a Docker image tag-et telepítési paraméterben adhatjuk át, pl. ha a "v2" az új tag, akkor egy paranccsal tudjuk frissíteni: <code>helm upgrade todoapp --install todoapp --set todos.tag=v2</code></p>
 </li>
 </ol>
                 

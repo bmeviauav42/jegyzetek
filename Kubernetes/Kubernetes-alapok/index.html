@@ -452,6 +452,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../DevOps/Prometheus-monitoring/" title="Prometheus monitorozás Kubernetes-ben" class="md-nav__link">
+      Prometheus monitorozás Kubernetes-ben
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -930,7 +942,7 @@
 <p>A futtatás elemi egysége a pod. Indítsunk el egy podot.</p>
 <ol>
 <li>
-<p>A létrehozáshoz podot yaml leíróban definiáljuk, és a <code>kubectl create</code> parancsnak átadjuk stdin-ről olvasva:</p>
+<p>A létrehozáshoz podot yaml leíróban definiáljuk, és a <code>kubectl create</code> parancsnak átadjuk stdin-ről olvasva (<em>Windows Command promptban</em> adjuk ki a parancsot):</p>
 <div class="highlight"><pre><span></span><code>kubectl create -f -
 apiVersion: v1
 kind: Pod
@@ -950,18 +962,20 @@ spec:
 </li>
 <li>
 <p>Nézzük meg a pod logjait: <code>kubectl logs counter</code></p>
-</li>
-<li>
-<p>Ha akarjuk, tegyük hozzá a <code>-f</code> kapcsolót is (<code>kubectl logs -f counter</code>) a log követéséhez. Ctrl-C-vel léphetünk ki a log folyamatos követéséből.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Ha gondoljuk, tegyük hozzá a <code>-f</code> kapcsolót is (<code>kubectl logs -f counter</code>) a log követéséhez. Ctrl-C-vel léphetünk ki a log folyamatos követéséből.</p>
+</div>
 </li>
 <li>
 <p>Töröljük a podot: <code>kubectl delete pod counter</code></p>
 </li>
 <li>
 <p>Ellenőrizzük, hogy a pod tényleg eltűnik egy kis idő múlva: <code>kubectl get pod</code></p>
-</li>
-<li>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>A pod törlése nem azonnali. A benne futó konténerek leállás jelzést kapnak, és ők maguk terminálhatnak. Ha ez nem történik, meg, akkor kis idő múlva megszűnteti őket a rendszer.</p>
+</div>
 </li>
 </ol>
 <h3 id="yaml-leiro-fajl">Yaml leíró fájl<a class="headerlink" href="#yaml-leiro-fajl" title="Permanent link">&para;</a></h3>
@@ -969,9 +983,10 @@ spec:
 <ol>
 <li>
 <p>Hozzunk létre egy új yaml fájt <code>createpod.yml</code> néven.</p>
-<ul>
-<li>Használhatjuk például Visual Studio Code-ot. Érdemes olyan szövegszerkesztővel dolgozni, amely ismeri a yaml szintaktikát.</li>
-</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Használhatjuk például Visual Studio Code-ot. Érdemes olyan szövegszerkesztővel dolgozni, amely ismeri a yaml szintaktikát.</p>
+</div>
 </li>
 <li>
 <p>Másoljuk be a yaml fájlba az alábbiakat.</p>
@@ -995,11 +1010,11 @@ spec:
 <p>Hozzuk létre a podot: <code>kubectl create -f createpod.yml</code></p>
 </li>
 <li>
-<p>A pod létrejött. Ellenőrizzük: <code>kubectl get pod</code>, majd töröljük a podot: <code>kubectl delete pod counter</code>.</p>
+<p>A pod létrejött. Ellenőrizzük: <code>kubectl get pod</code>, majd töröljük a podot: <code>kubectl delete pod counter</code></p>
 </li>
 </ol>
 <h3 id="deployment-letrehozasa">Deployment létrehozása<a class="headerlink" href="#deployment-letrehozasa" title="Permanent link">&para;</a></h3>
-<p>A podokat nem szoktuk közvetlenük létrehozni, hanem Deployment-re és ReplicaSet-re szoktunk bízni a kezelésüket és létrehozásukat.</p>
+<p>A podokat nem szoktuk közvetlenük létrehozni, hanem <em>Deployment</em>-re és <em>ReplicaSet</em>-re szoktunk bízni a kezelésüket és létrehozásukat.</p>
 <ol>
 <li>
 <p>Hozzunk létre egy új yaml fájl <code>createdepl.yml</code> néven az alábbi tartalommal.</p>
@@ -1021,19 +1036,16 @@ spec:
         <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">count</span>
           <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ubuntu:16.04</span>
           <span class="nt">args</span><span class="p">:</span>
-            <span class="p p-Indicator">[</span>
-              <span class="nv">bash</span><span class="p p-Indicator">,</span>
-              <span class="nv">-c</span><span class="p p-Indicator">,</span>
-              <span class="s">&#39;for</span><span class="nv"> </span><span class="s">((i=0;</span><span class="nv"> </span><span class="s">;i++));do</span><span class="nv"> </span><span class="s">echo</span><span class="nv"> </span><span class="s">&quot;$i:</span><span class="nv"> </span><span class="s">$(date)&quot;;sleep</span><span class="nv"> </span><span class="s">10;done&#39;</span><span class="p p-Indicator">,</span>
-            <span class="p p-Indicator">]</span>
+            <span class="p p-Indicator">[</span><span class="nv">bash</span><span class="p p-Indicator">,</span> <span class="nv">-c</span><span class="p p-Indicator">,</span> <span class="s">&#39;for</span><span class="nv"> </span><span class="s">((i=0;</span><span class="nv"> </span><span class="s">;i++));do</span><span class="nv"> </span><span class="s">echo</span><span class="nv"> </span><span class="s">&quot;$i:</span><span class="nv"> </span><span class="s">$(date)&quot;;sleep</span><span class="nv"> </span><span class="s">5;done&#39;</span><span class="p p-Indicator">]</span>
 </code></pre></div>
 
 </li>
 <li>
 <p>Hozzuk létre a Deployment-et: <code>kubectl apply -f createdepl.yml</code></p>
-</li>
-<li>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
 <p>Ezúttal nem <code>create</code>, hanem <code>apply</code> parancsot használunk. Az apply létrehozza, ha nem létezik, és módosítja az erőforrást, ha már létezik.</p>
+</div>
 </li>
 <li>
 <p>Listázzuk a Deployment-eket, ReplicaSet-eket és a podokat:</p>
@@ -1042,18 +1054,16 @@ spec:
 <li><code>kubectl get replicaset</code></li>
 <li><code>kubectl get pod</code></li>
 </ul>
-<p>Vegyük észre, hogy a pod neve generált, a Deployment és a ReplicaSet alapján kap automatikusan egyet.</p>
+<p>Vegyük észre, hogy a pod neve generált, a <em>Deployment</em> és a <em>ReplicaSet</em> alapján kap automatikusan egyet.</p>
 </li>
 <li>
-<p>Változtassuk meg a program futását: ne 5, hanem 10 másodpercenként írjuk ki az időt. Ezt a Deployment módosításával fogjuk megtenni. Gondolhatunk arra is, hogy a podot szerkesszük, de azt nem tehetjük meg. Egy futó pod nem cserélhető le. Ehelyett valójában egy új podot fogunk létrehozni indirekten.</p>
+<p>Változtassuk meg a program futását: ne 5, hanem 10 másodpercenként írjuk ki az időt. Ezt a <em>Deployment</em> módosításával fogjuk megtenni. Gondolhatunk arra is, hogy a podot szerkesszük, de azt nem tehetjük meg. Egy futó pod nem cserélhető le. Ehelyett valójában egy új podot fogunk létrehozni indirekten.</p>
 <ul>
 <li>Írjuk át a yaml fájlban a bash parancsban a sleep-et 10-re.</li>
 <li>Mentsük a fájlt.</li>
 <li>Alkalmazzuk a változtatásokat: <code>kubectl apply -f createdepl.yml</code></li>
-<li>Nézzük a podok változását: <code>kubectl get pod</code><ul>
+<li>Nézzük a podok változását: <code>kubectl get pod</code></li>
 <li>Időzítés függően jó eséllyel látni fogjuk a régi leálló podot, és az újat is.</li>
-</ul>
-</li>
 </ul>
 </li>
 <li>
@@ -1064,15 +1074,15 @@ spec:
 </ul>
 </li>
 <li>
-<p>Töröljük a Deployment-et: <code>kubectl delete deployment counter</code></p>
+<p>Töröljük a <em>Deployment</em>-et: <code>kubectl delete deployment counter</code></p>
 <ul>
-<li>Ez a ReplicaSet-et és a podokat is törölni fogja.</li>
+<li>Ez a <em>ReplicaSet</em>-et és a podokat is törölni fogja.</li>
 </ul>
 </li>
 </ol>
 <div class="admonition info">
 <p class="admonition-title">Info</p>
-<p>A Deployment szolgál az alkalmazás verziónak frissítésére, kiadására. Podok helyett leggyakrabban Deploymenteket definiálunk.</p>
+<p>A <em>Deployment</em> szolgál az alkalmazás verziónak frissítésére, kiadására. Podok helyett leggyakrabban <em>Deployment</em>-eket definiálunk.</p>
 </div>
 <h3 id="kubectl-parancsok">Kubectl parancsok<a class="headerlink" href="#kubectl-parancsok" title="Permanent link">&para;</a></h3>
 <p>A <code>kubectl</code> leggyakrabban használt parancsainak szerkezete: <code>kubectl &lt;ige&gt; &lt;erőforrás&gt; &lt;attribútumok&gt;</code>.</p>
@@ -1087,20 +1097,42 @@ spec:
 <p>Az erőforrások a <code>pod</code>, <code>replicaset</code> vagy röviden <code>rs</code>, a <code>deployment</code>, stb.</p>
 <p>A parancsokról <code>-h</code> kapcsolóval kaphatunk segítséget, pl. <code>kubectl describe -h</code></p>
 <h3 id="dashboard-es-proxy-zas">Dashboard és proxy-zás<a class="headerlink" href="#dashboard-es-proxy-zas" title="Permanent link">&para;</a></h3>
-<p>A <a href="https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/"><em>Web UI</em> / <em>Dashobard</em></a> egy webalkalmazás, amely maga is Kubernetes alatt fut. Az alkalmazás a klaszter tartalmát jeleníti meg egy egyszerű, de könnyen áttekinthető webes felületen. (Mi az alkalmazás stabil 1.10-es verzióját fogjuk használni. A kettes verzió még béta állapotú, és bugos.)</p>
+<p>A <a href="https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/"><em>Web UI</em> / <em>Dashboard</em></a> egy webalkalmazás, amely maga is Kubernetes alatt fut. Az alkalmazás a klaszter tartalmát jeleníti meg egy egyszerű, de könnyen áttekinthető webes felületen. (Mi az alkalmazás stabil 1.10-es verzióját fogjuk használni. A kettes verzió még béta állapotú, és bugos.)</p>
 <p>A dashboard alapvetően felhasználó authentikáció után érhető el. Az egyszerűség végett mi ezt most kikapcsoljuk, és authentikáció nélkül fogjuk használni.</p>
 <ol>
 <li>
-<p>Telepítsük a dashboard-ot: <code>kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v1.10.1/src/deploy/alternative/kubernetes-dashboard.yaml</code></p>
+<p>Telepítsük a dashboard-ot:</p>
 <ul>
-<li>Értelemszerűen csak egyszer kell egy klaszterbe telepíteni.</li>
-</ul>
+<li>
+<p>Telepítsük alapbeállításokkal: <code>kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/aio/deploy/alternative.yaml</code></p>
 </li>
 <li>
-<p>Adjunk egy pár másodpercet a felállásra. Nézzük meg, hogy rendben fut-e: <code>kubectl get pods -n kube-system -l k8s-app=kubernetes-dashboard</code></p>
-<ul>
-<li>Akkor jó, ha a pod <em>running</em> állapotban van.</li>
+<p>Szerkesszünk bele a konténer argumentumaiba, hogy engedélyezzük az anonim belépést: <code>kubectl edit deployment kubernetes-dashboard --namespace kubernetes-dashboard</code></p>
+<p>A parancs letölti és megnyitja a <em>deployment</em> leíróját. Keressük meg a konténer indítási argumentumait, és adjunk hozzá még két sort (ügyeljünk a megfelelő behúzásra):</p>
+<div class="highlight"><pre><span></span><code><span class="p p-Indicator">-</span> <span class="nt">args</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">--namespace=kubernetes-dashboard</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">--enable-insecure-login</span>
+<span class="hll">  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">--enable-skip-login</span>
+</span><span class="hll">  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">--authentication-mode=basic</span>
+</span></code></pre></div>
+
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Ez csak helyi működési módban javasolt! Most szándékosan kikerültük az authentikációt!</p>
+</div>
+</li>
 </ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Értelemszerűen a dashboard-ot csak egyszer kell egy klaszterbe telepíteni.</p>
+</div>
+</li>
+<li>
+<p>Adjunk egy pár másodpercet a felállásra. Nézzük meg, hogy rendben fut-e: <code>kubectl get pods -n kubernetes-dashboard</code></p>
+<div class="admonition success">
+<p class="admonition-title">Success</p>
+<p>Akkor jó, ha a <em>kubernetes-dashboard-...</em> nevű pod <em>running</em> állapotban van.</p>
+</div>
 </li>
 <li>
 <p>A webalkalmazás csak a klaszteren belül érhető el egyelőre. Látni fogjuk később, hogyan tudunk a klaszteren kívülre "publikálni". Egyelőre azonban egy másik, fejlesztéshez kényelmesen használható megoldást alkalmazunk. Nyissunk egy <strong>új</strong> konzolt, és adjuk ki a <code>kubectl proxy</code> parancsot.</p>
@@ -1114,15 +1146,15 @@ spec:
 </ul>
 </li>
 <li>
-<p>Nyissuk meg böngészőben: <a href="http://localhost:8001/api/v1/namespaces/kube-system/services/kubernetes-dashboard:/proxy/">http://localhost:8001/api/v1/namespaces/kube-system/services/kubernetes-dashboard:/proxy/</a></p>
+<p>Nyissuk meg böngészőben: <a href="http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/kubernetes-dashboard:/proxy/">http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/kubernetes-dashboard:/proxy/</a></p>
 <ul>
 <li>
 <p>Értelmezzük az URL-t:</p>
 <ul>
 <li><code>localhost:8001</code>: a proxy helyi portja</li>
 <li><code>/api/v1</code>: Kubernetes Api verzió, ez mindig így néz ki</li>
-<li><code>/namespaces/kube-system</code>: a <em>kube-system</em> névtérben szeretnénk elérni egy elemet</li>
-<li><code>/services/kubernetes-dashboard:</code> a névtéren belül a service-ek közül a "kubernetes-dashboard" nevű szolgáltatást szeretnénk elérni</li>
+<li><code>/namespaces/kubernetes-dashboard</code>: a <em>kubernetes-dashboard</em> névtérben szeretnénk elérni egy elemet</li>
+<li><code>/services/kubernetes-dashboard:</code> a névtéren belül a service-ek közül a <em>kubernetes-dashboard</em> nevű szolgáltatást szeretnénk elérni</li>
 <li><code>/proxy</code>: kérjük az erőforrás proxy-zását (ez mindig így néz ki)</li>
 </ul>
 </li>
@@ -1172,13 +1204,11 @@ spec:
 <span class="nt">spec</span><span class="p">:</span>
   <span class="l l-Scalar l-Scalar-Plain">...</span>
   <span class="l l-Scalar l-Scalar-Plain">selector</span><span class="p p-Indicator">:</span>
-    <span class="nt">k8s-app</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">kubernetes-dashboard</span> <span class="c1"># label, amelyet a podokon keres</span>
-</code></pre></div>
+<span class="hll">    <span class="nt">k8s-app</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">kubernetes-dashboard</span> <span class="c1"># label, amelyet a podokon keres</span>
+</span></code></pre></div>
 
-</li>
-</ul>
 <p>Ez a service azon podok felé osztja szét a kéréseket, amelyek a <em>k8s-app</em> címkében <em>kubernetes-dashboard</em> értékkel rendelkeznek.</p>
-<ul>
+</li>
 <li>
 <p>Nézzük meg a podban ugyanezt. A service alatt bármelyik podra kattintva navigáljunk el a podhoz, és kérjük le a leíróját az előbbiek szerint. Keressük meg a pod metaadataiban a fenti labelt.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Pod</span>
@@ -1186,8 +1216,8 @@ spec:
 <span class="nt">metadata</span><span class="p">:</span>
   <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">kubernetes-dashboard-57c9d8c7c4-z98z2</span> <span class="c1"># pod saját, generált neve</span>
   <span class="nt">labels</span><span class="p">:</span>
-    <span class="nt">k8s-app</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">kubernetes-dashboard</span> <span class="c1"># pod címkéje, amivel a service rátalál</span>
-</code></pre></div>
+<span class="hll">    <span class="nt">k8s-app</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">kubernetes-dashboard</span> <span class="c1"># pod címkéje, amivel a service rátalál</span>
+</span></code></pre></div>
 
 </li>
 </ul>
@@ -1214,7 +1244,7 @@ spec:
     <span class="nt">spec</span><span class="p">:</span>
       <span class="nt">containers</span><span class="p">:</span> <span class="c1"># leírja a podban a konténert</span>
         <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">kubernetes-dashboard</span>
-          <span class="nt">image</span><span class="p">:</span> <span class="s">&quot;kubernetesui/dashboard:v2.0.0-beta4&quot;</span>
+          <span class="nt">image</span><span class="p">:</span> <span class="s">&quot;kubernetesui/dashboard:v2.0.3&quot;</span>
           <span class="nt">args</span><span class="p">:</span>
             <span class="p p-Indicator">-</span> <span class="s">&quot;--namespace=kubernetes-dashboard&quot;</span>
           <span class="nt">ports</span><span class="p">:</span>

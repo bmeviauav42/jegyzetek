@@ -12,18 +12,18 @@
       
         <meta name="author" content="Dudás Ákos">
       
-      <link rel="shortcut icon" href="assets/images/favicon.png">
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.1.6">
     
     
       
-        <title>Tárgy ismertető</title>
+        <title>Prometheus monitorozás Kubernetes-ben</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.4b9ffd7b.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.4b9ffd7b.min.css">
       
-        <link rel="stylesheet" href="assets/stylesheets/palette.b79bcd20.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.b79bcd20.min.css">
       
       
         
@@ -41,7 +41,7 @@
     
     
     
-      <link rel="stylesheet" href="extra-material-theme.css">
+      <link rel="stylesheet" href="../../extra-material-theme.css">
     
     
       
@@ -59,6 +59,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#cel" class="md-skip">
+          Kihagyás
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -66,7 +71,7 @@
     
       <header class="md-header" data-md-component="header">
   <nav class="md-header-nav md-grid" aria-label="Header">
-    <a href="." title="BME AUT Mikroszolgáltatások és konténeralapú szoftverfejlesztés" class="md-header-nav__button md-logo" aria-label="BME AUT Mikroszolgáltatások és konténeralapú szoftverfejlesztés">
+    <a href="../.." title="BME AUT Mikroszolgáltatások és konténeralapú szoftverfejlesztés" class="md-header-nav__button md-logo" aria-label="BME AUT Mikroszolgáltatások és konténeralapú szoftverfejlesztés">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
@@ -83,7 +88,7 @@
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
-              Tárgy ismertető
+              Prometheus monitorozás Kubernetes-ben
             
           </span>
         </div>
@@ -145,14 +150,16 @@
         
           
 
-<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  
+
+<nav class="md-tabs md-tabs--active" aria-label="Tabs" data-md-component="tabs">
   <div class="md-tabs__inner md-grid">
     <ul class="md-tabs__list">
       
         
   <li class="md-tabs__item">
     
-      <a href="." class="md-tabs__link md-tabs__link--active">
+      <a href="../.." class="md-tabs__link">
         Tárgy ismertető
       </a>
     
@@ -166,7 +173,7 @@
   
     <li class="md-tabs__item">
       
-        <a href="Docker/Docker-alapok/" class="md-tabs__link">
+        <a href="../../Docker/Docker-alapok/" class="md-tabs__link">
           Docker
         </a>
       
@@ -179,7 +186,7 @@
   
     <li class="md-tabs__item">
       
-        <a href="Architektura/AdatbazisApiGateway/" class="md-tabs__link">
+        <a href="../../Architektura/AdatbazisApiGateway/" class="md-tabs__link">
           Architektúra
         </a>
       
@@ -192,7 +199,7 @@
   
     <li class="md-tabs__item">
       
-        <a href="DevOps/Nyomkovetes/" class="md-tabs__link">
+        <a href="../Nyomkovetes/" class="md-tabs__link md-tabs__link--active">
           DevOps
         </a>
       
@@ -205,7 +212,7 @@
   
     <li class="md-tabs__item">
       
-        <a href="Kubernetes/Kubernetes-alapok/" class="md-tabs__link">
+        <a href="../../Kubernetes/Kubernetes-alapok/" class="md-tabs__link">
           Kubernetes
         </a>
       
@@ -218,7 +225,7 @@
   
     <li class="md-tabs__item">
       
-        <a href="Serverless/serverless/" class="md-tabs__link">
+        <a href="../../Serverless/serverless/" class="md-tabs__link">
           Serverless
         </a>
       
@@ -240,7 +247,7 @@
                   <div class="md-sidebar__inner">
                     <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="." title="BME AUT Mikroszolgáltatások és konténeralapú szoftverfejlesztés" class="md-nav__button md-logo" aria-label="BME AUT Mikroszolgáltatások és konténeralapú szoftverfejlesztés">
+    <a href="../.." title="BME AUT Mikroszolgáltatások és konténeralapú szoftverfejlesztés" class="md-nav__button md-logo" aria-label="BME AUT Mikroszolgáltatások és konténeralapú szoftverfejlesztés">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
@@ -268,18 +275,11 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-    
-    <a href="." title="Tárgy ismertető" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../.." title="Tárgy ismertető" class="md-nav__link">
       Tárgy ismertető
     </a>
-    
   </li>
 
     
@@ -289,7 +289,7 @@
 
 
   <li class="md-nav__item">
-    <a href="hazi-feladat/" title="Házi feladat leírása és megszerezhető pontok" class="md-nav__link">
+    <a href="../../hazi-feladat/" title="Házi feladat leírása és megszerezhető pontok" class="md-nav__link">
       Házi feladat leírása és megszerezhető pontok
     </a>
   </li>
@@ -326,7 +326,7 @@
 
 
   <li class="md-nav__item">
-    <a href="Docker/Docker-alapok/" title="Docker alapok" class="md-nav__link">
+    <a href="../../Docker/Docker-alapok/" title="Docker alapok" class="md-nav__link">
       Docker alapok
     </a>
   </li>
@@ -338,7 +338,7 @@
 
 
   <li class="md-nav__item">
-    <a href="Docker/Dockerfile-compose/" title="Dockerfile és docker-compose" class="md-nav__link">
+    <a href="../../Docker/Dockerfile-compose/" title="Dockerfile és docker-compose" class="md-nav__link">
       Dockerfile és docker-compose
     </a>
   </li>
@@ -380,7 +380,7 @@
 
 
   <li class="md-nav__item">
-    <a href="Architektura/AdatbazisApiGateway/" title="Adattárolás és Api Gateway" class="md-nav__link">
+    <a href="../../Architektura/AdatbazisApiGateway/" title="Adattárolás és Api Gateway" class="md-nav__link">
       Adattárolás és Api Gateway
     </a>
   </li>
@@ -392,7 +392,7 @@
 
 
   <li class="md-nav__item">
-    <a href="Architektura/Kommunikacio/" title="Kommunikáció" class="md-nav__link">
+    <a href="../../Architektura/Kommunikacio/" title="Kommunikáció" class="md-nav__link">
       Kommunikáció
     </a>
   </li>
@@ -407,10 +407,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" checked>
     
     <label class="md-nav__link" for="nav-5">
       DevOps
@@ -434,7 +436,7 @@
 
 
   <li class="md-nav__item">
-    <a href="DevOps/Nyomkovetes/" title="Elosztott nyomkövetés" class="md-nav__link">
+    <a href="../Nyomkovetes/" title="Elosztott nyomkövetés" class="md-nav__link">
       Elosztott nyomkövetés
     </a>
   </li>
@@ -446,7 +448,7 @@
 
 
   <li class="md-nav__item">
-    <a href="DevOps/Logging-Health-Checks/" title="Naplózás, health check" class="md-nav__link">
+    <a href="../Logging-Health-Checks/" title="Naplózás, health check" class="md-nav__link">
       Naplózás, health check
     </a>
   </li>
@@ -456,11 +458,84 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="DevOps/Prometheus-monitoring/" title="Prometheus monitorozás Kubernetes-ben" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Prometheus monitorozás Kubernetes-ben
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9h14V7H3v2m0 4h14v-2H3v2m0 4h14v-2H3v2m16 0h2v-2h-2v2m0-10v2h2V7h-2m0 6h2v-2h-2v2z"/></svg>
+        </span>
+      </label>
+    
+    <a href="./" title="Prometheus monitorozás Kubernetes-ben" class="md-nav__link md-nav__link--active">
       Prometheus monitorozás Kubernetes-ben
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Tartalomjegyzék">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Tartalomjegyzék
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#cel" class="md-nav__link">
+    Cél
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#elokovetelmenyek" class="md-nav__link">
+    Előkövetelmények
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prometheusrol-roviden" class="md-nav__link">
+    Prometheusról, röviden
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prometheus-telepitese" class="md-nav__link">
+    Prometheus telepítése
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prometheus-webfelulet-es-grafana" class="md-nav__link">
+    Prometheus webfelület és Grafana
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sajat-komponensek-monitorozasa" class="md-nav__link">
+    Saját komponensek monitorozása
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -500,7 +575,7 @@
 
 
   <li class="md-nav__item">
-    <a href="Kubernetes/Kubernetes-alapok/" title="Kubernetes alapok" class="md-nav__link">
+    <a href="../../Kubernetes/Kubernetes-alapok/" title="Kubernetes alapok" class="md-nav__link">
       Kubernetes alapok
     </a>
   </li>
@@ -512,7 +587,7 @@
 
 
   <li class="md-nav__item">
-    <a href="Kubernetes/Kubernetes-alkalmazas-telepites/" title="Alkalmazás telepítése Kubernetes klaszterbe" class="md-nav__link">
+    <a href="../../Kubernetes/Kubernetes-alkalmazas-telepites/" title="Alkalmazás telepítése Kubernetes klaszterbe" class="md-nav__link">
       Alkalmazás telepítése Kubernetes klaszterbe
     </a>
   </li>
@@ -524,7 +599,7 @@
 
 
   <li class="md-nav__item">
-    <a href="AKS/aks/" title="K8S DevOps Azure DevOps-ban és Azure Kubernetes Service-szel" class="md-nav__link">
+    <a href="../../AKS/aks/" title="K8S DevOps Azure DevOps-ban és Azure Kubernetes Service-szel" class="md-nav__link">
       K8S DevOps Azure DevOps-ban és Azure Kubernetes Service-szel
     </a>
   </li>
@@ -566,7 +641,7 @@
 
 
   <li class="md-nav__item">
-    <a href="Serverless/serverless/" title="Mikroszolgáltatások serverless architektúra fölött" class="md-nav__link">
+    <a href="../../Serverless/serverless/" title="Mikroszolgáltatások serverless architektúra fölött" class="md-nav__link">
       Mikroszolgáltatások serverless architektúra fölött
     </a>
   </li>
@@ -584,12 +659,77 @@
               </div>
             
             
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Tartalomjegyzék">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Tartalomjegyzék
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#cel" class="md-nav__link">
+    Cél
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#elokovetelmenyek" class="md-nav__link">
+    Előkövetelmények
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prometheusrol-roviden" class="md-nav__link">
+    Prometheusról, röviden
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prometheus-telepitese" class="md-nav__link">
+    Prometheus telepítése
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prometheus-webfelulet-es-grafana" class="md-nav__link">
+    Prometheus webfelület és Grafana
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sajat-komponensek-monitorozasa" class="md-nav__link">
+    Saját komponensek monitorozása
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
           
           <div class="md-content">
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/bmeviauav42/jegyzetek/edit/master/docs/index.md" title="Oldal szerkesztése" class="md-content__button md-icon">
+                  <a href="https://github.com/bmeviauav42/jegyzetek/edit/master/docs/DevOps/Prometheus-monitoring.md" title="Oldal szerkesztése" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
@@ -597,14 +737,68 @@
                   
                 
                 
-                  <h1>Tárgy ismertető</h1>
+                  <h1>Prometheus monitorozás Kubernetes-ben</h1>
                 
-                <p>Jegyzetek, feladatok és példa kódok <a href="https://www.aut.bme.hu/Course/VIAUAV42/">BMEVIAUAV42 Mikroszolgáltatások és konténeralapú szoftverfejlesztés</a> tárgyhoz.</p>
-<p>A félév <a href="https://www.aut.bme.hu/Course/VIAUAV42/">ütemezését lásd itt</a>.</p>
-<p><a href="https://www.aut.bme.hu/Upload/Course/VIAUAV42/hallgatoi_jegyzetek/01-Mikroszolg%c3%a1ltat%c3%a1sok%20architekt%c3%bara%20bevezet%c5%91.pdf">Bevezető előadás</a>: motiváció, architektúra alapjai.</p>
-<hr />
-<p>Az itt található oktatási segédanyagok a BMEVIAUAV42 tárgy hallgatóinak készültek. Az anyagok oly módú felhasználása, amely a tárgy oktatásához nem szorosan kapcsolódik, csak a szerző(k) és a forrás megjelölésével történhet.</p>
-<p>Az anyagok a tárgy keretében oktatott kontextusban értelmezhetőek. Az anyagokért egyéb felhasználás esetén a szerző(k) felelősséget nem vállalnak.</p>
+                <h2 id="cel">Cél<a class="headerlink" href="#cel" title="Permanent link">&para;</a></h2>
+<p>A labor célja egy példán keresztül megismerni a Prometheus-alapú monitorozást Kubernetes környezetben.</p>
+<h2 id="elokovetelmenyek">Előkövetelmények<a class="headerlink" href="#elokovetelmenyek" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Kubernetes<ul>
+<li>Bármely felhő platform által biztosított klaszter</li>
+<li>Linux platformon: <a href="https://kubernetes.io/docs/tasks/tools/install-minikube">minikube</a></li>
+<li>Windows platformon: Docker Desktop</li>
+</ul>
+</li>
+<li><a href="https://kubernetes.io/docs/tasks/tools/install-kubectl/">kubectl</a><ul>
+<li>A binárisa legyen elérhető PATH-on.</li>
+</ul>
+</li>
+<li><a href="https://helm.sh/docs/intro/install/">helm v3</a><ul>
+<li>A binárisa legyen elérhető PATH-on.</li>
+</ul>
+</li>
+</ul>
+<h2 id="prometheusrol-roviden">Prometheusról, röviden<a class="headerlink" href="#prometheusrol-roviden" title="Permanent link">&para;</a></h2>
+<p>A <a href="https://prometheus.io">Prometheus</a> egy metrikák gyűjtésére és lekérdezésére alkalmas adatbázis. Feladata egy rendszer (nem csak Kubernetes!) komponenseitől azok által publikált metrika adatok összegyűjtése. Saját grafikus felhasználói felülettel rendelkezik ugyan, de az csak nagyon alapvető funkciókra használható, ezért a <a href="https://grafana.com">Grafana</a> dashboard rendszerrel együtt szokták használni.</p>
+<p>A Prometheus architektúrája a hivatalos dokumentációból:</p>
+<p><img alt="Prometheus architektúra" src="https://prometheus.io/assets/architecture.png" /></p>
+<h2 id="prometheus-telepitese">Prometheus telepítése<a class="headerlink" href="#prometheus-telepitese" title="Permanent link">&para;</a></h2>
+<p>A Prometheus csak egy metrikagyűjtő szerver. Ahhoz, hogy Kubernetes alatt monitorozni tudjuk, számos további komponensre van szükség. Ezek telepítését fogja össze több projekt is (amelyek zavarbaejtően hasonló nevűek, ezért vigyázzunk, ha rákeresünk). Ezek közül a <a href="https://github.com/helm/charts/tree/master/stable/prometheus-operator">prometheus-operator helm chart</a> telepítése a legegyszerűbb számunka.</p>
+<p>Helm segítségével regisztráljuk a chart repository-ját, majd telepítsük a chart-ot:</p>
+<div class="highlight"><pre><span></span><code>helm repo add stable https://kubernetes-charts.storage.googleapis.com
+helm repo update
+helm install prometheus stable/prometheus-operator
+</code></pre></div>
+
+<h2 id="prometheus-webfelulet-es-grafana">Prometheus webfelület és Grafana<a class="headerlink" href="#prometheus-webfelulet-es-grafana" title="Permanent link">&para;</a></h2>
+<p>A Prometheus saját webfelülete nem túl felhasználóbarát, de célratörő eszköz. A Grafana a már jól összeállított rendszerünk metrikáinak grafikus megjelenítéséért felel.</p>
+<ol>
+<li>
+<p>A Prometheus saját webfelületét a prometheus-t futtató pod 9090-es porján érjük el. Különösebb bonyolítás nélkül továbbítsuk ezt egy helyi portra egy <strong>új</strong> terminálban kiadott parancssal: <code>kubectl port-forward $(kubectl get pods --selector "app=prometheus" --output=name) 9090:9090</code></p>
+</li>
+<li>
+<p>Nyissuk meg böngészőben a <a href="http://localhost:9090">http://localhost:9090</a> címen. Nézzük meg a megtalált <em>target</em>-eket és az <em>alert</em>-eket is.</p>
+</li>
+<li>
+<p>Tegyük elérhetővé a Grafana-t is az előzőhöz hasonlóan egy <strong>új</strong> terminálban kiadott paranccsal: <code>kubectl port-forward $(kubectl get pods --selector "app.kubernetes.io/name=grafana" --output=name) 3000:3000</code></p>
+</li>
+<li>
+<p>A Grafana a <a href="http://localhost:3000">http://localhost:3000</a> címen lesz elérhető. Nyissuk meg és lépjünk be az <code>admin / prom-operator</code> felhasználónévvel és jelszóval, majd nézzünk meg pár kész dashboard-ot. Ezeket mind a prometheus-operator helm chart telepítette számunkra.</p>
+</li>
+</ol>
+<h2 id="sajat-komponensek-monitorozasa">Saját komponensek monitorozása<a class="headerlink" href="#sajat-komponensek-monitorozasa" title="Permanent link">&para;</a></h2>
+<p>A <em>prometheus-operator</em> chart előre konfigurál számos monitorozott célt, ezek többnyire a Kubernetes saját működését segítik láthatóvá tenni. Ha a saját alkalmazásunkat szeretnénk monitorozni, három lehetőségünk van.</p>
+<ol>
+<li>
+<p>Több eszköz támogatja a Prometheus monitorozást, csak engedélyezni kell. Erre példa a Traefik, amelyben egy <a href="https://docs.traefik.io/observability/metrics/prometheus/">kapcsolóval engedélyezhetjük</a>, hogy a Prometheus számára scrapelhetővé tegye a metrikáit. Ezen metrikákra gyakran találunk kész <a href="https://grafana.com/grafana/dashboards/10902">Grafana dashboard-ot</a> is, amit csak importálnunk kell.</p>
+</li>
+<li>
+<p>Bizonyos komponensek önmagukban nem publikálnak Prometheus számára metrikákat, azonban saját belső metrikáik vannak, így azokat "csak" transzformálni kell a Prometheus számára. Erre egy példa az Elasticsearch, amely saját magáról részletes információkat nyújt http kéréseken keresztül, de nem direktben a Prometheus által várt formában. Ilyenkor un. <a href="https://github.com/justwatchcom/elasticsearch_exporter"><em>exporter</em></a>-t telepíthetünk, amely egy kis program, maga is konténer formájában, ami az Elasticsearch-től lekérdezett adatokat transzformálja a Prometheus-nak.</p>
+</li>
+<li>
+<p>Ha pedig magunk által írt komponenseket akarunk monitorozni, akkor a forráskódunkat kell instrumentálni. Ez az adott környezet ismeretében egyszerűbb vagy bonyolultabb feladat. Például .NET Core esetében a <a href="https://github.com/prometheus-net/prometheus-net">Prometheus-net</a> NuGet csomagon keresztük pár sor kód segítségével kivitelezhető.</p>
+</li>
+</ol>
                 
                   
                 
@@ -643,15 +837,15 @@
       
     </div>
     
-      <script src="assets/javascripts/vendor.a0c4167b.min.js"></script>
-      <script src="assets/javascripts/bundle.fb26dd1d.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "M\u00e1sol\u00e1s v\u00e1g\u00f3lapra", "clipboard.copied": "V\u00e1g\u00f3lapra m\u00e1solva", "search.config.lang": "hu", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Keres\u00e9shez \u00edrj ide valamit", "search.result.none": "Nincs tal\u00e1lat", "search.result.one": "1 egyez\u0151 dokumentum", "search.result.other": "# egyez\u0151 dokumentum"}</script>
+      <script src="../../assets/javascripts/vendor.a0c4167b.min.js"></script>
+      <script src="../../assets/javascripts/bundle.fb26dd1d.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "M\u00e1sol\u00e1s v\u00e1g\u00f3lapra", "clipboard.copied": "V\u00e1g\u00f3lapra m\u00e1solva", "search.config.lang": "hu", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Keres\u00e9shez \u00edrj ide valamit", "search.result.none": "Nincs tal\u00e1lat", "search.result.one": "1 egyez\u0151 dokumentum", "search.result.other": "# egyez\u0151 dokumentum"}</script>
       
       <script>
         app = initialize({
-          base: ".",
+          base: "../..",
           features: ["tabs"],
           search: Object.assign({
-            worker: "assets/javascripts/worker/search.37585f48.min.js"
+            worker: "../../assets/javascripts/worker/search.37585f48.min.js"
           }, typeof search !== "undefined" && search)
         })
       </script>
