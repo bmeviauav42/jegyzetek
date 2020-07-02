@@ -41,14 +41,14 @@ Célunk nem csak az egyszeri telepítés, hanem az alkalmazás naprakészen tart
 
 Ellenőrizzük, hogy a `helm` CLI elérhető-e: `helm version`
 
-!!! note
+!!! note "Helm 3"
     A feladat során a Helm 3-as verzióját fogjuk használni. A korábbi verziója koncepcióban azonos, de működésében eltérő.
 
 ### Ingress Controller (api gateway) telepítése Helm charttal
 
 A Traefik-et [Helm charttal](https://github.com/containous/traefik-helm-chart) fogjuk telepíteni, mert a Traefik helyes működéséhez a Traefik konténer (Deployment) mellett egyéb elemekre is szükség lesz (klaszteren belüli hozzáférés szabályzás miatt).
 
-!!! important
+!!! warning "Chart-ok ellenőrzése"
     A Helm chartok nagy része harmadik féltől származik, így a klaszterünbe való telepítés előtt a tartalmukat érdemes alaposan megnézni.
 
 1. A Helm is repository-kkal dolgozik, ahonnan a chart-okat letölti. Ezeket regisztrálni kell. Regisztráljuk a Traefik hivatalos chart-ját tartalmazó repository-t, majd frissítsük az elérhető char-okat:
@@ -64,7 +64,7 @@ A Traefik-et [Helm charttal](https://github.com/containous/traefik-helm-chart) f
      - A `traefik/traefik` azonosítha a telepítendő chartot (repository/chartnév).
      - A `--set` kapcsolóval a chart változóit állítjuk be.
 
-    !!! info
+    !!! info "Publikus eléréshez"
         A Traefik jelen konfigurációban _NodePort_ service típussal van konfigurálva, ami azt jelenti, lokálisan, helyben a megadott porton lesz csak elérhető. Ha publikusan elérhető klaszterben dolgozunk, akkor tipikusan _LoadBalancer_ service típust fogunk kérni, hogy publikus IP címet is kapjon a Traefik.
 
 1. Ellenőrizzük, hogy fut-e: `kubectl get pod`
@@ -77,7 +77,7 @@ A Traefik-et [Helm charttal](https://github.com/containous/traefik-helm-chart) f
     kubectl port-forward $(kubectl get pods --selector "app.kubernetes.io/name=traefik" --output=name) 9000:9000
     ```
 
-!!! note
+!!! note ""
     Ha frissíteni szeretnénk később a Traefik-et, akkor azt a `helm upgrade traefik traefik/traefik ...` paranccsal tudjuk megtenni.
 
 ### Adatbázisok telepítése

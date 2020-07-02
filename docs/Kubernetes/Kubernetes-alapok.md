@@ -86,14 +86,14 @@ A futtatás elemi egysége a pod. Indítsunk el egy podot.
 
 1. Nézzük meg a pod logjait: `kubectl logs counter`
 
-    !!! tip
+    !!! tip ""
         Ha gondoljuk, tegyük hozzá a `-f` kapcsolót is (`kubectl logs -f counter`) a log követéséhez. Ctrl-C-vel léphetünk ki a log folyamatos követéséből.
 
 1. Töröljük a podot: `kubectl delete pod counter`
 
 1. Ellenőrizzük, hogy a pod tényleg eltűnik egy kis idő múlva: `kubectl get pod`
 
-    !!! note
+    !!! note ""
         A pod törlése nem azonnali. A benne futó konténerek leállás jelzést kapnak, és ők maguk terminálhatnak. Ha ez nem történik, meg, akkor kis idő múlva megszűnteti őket a rendszer.
 
 ### Yaml leíró fájl
@@ -102,7 +102,7 @@ A yaml leíró begépelése a fentiek szerint nem kényelmes. Tipikusan komplex 
 
 1. Hozzunk létre egy új yaml fájt `createpod.yml` néven.
 
-    !!! tip
+    !!! tip ""
         Használhatjuk például Visual Studio Code-ot. Érdemes olyan szövegszerkesztővel dolgozni, amely ismeri a yaml szintaktikát.
 
 1. Másoljuk be a yaml fájlba az alábbiakat.
@@ -156,7 +156,7 @@ A podokat nem szoktuk közvetlenük létrehozni, hanem _Deployment_-re és _Repl
 
 1. Hozzuk létre a Deployment-et: `kubectl apply -f createdepl.yml`
 
-    !!! info
+    !!! info ""
         Ezúttal nem `create`, hanem `apply` parancsot használunk. Az apply létrehozza, ha nem létezik, és módosítja az erőforrást, ha már létezik.
 
 1. Listázzuk a Deployment-eket, ReplicaSet-eket és a podokat:
@@ -184,7 +184,7 @@ A podokat nem szoktuk közvetlenük létrehozni, hanem _Deployment_-re és _Repl
 
     - Ez a _ReplicaSet_-et és a podokat is törölni fogja.
 
-!!! info
+!!! info ""
     A _Deployment_ szolgál az alkalmazás verziónak frissítésére, kiadására. Podok helyett leggyakrabban _Deployment_-eket definiálunk.
 
 ### Kubectl parancsok
@@ -225,15 +225,15 @@ A dashboard alapvetően felhasználó authentikáció után érhető el. Az egys
           - --authentication-mode=basic
         ```
 
-        !!! important
+        !!! warning "Csak fejlesztői gépen"
             Ez csak helyi működési módban javasolt! Most szándékosan kikerültük az authentikációt!
 
-    !!! note
+    !!! note ""
         Értelemszerűen a dashboard-ot csak egyszer kell egy klaszterbe telepíteni.
 
 1. Adjunk egy pár másodpercet a felállásra. Nézzük meg, hogy rendben fut-e: `kubectl get pods -n kubernetes-dashboard`
 
-    !!! success
+    !!! success ""
         Akkor jó, ha a _kubernetes-dashboard-..._ nevű pod _running_ állapotban van.
 
 1. A webalkalmazás csak a klaszteren belül érhető el egyelőre. Látni fogjuk később, hogyan tudunk a klaszteren kívülre "publikálni". Egyelőre azonban egy másik, fejlesztéshez kényelmesen használható megoldást alkalmazunk. Nyissunk egy **új** konzolt, és adjuk ki a `kubectl proxy` parancsot.
@@ -336,7 +336,7 @@ Használjuk a dashboard-ot a következőkhöz. A feladatban végig a _kubernetes
                     protocol: TCP
       ```
 
-    !!! info
+    !!! info ""
         Ha még eggyel "feljebb" lépünk, a ReplicaSet-ből a Deployment-be, hasonló összekapcsolást találnánk.
 
 ### Pod "újraindítása"
@@ -349,5 +349,5 @@ Használjuk a dashboard-ot a következőkhöz. A feladatban végig a _kubernetes
 
 1. Egy új pod született. Az _Age_ oszlop alapján láthatjuk. (Lehet, hogy a töröltet is látjuk még, leállás alatt.) Ez a ReplicaSet feladata: garantálni, hogy legyen 3 példány.
 
-!!! note
+!!! note "Újraindítás"
     A pod törlése megfelel egy komponens újraindításának. Ha több példányunk van, akkor mindegyiket kézzel tudjuk így törölni. Ez persze csak akkor működik, ha a pod felett van egy controller, ami szükség szerint létrehozza az új podokat.

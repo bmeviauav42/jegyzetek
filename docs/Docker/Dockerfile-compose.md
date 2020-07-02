@@ -76,7 +76,7 @@ Előző laboron készítettünk már egy saját image-et. Az image elkészítés
 1. Indíts el egy új konténert ebből az image-ből: `docker run -it --rm -p 8085:80 hellopython:v1`
 1. Nyisd meg böngészőben a <http://localhost:8085> oldalt.
 
-!!! success
+!!! success ""
     A weboldal ki kell írja a neptun kódodat, és egy hibaüzenetet a Redis-szel kapcsolatban.
 
 ### Dockerignore és build kontextus
@@ -95,7 +95,7 @@ A `Dockerfile`-ban hivatkoztunk az aktuális könyvtárra a `.`-tal. Vizsgáljuk
 
     A `docker build` parancs végén a `.` az aktuális könyvtár. Ezzel tudatjuk a Docker-rel, hogy a buildeléshez ezt a _kontextust_ használja, azon fájlok legyenek elérhetőek a build során, amelyek ebben a kontextusban vannak. A `Dockerfile`-ban a `COPY` így **relatív** útvonallal hivatkozik a kontextusban levő fájlokra.
 
-    !!! warning
+    !!! warning "Elérhető fájlok"
         Ennek következménye az is, hogy csak a build kontextusban levő fájlokra tudunk hivatkozni. Tehát nem lehet pl. `COPY ..\..\file` használatával tetszőleges fájlt felmásolni a build közben.
 
 1. Ha a build kontextusból szeretnénk kihagyni fájlokat, hogy a build ne tartson sokáig, akkor egy `.dockerignore` fájlra lesz szükségünk (a `.gitignore` mintájára). Ide szokás például a build környezet saját könyvtárait (`obj`, `bin`, `.vs`, `node_modules`, stb.) is felvenni.
@@ -144,8 +144,8 @@ A fenti alkalmazás egy része még nem működik. A Python alkalmazás mellett 
 1. Nyisd meg böngészőben a <http://localhost:8085> oldalt.
 1. Egy új konzolban nézd meg a futó konténereket a `docker ps` parancs segítségével.
 
-!!! note
-    A Docker-compose alkalmas üzemeltetésre is. A `docker-compose.yml` fájl nem csak fejlesztői környezetet ír le, hanem üzemeltetéshez szükséges környezetet is. Ha a compose fájlt megfelelően írjuk meg (pl. használjuk a [`restart` direktívát](https://docs.docker.com/compose/compose-file/#restart) is), az elindított szolgáltatások automatikusan újraindulnak a rendszer indulásakor.
+!!! note "docker-compose üzemeltetéshez"
+    A docker-compose alkalmas üzemeltetésre is. A `docker-compose.yml` fájl nem csak fejlesztői környezetet ír le, hanem üzemeltetéshez szükséges környezetet is. Ha a compose fájlt megfelelően írjuk meg (pl. használjuk a [`restart` direktívát](https://docs.docker.com/compose/compose-file/#restart) is), az elindított szolgáltatások automatikusan újraindulnak a rendszer indulásakor.
 
 ### Több compose yaml fájl
 
@@ -181,7 +181,7 @@ A docker-compose parancsnak nem adtuk meg, hogy milyen yaml fájlból dolgozzon.
 
     A `-f` kapcsolóval tudjuk kérni a megadott yaml fájlok összefésülését.
 
-!!! note
+!!! note ""
     Általában a `docker-compose.yaml`-be kerülnek a közös konfigurációk, és a további fájlokba a környezet specifikus konfigurációk.
 
 ### Tipikusan használt image-ek
@@ -210,7 +210,7 @@ A kész image-ek, amiket pedig felhasználunk:
 - MSSQL Server, redis, mongodb, mysql, nginx, ...
 - Termérdek elérhető image: <https://hub.docker.com>
 
-!!! note
+!!! warning "Verziózás fontos"
     Az image-ek verziózását minden esetben meg kell érteni! Minden image más-más megközelítést alkalmaz.
 
 ### Kész image testreszabása
@@ -254,7 +254,7 @@ A Microsoft Visual Studio a 2017-es verzió óta támogatja és megkönnyíti a 
 1. Indítsuk el az alkalmazást Docker-compose használatával: legyen a _docker-compose_ a startup projektünk, és F5-tel indítsuk debug módban az alkalmazást.
 1. Egy konzolból listázzuk ki a futó konténereket: `docker ps`
 
-!!! note
+!!! note "Debuggolás konténerben is"
     A Visual Studio Code is támogatja a konténerek debuggolását. Erről részletesen lásd [itt](https://code.visualstudio.com/docs/remote/containers).
 
 ## További olvasnivaló

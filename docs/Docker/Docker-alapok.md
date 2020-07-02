@@ -67,8 +67,8 @@ A labor célja megismerni a Docker konténerek használatának alapjait és a le
         - `docker tag <id> <tag>`
 - Konkrét parancshoz segítség: `docker <parancs> --help`
 
-!!! tip
-    Minden konténer (futó is!) eltávolítása `docker rm -f $(docker ps -aq)` (PowerShell)
+!!! tip "Minden konténer (futók is!) eltávolítása"
+    `docker rm -f $(docker ps -aq)` (PowerShell)
 
 ### _Volume_ csatolása (_bind mount_)
 
@@ -81,8 +81,8 @@ A labor célja megismerni a Docker konténerek használatának alapjait és a le
     - `exit`
 - Nézzük meg a munkakönyvtárunkat.
 
-!!! tip
-    `--rm` opció törli a konténert leállás után; pl. teszteléshez hasznos, mint most.
+!!! tip "`--rm`"
+    A `--rm` opció törli a konténert leállás után; pl. teszteléshez hasznos, mint most.
 
 ### Port mappelés
 
@@ -130,7 +130,7 @@ A labor célja megismerni a Docker konténerek használatának alapjait és a le
 
 Kövesd az alábbi lépéseket egy saját image elkészítéséhez.
 
-!!! tip
+!!! tip ""
     Az alábbinál lesz jobb megoldás, lásd következő órán.
 
 1. Indíts el egy nginx image-et: `docker run -d -p 8085:80 nginx` Jegyezd meg az image id-t, alább többször is használni fogjuk.

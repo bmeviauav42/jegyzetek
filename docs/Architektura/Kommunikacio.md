@@ -33,7 +33,7 @@ A laborfeladat során két ASP.NET Core mikroszolgáltatás közötti REST-es ko
 
 Klónozzuk le a kiinduló projektet, és nyissuk meg a solutiont Visual Studio-val.
 
-!!! important
+!!! warning "Ékezetes elérési út"
     Fontos, hogy ne legyen az elérési útban speciális (és ékezetes) karakter, különben nem tud a VS a docker-compose-hoz Debuggerrel csatlakozni.
 
 ```cmd
@@ -106,7 +106,7 @@ Próbáljuk ki! Tapasztalatunk szerint szinte megszűntek a hibák.
 
 Ez a Policy gyakorlatilag beépül a `HttpClient` Handler Pipeline-jába, így a hívó számára transzparens lesz az újrapróbálkozási logika. Viszont éredemes odafigyelni a `HttpClient` `Timeout`jára is, mert az újrapróbálkozások során így az nem indul újra.
 
-!!! note
+!!! note "Polly általánosan"
     A Polly-t nem csak `HttpClient`-tel lehet használni, hanem tetszőleges kódban: össze lehet rakni egy Policy láncot, és abba beburkolni a kívánt hívást. A Policy-ket akár karbantarthatjuk a DI konténerben is.
 
 #### Exponenciálisan növekvő Retry időköz
@@ -223,7 +223,7 @@ services.AddMassTransit(x =>
 });
 ```
 
-!!! note
+!!! note "Konfiguráció korrektebben"
     Itt is érdemesebb lenne a rabbitmq hosztnevet és a bejelentkezési adatokat konfigurációból nyerni.
 
 Süssük el az eseményt a `TestController`ben. Kérjük el az `IBusControl` objektumot, és azon hívjuk meg a `Publish` metódust. MassTransit esetében a `Publish` süti el a broadcast szerű eseményeket, míg a `Send` inkább a command típusú üzenetekre van kihegyezve.
@@ -330,13 +330,15 @@ Próbáljuk ki!
 * Süssük el fiddlerből vagy Postmanből a `CreateOrder` Actiont
 * Nézzük meg, hogy frissült-e a termék raktárkészlete
 
-!!! tip
-    Ha nem frissült, akkor a logokból vagy a rabbitmq menedzsment felületéről lehet nyomozni. Ha azt tapasztaljuk hogy nem tud csatlakozni valamilyik szolgáltatás, akkor ellenőrízzük a docker-compose file-t és a connection string-eket. Ha azt tapasztaljuk, hogy `skipped` üzenetsorba kerülnek az üzenetek, akkor a küldő oldal rendben működött, de valamiért a fogadó oldal nem tudott a megadott üzenettípusra egyszer sem feliratkozni helyesen.
+!!! tip "Hibakeresés"
+    Ha nem frissült, akkor a logokból vagy a rabbitmq menedzsment felületéről lehet nyomozni.
+    
+    - Ha azt tapasztaljuk hogy nem tud csatlakozni valamelyik szolgáltatás, akkor ellenőrizzük a docker-compose file-t és a connection string-eket.
+    - Ha azt tapasztaljuk, hogy `skipped` üzenetsorba kerülnek az üzenetek, akkor a küldő oldal rendben működött, de valamiért a fogadó oldal nem tudott a megadott üzenettípusra egyszer sem feliratkozni helyesen.
 
-!!! note
+!!! note "Kitekintés"
     A fenti példában nem törődtünk az idempotens megvalósítással, ez mindig külön tervezést igényel, az üzleti logikánk függvényében, de mindenképpen érdemes a tervezés során figyelni erre.
 
-!!! note
     Mi most broadcast jellegű integrációs eseményt sütöttünk el. Ne feledjünk van ennek egy másik variánsa is, amikor command szerű üzenetet küldünk egy másik szolgáltatásnak, és ott elvárjuk az esemény lefutását. Integrációs esemény során a fogadó félre van bízva, hogy mit kezd a kapott információval.
 
 ## Contract-First API készítés - gRPC
@@ -345,7 +347,7 @@ A feladat célja kipróbálni a contract-first megkozelítést: tehát előbb az
 
 Ezt REST-es API-val is meg tudnánk tenni a Swagger/OpenAPI leíróval, de mi most gRPC-n keresztül próváljuk ki. Feladatunkban a Catalog szolgáltatás `ProductController` két műveletét írjuk meg gRPC protokollal. Majd hívjuk meg ezeket az Order szolgáltatásból.
 
-!!! note
+!!! note ".NET Core 3.0+"
     A gRPC csak .NET Core 3.0-tól támogatott, így érdemes a Visual Studio-t frissíteni legalább 16.3.x verzióra
 
 #### Szerver oldal
@@ -472,12 +474,12 @@ services.AddGrpcClient<CatalogService.CatalogServiceClient>(o =>
     o.Address = new Uri("https://msa.comm.lab.services.catalog");
 }).ConfigurePrimaryHttpMessageHandler(p => new HttpClientHandler
 {
-    ServerCertificateCustomValidationCallback =     
+    ServerCertificateCustomValidationCallback =
         HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
 });
 ```
 
-!!! note
+!!! note "IHttpClientFactory haszálata"
     Megfigyelhetjük, hogy a gRPC kliens is az `IHttpClientFactory` megoldásra épít.
 
 A `TestController`ben cseréljük le A REST kliensünket a gRPC kliensre.

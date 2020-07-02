@@ -39,8 +39,8 @@ Az ASP.NET Core TODO webalkalmazásunkban implementáljunk szemantikus naplózá
 
 A labor keretében most a Logstash transzformációs komponenst kihagyjuk a képből idő hiányában, és közvetlenül az Elasticsearch-be fog írni az alkalmazás.
 
-!!! note
-    Ha az alkalmazásunkat Azure PaaS szolgáltatásokra építjük, akkor az ajánlott megoldás az Azure Application Insights. ELK-t akkor érdemes használni, ha az architektúránkat felhő szolgáltató függetlennek szeretnénk tartani (ami viszonylag ritka).
+!!! note "Azure Application Insights"
+    Ha az alkalmazásunkat Azure PaaS szolgáltatásokra építjük, akkor az ajánlott megoldás az _Azure Application Insights_. ELK-t akkor érdemes használni, ha az architektúránkat felhő szolgáltató függetlennek szeretnénk tartani (ami viszonylag ritka).
 
 Az (ASP).NET Core kiváló absztrakciós réteget nyújt nekünk a naplózáshoz az `ILogger<T>` és kapcsolódó interfészein keresztül. Egyszerűbb implementációi a keretrendszerben is megtalálhatóak, de ezek nem elégítik ki a szemantikus naplózáshoz kapcsolódó igényeket: mégpedig, hogy egyszerűen és egységesen parsolhatóak legyenek a naplóbejegyzések.
 
@@ -133,7 +133,7 @@ public static IHostBuilder CreateWebHostBuilder(string[] args) =>
         });
 ```
 
-!!! note
+!!! note "Hibakezelés az indulás közben"
     A Serilog ajánlások szerint a Main függvényben lenne érdemes a Serilog-ot inicializálni, hogy az app indulása során fellépő kivételeket is le lehessen logolni. Most ettől az aspektustól eltekintünk az egyszerűség kedvéért.
 
 * A kódrészletből láthatjuk, hogy a Serilog-ot konfigurálhatjuk az `IConfiguration`-ból is, de ezt most nem fogjuk kihasználni, és itt inline adjuk meg az alapértelmezéseket.
@@ -150,7 +150,7 @@ Fentebb is láthatjuk, hogy az Elasticsearch URL-jét  a konfigurációból nyer
       - ASPNETCORE_LogsUrl=http://logs:9200
 ```
 
-!!! note
+!!! note ""
     A Serilog az appsetting.json és az appsettings.Development.json-ből nem használja fel a Logging szekciót. Ezeket az igényesség kedvéért törölhetjük. Ezek csak a Microsoft-os `ILogger` implementáció számára kellenek.
 
 Logoljunk egy saját eseményt, most a példa kedvéért a TodosRepository-ban. Kérjünk el egy `ILogger<T>`-t
@@ -263,7 +263,7 @@ Vegyük fel az következő csomagokat a Todos.Api projekthez.
 <PackageReference Include="AspNetCore.HealthChecks.Redis" Version="2.2.1" />
 ```
 
-!!! note
+!!! important "Verzió fontos"
     `AspNetCore.HealthChecks.Redis` csomag direkt a 2.2.1-es mert összeakadna a `Microsoft.Extensions.Caching.Redis` csomaggal az újabb verzió.
 
 Vegyük fel a csekkolásokat.
@@ -275,7 +275,7 @@ services.AddHealthChecks()
     .AddElasticsearch(Configuration.GetValue<string>("ElasticsearchUrl") ?? "http://elasticsearch:9200", tags: new[] { "readiness" });
 ```
 
-!!! note
+!!! note "`IOptions<T>` használata"
     Az ASP.NET Core-os konfigurációk kezelésére itt is célszerűbb lenne az `IOptions<T>` mintát használni, de most az egyszerűség kedvéért ettől eltekintünk.
 
 Publikáljuk ki egy végponton őket.
