@@ -851,13 +851,13 @@
 <h3 id="helm">Helm<a class="headerlink" href="#helm" title="Permanent link">&para;</a></h3>
 <p>Ellenőrizzük, hogy a <code>helm</code> CLI elérhető-e: <code>helm version</code></p>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
+<p class="admonition-title">Helm 3</p>
 <p>A feladat során a Helm 3-as verzióját fogjuk használni. A korábbi verziója koncepcióban azonos, de működésében eltérő.</p>
 </div>
 <h3 id="ingress-controller-api-gateway-telepitese-helm-charttal">Ingress Controller (api gateway) telepítése Helm charttal<a class="headerlink" href="#ingress-controller-api-gateway-telepitese-helm-charttal" title="Permanent link">&para;</a></h3>
 <p>A Traefik-et <a href="https://github.com/containous/traefik-helm-chart">Helm charttal</a> fogjuk telepíteni, mert a Traefik helyes működéséhez a Traefik konténer (Deployment) mellett egyéb elemekre is szükség lesz (klaszteren belüli hozzáférés szabályzás miatt).</p>
-<div class="admonition important">
-<p class="admonition-title">Important</p>
+<div class="admonition warning">
+<p class="admonition-title">Chart-ok ellenőrzése</p>
 <p>A Helm chartok nagy része harmadik féltől származik, így a klaszterünbe való telepítés előtt a tartalmukat érdemes alaposan megnézni.</p>
 </div>
 <ol>
@@ -876,7 +876,7 @@ helm repo update
 <li>A <code>--set</code> kapcsolóval a chart változóit állítjuk be.</li>
 </ul>
 <div class="admonition info">
-<p class="admonition-title">Info</p>
+<p class="admonition-title">Publikus eléréshez</p>
 <p>A Traefik jelen konfigurációban <em>NodePort</em> service típussal van konfigurálva, ami azt jelenti, lokálisan, helyben a megadott porton lesz csak elérhető. Ha publikusan elérhető klaszterben dolgozunk, akkor tipikusan <em>LoadBalancer</em> service típust fogunk kérni, hogy publikus IP címet is kapjon a Traefik.</p>
 </div>
 </li>
@@ -894,7 +894,6 @@ helm repo update
 </li>
 </ol>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
 <p>Ha frissíteni szeretnénk később a Traefik-et, akkor azt a <code>helm upgrade traefik traefik/traefik ...</code> paranccsal tudjuk megtenni.</p>
 </div>
 <h3 id="adatbazisok-telepitese">Adatbázisok telepítése<a class="headerlink" href="#adatbazisok-telepitese" title="Permanent link">&para;</a></h3>

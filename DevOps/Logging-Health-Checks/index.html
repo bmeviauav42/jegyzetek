@@ -909,8 +909,8 @@
 </ul>
 <p>A labor keretében most a Logstash transzformációs komponenst kihagyjuk a képből idő hiányában, és közvetlenül az Elasticsearch-be fog írni az alkalmazás.</p>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Ha az alkalmazásunkat Azure PaaS szolgáltatásokra építjük, akkor az ajánlott megoldás az Azure Application Insights. ELK-t akkor érdemes használni, ha az architektúránkat felhő szolgáltató függetlennek szeretnénk tartani (ami viszonylag ritka).</p>
+<p class="admonition-title">Azure Application Insights</p>
+<p>Ha az alkalmazásunkat Azure PaaS szolgáltatásokra építjük, akkor az ajánlott megoldás az <em>Azure Application Insights</em>. ELK-t akkor érdemes használni, ha az architektúránkat felhő szolgáltató függetlennek szeretnénk tartani (ami viszonylag ritka).</p>
 </div>
 <p>Az (ASP).NET Core kiváló absztrakciós réteget nyújt nekünk a naplózáshoz az <code>ILogger&lt;T&gt;</code> és kapcsolódó interfészein keresztül. Egyszerűbb implementációi a keretrendszerben is megtalálhatóak, de ezek nem elégítik ki a szemantikus naplózáshoz kapcsolódó igényeket: mégpedig, hogy egyszerűen és egységesen parsolhatóak legyenek a naplóbejegyzések.</p>
 <p>Használjuk a Serilog külső osztálykönyvtárat a naplózásra, ami a a fenti absztrakcióra épül rá. Seriloghoz több nyelő (Sink) implementáció is készült, és van kifejezetten Elasticsearch-be naplózó csomag is.</p>
@@ -988,7 +988,7 @@
 </code></pre></div>
 
 <div class="admonition note">
-<p class="admonition-title">Note</p>
+<p class="admonition-title">Hibakezelés az indulás közben</p>
 <p>A Serilog ajánlások szerint a Main függvényben lenne érdemes a Serilog-ot inicializálni, hogy az app indulása során fellépő kivételeket is le lehessen logolni. Most ettől az aspektustól eltekintünk az egyszerűség kedvéért.</p>
 </div>
 <ul>
@@ -1009,7 +1009,6 @@
 </code></pre></div>
 
 <div class="admonition note">
-<p class="admonition-title">Note</p>
 <p>A Serilog az appsetting.json és az appsettings.Development.json-ből nem használja fel a Logging szekciót. Ezeket az igényesség kedvéért törölhetjük. Ezek csak a Microsoft-os <code>ILogger</code> implementáció számára kellenek.</p>
 </div>
 <p>Logoljunk egy saját eseményt, most a példa kedvéért a TodosRepository-ban. Kérjünk el egy <code>ILogger&lt;T&gt;</code>-t</p>
@@ -1090,8 +1089,8 @@ git checkout kiindulóTODO
 <span class="nt">&lt;PackageReference</span> <span class="na">Include=</span><span class="s">&quot;AspNetCore.HealthChecks.Redis&quot;</span> <span class="na">Version=</span><span class="s">&quot;2.2.1&quot;</span> <span class="nt">/&gt;</span>
 </code></pre></div>
 
-<div class="admonition note">
-<p class="admonition-title">Note</p>
+<div class="admonition important">
+<p class="admonition-title">Verzió fontos</p>
 <p><code>AspNetCore.HealthChecks.Redis</code> csomag direkt a 2.2.1-es mert összeakadna a <code>Microsoft.Extensions.Caching.Redis</code> csomaggal az újabb verzió.</p>
 </div>
 <p>Vegyük fel a csekkolásokat.</p>
@@ -1102,7 +1101,7 @@ git checkout kiindulóTODO
 </code></pre></div>
 
 <div class="admonition note">
-<p class="admonition-title">Note</p>
+<p class="admonition-title"><code>IOptions&lt;T&gt;</code> használata</p>
 <p>Az ASP.NET Core-os konfigurációk kezelésére itt is célszerűbb lenne az <code>IOptions&lt;T&gt;</code> mintát használni, de most az egyszerűség kedvéért ettől eltekintünk.</p>
 </div>
 <p>Publikáljuk ki egy végponton őket.</p>
