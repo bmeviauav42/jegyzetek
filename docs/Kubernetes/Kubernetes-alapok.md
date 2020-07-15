@@ -205,7 +205,7 @@ A parancsokról `-h` kapcsolóval kaphatunk segítséget, pl. `kubectl describe 
 
 ### Dashboard és proxy-zás
 
-A [_Web UI_ / _Dashboard_](https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/) egy webalkalmazás, amely maga is Kubernetes alatt fut. Az alkalmazás a klaszter tartalmát jeleníti meg egy egyszerű, de könnyen áttekinthető webes felületen. (Mi az alkalmazás stabil 1.10-es verzióját fogjuk használni. A kettes verzió még béta állapotú, és bugos.)
+A [_Web UI_ / _Dashboard_](https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/) egy webalkalmazás, amely maga is Kubernetes alatt fut. Az alkalmazás a klaszter tartalmát jeleníti meg egy egyszerű, de könnyen áttekinthető webes felületen.
 
 A dashboard alapvetően felhasználó authentikáció után érhető el. Az egyszerűség végett mi ezt most kikapcsoljuk, és authentikáció nélkül fogjuk használni.
 
