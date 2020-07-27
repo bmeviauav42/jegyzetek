@@ -17,7 +17,7 @@
     
     
       
-        <title>Alkalmazás telepítése Kubernetes klaszterbe</title>
+        <title>Alkalmazás telepítése Kubernetes klaszterbe - BME AUT Mikroszolgáltatások és konténeralapú szoftverfejlesztés</title>
       
     
     
@@ -62,7 +62,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#cel" class="md-skip">
+        <a href="#alkalmazas-telepitese-kubernetes-klaszterbe" class="md-skip">
           Kihagyás
         </a>
       
@@ -521,6 +521,8 @@
     
     <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
     
+      
+    
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
         Alkalmazás telepítése Kubernetes klaszterbe
@@ -536,6 +538,8 @@
       
 <nav class="md-nav md-nav--secondary" aria-label="Tartalomjegyzék">
   
+  
+    
   
   
     <label class="md-nav__title" for="__toc">
@@ -702,6 +706,8 @@
 <nav class="md-nav md-nav--secondary" aria-label="Tartalomjegyzék">
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon">
@@ -807,9 +813,8 @@
                   
                 
                 
-                  <h1>Alkalmazás telepítése Kubernetes klaszterbe</h1>
-                
-                <h2 id="cel">Cél<a class="headerlink" href="#cel" title="Permanent link">&para;</a></h2>
+                <h1 id="alkalmazas-telepitese-kubernetes-klaszterbe">Alkalmazás telepítése Kubernetes klaszterbe<a class="headerlink" href="#alkalmazas-telepitese-kubernetes-klaszterbe" title="Permanent link">&para;</a></h1>
+<h2 id="cel">Cél<a class="headerlink" href="#cel" title="Permanent link">&para;</a></h2>
 <p>A labor célja egy alkalmazás telepítése Kubernetes klaszterbe, valamint a frissítés módjának megismerése. A telepítéshez és frissítéshez részben Helm chartot, részben magunk által elkészített yaml erőforrás leírókat használunk.</p>
 <h2 id="elokovetelmenyek">Előkövetelmények<a class="headerlink" href="#elokovetelmenyek" title="Permanent link">&para;</a></h2>
 <ul>
@@ -1031,8 +1036,6 @@ docker-compose build
 <p>Ezen chart segítségével a Docker image tag-et telepítési paraméterben adhatjuk át, pl. ha a "v2" az új tag, akkor egy paranccsal tudjuk frissíteni: <code>helm upgrade todoapp --install todoapp --set todos.tag=v2</code></p>
 </li>
 </ol>
-                
-                  
                 
               
               

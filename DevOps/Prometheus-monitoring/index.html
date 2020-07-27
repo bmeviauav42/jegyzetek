@@ -17,7 +17,7 @@
     
     
       
-        <title>Prometheus monitorozás Kubernetes-ben</title>
+        <title>Prometheus monitorozás Kubernetes-ben - BME AUT Mikroszolgáltatások és konténeralapú szoftverfejlesztés</title>
       
     
     
@@ -62,7 +62,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#cel" class="md-skip">
+        <a href="#prometheus-monitorozas-kubernetes-ben" class="md-skip">
           Kihagyás
         </a>
       
@@ -467,6 +467,8 @@
     
     <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
     
+      
+    
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
         Prometheus monitorozás Kubernetes-ben
@@ -482,6 +484,8 @@
       
 <nav class="md-nav md-nav--secondary" aria-label="Tartalomjegyzék">
   
+  
+    
   
   
     <label class="md-nav__title" for="__toc">
@@ -668,6 +672,8 @@
 <nav class="md-nav md-nav--secondary" aria-label="Tartalomjegyzék">
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon">
@@ -739,9 +745,8 @@
                   
                 
                 
-                  <h1>Prometheus monitorozás Kubernetes-ben</h1>
-                
-                <h2 id="cel">Cél<a class="headerlink" href="#cel" title="Permanent link">&para;</a></h2>
+                <h1 id="prometheus-monitorozas-kubernetes-ben">Prometheus monitorozás Kubernetes-ben<a class="headerlink" href="#prometheus-monitorozas-kubernetes-ben" title="Permanent link">&para;</a></h1>
+<h2 id="cel">Cél<a class="headerlink" href="#cel" title="Permanent link">&para;</a></h2>
 <p>A labor célja egy példán keresztül megismerni a Prometheus-alapú monitorozást Kubernetes környezetben.</p>
 <h2 id="elokovetelmenyek">Előkövetelmények<a class="headerlink" href="#elokovetelmenyek" title="Permanent link">&para;</a></h2>
 <ul>
@@ -801,8 +806,6 @@ helm install prometheus stable/prometheus-operator
 <p>Ha pedig magunk által írt komponenseket akarunk monitorozni, akkor a forráskódunkat kell instrumentálni. Ez az adott környezet ismeretében egyszerűbb vagy bonyolultabb feladat. Például .NET Core esetében a <a href="https://github.com/prometheus-net/prometheus-net">Prometheus-net</a> NuGet csomagon keresztük pár sor kód segítségével kivitelezhető.</p>
 </li>
 </ol>
-                
-                  
                 
               
               

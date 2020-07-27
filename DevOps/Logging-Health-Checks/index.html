@@ -17,7 +17,7 @@
     
     
       
-        <title>Naplózás, health check</title>
+        <title>Naplózás, health check - BME AUT Mikroszolgáltatások és konténeralapú szoftverfejlesztés</title>
       
     
     
@@ -62,7 +62,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#eloadas" class="md-skip">
+        <a href="#naplozas-health-check" class="md-skip">
           Kihagyás
         </a>
       
@@ -455,6 +455,8 @@
     
     <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
     
+      
+    
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
         Naplózás, health check
@@ -470,6 +472,8 @@
       
 <nav class="md-nav md-nav--secondary" aria-label="Tartalomjegyzék">
   
+  
+    
   
   
     <label class="md-nav__title" for="__toc">
@@ -728,6 +732,8 @@
 <nav class="md-nav md-nav--secondary" aria-label="Tartalomjegyzék">
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon">
@@ -859,9 +865,8 @@
                   
                 
                 
-                  <h1>Naplózás, health check</h1>
-                
-                <h2 id="eloadas">Előadás<a class="headerlink" href="#eloadas" title="Permanent link">&para;</a></h2>
+                <h1 id="naplozas-health-check">Naplózás, health check<a class="headerlink" href="#naplozas-health-check" title="Permanent link">&para;</a></h1>
+<h2 id="eloadas">Előadás<a class="headerlink" href="#eloadas" title="Permanent link">&para;</a></h2>
 <p><a href="https://www.aut.bme.hu/Upload/Course/VIAUAV42/hallgatoi_jegyzetek/Logging,%20health%20checks.pdf">Naplózás, Health Checks</a></p>
 <details><summary>Előző alkalmak cheatsheet</summary><ul>
 <li>Docker<ul>
@@ -1177,8 +1182,6 @@ git checkout kiindulóTODO
 
 <p>Telepítsük ki, majd rontsuk el a működést a végpontunkkal. Közben figyeljük a podok állapotát. Egy idő után láthatjuk, hogy a próba sérült, és a k8s megpróbálja újraindítani a pod-ot, mivel ott már az <code>IsLive</code> property érteke igaz lesz.</p>
 <p>Érdemes minden health check definiálása során megtervezni azt, hogy az most melyik próbába illik bele jobban. Ha van esély, hogy magától megjavuljon, akkor a readiness próbába érdemes rakni (pl. valamilyen külső szolgáltatás nem elérhető, persze ez lehet konfigurációs hiba is, ahogy láttuk), ha pedig újraindítás tud segíteni akkor a liveness próbába rakjuk.</p>
-                
-                  
                 
               
               
