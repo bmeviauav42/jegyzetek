@@ -349,3 +349,8 @@ Használjuk a dashboard-ot a következőkhöz. A feladatban végig a _kubernetes
 
 !!! note "Újraindítás"
     A pod törlése megfelel egy komponens újraindításának. Ha több példányunk van, akkor mindegyiket kézzel tudjuk így törölni. Ez persze csak akkor működik, ha a pod felett van egy controller, ami szükség szerint létrehozza az új podokat.
+
+## További olvasnivaló
+
+- [The twelve-factor app](https://12factor.net/): modern webszolgáltatások fejlesztése (nem csak Kubernetes)
+- Bilgin Ibryam, Roland Huss - Kubernetes Patterns: Reusable Elements for Designing Cloud Native Applications, O'Reilly, 2019
