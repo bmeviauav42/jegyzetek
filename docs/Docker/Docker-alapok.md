@@ -1,6 +1,4 @@
----
-title: Docker alapok
----
+# Docker alapok
 
 ## Előadás
 

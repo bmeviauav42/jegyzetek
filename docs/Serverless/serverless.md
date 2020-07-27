@@ -1,6 +1,4 @@
----
-title: Mikroszolgáltatások serverless architektúra fölött
----
+# Mikroszolgáltatások serverless architektúra fölött
 
 ## Előadás
 

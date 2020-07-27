@@ -1,6 +1,4 @@
----
-title: Prometheus monitorozás Kubernetes-ben
----
+# Prometheus monitorozás Kubernetes-ben
 
 ## Cél
 

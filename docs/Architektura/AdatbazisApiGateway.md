@@ -1,6 +1,4 @@
----
-title: Adattárolás és Api Gateway
----
+# Adattárolás és Api Gateway
 
 ## Előadás
 

@@ -1,6 +1,4 @@
----
-title: Tárgy ismertető
----
+# Tárgy ismertető
 
 Jegyzetek, feladatok és példa kódok [BMEVIAUAV42 Mikroszolgáltatások és konténeralapú szoftverfejlesztés](https://www.aut.bme.hu/Course/VIAUAV42/) tárgyhoz.
 

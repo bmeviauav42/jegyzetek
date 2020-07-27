@@ -1,6 +1,4 @@
----
-title: Kommunikáció
----
+# Kommunikáció
 
 ## Előadás
 

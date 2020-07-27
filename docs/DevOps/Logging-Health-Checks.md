@@ -1,6 +1,4 @@
----
-title: Naplózás, health check
----
+# Naplózás, health check
 
 ## Előadás
 

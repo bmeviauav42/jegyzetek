@@ -1,6 +1,4 @@
----
-title: Elosztott nyomkövetés
----
+# Elosztott nyomkövetés
 
 ## Előadás
 

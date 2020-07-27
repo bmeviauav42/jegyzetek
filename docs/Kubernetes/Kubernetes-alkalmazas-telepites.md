@@ -1,6 +1,4 @@
----
-title: Alkalmazás telepítése Kubernetes klaszterbe
----
+# Alkalmazás telepítése Kubernetes klaszterbe
 
 ## Cél
 

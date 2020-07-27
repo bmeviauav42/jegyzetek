@@ -1,6 +1,4 @@
----
-title: Dockerfile és docker-compose
----
+# Dockerfile és docker-compose
 
 ## Cél
 

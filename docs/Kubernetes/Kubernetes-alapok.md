@@ -1,6 +1,4 @@
----
-title: Kubernetes alapok
----
+# Kubernetes alapok
 
 ## Előadás
 
