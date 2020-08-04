@@ -8,6 +8,10 @@ A félév [ütemezését lásd itt](https://www.aut.bme.hu/Course/VIAUAV42/).
 
 ---
 
-Az itt található oktatási segédanyagok a BMEVIAUAV42 tárgy hallgatóinak készültek. Az anyagok oly módú felhasználása, amely a tárgy oktatásához nem szorosan kapcsolódik, csak a szerző(k) és a forrás megjelölésével történhet.
+!!! note "Javítás az anyagban"
+    A tárgy hallgatóinak az anyagban történő javításért, kiegészítésért plusz pontot adunk! Ha hibát találsz, vagy kiegészítenéd/pontosítanád a feladatleírásokat, nyiss egy _pull request_-et! A repository linkjét a jobb felső sarokban találod.
 
-Az anyagok a tárgy keretében oktatott kontextusban értelmezhetőek. Az anyagokért egyéb felhasználás esetén a szerző(k) felelősséget nem vállalnak.
+!!! quote "Felhasználási feltételek"
+    Az itt található oktatási segédanyagok a BMEVIAUAV42 tárgy hallgatóinak készültek. Az anyagok oly módú felhasználása, amely a tárgy oktatásához nem szorosan kapcsolódik, csak a szerző(k) és a forrás megjelölésével történhet.
+    
+    Az anyagok a tárgy keretében oktatott kontextusban értelmezhetőek. Az anyagokért egyéb felhasználás esetén a szerző(k) felelősséget nem vállalnak.
