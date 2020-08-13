@@ -112,7 +112,7 @@ A fenti alkalmazás egy része még nem működik. A Python alkalmazás mellett 
 
 1. Visual Studio Code-ban nyisd meg a mappát, amiben az előző feladat során használt _pythonweb_ mappa van. Tehát nem az előzőleg használt mappa kell, hanem egy szinttel feljebb (pl. `c:\work\<neptun>\dockerlab`).
 
-1. Készíts ide egy `docker-compose.yml` nevű fájlt az alábbi tartalommal.
+1. Készíts ide egy `docker-compose.yaml` nevű fájlt az alábbi tartalommal.
 
     ```yaml
     version: "3"
@@ -139,11 +139,11 @@ A fenti alkalmazás egy része még nem működik. A Python alkalmazás mellett 
 1. Nyiss egy _PowerShell_ konzolt ugyanebbe a mappába. Indítsd el az alkalmazásokat az alábbi paranccsal: `docker-compose up --build`
     - Két lépésben a parancs: `docker-compose build` és `docker-compose up`
 
-1. Nyisd meg böngészőben a <http://localhost:8085> oldalt.
+1. Nyisd meg böngészőben a <http://localhost:5000> oldalt.
 1. Egy új konzolban nézd meg a futó konténereket a `docker ps` parancs segítségével.
 
 !!! note "docker-compose üzemeltetéshez"
-    A docker-compose alkalmas üzemeltetésre is. A `docker-compose.yml` fájl nem csak fejlesztői környezetet ír le, hanem üzemeltetéshez szükséges környezetet is. Ha a compose fájlt megfelelően írjuk meg (pl. használjuk a [`restart` direktívát](https://docs.docker.com/compose/compose-file/#restart) is), az elindított szolgáltatások automatikusan újraindulnak a rendszer indulásakor.
+    A docker-compose alkalmas üzemeltetésre is. A `docker-compose.yaml` fájl nem csak fejlesztői környezetet ír le, hanem üzemeltetéshez szükséges környezetet is. Ha a compose fájlt megfelelően írjuk meg (pl. használjuk a [`restart` direktívát](https://docs.docker.com/compose/compose-file/#restart) is), az elindított szolgáltatások automatikusan újraindulnak a rendszer indulásakor.
 
 ### Több compose yaml fájl
 
@@ -174,7 +174,7 @@ A docker-compose parancsnak nem adtuk meg, hogy milyen yaml fájlból dolgozzon.
 1. Indítsuk el a rendszert az alábbi paranccsal
 
     ```bash
-    docker-compose -f docker-compose.yml -f docker-compose.prod.yml up
+    docker-compose -f docker-compose.yaml -f docker-compose.prod.yaml up
     ```
 
     A `-f` kapcsolóval tudjuk kérni a megadott yaml fájlok összefésülését.
@@ -229,7 +229,7 @@ Az előbb a _Redis_ memória alapú adatbázist minden konfiguráció nélkül f
       mcr.microsoft.com/mssql/server:2017-CU8-ubuntu
     ```
 
-- Becsatolhatjuk a saját konfigurációs fájljainkat a konténerbe. Korábban láttuk, hogy lehetőségünk van egy mappát a host géptről a konténerbe csatolni. Ha elkészítjük a testreszabott konfigurációs fájlt, akkor a `docker-compose.yml` leírásban a következő módon tudjuk ezt a fájlt becsatolni a konténer indulásakor.
+- Becsatolhatjuk a saját konfigurációs fájljainkat a konténerbe. Korábban láttuk, hogy lehetőségünk van egy mappát a host géptről a konténerbe csatolni. Ha elkészítjük a testreszabott konfigurációs fájlt, akkor a `docker-compose.yaml` leírásban a következő módon tudjuk ezt a fájlt becsatolni a konténer indulásakor.
 
     ```yaml
     services:
