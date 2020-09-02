@@ -2,7 +2,7 @@
 
 ## Előadás
 
-[Elosztott nyomkövetés](https://www.aut.bme.hu/Upload/Course/VIAUAV42/hallgatoi_jegyzetek/07-Nyomk%c3%b6vet%c3%a9s%20-%20clean.pdf)
+[Elosztott nyomkövetés](https://edu.vik.bme.hu/mod/resource/view.php?id=22406)
 
 ## Cél
 

@@ -2,9 +2,9 @@
 
 ## Előadás
 
-[Adattárolás mikroszolgáltatásokban](https://www.aut.bme.hu/Upload/Course/VIAUAV42/hallgatoi_jegyzetek/04-Adatbazisok.pdf)
+[Adattárolás mikroszolgáltatásokban](https://edu.vik.bme.hu/mod/resource/view.php?id=22404)
 
-[Api Gateway](https://www.aut.bme.hu/Upload/Course/VIAUAV42/hallgatoi_jegyzetek/05-API%20Gateway.pdf)
+[Api Gateway](https://edu.vik.bme.hu/mod/resource/view.php?id=22402)
 
 ## Cél
 

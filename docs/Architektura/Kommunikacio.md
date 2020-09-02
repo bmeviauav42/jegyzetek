@@ -2,7 +2,7 @@
 
 ## Előadás
 
-[Kommunikációs lehetőségek](https://www.aut.bme.hu/Upload/Course/VIAUAV42/hallgatoi_jegyzetek/Kommunik%c3%a1ci%c3%b3s%20lehet%c5%91s%c3%a9gek.pdf)
+[Kommunikációs lehetőségek](https://edu.vik.bme.hu/mod/resource/view.php?id=22409)
 
 ## Cél
 

@@ -2,7 +2,7 @@
 
 ## Előadás
 
-[Kubernetes bevezető](https://www.aut.bme.hu/Upload/Course/VIAUAV42/hallgatoi_jegyzetek/10-Kubernetes.pdf)
+[Kubernetes bevezető](https://edu.vik.bme.hu/mod/resource/view.php?id=22403)
 
 ## Cél
 

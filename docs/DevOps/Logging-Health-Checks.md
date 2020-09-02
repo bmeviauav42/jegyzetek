@@ -2,7 +2,7 @@
 
 ## Előadás
 
-[Naplózás, Health Checks](https://www.aut.bme.hu/Upload/Course/VIAUAV42/hallgatoi_jegyzetek/Logging,%20health%20checks.pdf)
+[Naplózás, Health Checks](https://edu.vik.bme.hu/mod/resource/view.php?id=22408)
 
 ??? "Előző alkalmak cheatsheet"
 

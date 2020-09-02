@@ -2,7 +2,7 @@
 
 ## Előadás
 
-[Konténer-technológiák és Docker alapok](https://www.aut.bme.hu/Upload/Course/VIAUAV42/hallgatoi_jegyzetek/02-Kontenerek%20Docker.pdf)
+[Konténer-technológiák és Docker alapok](https://edu.vik.bme.hu/mod/resource/view.php?id=22405)
 
 ## Cél
 

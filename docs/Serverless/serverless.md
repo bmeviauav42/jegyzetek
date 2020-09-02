@@ -2,7 +2,7 @@
 
 ## Előadás
 
-[Serverless, Functionasa Service (FaaS)](https://www.aut.bme.hu/Upload/Course/VIAUAV42/hallgatoi_jegyzetek/Mikroszolg%c3%a1ltat%c3%a1sok%20-%20serverless,%20faas%20-%20clean.pdf)
+[Serverless, Functionasa Service (FaaS)](https://edu.vik.bme.hu/mod/resource/view.php?id=22410)
 
 ## Azure Functions referenciaarchitektúrák mikroszolgáltatásokhoz
 
