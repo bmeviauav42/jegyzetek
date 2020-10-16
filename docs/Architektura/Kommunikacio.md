@@ -326,35 +326,33 @@ Próbáljuk ki!
 
 ## Contract-First API készítés - gRPC
 
-A feladat célja kipróbálni a contract-first megkozelítést: tehát előbb az interfész leírót készítjük el egy Domain Specific Language (DSL) segítésével, majd abból generálunk kliens és szerver oldali kódot. 
+A feladat célja kipróbálni a contract-first megkozelítést: tehát előbb az interfész leírót készítjük el egy Domain Specific Language (DSL) segítésével, majd abból generálunk kliens és szerver oldali kódot.
 
-Ezt REST-es API-val is meg tudnánk tenni a Swagger/OpenAPI leíróval, de mi most gRPC-n keresztül próváljuk ki. Feladatunkban a Catalog szolgáltatás `ProductController` két műveletét írjuk meg gRPC protokollal. Majd hívjuk meg ezeket az Order szolgáltatásból.
+Ezt REST-es API-val is meg tudnánk tenni a Swagger/OpenAPI leíróval, de mi most gRPC-n keresztül próbáljuk ki. Feladatunkban a Catalog szolgáltatás `ProductController` két műveletét írjuk meg gRPC protokollal. Majd hívjuk meg ezeket az Order szolgáltatásból.
 
-!!! note ".NET Core 3.0+"
-    A gRPC csak .NET Core 3.0-tól támogatott, így érdemes a Visual Studio-t frissíteni legalább 16.3.x verzióra
 
 #### Szerver oldal
 
-Lehetőség lenne egy Projektsablonból is dolgoznunk (File / New Project / gRPC Serice), ami szintén egy ASP.NET Core 3.0-ás projekt, de most a meglévő Catalog projektünkbe rakjuk bele ezt a funkcionalitást.
+Lehetőség lenne egy Projektsablonból is dolgoznunk (File / New Project / gRPC Serice), ami szintén egy ASP.NET Core 3.1-ás projekt, de most a meglévő Catalog projektünkbe rakjuk bele ezt a funkcionalitást.
 
-Vegyük fel a Catalog projektbe az alábbi NuGet csomagot. Fontos, hogy a **2.23.1**-es verzió legyen, mert én a 2.23.2-es verzióval belefutottam egy bugba.
+Vegyük fel a Catalog projektbe az alábbi NuGet csomagot.
 
 ```xml
-<PackageReference Include="Grpc.AspNetCore" Version="2.23.1" />
+<PackageReference Include="Grpc.AspNetCore" Version="2.32.0" />
 ```
 
-A Catalog projektbe vegyünk fel egy `Protos` mappát, és abba egy Text fájlt `catalog.proto` néven, ami a szolgáltatásleírónk lesz. Készütsünk el egy saját szolgáltatásleírót a Catalog REST API-nk mintájára. Tartalom a következő:
+A Catalog projektbe vegyünk fel egy `Protos` mappát, és abba egy Text fájlt `catalog.proto` néven, ami a szolgáltatásleírónk lesz. Készítsünk el egy saját szolgáltatásleírót a Catalog REST API-nk mintájára. Tartalom a következő:
 
 * Egy szolgáltatásunk lesz `CatalogService` néven
 * A szolgáltatásban `rpc` kulcsszóval tudunk műveleteket definiálni, megadva a bemenő paramétert és a visszatérési értéket.
     * Ezek külön definiált `message` típusok lehetnek.
 * Az első legyen a `GetProducts`
     * Sajnos a proto szabványban nincs `void` típusú üzenet, ezért szükséges felvennünk egy üres üzenetet `Empty` néven, ez fogja majd a `void` típust reprezentálni
-    * A visszatérési érték típusát a `ProductsResponse` üzenet írja le, amiben több `Product` típusú üzenet lesz (nevezhetnénk tömbnek is, itt `repeated` kulcsszó)
+    * A visszatérési érték típusát a `ProductsResponse` üzenet írja le, amiben több `Product` típusú üzenet lesz (nevezhetnénk tömbnek is, itt ez a `repeated` kulcsszó)
     * Az üzenetekben meg kell adnunk a mezők sorrendjét az egyenlőség mögött a bináris sorosítás miatt
     * `Product` üzenet az eddig megszokott propertykkel rendelkezzen a proto-s típusokkal (sajnos itt nincs `decimal`)
 * A `GetProduct` művelet egy azonosítót vár, és egy `Product`-tal tér vissza.
-    * Az id-t is szükséges becsomagolni egy üzenettípusba: `GetProductRequest`
+    * Az `id`-t is szükséges becsomagolni egy üzenettípusba: `GetProductRequest`
 
 ```proto
 syntax = "proto3";
@@ -372,19 +370,19 @@ message Empty {
 }
 
 message ProductsResponse {
-	repeated Product Products = 1;
+    repeated Product Products = 1;
 }
 
 message Product {
-	int32 ProductId = 1;
-	string Name = 2;
-	double UnitPrice = 3;
-	int32 Stock = 4;
+    int32 ProductId = 1;
+    string Name = 2;
+    double UnitPrice = 3;
+    int32 Stock = 4;
 }
 
 message GetProductRequest {
-	int32 ProductId = 1;
-} 
+    int32 ProductId = 1;
+}
 ```
 
 A `.proto` fájlból a modellek és egy ősosztály is generálódik a fordítás során. Ehhez viszont a Catalog projekt fájlban fel kell venni a következő elemet:
@@ -445,11 +443,11 @@ app.UseEndpoints(endpoints =>
 
 #### Kliens oldal
 
-Adjunk az Order projekthez egy szolgáltatás referenciát. Az Order projekten jobb gomb / Add / Service Reference / gRPC / Add / File ahol tallózuk ki a másik projektben található .proto fájlt és **Client** módban generáljuk le a szükséges osztályokat. Ez a művelet a szükséges NuGet csomagokat is hozzáadja a projekthez.
+Adjunk az Order projekthez egy szolgáltatás referenciát. Az Order projekten jobb gomb / Add / Service Reference / gRPC / Add / File ahol tallózzuk ki a másik projektben található .proto fájlt és **Client** módban generáljuk le a szükséges osztályokat. Ez a művelet a szükséges NuGet csomagokat is hozzáadja a projekthez.
 
 ![image](https://user-images.githubusercontent.com/8333960/66718227-b87af080-ede1-11e9-8b45-48e8e06449fa.png)
 
-A `Startup` osztályban regisztráljuk be a DI konténerbe a gRPC kliensünket. Mivel a gRPC-nek szüksége van HTTPS-re, viszont most a konténereink nem bíznak egymás tanusítványaiban, ezért most ideiglenesen kapcsoljuk ki a HTTPS hibákat a gRPC-t alatt lévő `HttpClient`-ben.
+A `Startup` osztályban regisztráljuk be a DI konténerbe a gRPC kliensünket. Mivel a gRPC-nek szüksége van HTTPS-re, viszont most a konténereink nem bíznak egymás tanúsítványaiban, ezért most ideiglenesen kapcsoljuk ki a HTTPS hibákat a gRPC-t alatt lévő `HttpClient`-ben.
 
 ```cs
 services.AddGrpcClient<CatalogService.CatalogServiceClient>(o =>
@@ -462,23 +460,23 @@ services.AddGrpcClient<CatalogService.CatalogServiceClient>(o =>
 });
 ```
 
-!!! note "IHttpClientFactory haszálata"
+!!! note "IHttpClientFactory használata"
     Megfigyelhetjük, hogy a gRPC kliens is az `IHttpClientFactory` megoldásra épít.
 
 A `TestController`ben cseréljük le A REST kliensünket a gRPC kliensre.
 
 ```cs
 //private readonly ICatalogApiClient _catalogApiClient;
-private readonly IBusControl _bus;
+private readonly IPublishEndpoint _publishEndpoint;
 private readonly CatalogService.CatalogServiceClient _catalogServiceClient;
 
 public TestController(
-    //ICatalogApiClient catalogApiClient, 
-    IBusControl bus, 
+    ICatalogApiClient catalogApiClient,
+    IPublishEndpoint publishEndpoint,
     CatalogService.CatalogServiceClient catalogServiceClient)
 {
     //_catalogApiClient = catalogApiClient;
-    _bus = bus;
+    _publishEndpoint = publishEndpoint;
     _catalogServiceClient = catalogServiceClient;
 }
 
@@ -493,4 +491,4 @@ Próbáljuk ki!
 
 ## Összefoglalás
 
-A gyakorlat során néztünk példát REST-es kommunikáció esetében a hibatűrés növelésére egy Retry policy-vel. Majd Aszinkron kommunikációt implementáltunk egy RabbitMQ üzenetsor és MassTransit konyvtár segítségével a két szolgáltatásunk között. Végül Contract first megközelítéssel készítettünk szolgáltatást, most gRPC-n kipróbálva.
+A gyakorlat során néztünk példát REST-es kommunikáció esetében a hibatűrés növelésére egy Retry policy-vel. Majd aszinkron kommunikációt implementáltunk a két szolgáltatásunk között a RabbitMQ üzenetsor és a MassTransit könyvtár segítségével. Végül Contract-first megközelítéssel készítettünk szolgáltatást, most gRPC-n kipróbálva.
