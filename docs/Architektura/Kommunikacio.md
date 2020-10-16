@@ -195,45 +195,45 @@ Ismételjük meg ezt a Catalog szolgáltatásban is.
 Kezdjük a a küldő oldallal. Vegyük fel az Order szolgáltatásba a következő NuGet csomagokat.
 
 ```xml
-<PackageReference Include="MassTransit.Extensions.DependencyInjection" Version="5.5.5" />
-<PackageReference Include="MassTransit.Extensions.Logging" Version="5.5.5" />
-<PackageReference Include="MassTransit.RabbitMQ" Version="5.5.5" />
+<PackageReference Include="MassTransit.AspNetCore" Version="7.0.4" />
+<PackageReference Include="MassTransit.RabbitMQ" Version="7.0.4" />
 ```
 
-Konfiguráljuk be a `Startup` osztályban a MassTransit-ot, hogy RabbitMQ-t használjon, adjuk meg a logolás módját, és hogy melyik üzenetsorba rakja az `IOrderCreatedEvent` eseményünket.
+Konfiguráljuk be a `Startup` osztályban a MassTransit-ot, hogy RabbitMQ-t használjon, és hogy melyik üzenetsorba rakja az `IOrderCreatedEvent` eseményünket.
 
 ```cs
 services.AddMassTransit(x =>
 {
-    x.AddBus(provider =>
-        Bus.Factory.CreateUsingRabbitMq(cfg =>
-        {
-            cfg.Host(new Uri($"rabbitmq://rabbitmq:/"),
-                hostConfig =>
-                {
-                    hostConfig.Username("guest");
-                    hostConfig.Password("guest");
-                });
-            cfg.UseExtensionsLogging(provider.GetRequiredService<ILoggerFactory>());
-        }));
+    x.UsingRabbitMq((ctx, config) =>
+    {
+        config.Host(new Uri($"rabbitmq://rabbitmq:/"),
+            hostConfig =>
+            {
+                hostConfig.Username("guest");
+                hostConfig.Password("guest");
+            });
+    });
 
-    EndpointConvention.Map<IOrderCreatedEvent>(new Uri("rabbitmq://rabbitmq:/integration"));
+    EndpointConvention.Map<IOrderCreatedEvent>(
+        new Uri("rabbitmq://rabbitmq:/integration"));
 });
+
+services.AddMassTransitHostedService();
 ```
 
 !!! note "Konfiguráció korrektebben"
     Itt is érdemesebb lenne a rabbitmq hosztnevet és a bejelentkezési adatokat konfigurációból nyerni.
 
-Süssük el az eseményt a `TestController`ben. Kérjük el az `IBusControl` objektumot, és azon hívjuk meg a `Publish` metódust. MassTransit esetében a `Publish` süti el a broadcast szerű eseményeket, míg a `Send` inkább a command típusú üzenetekre van kihegyezve.
+Süssük el az eseményt a `TestController`ben. Kérjük el az `IPublishEndpoint` objektumot a konstruktorban, és azon hívjuk meg a `Publish` metódust a `CreateOrder` actionben. MassTransit esetében a `Publish` süti el a broadcast szerű eseményeket, míg a `Send` inkább a command típusú üzenetekre van kihegyezve.
 
 ```cs
 private readonly ICatalogApiClient _catalogApiClient;
-private readonly IBusControl _bus;
+private readonly IPublishEndpoint _publishEndpoint;
 
-public TestController(ICatalogApiClient catalogApiClient, IBusControl bus)
+public TestController(ICatalogApiClient catalogApiClient, IPublishEndpoint publishEndpoint)
 {
     _catalogApiClient = catalogApiClient;
-    _bus = bus;
+    _publishEndpoint = publishEndpoint;
 }
 
 // ...
@@ -241,8 +241,8 @@ public TestController(ICatalogApiClient catalogApiClient, IBusControl bus)
 [HttpPost("[action]")]
 public async Task<ActionResult> CreateOrder()
 {
-    await _bus.Publish(new OrderCreatedEvent 
-    {
+    await _publishEndpoint.Publish(new OrderCreatedEvent
+    { 
         ProductId = 1,
         Quantity = 1,
         OrderPlaced = DateTimeOffset.UtcNow
@@ -257,14 +257,13 @@ public async Task<ActionResult> CreateOrder()
 Térjünk át a fogadó oldalra. A Catalog szolgáltatás projektbe vegyük fel szintén az alábbi NuGet csomagokat.
 
 ```xml
-<PackageReference Include="MassTransit.Extensions.DependencyInjection" Version="5.5.5" />
-<PackageReference Include="MassTransit.Extensions.Logging" Version="5.5.5" />
-<PackageReference Include="MassTransit.RabbitMQ" Version="5.5.5" />
+<PackageReference Include="MassTransit.AspNetCore" Version="7.0.4" />
+<PackageReference Include="MassTransit.RabbitMQ" Version="7.0.4" />
 ```
 
 Szükségünk lesz egy az eseményt lekezelő osztályra is, aminek MassTransit esetben az `IConsumer<T>` interfészt kell megvalósítania.
 
-Vegyünk fel a Catalog projektbe egy `IntegrationEventHandlers` mappát, majd abba hozzunk létre egy új osztályt `OrderCreatedEventHandler` néven az alábbi tartommal. Itt csak a kapott adatok alapján frissítsük az adatainkat: a mi Móricka példánkban a `ProductController`ben lévő statikus listán dolgozunk.
+Vegyünk fel a Catalog projektbe egy `IntegrationEventHandlers` mappát, majd abba hozzunk létre egy új osztályt `OrderCreatedEventHandler` néven az alábbi tartalommal. Itt csak a kapott adatok alapján frissítsük az adatainkat: a mi Móricka példánkban a `ProductController`ben lévő statikus listán dolgozunk.
 
 ```cs
 public class OrderCreatedEventHandler : IConsumer<IOrderCreatedEvent>
@@ -283,56 +282,42 @@ public class OrderCreatedEventHandler : IConsumer<IOrderCreatedEvent>
 }
 ```
 
-Konfiguráljuk be a `Startup`-ban a MassTransit-ot, hogy RabbitMQ-t használjon, adjuk meg a logolás módját, illetve hogy melyik üzenetsorból várja az `IOrderCreatedEvent` eseményünket, és azt melyik `IConsumer` megvalósítás kezelje le. 
+Konfiguráljuk be a `Startup`-ban a MassTransit-ot, hogy RabbitMQ-t használjon, illetve hogy melyik üzenetsorból várja az `IOrderCreatedEvent` eseményünket, és azt melyik `IConsumer` megvalósítás kezelje le.
 
 ```cs
 services.AddMassTransit(x =>
 {
     x.AddConsumer<OrderCreatedEventHandler>();
-    x.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(cfg =>
+    x.UsingRabbitMq((ctx, cfg) =>
     {
-        var host = cfg.Host(new Uri($"rabbitmq://rabbitmq:"), hostConfig =>
+        cfg.Host(new Uri($"rabbitmq://rabbitmq:/"), hostConfig =>
         {
             hostConfig.Username("guest");
             hostConfig.Password("guest");
         });
-        cfg.UseExtensionsLogging(provider.GetRequiredService<ILoggerFactory>());
-        cfg.ReceiveEndpoint(host, "integration", ep =>
+        cfg.ReceiveEndpoint("integration", e =>
         {
-            ep.ConfigureConsumer<OrderCreatedEventHandler>(provider);
+            e.ConfigureConsumer<OrderCreatedEventHandler>(ctx);
         });
-    }));
+    });
 });
+
+services.AddMassTransitHostedService();
 ```
 
-Fogadó oldalon még szükséges elindítani egy háttérfolyamatot is, ami figyeli az üzenetsorokat. Ezt most tegyük meg a `Startup.Configure()` metódus végén.
-
-```cs
-public void Configure(
-    IApplicationBuilder app,
-    IHostingEnvironment env,
-    IApplicationLifetime lifetime)
-{
-    // ...
-    app.UseMvc();
-
-    var bus = app.ApplicationServices.GetService<IBusControl>();
-    var busHandle = TaskUtil.Await(() => bus.StartAsync());
-    lifetime.ApplicationStopping.Register(() => busHandle.Stop());
-}
-```
+Az `AddMassTransitHostedService` metódus egy háttérfolyamatot regisztrál be, ami figyeli az üzenetsorokat.
 
 Próbáljuk ki!
 
 * Kérjük le a termékeket
-* Süssük el fiddlerből vagy Postmanből a `CreateOrder` Actiont
+* Süssünk el fiddlerből vagy Postmanből egy POST /api/Test/CreateOrder kérést
 * Nézzük meg, hogy frissült-e a termék raktárkészlete
 
 !!! tip "Hibakeresés"
     Ha nem frissült, akkor a logokból vagy a rabbitmq menedzsment felületéről lehet nyomozni.
-    
-    - Ha azt tapasztaljuk hogy nem tud csatlakozni valamelyik szolgáltatás, akkor ellenőrizzük a docker-compose file-t és a connection string-eket.
-    - Ha azt tapasztaljuk, hogy `skipped` üzenetsorba kerülnek az üzenetek, akkor a küldő oldal rendben működött, de valamiért a fogadó oldal nem tudott a megadott üzenettípusra egyszer sem feliratkozni helyesen.
+
+    * Ha azt tapasztaljuk hogy nem tud csatlakozni valamelyik szolgáltatás, akkor ellenőrizzük a docker-compose file-t és a connection string-eket.
+    * Ha azt tapasztaljuk, hogy `skipped` üzenetsorba kerülnek az üzenetek, akkor a küldő oldal rendben működött, de valamiért a fogadó oldal nem tudott a megadott üzenettípusra egyszer sem feliratkozni helyesen.
 
 !!! note "Kitekintés"
     A fenti példában nem törődtünk az idempotens megvalósítással, ez mindig külön tervezést igényel, az üzleti logikánk függvényében, de mindenképpen érdemes a tervezés során figyelni erre.
