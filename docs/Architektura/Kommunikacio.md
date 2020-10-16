@@ -85,7 +85,7 @@ Vegyük fel az Order projektbe az alábbi NuGet csomagot. Ez függőségként be
 
 A Startup osztályba adjuk hozzá a Retry policy-t az `IHttpClientFactory`-hoz. Állítsuk be, hogy a kapcsolódási hibák és az általunk tranziens hibáknak vélt státuszkódok esetén próbálkozzon újra 5x.
 
-```Cs
+```C#
 bool RetryableStatusCodesPredicate(HttpStatusCode statusCode) =>
     statusCode == HttpStatusCode.BadGateway
         || statusCode == HttpStatusCode.ServiceUnavailable
@@ -111,7 +111,7 @@ Ez a Policy gyakorlatilag beépül a `HttpClient` Handler Pipeline-jába, így a
 
 Azonnali Retry helyett várjunk egy kicsit az újrapróbálkozások között, mégpedig exponenciálisan egyre többet.
 
-```Cs
+```C#
     //.RetryAsync(5)
     .WaitAndRetryAsync(5, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)))
 ```
@@ -164,7 +164,7 @@ Adjuk meg, a másik két service esetében a rabbitmq-tól való függést.
 
 Hozzunk létre egy új .NET Standard projektet `Msa.Comm.Lab.Events` néven, ami lényegében a kommunikáció contractja lesz. Ebbe vegyünk fel egy interfészt `IOrderCreatedEvent` néven az alábbi tartalommal. Ez fog majd utazni az üzenetsorban.
 
-```cs
+```C#
 public interface IOrderCreatedEvent
 {
     int ProductId { get; }
@@ -177,7 +177,7 @@ Az Order projektben adjunk referenciát az előzőleg létrehozott projektre.
 
 Hozzunk létre egy `IntegrationEvents` mappát az Order projektben, majd abba implementáljuk egy osztályba az `IOrderCreatedEvent` interfészt.
 
-```cs
+```C#
 public class OrderCreatedEvent : IOrderCreatedEvent
 {
     public int ProductId { get; set; }
@@ -201,7 +201,7 @@ Kezdjük a a küldő oldallal. Vegyük fel az Order szolgáltatásba a következ
 
 Konfiguráljuk be a `Startup` osztályban a MassTransit-ot, hogy RabbitMQ-t használjon, és hogy melyik üzenetsorba rakja az `IOrderCreatedEvent` eseményünket.
 
-```cs
+```C#
 services.AddMassTransit(x =>
 {
     x.UsingRabbitMq((ctx, config) =>
@@ -226,7 +226,7 @@ services.AddMassTransitHostedService();
 
 Süssük el az eseményt a `TestController`ben. Kérjük el az `IPublishEndpoint` objektumot a konstruktorban, és azon hívjuk meg a `Publish` metódust a `CreateOrder` actionben. MassTransit esetében a `Publish` süti el a broadcast szerű eseményeket, míg a `Send` inkább a command típusú üzenetekre van kihegyezve.
 
-```cs
+```C#
 private readonly ICatalogApiClient _catalogApiClient;
 private readonly IPublishEndpoint _publishEndpoint;
 
@@ -265,7 +265,7 @@ Szükségünk lesz egy az eseményt lekezelő osztályra is, aminek MassTransit 
 
 Vegyünk fel a Catalog projektbe egy `IntegrationEventHandlers` mappát, majd abba hozzunk létre egy új osztályt `OrderCreatedEventHandler` néven az alábbi tartalommal. Itt csak a kapott adatok alapján frissítsük az adatainkat: a mi Móricka példánkban a `ProductController`ben lévő statikus listán dolgozunk.
 
-```cs
+```C#
 public class OrderCreatedEventHandler : IConsumer<IOrderCreatedEvent>
 {
     public Task Consume(ConsumeContext<IOrderCreatedEvent> context)
@@ -284,7 +284,7 @@ public class OrderCreatedEventHandler : IConsumer<IOrderCreatedEvent>
 
 Konfiguráljuk be a `Startup`-ban a MassTransit-ot, hogy RabbitMQ-t használjon, illetve hogy melyik üzenetsorból várja az `IOrderCreatedEvent` eseményünket, és azt melyik `IConsumer` megvalósítás kezelje le.
 
-```cs
+```C#
 services.AddMassTransit(x =>
 {
     x.AddConsumer<OrderCreatedEventHandler>();
@@ -395,7 +395,7 @@ A `.proto` fájlból a modellek és egy ősosztály is generálódik a fordítá
 
 A Catalog projektbe hozzunk létre egy `Services` mappát, majd abba egy `CatalogService` osztályt, ami a  `Grpc.CatalogService.CatalogServiceBase`-ből származik le. Nekünk csak felül kell definiálni a kívánt metódusokat. Ide is vegyük fel az alábbi statikus listát, és ennek a segítségével valósítsuk meg az üzleti műveleteket. Figyeljük meg, hogy a .proto-ból generált típusokkal tudunk itt dolgozni.
 
-```cs
+```C#
 public class CatalogService : Grpc.CatalogService.CatalogServiceBase
 {
     private readonly ILogger<CatalogService> _logger;
@@ -429,11 +429,11 @@ public class CatalogService : Grpc.CatalogService.CatalogServiceBase
 
 A Catalog `Startup` osztályban regisztráljuk be a gRPC szolgáltatásainkat.
 
-```cs
+```C#
 services.AddGrpc();
 ```
 
-```cs
+```C#
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapGrpcService<Services.CatalogService>();
@@ -449,7 +449,7 @@ Adjunk az Order projekthez egy szolgáltatás referenciát. Az Order projekten j
 
 A `Startup` osztályban regisztráljuk be a DI konténerbe a gRPC kliensünket. Mivel a gRPC-nek szüksége van HTTPS-re, viszont most a konténereink nem bíznak egymás tanúsítványaiban, ezért most ideiglenesen kapcsoljuk ki a HTTPS hibákat a gRPC-t alatt lévő `HttpClient`-ben.
 
-```cs
+```C#
 services.AddGrpcClient<CatalogService.CatalogServiceClient>(o =>
 {
     o.Address = new Uri("https://msa.comm.lab.services.catalog");
@@ -465,7 +465,7 @@ services.AddGrpcClient<CatalogService.CatalogServiceClient>(o =>
 
 A `TestController`ben cseréljük le A REST kliensünket a gRPC kliensre.
 
-```cs
+```C#
 //private readonly ICatalogApiClient _catalogApiClient;
 private readonly IPublishEndpoint _publishEndpoint;
 private readonly CatalogService.CatalogServiceClient _catalogServiceClient;
