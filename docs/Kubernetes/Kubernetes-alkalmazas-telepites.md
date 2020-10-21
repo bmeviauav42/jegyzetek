@@ -75,6 +75,8 @@ A Traefik-et [Helm charttal](https://github.com/containous/traefik-helm-chart) f
     kubectl port-forward $(kubectl get pods --selector "app.kubernetes.io/name=traefik" --output=name) 9000:9000
     ```
 
+1. Nézzük meg a Traefik dashboardot: <http://localhost:9000/dashboard/> (a végén kell a perjel!)
+
 !!! note ""
     Ha frissíteni szeretnénk később a Traefik-et, akkor azt a `helm upgrade traefik traefik/traefik ...` paranccsal tudjuk megtenni.
 
