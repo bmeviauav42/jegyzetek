@@ -118,7 +118,7 @@ Az alkalmazásunk telepítéséhez szintén yaml leírókat találunk a _kuberne
 
 1. Menjünk vissza a Kubernetes dashboard-ra. Egy kicsit várjunk, és azt kell lássuk, hogy az eddig piros elemek kizöldülnek. A Kubernetes folyamatosan törekszik az elvárt állapot elérésére, ezért a nem elérhető image-einket újra és újra megpróbálta elérni, míg nem sikerült.
 
-1. Próbáljuk ki az alkalmazást a <http://localhost:30080> címen
+1. Próbáljuk ki az alkalmazást a <http://localhost:32080> címen
 
 ### Alkalmazás frissítése
 
@@ -182,6 +182,6 @@ Az alkalmazás fent ismertetett frissítéséhez a yaml fájlokba minden alkalom
 
 1. Nézzük meg, hogy a Helm szerint létezik-e a release: `helm list`
 
-1. Próbáljuk ki az alkalmazást a <http://localhost:30080> címen.
+1. Próbáljuk ki az alkalmazást a <http://localhost:32080> címen.
 
 1. Ezen chart segítségével a Docker image tag-et telepítési paraméterben adhatjuk át, pl. ha a "v2" az új tag, akkor egy paranccsal tudjuk frissíteni: `helm upgrade todoapp --install todoapp --set todos.tag=v2`
