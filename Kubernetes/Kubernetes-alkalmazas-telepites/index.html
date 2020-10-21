@@ -950,7 +950,7 @@ docker-compose build
 <p>Menjünk vissza a Kubernetes dashboard-ra. Egy kicsit várjunk, és azt kell lássuk, hogy az eddig piros elemek kizöldülnek. A Kubernetes folyamatosan törekszik az elvárt állapot elérésére, ezért a nem elérhető image-einket újra és újra megpróbálta elérni, míg nem sikerült.</p>
 </li>
 <li>
-<p>Próbáljuk ki az alkalmazást a <a href="http://localhost:30080">http://localhost:30080</a> címen</p>
+<p>Próbáljuk ki az alkalmazást a <a href="http://localhost:32080">http://localhost:32080</a> címen</p>
 </li>
 </ol>
 <h3 id="alkalmazas-frissitese">Alkalmazás frissítése<a class="headerlink" href="#alkalmazas-frissitese" title="Permanent link">&para;</a></h3>
@@ -1030,7 +1030,7 @@ docker-compose build
 <p>Nézzük meg, hogy a Helm szerint létezik-e a release: <code>helm list</code></p>
 </li>
 <li>
-<p>Próbáljuk ki az alkalmazást a <a href="http://localhost:30080">http://localhost:30080</a> címen.</p>
+<p>Próbáljuk ki az alkalmazást a <a href="http://localhost:32080">http://localhost:32080</a> címen.</p>
 </li>
 <li>
 <p>Ezen chart segítségével a Docker image tag-et telepítési paraméterben adhatjuk át, pl. ha a "v2" az új tag, akkor egy paranccsal tudjuk frissíteni: <code>helm upgrade todoapp --install todoapp --set todos.tag=v2</code></p>
