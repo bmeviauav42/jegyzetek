@@ -851,7 +851,6 @@ az sql db create -g $(az group list --query [0].name -o tsv) -s xgef0qsrv -n mhc
 <h2 id="1-feladat">1. feladat<a class="headerlink" href="#1-feladat" title="Permanent link">&para;</a></h2>
 <p>A laboranyag alapján, továbbá</p>
 <ul>
-<li>A build pipeline változók közé vegyük fel az <code>SQLDB</code>-t is</li>
 <li>Mindenhol, ahol Container Registry-t kell megadni, adjuk meg a teljes login server címet</li>
 <li>A release pipeline-ban klónozzuk a <code>Create Deployments &amp; Services in AKS</code> lépést, nevezzük át <code>Create Namespace</code>-re, a <code>Command</code> rész alatt állítsunk be inline configuration-t a következőre:</li>
 </ul>
