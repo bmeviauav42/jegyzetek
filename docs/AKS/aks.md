@@ -38,7 +38,7 @@ A hivatalos Azure DevOps labor anyagot követi: <https://www.azuredevopslabs.com
     - adatbázis létrehozása 
     
      ```bash
-    az sql db create -g $(az group list --query [0].name -o tsv) -s xgef0qsrv -n mhcdb --service-objective S0
+    az sql db create -g $(az group list --query [0].name -o tsv) -s <neptun>srv -n mhcdb --service-objective S0
      ```
 
 ## -1. feladat - egyedi image név és adatbázis név
