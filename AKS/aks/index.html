@@ -805,7 +805,8 @@
 <li><code>mhc-aks.yaml</code></li>
 </ul>
 </li>
-<li>Azure portálra lépjünk be az edu.bme.hu-s címünkkel, válasszuk az autsoft.hu tenantot. Nézzünk szét a resource group-ban. Az AKS namespace-ek közé vegyük fel az edu.bme.hu-s címünk szerintit (<code>@</code> előtti rész, pontok nélkül)<br />
+<li>legyen az <strong>edu-s azonosító</strong> ez: a <code>@edu.bme.hu</code> előtti rész pontok nélkül</li>
+<li>Azure portálra lépjünk be az edu.bme.hu-s címünkkel, válasszuk az autsoft.hu tenantot. Nézzünk szét a resource group-ban. Az AKS namespace-ek közé vegyük fel az edu-s azonosító szerintit
     <div class="highlight"><pre><span></span><code><span class="p">{</span>
   <span class="s2">&quot;apiVersion&quot;</span><span class="o">:</span> <span class="s2">&quot;v1&quot;</span><span class="p">,</span>
   <span class="s2">&quot;kind&quot;</span><span class="o">:</span> <span class="s2">&quot;Namespace&quot;</span><span class="p">,</span>
@@ -817,11 +818,11 @@
 <ul>
 <li>az image neve elé tegyük a neptunkódunkat</li>
 <li>docker-compose.yml-ban<ul>
-<li><code>image: myhealth.web</code> -&gt; <code>image: &lt;neptunkod&gt;.myhealth.web</code></li>
+<li><code>image: myhealth.web</code> -&gt; <code>image: &lt;edu-s azonosító&gt;.myhealth.web</code></li>
 </ul>
 </li>
 <li>mhc-aks.yaml-ban 93. sor körül<ul>
-<li><code>image: __ACR__/myhealth.web:latest</code> -&gt; <code>image: __ACR__/&lt;neptunkod&gt;.myhealth.web:latest</code></li>
+<li><code>image: __ACR__/myhealth.web:latest</code> -&gt; <code>image: __ACR__/&lt;edu-s azonosító&gt;.myhealth.web:latest</code></li>
 </ul>
 </li>
 <li>src/MyHealth.Web/appsettings.json a connection string-ben<ul>
@@ -850,12 +851,7 @@
 <p>A laboranyag alapján, továbbá</p>
 <ul>
 <li>Mindenhol, ahol Container Registry-t kell megadni, adjuk meg a teljes login server címet</li>
-<li>
-<p>A release pipeline-ban klónozzuk a <code>Create Deployments &amp; Services in AKS</code> lépést, nevezzük át <code>Create Namespace</code>-re, a <code>Command</code> rész alatt állítsunk be inline configuration-t a következőre:</p>
-</li>
-<li>
-<p>A release pipeline utolsó (<code>Update image in AKS</code>) lépésében az <code>Arguments</code> részen <code>image deployments/mhc-front mhc-front=$(ACR)/myhealth.web:$(Build.BuildId)</code> -&gt; <code>image deployments/mhc-front mhc-front=$(ACR)/&lt;neptunkód&gt;.myhealth.web:$(Build.BuildId)</code></p>
-</li>
+<li>A release pipeline utolsó (<code>Update image in AKS</code>) lépésében az <code>Arguments</code> részen <code>image deployments/mhc-front mhc-front=$(ACR)/myhealth.web:$(Build.BuildId)</code> -&gt; <code>image deployments/mhc-front mhc-front=$(ACR)/&lt;neptunkód&gt;.myhealth.web:$(Build.BuildId)</code></li>
 </ul>
 <h2 id="2-feladat">2. feladat<a class="headerlink" href="#2-feladat" title="Permanent link">&para;</a></h2>
 <p>A laboranyag alapján, továbbá</p>
