@@ -814,7 +814,9 @@
 <div class="highlight"><pre><span></span><code>az sql server create -l <span class="s2">&quot;North Europe&quot;</span> -g <span class="k">$(</span>az group list --query <span class="o">[</span><span class="m">0</span><span class="o">]</span>.name -o tsv<span class="k">)</span> -n &lt;neptun&gt;srv -u &lt;neptun&gt; -p sqlAdmin123.
 </code></pre></div>
 
-<p>-adatbázis létrehozása </p>
+<ul>
+<li>adatbázis létrehozása </li>
+</ul>
 <p><code>bash
 az sql db create -g $(az group list --query [0].name -o tsv) -s xgef0qsrv -n mhcdb --service-objective S0</code></p>
 </li>
