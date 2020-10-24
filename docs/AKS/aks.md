@@ -28,7 +28,7 @@ A hivatalos Azure DevOps labor anyagot követi: <https://www.azuredevopslabs.com
     - `docker-compose.yml`
     - `mhc-aks.yaml`
 - Azure portálra lépjünk be az edu.bme.hu-s címünkkel, válasszuk az autsoft.hu tenantot. Nézzünk szét a resource group-ban. Az AKS namespace-ek közé vegyük fel az edu.bme.hu-s címünk szerintit (`@` előtti rész, pontok nélkül)  
-    ```yaml
+    ```javascript
     {
       "apiVersion": "v1",
       "kind": "Namespace",
