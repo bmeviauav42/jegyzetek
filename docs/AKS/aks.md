@@ -5,7 +5,7 @@
 - Azure szolgáltatások
     - Azure DevOps
     - Azure Kubernetes Service (multitenant)
-    - Azure SQL (multitenant)
+    - Azure SQL (Sandbox előfizetésből)
 - Terraform
 - DevOps műveletek Azure DevOps-ban
     - Forráskód kezelés Azure Repos-szal
@@ -20,7 +20,7 @@ A hivatalos Azure DevOps labor anyagot követi: <https://www.azuredevopslabs.com
 
 - Azure DevOps szervezet létrehozása
 - Be fog kérni nevet, emailt, országot (nem kell hozzájárulni az emailküldéshez)
-- Utána **Get started with Azure DevOps** dalógus jelenik meg -> Continue (nem kell hozzájárulni az emailküldéshez)
+- Utána **Get started with Azure DevOps** dialógus jelenik meg -> Continue (nem kell hozzájárulni az emailküldéshez)
 - Ha bejön az új projekt készítő felület, akkor nem kell használatba venni
 - Helyette Azure DevOps projekt generálása a laboranyag alapján
 - DevOps elmélet
@@ -28,6 +28,7 @@ A hivatalos Azure DevOps labor anyagot követi: <https://www.azuredevopslabs.com
 - Azure Repos: projekt felfedezése konténer szempontból
     - `docker-compose.yml`
     - `mhc-aks.yaml`
+- [sandbox előfizetés](https://docs.microsoft.com/en-us/learn/modules/develop-app-that-queries-azure-sql/3-exercise-create-tables-bulk-import-query-data)
 
 ## -1. feladat - egyedi image név és adatbázis név
 
@@ -51,7 +52,6 @@ A hivatalos Azure DevOps labor anyagot követi: <https://www.azuredevopslabs.com
 For ($i=1; $i -le 5; $i++) { az sql db create -g AKSLab -s akssqlsrv -n akslabsql$i --compute-model Serverless --edition GeneralPurpose --family Gen5 --auto-pause-delay 120 --max-size 1GB --capacity 1 --min-capacity 0.5 }
 ```
 
-- Lépjünk be az [Azure portálra](https://portal.azure.com) a labuser@autsoft.hu userrel. Jelszó: a laborgép jelszava
 - Főleg csak olvasási jogokkal rendelkezik
     - Nézzük meg a létrejött erőforrásokat
 
