@@ -35,7 +35,7 @@ A hivatalos Azure DevOps labor anyagot követi: <https://www.azuredevopslabs.com
     az sql server create -l "North Europe" -g $(az group list --query [0].name -o tsv) -n <neptun>srv -u <neptun> -p sqlAdmin123.
     ```
     
-    -adatbázis létrehozása 
+    - adatbázis létrehozása 
     
      ```bash
     az sql db create -g $(az group list --query [0].name -o tsv) -s xgef0qsrv -n mhcdb --service-objective S0
