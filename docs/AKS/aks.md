@@ -57,7 +57,7 @@ A hivatalos Azure DevOps labor anyagot követi: <https://www.azuredevopslabs.com
 
 - Project Settings -> Pipelines részen belül Service Connection -> New Service Connection -> Azure Resource Manager -> alul váltsunk a linkkel a teljes verzióra (full version)
 - Töltsük ki a terraform file alapján
-    - Subscription Name: **MSDN1**
+    - Subscription Name: **VSEai**
 
 ## 1. feladat
 
@@ -73,4 +73,4 @@ A laboranyag alapján, továbbá
 
 A laboranyag alapján, továbbá
 
-- a kubectl parancsok végére mindig írjuk `--namespace=<neptunkód>`
+- a kubectl parancsok végére mindig írjuk `--namespace=<saját namespace-ünk neve>`
