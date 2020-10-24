@@ -794,32 +794,24 @@
 <p>A hivatalos Azure DevOps labor anyagot követi: <a href="https://www.azuredevopslabs.com/labs/vstsextend/kubernetes/">https://www.azuredevopslabs.com/labs/vstsextend/kubernetes/</a>. Itt csak a kiegészítéseket, ill. egy vázlatot írunk le.</p>
 <h2 id="elokeszuletek">Előkészületek<a class="headerlink" href="#elokeszuletek" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Azure DevOps szervezet létrehozása</li>
-<li>Be fog kérni nevet, emailt, országot (nem kell hozzájárulni az emailküldéshez)</li>
+<li>Azure DevOps<ul>
+<li>szervezet létrehozása</li>
+<li>be fog kérni nevet, emailt, országot (nem kell hozzájárulni az emailküldéshez)</li>
 <li>Utána <strong>Get started with Azure DevOps</strong> dialógus jelenik meg -&gt; Continue (nem kell hozzájárulni az emailküldéshez)</li>
 <li>Ha bejön az új projekt készítő felület, akkor nem kell használatba venni</li>
-<li>Helyette Azure DevOps projekt generálása a laboranyag alapján</li>
-<li>DevOps elmélet
-  <a href="https://docs.microsoft.com/en-us/azure/devops/learn/what-is-devops">https://docs.microsoft.com/en-us/azure/devops/learn/what-is-devops</a></li>
-<li>Azure Repos: projekt felfedezése konténer szempontból<ul>
+<li>... helyette Azure DevOps projekt generálása a laboranyag alapján</li>
+<li>Azure Repos: projekt felfedezése konténer szempontból</li>
 <li><code>docker-compose.yml</code></li>
 <li><code>mhc-aks.yaml</code></li>
 </ul>
 </li>
-<li>
-<p><a href="https://docs.microsoft.com/en-us/learn/modules/develop-app-that-queries-azure-sql/3-exercise-create-tables-bulk-import-query-data">sandbox előfizetés</a></p>
-<ul>
-<li>adatbázisszerver létrehozása </li>
-</ul>
-<div class="highlight"><pre><span></span><code>az sql server create -l <span class="s2">&quot;North Europe&quot;</span> -g <span class="k">$(</span>az group list --query <span class="o">[</span><span class="m">0</span><span class="o">]</span>.name -o tsv<span class="k">)</span> -n &lt;neptun&gt;srv -u &lt;neptun&gt; -p sqlAdmin123.
-</code></pre></div>
-
-<ul>
-<li>adatbázis létrehozása </li>
-</ul>
-<p><code>bash
-az sql db create -g $(az group list --query [0].name -o tsv) -s &lt;neptun&gt;srv -n mhcdb --service-objective S0</code></p>
-</li>
+<li>Azure portálra lépjünk be az edu.bme.hu-s címünkkel, válasszuk az autsoft.hu tenantot. Nézzünk szét a resource group-ban. Az AKS namespace-ek közé vegyük fel az edu.bme.hu-s címünk szerintit (<code>@</code> előtti rész, pontok nélkül)<br />
+    <div class="highlight"><pre><span></span><code><span class="p p-Indicator">{</span>
+  <span class="s">&quot;apiVersion&quot;</span><span class="p p-Indicator">:</span> <span class="s">&quot;v1&quot;</span><span class="p p-Indicator">,</span>
+  <span class="s">&quot;kind&quot;</span><span class="p p-Indicator">:</span> <span class="s">&quot;Namespace&quot;</span><span class="p p-Indicator">,</span>
+  <span class="s">&quot;metadata&quot;</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">{</span> <span class="s">&quot;name&quot;</span><span class="p p-Indicator">:</span> <span class="s">&quot;&lt;edu-s</span><span class="nv"> </span><span class="s">azonosító&gt;&quot;</span> <span class="p p-Indicator">},</span>
+<span class="p p-Indicator">}</span>
+</code></pre></div></li>
 </ul>
 <h2 id="-1-feladat-egyedi-image-nev-es-adatbazis-nev">-1. feladat - egyedi image név és adatbázis név<a class="headerlink" href="#-1-feladat-egyedi-image-nev-es-adatbazis-nev" title="Permanent link">&para;</a></h2>
 <ul>
@@ -858,17 +850,12 @@ az sql db create -g $(az group list --query [0].name -o tsv) -s &lt;neptun&gt;sr
 <p>A laboranyag alapján, továbbá</p>
 <ul>
 <li>Mindenhol, ahol Container Registry-t kell megadni, adjuk meg a teljes login server címet</li>
-<li>A release pipeline-ban klónozzuk a <code>Create Deployments &amp; Services in AKS</code> lépést, nevezzük át <code>Create Namespace</code>-re, a <code>Command</code> rész alatt állítsunk be inline configuration-t a következőre:</li>
-</ul>
-<div class="highlight"><pre><span></span><code><span class="p p-Indicator">{</span>
-  <span class="s">&quot;apiVersion&quot;</span><span class="p p-Indicator">:</span> <span class="s">&quot;v1&quot;</span><span class="p p-Indicator">,</span>
-  <span class="s">&quot;kind&quot;</span><span class="p p-Indicator">:</span> <span class="s">&quot;Namespace&quot;</span><span class="p p-Indicator">,</span>
-  <span class="s">&quot;metadata&quot;</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">{</span> <span class="s">&quot;name&quot;</span><span class="p p-Indicator">:</span> <span class="s">&quot;&lt;neptunkód&gt;&quot;</span> <span class="p p-Indicator">},</span>
-<span class="p p-Indicator">}</span>
-</code></pre></div>
-
-<ul>
-<li>A release pipeline utolsó (<code>Update image in AKS</code>) lépésében az <code>Arguments</code> részen <code>image deployments/mhc-front mhc-front=$(ACR)/myhealth.web:$(Build.BuildId)</code> -&gt; <code>image deployments/mhc-front mhc-front=$(ACR)/&lt;neptunkód&gt;.myhealth.web:$(Build.BuildId)</code></li>
+<li>
+<p>A release pipeline-ban klónozzuk a <code>Create Deployments &amp; Services in AKS</code> lépést, nevezzük át <code>Create Namespace</code>-re, a <code>Command</code> rész alatt állítsunk be inline configuration-t a következőre:</p>
+</li>
+<li>
+<p>A release pipeline utolsó (<code>Update image in AKS</code>) lépésében az <code>Arguments</code> részen <code>image deployments/mhc-front mhc-front=$(ACR)/myhealth.web:$(Build.BuildId)</code> -&gt; <code>image deployments/mhc-front mhc-front=$(ACR)/&lt;neptunkód&gt;.myhealth.web:$(Build.BuildId)</code></p>
+</li>
 </ul>
 <h2 id="2-feladat">2. feladat<a class="headerlink" href="#2-feladat" title="Permanent link">&para;</a></h2>
 <p>A laboranyag alapján, továbbá</p>
