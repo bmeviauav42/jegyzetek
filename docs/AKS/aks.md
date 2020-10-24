@@ -29,6 +29,17 @@ A hivatalos Azure DevOps labor anyagot követi: <https://www.azuredevopslabs.com
     - `docker-compose.yml`
     - `mhc-aks.yaml`
 - [sandbox előfizetés](https://docs.microsoft.com/en-us/learn/modules/develop-app-that-queries-azure-sql/3-exercise-create-tables-bulk-import-query-data)
+    - adatbázisszerver létrehozása 
+    
+    ```bash
+    az sql server create -l "North Europe" -g $(az group list --query [0].name -o tsv) -n <neptun>srv -u <neptun> -p sqlAdmin123.
+    ```
+    
+    -adatbázis létrehozása 
+    
+     ```bash
+    az sql db create -g $(az group list --query [0].name -o tsv) -s xgef0qsrv -n mhcdb --service-objective S0
+     ```
 
 ## -1. feladat - egyedi image név és adatbázis név
 
@@ -37,8 +48,6 @@ A hivatalos Azure DevOps labor anyagot követi: <https://www.azuredevopslabs.com
     - `image: myhealth.web` -> `image: <neptunkod>.myhealth.web`
 - mhc-aks.yaml-ban 93. sor körül
     - `image: __ACR__/myhealth.web:latest` -> `image: __ACR__/<neptunkod>.myhealth.web:latest`
-- src/MyHealth.Web/appsettings.json a connection string-ben
-    - `Initial Catalog=mhcdb` helyett `Initial Catalog=__SQLDB__`
 - ne felejtsünk el commitolni!
 
 ## Kitérő: terraform és multitenant infrastruktúra
@@ -46,14 +55,6 @@ A hivatalos Azure DevOps labor anyagot követi: <https://www.azuredevopslabs.com
 - [terraform file](https://autsoft.sharepoint.com/:f:/g/shared/AUT/EumyvuEMcWVBlSvpxxtcnL4BThMYJ8D1yyfXQQAv1DjzAQ?e=UN9eiY) main.tf
     - Jelszó: a laborgép jelszava
     - Azure SQL Serverless változatot nem támogat még :(
-- Azure SQL Serverless adatbázisok batch-elt létrehozása Azure CLI-vel
-
-```
-For ($i=1; $i -le 5; $i++) { az sql db create -g AKSLab -s akssqlsrv -n akslabsql$i --compute-model Serverless --edition GeneralPurpose --family Gen5 --auto-pause-delay 120 --max-size 1GB --capacity 1 --min-capacity 0.5 }
-```
-
-- Főleg csak olvasási jogokkal rendelkezik
-    - Nézzük meg a létrejött erőforrásokat
 
 ## 0. feladat Azure és Azure DevOps összekötése
 
