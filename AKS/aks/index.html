@@ -806,7 +806,18 @@
 <li><code>mhc-aks.yaml</code></li>
 </ul>
 </li>
-<li><a href="https://docs.microsoft.com/en-us/learn/modules/develop-app-that-queries-azure-sql/3-exercise-create-tables-bulk-import-query-data">sandbox előfizetés</a></li>
+<li>
+<p><a href="https://docs.microsoft.com/en-us/learn/modules/develop-app-that-queries-azure-sql/3-exercise-create-tables-bulk-import-query-data">sandbox előfizetés</a></p>
+<ul>
+<li>adatbázisszerver létrehozása </li>
+</ul>
+<div class="highlight"><pre><span></span><code>az sql server create -l <span class="s2">&quot;North Europe&quot;</span> -g <span class="k">$(</span>az group list --query <span class="o">[</span><span class="m">0</span><span class="o">]</span>.name -o tsv<span class="k">)</span> -n &lt;neptun&gt;srv -u &lt;neptun&gt; -p sqlAdmin123.
+</code></pre></div>
+
+<p>-adatbázis létrehozása </p>
+<p><code>bash
+az sql db create -g $(az group list --query [0].name -o tsv) -s xgef0qsrv -n mhcdb --service-objective S0</code></p>
+</li>
 </ul>
 <h2 id="-1-feladat-egyedi-image-nev-es-adatbazis-nev">-1. feladat - egyedi image név és adatbázis név<a class="headerlink" href="#-1-feladat-egyedi-image-nev-es-adatbazis-nev" title="Permanent link">&para;</a></h2>
 <ul>
@@ -819,10 +830,6 @@
 <li><code>image: __ACR__/myhealth.web:latest</code> -&gt; <code>image: __ACR__/&lt;neptunkod&gt;.myhealth.web:latest</code></li>
 </ul>
 </li>
-<li>src/MyHealth.Web/appsettings.json a connection string-ben<ul>
-<li><code>Initial Catalog=mhcdb</code> helyett <code>Initial Catalog=__SQLDB__</code></li>
-</ul>
-</li>
 <li>ne felejtsünk el commitolni!</li>
 </ul>
 <h2 id="kitero-terraform-es-multitenant-infrastruktura">Kitérő: terraform és multitenant infrastruktúra<a class="headerlink" href="#kitero-terraform-es-multitenant-infrastruktura" title="Permanent link">&para;</a></h2>
@@ -830,16 +837,6 @@
 <li><a href="https://autsoft.sharepoint.com/:f:/g/shared/AUT/EumyvuEMcWVBlSvpxxtcnL4BThMYJ8D1yyfXQQAv1DjzAQ?e=UN9eiY">terraform file</a> main.tf<ul>
 <li>Jelszó: a laborgép jelszava</li>
 <li>Azure SQL Serverless változatot nem támogat még :(</li>
-</ul>
-</li>
-<li>Azure SQL Serverless adatbázisok batch-elt létrehozása Azure CLI-vel</li>
-</ul>
-<div class="highlight"><pre><span></span><code>For ($i=1; $i -le 5; $i++) { az sql db create -g AKSLab -s akssqlsrv -n akslabsql$i --compute-model Serverless --edition GeneralPurpose --family Gen5 --auto-pause-delay 120 --max-size 1GB --capacity 1 --min-capacity 0.5 }
-</code></pre></div>
-
-<ul>
-<li>Főleg csak olvasási jogokkal rendelkezik<ul>
-<li>Nézzük meg a létrejött erőforrásokat</li>
 </ul>
 </li>
 </ul>
