@@ -5,7 +5,7 @@
 - Azure szolgáltatások
     - Azure DevOps
     - Azure Kubernetes Service (multitenant)
-    - Azure SQL (Sandbox előfizetésből)
+    - Azure SQL (multitenant)
 - Terraform
 - DevOps műveletek Azure DevOps-ban
     - Forráskód kezelés Azure Repos-szal
@@ -52,7 +52,6 @@ A hivatalos Azure DevOps labor anyagot követi: <https://www.azuredevopslabs.com
 
 - [terraform file](https://autsoft.sharepoint.com/:f:/g/shared/AUT/EumyvuEMcWVBlSvpxxtcnL4BThMYJ8D1yyfXQQAv1DjzAQ?e=UN9eiY) main.tf
     - Jelszó: a laborgép jelszava
-    - Azure SQL Serverless változatot nem támogat még :(
 
 ## 0. feladat Azure és Azure DevOps összekötése
 
@@ -65,6 +64,7 @@ A hivatalos Azure DevOps labor anyagot követi: <https://www.azuredevopslabs.com
 A laboranyag alapján, továbbá
 
 - Mindenhol, ahol Container Registry-t kell megadni, adjuk meg a teljes login server címet
+- Az agent legyen hosted (Azure Pipelines), a database deployment lépésnél windows agent kell, a többi lehet linuxos
 - A release pipeline utolsó (`Update image in AKS`) lépésében az `Arguments` részen `image deployments/mhc-front mhc-front=$(ACR)/myhealth.web:$(Build.BuildId)` -> `image deployments/mhc-front mhc-front=$(ACR)/<neptunkód>.myhealth.web:$(Build.BuildId)`
 
 ## 2. feladat
