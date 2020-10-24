@@ -66,7 +66,6 @@ A hivatalos Azure DevOps labor anyagot követi: <https://www.azuredevopslabs.com
 
 A laboranyag alapján, továbbá
 
-- A build pipeline változók közé vegyük fel az `SQLDB`-t is
 - Mindenhol, ahol Container Registry-t kell megadni, adjuk meg a teljes login server címet
 - A release pipeline-ban klónozzuk a `Create Deployments & Services in AKS` lépést, nevezzük át `Create Namespace`-re, a `Command` rész alatt állítsunk be inline configuration-t a következőre:
 
