@@ -25,8 +25,8 @@ A hivatalos Azure DevOps labor anyagot követi: <https://www.azuredevopslabs.com
     - Ha bejön az új projekt készítő felület, akkor nem kell használatba venni
     - ... helyette Azure DevOps projekt generálása a laboranyag alapján
     - Azure Repos: projekt felfedezése konténer szempontból
-    - `docker-compose.yml`
-    - `mhc-aks.yaml`
+        - `docker-compose.yml`
+        - `mhc-aks.yaml`
 - legyen az **edu-s azonosító** ez: a `@edu.bme.hu` előtti rész pontok nélkül
 - Azure portálra lépjünk be az edu.bme.hu-s címünkkel, válasszuk az autsoft.hu tenantot. Nézzünk szét a resource group-ban. Az AKS namespace-ek közé vegyük fel az edu-s azonosító szerintit
     ```javascript
