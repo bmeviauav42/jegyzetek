@@ -48,6 +48,8 @@ A hivatalos Azure DevOps labor anyagot követi: <https://www.azuredevopslabs.com
     - `image: myhealth.web` -> `image: <neptunkod>.myhealth.web`
 - mhc-aks.yaml-ban 93. sor körül
     - `image: __ACR__/myhealth.web:latest` -> `image: __ACR__/<neptunkod>.myhealth.web:latest`
+- src/MyHealth.Web/appsettings.json a connection string-ben
+    - `Initial Catalog=mhcdb` helyett `Initial Catalog=__SQLDB__`
 - ne felejtsünk el commitolni!
 
 ## Kitérő: terraform és multitenant infrastruktúra
