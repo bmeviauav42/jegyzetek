@@ -854,6 +854,7 @@
 <li>Mindenhol, ahol Container Registry-t kell megadni, adjuk meg a teljes login server címet. Ugyanígy, ahol Azure SQL szerver címet kell megadni, adjuk meg a teljes FQDN címet</li>
 <li>Minden docker compose taszknál legyen kiválasztva a container registry (különben nem taggeli be a push-hoz az image-et)</li>
 <li>Az agent legyen hosted (Azure Pipelines), a database deployment lépésnél windows agent kell, a többi lehet linuxos</li>
+<li>A kubectl paramcsoknál töltsük ki a névteret: legyen a saját névterünk</li>
 <li>A release pipeline utolsó (<code>Update image in AKS</code>) lépésében az <code>Arguments</code> részen <code>image deployments/mhc-front mhc-front=$(ACR)/myhealth.web:$(Build.BuildId)</code> -&gt; <code>image deployments/mhc-front mhc-front=$(ACR)/&lt;edu-s azonosító&gt;.myhealth.web:$(Build.BuildId)</code></li>
 </ul>
 <h2 id="2-feladat">2. feladat<a class="headerlink" href="#2-feladat" title="Permanent link">&para;</a></h2>
