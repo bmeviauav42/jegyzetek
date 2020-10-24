@@ -832,6 +832,10 @@ az sql db create -g $(az group list --query [0].name -o tsv) -s &lt;neptun&gt;sr
 <li><code>image: __ACR__/myhealth.web:latest</code> -&gt; <code>image: __ACR__/&lt;neptunkod&gt;.myhealth.web:latest</code></li>
 </ul>
 </li>
+<li>src/MyHealth.Web/appsettings.json a connection string-ben<ul>
+<li><code>Initial Catalog=mhcdb</code> helyett <code>Initial Catalog=__SQLDB__</code></li>
+</ul>
+</li>
 <li>ne felejtsünk el commitolni!</li>
 </ul>
 <h2 id="kitero-terraform-es-multitenant-infrastruktura">Kitérő: terraform és multitenant infrastruktúra<a class="headerlink" href="#kitero-terraform-es-multitenant-infrastruktura" title="Permanent link">&para;</a></h2>
