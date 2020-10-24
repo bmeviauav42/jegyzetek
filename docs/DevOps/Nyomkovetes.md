@@ -231,7 +231,7 @@ Felmerül a kérdés, mennyit kellett a kód instrumentálásán dolgozni a HotR
 
 Kiinduló projekt és megoldás: <https://github.com/bmeviauav42/nyomkovetes>
 
-A feladat keretében .NET Core 3.0 környezetben dolgozunk, de az OpenTracing és Jaeger .NET kliens könyvtárak korábbi .NET Core verziókkal is használhatók, nincs bennük semmi .NET Core 3.0 specifikus.
+A feladat keretében .NET Core 3.1 környezetben dolgozunk, de az OpenTracing és Jaeger .NET kliens könyvtárak korábbi .NET Core verziókkal is használhatók, nincs bennük semmi .NET Core 3.1 specifikus.
 
 Vannak kliens könyvtárak, melyek azt várják, hogy a `jaeger-agent` a helyi gépen (pl. ugyanabban a docker containerben) fut, az agenttel UDP protokollon történik a kommunikáció. A tapasztalatok szerint számos kliens könyvtár tud más gépen/containerben futó agenttel kommunikálni, konfigurálható a kliensben az agent címe (host és a port). Ez lehetővé teszi a `jaegertracing/all-in-one` kényelmes használatát, a szolgáltatásokat futtató konténetben nem kell jaeger agentet telepíteni. Éles környezetben ez a megoldás korlátozottan ajánlott: az UDP megbízhatóan működik localhost esetén, de egy valódi hálózaton veszhetnek el csomagok. A legtöbb kliens könyvtár azt is támogatja, hogy az agent kihagyásával, közvetlen a collectornak történjen az adatküldés, akár HTTP protokollon.
 
@@ -373,7 +373,7 @@ Itt még nem használunk OpenTracing specifikus instrumentálást, az `Microsoft
 
 #### Saját span készítése, taggelés (##Instr_CreateSpan)
 
-Saját spant készítünk. Itt már explicit OpenTracing API instrumentálást végzünk. Ehhez "logikailag" fel kellene vegyük az érintett projektben az **`OpenTracing`** NuGet package hivatkozást (`Jager` és `OpenTracing.Contrib.NetCore` nem kell, hiszen mi csak az API-t használjuk). Esetünkben nem kell megtenni, mert az `Msa.Comm.Lab.Shared` projektre van referencia, aminek már van (közvetett) `OpenTracing`  függése, a .NET Core 3.0 esetében ez már elég a megfelelő működéshez.
+Saját spant készítünk. Itt már explicit OpenTracing API instrumentálást végzünk. Ehhez "logikailag" fel kellene vegyük az érintett projektben az **`OpenTracing`** NuGet package hivatkozást (`Jager` és `OpenTracing.Contrib.NetCore` nem kell, hiszen mi csak az API-t használjuk). Esetünkben nem kell megtenni, mert az `Msa.Comm.Lab.Shared` projektre van referencia, aminek már van (közvetett) `OpenTracing`  függése, a .NET Core 3.1 esetében ez már elég a megfelelő működéshez.
 
 **Feladat**: a `Catalog` szolgáltatás `ProductController` osztályban a repository-hoz való hozzárés előtt cache-ben való keresést szimulálunk, ezt egy **új span** hatókörében trace-eljük.
 
