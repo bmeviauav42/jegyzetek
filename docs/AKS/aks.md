@@ -39,7 +39,7 @@ A hivatalos Azure DevOps labor anyagot követi: <https://www.azuredevopslabs.com
 
 ## -1. feladat - egyedi image név és adatbázis név
 
-- az image neve elé tegyük a neptunkódunkat
+- az image neve elé tegyük az edu-s azonosítónkat
 - docker-compose.yml-ban
     - `image: myhealth.web` -> `image: <edu-s azonosító>.myhealth.web`
 - mhc-aks.yaml-ban 93. sor körül
