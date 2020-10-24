@@ -18,28 +18,23 @@ A hivatalos Azure DevOps labor anyagot követi: <https://www.azuredevopslabs.com
 
 ## Előkészületek
 
-- Azure DevOps szervezet létrehozása
-- Be fog kérni nevet, emailt, országot (nem kell hozzájárulni az emailküldéshez)
-- Utána **Get started with Azure DevOps** dialógus jelenik meg -> Continue (nem kell hozzájárulni az emailküldéshez)
-- Ha bejön az új projekt készítő felület, akkor nem kell használatba venni
-- Helyette Azure DevOps projekt generálása a laboranyag alapján
-- DevOps elmélet
-  https://docs.microsoft.com/en-us/azure/devops/learn/what-is-devops
-- Azure Repos: projekt felfedezése konténer szempontból
+- Azure DevOps
+    - szervezet létrehozása
+    - be fog kérni nevet, emailt, országot (nem kell hozzájárulni az emailküldéshez)
+    - Utána **Get started with Azure DevOps** dialógus jelenik meg -> Continue (nem kell hozzájárulni az emailküldéshez)
+    - Ha bejön az új projekt készítő felület, akkor nem kell használatba venni
+    - ... helyette Azure DevOps projekt generálása a laboranyag alapján
+    - Azure Repos: projekt felfedezése konténer szempontból
     - `docker-compose.yml`
     - `mhc-aks.yaml`
-- [sandbox előfizetés](https://docs.microsoft.com/en-us/learn/modules/develop-app-that-queries-azure-sql/3-exercise-create-tables-bulk-import-query-data)
-    - adatbázisszerver létrehozása 
-    
-    ```bash
-    az sql server create -l "North Europe" -g $(az group list --query [0].name -o tsv) -n <neptun>srv -u <neptun> -p sqlAdmin123.
+- Azure portálra lépjünk be az edu.bme.hu-s címünkkel, válasszuk az autsoft.hu tenantot. Nézzünk szét a resource group-ban. Az AKS namespace-ek közé vegyük fel az edu.bme.hu-s címünk szerintit (`@` előtti rész, pontok nélkül)  
+    ```yaml
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "metadata": { "name": "<edu-s azonosító>" },
+    }
     ```
-    
-    - adatbázis létrehozása 
-    
-     ```bash
-    az sql db create -g $(az group list --query [0].name -o tsv) -s <neptun>srv -n mhcdb --service-objective S0
-     ```
 
 ## -1. feladat - egyedi image név és adatbázis név
 
@@ -71,13 +66,6 @@ A laboranyag alapján, továbbá
 - Mindenhol, ahol Container Registry-t kell megadni, adjuk meg a teljes login server címet
 - A release pipeline-ban klónozzuk a `Create Deployments & Services in AKS` lépést, nevezzük át `Create Namespace`-re, a `Command` rész alatt állítsunk be inline configuration-t a következőre:
 
-```yaml
-{
-  "apiVersion": "v1",
-  "kind": "Namespace",
-  "metadata": { "name": "<neptunkód>" },
-}
-```
 
 - A release pipeline utolsó (`Update image in AKS`) lépésében az `Arguments` részen `image deployments/mhc-front mhc-front=$(ACR)/myhealth.web:$(Build.BuildId)` -> `image deployments/mhc-front mhc-front=$(ACR)/<neptunkód>.myhealth.web:$(Build.BuildId)`
 
