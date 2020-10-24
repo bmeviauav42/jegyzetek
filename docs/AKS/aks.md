@@ -32,7 +32,7 @@ A hivatalos Azure DevOps labor anyagot követi: <https://www.azuredevopslabs.com
     {
       "apiVersion": "v1",
       "kind": "Namespace",
-      "metadata": { "name": "<edu-s azonosító>" },
+      "metadata": { "name": "<edu-s azonosító>" }
     }
     ```
 
