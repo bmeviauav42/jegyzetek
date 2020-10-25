@@ -388,8 +388,8 @@ Saját spant készítünk. Itt már explicit OpenTracing API instrumentálást v
     * Log esemény felvétele aktív spanhez
 * Futtassuk az alkalmazást, böngészőben egymás után kérjük le az egyes termékek adatait a `Test` szolgáltatás segítségével, a különböző kód ágak teszteléséhez:
     * <https://localhost:44385/api/test/1>, cache hibát generál
-    * <https://localhost:44385/api/test/1>, nincs cache találat
-    * <https://localhost:44385/api/test/1>, van cache találat
+    * <https://localhost:44385/api/test/2>, van cache találat
+    * <https://localhost:44385/api/test/3>, nincs cache találat
 * A Jaeger UI segítségével vizsgáljuk meg a három trace-t
 
 #### Baggage használata (##Instr_Baggage)
