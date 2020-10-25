@@ -235,7 +235,7 @@ A feladat keretében .NET Core 3.1 környezetben dolgozunk, de az OpenTracing é
 
 Vannak kliens könyvtárak, melyek azt várják, hogy a `jaeger-agent` a helyi gépen (pl. ugyanabban a docker containerben) fut, az agenttel UDP protokollon történik a kommunikáció. A tapasztalatok szerint számos kliens könyvtár tud más gépen/containerben futó agenttel kommunikálni, konfigurálható a kliensben az agent címe (host és a port). Ez lehetővé teszi a `jaegertracing/all-in-one` kényelmes használatát, a szolgáltatásokat futtató konténetben nem kell jaeger agentet telepíteni. Éles környezetben ez a megoldás korlátozottan ajánlott: az UDP megbízhatóan működik localhost esetén, de egy valódi hálózaton veszhetnek el csomagok. A legtöbb kliens könyvtár azt is támogatja, hogy az agent kihagyásával, közvetlen a collectornak történjen az adatküldés, akár HTTP protokollon.
 
-A kommunikációról szóló gyakorlat némiképpen továbbfejlesztett Order+Customer kiindulási példáját instrumentáljuk kötjük össze Jaegerrel és instrumentáljuk OpenTracing alapokon és. Miben más a kiinduló kód, mint a korábbi kommunikációs órán szereplő kiinduló gyakorlat?
+A kommunikációról szóló gyakorlat némiképpen továbbfejlesztett Order+Customer kiindulási példáját kötjük össze Jaegerrel és instrumentáljuk OpenTracing alapokon. Miben más a kiinduló kód, mint a korábbi kommunikációs órán szereplő kiinduló gyakorlat?
 
 * Repository mintát használ.
 * A Catalog szolgáltatás Sqlite adatbázisban tárolja az adatokat (in-memory üzemmódra konfiguráltan), induláskori seed-et, vagyis tesztadat generálást követően. Ez éles környezetben nem használható, a célja mindössze a nyomkövetés demonstrálása. A választás azért esett az Sqlite-ra az Entity Framework In Memory Database-zel szemben, mert részletesebb nyomkövetési információt szolgáltat.
@@ -245,8 +245,12 @@ A kommunikációról szóló gyakorlat némiképpen továbbfejlesztett Order+Cus
 Kiinduló lépések:
 
 * GitHub-ról klónozzuk ki a kiinduló solution-t:
-    * Hozzunk létre egy `tracing` mappát a `c:\work\<sajátnév>` munkakönyvátrunkban és indítsunk egy command promptot innen, futtassuk az alábbi parancsot:
+    * Hozzunk létre egy `tracing` mappát a `c:\work\<sajátnév>` munkakönyvtárunkban és indítsunk egy command promptot innen, futtassuk az alábbi parancsot:
 `git clone https://github.com/bmeviauav42/nyomkovetes`
+
+!!! warning "Ékezetes elérési út"
+    Fontos, hogy ne legyen az elérési útban speciális (és ékezetes) karakter, különben nem tud a VS a docker-compose-hoz Debuggerrel csatlakozni.
+
 * Indítsuk el VS alatt a szolgáltatásokat
 * A böngészőben hibaoldal jelenik meg. Frissítsük (ha kell többször is), a hiba eltűnik. Az oka: az OrderService hívja a CatalogService-t, de az először még nem állt fel teljesen, az Sqlite adatbázis seed-elése időt igényel.
 
@@ -348,13 +352,13 @@ Teszteljük a működést:
 
 * Indítsuk el a szolgáltatásokat VS alatt, frissítsük párszor a böngészőablakot
 * Jelenítsük meg Jaeger UI-t: <http://localhost:16686/>
-* A szűrőpanelen válasszuk ki a `Msa.Comm.Lab.Services.Order` szolgáltatást, frissítsük a megjelenített trace.eket (Find traces gomb), válasszunk ki jobboldalt egy hibával nem rendelkező trace-t és nyissuk meg.
+* A szűrőpanelen válasszuk ki a `Msa.Comm.Lab.Services.Order` szolgáltatást, frissítsük a megjelenített trace-eket (Find traces gomb), válasszunk ki jobboldalt egy hibával nem rendelkező trace-t és nyissuk meg.
 * A részteles trace megjelenítőben látjuk span hierarchiát: Http hívások és DB ExecuteReader a mélyén. Az `Action Msa.Comm.Lab.Services.Catalog.Controllers.ProductController/Get` spanben számos log van, többek között EF-höz kapcsolódók is.
 * **Mindezt úgy értük el, hogy semmiféle OpenTracing instrumentálást nem végeztünk a saját kódunkban**.
 
 ### Kód instrumentálás
 
-Checkoutoljuk ki Git-ben kész megoldást, a `megoldas/1-konfig-es-beepitett-instrumentalas` ágon található:
+Checkoutoljuk ki Git-ben kész megoldást, a `megoldas/2-kod-instrumentalas` ágon található:
 
 ```bash
 git checkout megoldas/2-kod-instrumentalas
@@ -368,7 +372,7 @@ Itt még nem használunk OpenTracing specifikus instrumentálást, az `Microsoft
 * DI-vel kap egy `ILogger<TestController>` objektumot. Ezt a `Microsoft.Extensions.Logging` beépítve támogatja.
 * A `Get()` műveletben a `log.LogInformation` hívással naplózunk. Strukturált naplózást használunk, az első paraméterben a `{ProdCount}` definiál egy kulcsot, az értéke a count paraméter lesz. Ez nemcsak mint string, hanem egy kulcs-érték párként is megjelenik a naplózás során: a spanhez fűzött log-ban lesz egy ilyen kulcs-érték pár.
 * Futtassuk az alkalmazást, generáljunk pár nem hibás hívást.
-* Jaeger UI frontenden nyissunk meg egy nem hibás trace-t. A felső Find keresőbe írjuk be: ProdCount és keressünk rá. Azon spanek, ahol van találat, sárga színnel jelennek meg. Egy találatunk van. Nyissuk le a spant, és keressük ki szemmel a számunkra érdekes logbejegyzést. Itt látjuk, hogy a logon megjelenik a `ProdCount = 3` kulcs-érték pár, így lehet(ne) erre is értelmesen keresni (a nyitóoldalon a trace keresőben igen, a trace részletes oldalon a span keresőben nem).
+* Jaeger UI frontenden nyissunk meg egy nem hibás trace-t. A felső Find keresőbe írjuk be: ProdCount és keressünk rá. Azon spanek, ahol van találat, sárga színnel jelennek meg. Egy találatunk van. Nyissuk le a spant, és keressük ki szemmel a számunkra érdekes logbejegyzést. Itt látjuk, hogy a logon megjelenik a `ProdCount = 3` kulcs-érték pár, így lehet(ne) erre is értelmesen keresni: a nyitóoldalon a trace keresőben igen (pl. ProdCount=3 a  Tags mezőben), a trace részletes oldalon a span keresőben nem (itt, ha beírjuk, hogy ProdCount, akkor sárgával kiemeli az adott spant/logokat, lenyitogatva a böngésző Ctrl+F funkciójával lehet próbálkozni).
 * Tipp: A span kereső egyelőre elég béna: ha valamit nem találunk, a jobb felső sarokban levő gombbal váltsunk JSON nézetre és keressünk abban szöveg szerint.
 
 #### Saját span készítése, taggelés (##Instr_CreateSpan)
