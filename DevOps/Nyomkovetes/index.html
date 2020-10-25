@@ -1286,7 +1286,7 @@ Próbálhatnánk a szolgáltatások logjaiból megtudni:</p>
 <p>Kiinduló projekt és megoldás: <a href="https://github.com/bmeviauav42/nyomkovetes">https://github.com/bmeviauav42/nyomkovetes</a></p>
 <p>A feladat keretében .NET Core 3.1 környezetben dolgozunk, de az OpenTracing és Jaeger .NET kliens könyvtárak korábbi .NET Core verziókkal is használhatók, nincs bennük semmi .NET Core 3.1 specifikus.</p>
 <p>Vannak kliens könyvtárak, melyek azt várják, hogy a <code>jaeger-agent</code> a helyi gépen (pl. ugyanabban a docker containerben) fut, az agenttel UDP protokollon történik a kommunikáció. A tapasztalatok szerint számos kliens könyvtár tud más gépen/containerben futó agenttel kommunikálni, konfigurálható a kliensben az agent címe (host és a port). Ez lehetővé teszi a <code>jaegertracing/all-in-one</code> kényelmes használatát, a szolgáltatásokat futtató konténetben nem kell jaeger agentet telepíteni. Éles környezetben ez a megoldás korlátozottan ajánlott: az UDP megbízhatóan működik localhost esetén, de egy valódi hálózaton veszhetnek el csomagok. A legtöbb kliens könyvtár azt is támogatja, hogy az agent kihagyásával, közvetlen a collectornak történjen az adatküldés, akár HTTP protokollon.</p>
-<p>A kommunikációról szóló gyakorlat némiképpen továbbfejlesztett Order+Customer kiindulási példáját instrumentáljuk kötjük össze Jaegerrel és instrumentáljuk OpenTracing alapokon és. Miben más a kiinduló kód, mint a korábbi kommunikációs órán szereplő kiinduló gyakorlat?</p>
+<p>A kommunikációról szóló gyakorlat némiképpen továbbfejlesztett Order+Customer kiindulási példáját kötjük össze Jaegerrel és instrumentáljuk OpenTracing alapokon. Miben más a kiinduló kód, mint a korábbi kommunikációs órán szereplő kiinduló gyakorlat?</p>
 <ul>
 <li>Repository mintát használ.</li>
 <li>A Catalog szolgáltatás Sqlite adatbázisban tárolja az adatokat (in-memory üzemmódra konfiguráltan), induláskori seed-et, vagyis tesztadat generálást követően. Ez éles környezetben nem használható, a célja mindössze a nyomkövetés demonstrálása. A választás azért esett az Sqlite-ra az Entity Framework In Memory Database-zel szemben, mert részletesebb nyomkövetési információt szolgáltat.</li>
@@ -1295,10 +1295,16 @@ Próbálhatnánk a szolgáltatások logjaiból megtudni:</p>
 <p>Kiinduló lépések:</p>
 <ul>
 <li>GitHub-ról klónozzuk ki a kiinduló solution-t:<ul>
-<li>Hozzunk létre egy <code>tracing</code> mappát a <code>c:\work\&lt;sajátnév&gt;</code> munkakönyvátrunkban és indítsunk egy command promptot innen, futtassuk az alábbi parancsot:
+<li>Hozzunk létre egy <code>tracing</code> mappát a <code>c:\work\&lt;sajátnév&gt;</code> munkakönyvtárunkban és indítsunk egy command promptot innen, futtassuk az alábbi parancsot:
 <code>git clone https://github.com/bmeviauav42/nyomkovetes</code></li>
 </ul>
 </li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Ékezetes elérési út</p>
+<p>Fontos, hogy ne legyen az elérési útban speciális (és ékezetes) karakter, különben nem tud a VS a docker-compose-hoz Debuggerrel csatlakozni.</p>
+</div>
+<ul>
 <li>Indítsuk el VS alatt a szolgáltatásokat</li>
 <li>A böngészőben hibaoldal jelenik meg. Frissítsük (ha kell többször is), a hiba eltűnik. Az oka: az OrderService hívja a CatalogService-t, de az először még nem állt fel teljesen, az Sqlite adatbázis seed-elése időt igényel.</li>
 </ul>
@@ -1396,12 +1402,12 @@ A szolgáltatás projektekben nem fogunk első körben közvetlen OpenTracing in
 <ul>
 <li>Indítsuk el a szolgáltatásokat VS alatt, frissítsük párszor a böngészőablakot</li>
 <li>Jelenítsük meg Jaeger UI-t: <a href="http://localhost:16686/">http://localhost:16686/</a></li>
-<li>A szűrőpanelen válasszuk ki a <code>Msa.Comm.Lab.Services.Order</code> szolgáltatást, frissítsük a megjelenített trace.eket (Find traces gomb), válasszunk ki jobboldalt egy hibával nem rendelkező trace-t és nyissuk meg.</li>
+<li>A szűrőpanelen válasszuk ki a <code>Msa.Comm.Lab.Services.Order</code> szolgáltatást, frissítsük a megjelenített trace-eket (Find traces gomb), válasszunk ki jobboldalt egy hibával nem rendelkező trace-t és nyissuk meg.</li>
 <li>A részteles trace megjelenítőben látjuk span hierarchiát: Http hívások és DB ExecuteReader a mélyén. Az <code>Action Msa.Comm.Lab.Services.Catalog.Controllers.ProductController/Get</code> spanben számos log van, többek között EF-höz kapcsolódók is.</li>
 <li><strong>Mindezt úgy értük el, hogy semmiféle OpenTracing instrumentálást nem végeztünk a saját kódunkban</strong>.</li>
 </ul>
 <h3 id="kod-instrumentalas">Kód instrumentálás<a class="headerlink" href="#kod-instrumentalas" title="Permanent link">&para;</a></h3>
-<p>Checkoutoljuk ki Git-ben kész megoldást, a <code>megoldas/1-konfig-es-beepitett-instrumentalas</code> ágon található:</p>
+<p>Checkoutoljuk ki Git-ben kész megoldást, a <code>megoldas/2-kod-instrumentalas</code> ágon található:</p>
 <div class="highlight"><pre><span></span><code>git checkout megoldas/2-kod-instrumentalas
 </code></pre></div>
 
@@ -1412,7 +1418,7 @@ A szolgáltatás projektekben nem fogunk első körben közvetlen OpenTracing in
 <li>DI-vel kap egy <code>ILogger&lt;TestController&gt;</code> objektumot. Ezt a <code>Microsoft.Extensions.Logging</code> beépítve támogatja.</li>
 <li>A <code>Get()</code> műveletben a <code>log.LogInformation</code> hívással naplózunk. Strukturált naplózást használunk, az első paraméterben a <code>{ProdCount}</code> definiál egy kulcsot, az értéke a count paraméter lesz. Ez nemcsak mint string, hanem egy kulcs-érték párként is megjelenik a naplózás során: a spanhez fűzött log-ban lesz egy ilyen kulcs-érték pár.</li>
 <li>Futtassuk az alkalmazást, generáljunk pár nem hibás hívást.</li>
-<li>Jaeger UI frontenden nyissunk meg egy nem hibás trace-t. A felső Find keresőbe írjuk be: ProdCount és keressünk rá. Azon spanek, ahol van találat, sárga színnel jelennek meg. Egy találatunk van. Nyissuk le a spant, és keressük ki szemmel a számunkra érdekes logbejegyzést. Itt látjuk, hogy a logon megjelenik a <code>ProdCount = 3</code> kulcs-érték pár, így lehet(ne) erre is értelmesen keresni (a nyitóoldalon a trace keresőben igen, a trace részletes oldalon a span keresőben nem).</li>
+<li>Jaeger UI frontenden nyissunk meg egy nem hibás trace-t. A felső Find keresőbe írjuk be: ProdCount és keressünk rá. Azon spanek, ahol van találat, sárga színnel jelennek meg. Egy találatunk van. Nyissuk le a spant, és keressük ki szemmel a számunkra érdekes logbejegyzést. Itt látjuk, hogy a logon megjelenik a <code>ProdCount = 3</code> kulcs-érték pár, így lehet(ne) erre is értelmesen keresni: a nyitóoldalon a trace keresőben igen (pl. ProdCount=3 a  Tags mezőben), a trace részletes oldalon a span keresőben nem (itt, ha beírjuk, hogy ProdCount, akkor sárgával kiemeli az adott spant/logokat, lenyitogatva a böngésző Ctrl+F funkciójával lehet próbálkozni).</li>
 <li>Tipp: A span kereső egyelőre elég béna: ha valamit nem találunk, a jobb felső sarokban levő gombbal váltsunk JSON nézetre és keressünk abban szöveg szerint.</li>
 </ul>
 <h4 id="sajat-span-keszitese-taggeles-instr_createspan">Saját span készítése, taggelés (##Instr_CreateSpan)<a class="headerlink" href="#sajat-span-keszitese-taggeles-instr_createspan" title="Permanent link">&para;</a></h4>
