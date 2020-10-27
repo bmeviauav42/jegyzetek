@@ -394,7 +394,7 @@ Saját spant készítünk. Itt már explicit OpenTracing API instrumentálást v
 
 #### Baggage használata (##Instr_Baggage)
 
-A `Catalog` szolgáltatás `ProductRepository` osztályban írjuk ki a felhasználónevet és kérést azonosítót Log-ba, melyet a példánkban az `Order` szolgáltatás generál.
+A `Catalog` szolgáltatás `ProductRepository` osztályban írjuk ki a felhasználónevet és kérés azonosítót Log-ba, melyet a példánkban az `Order` szolgáltatás generál.
 
 A megoldás elve:
 
