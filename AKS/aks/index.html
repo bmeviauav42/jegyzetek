@@ -768,7 +768,6 @@
 <li>Azure SQL (multitenant)</li>
 </ul>
 </li>
-<li>Terraform</li>
 <li>DevOps műveletek Azure DevOps-ban<ul>
 <li>Forráskód kezelés Azure Repos-szal</li>
 <li>CI+CD Azure Pipelines-szal</li>
@@ -834,10 +833,7 @@
 <p><code>image deployments/mhc-front mhc-front=$(ACR)/myhealth.web:$(Build.BuildId)</code> helyett</p>
 <p><strong><code>image deployments/mhc-front mhc-front=$(ACR)/&lt;edu-s azonosító&gt;.myhealth.web:$(Build.BuildId)</code></strong></p>
 <h2 id="2-feladat">2. feladat<a class="headerlink" href="#2-feladat" title="Permanent link">&para;</a></h2>
-<p>A laboranyag alapján, továbbá</p>
-<ul>
-<li>a kubectl parancsok végére mindig írjuk <code>--namespace=&lt;saját namespace-ünk neve&gt;</code></li>
-</ul>
+<p>A laboranyag alapján, viszont ne a k8s dashboard-ot használjuk</p>
                 
               
               
