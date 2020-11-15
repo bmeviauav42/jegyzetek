@@ -49,7 +49,7 @@ A hivatalos Azure DevOps labor anyagot követi: <https://www.azuredevopslabs.com
 
 ## 0. feladat Azure és Azure DevOps összekötése
 
-- Project Settings -> Pipelines részen belül Service Connection -> New Service Connection -> Azure Resource Manager -> alul váltsunk a linkkel a teljes verzióra (full version)
+- Project Settings -> Pipelines részen belül Service Connection -> New Service Connection -> Azure Resource Manager -> Service principal (manual)
 
 ## 1. feladat
 
