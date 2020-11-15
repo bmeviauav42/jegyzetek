@@ -6,7 +6,6 @@
     - Azure DevOps
     - Azure Kubernetes Service (multitenant)
     - Azure SQL (multitenant)
-- Terraform
 - DevOps műveletek Azure DevOps-ban
     - Forráskód kezelés Azure Repos-szal
     - CI+CD Azure Pipelines-szal
@@ -68,6 +67,4 @@ A laboranyag alapján, továbbá
 
 ## 2. feladat
 
-A laboranyag alapján, továbbá
-
-- a kubectl parancsok végére mindig írjuk `--namespace=<saját namespace-ünk neve>`
+A laboranyag alapján, viszont ne a k8s dashboard-ot használjuk
