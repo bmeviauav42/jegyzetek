@@ -13,7 +13,7 @@
 
 ## A labor menete
 
-A hivatalos Azure DevOps labor anyagot követi: <https://www.azuredevopslabs.com/labs/vstsextend/kubernetes/>. Itt csak a kiegészítéseket, ill. egy vázlatot írunk le.
+A hivatalos [Azure DevOps k8s labor anyagot](https://www.azuredevopslabs.com/labs/vstsextend/kubernetes/) követi. Itt csak a kiegészítéseket, ill. egy vázlatot írunk le.
 
 ## Előkészületek
 
