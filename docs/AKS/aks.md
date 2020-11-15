@@ -55,7 +55,7 @@ A hivatalos Azure DevOps labor anyagot követi: <https://www.azuredevopslabs.com
 
 A laboranyag alapján, továbbá
 - A build pipeline változók közé vegyük fel az SQLDB-t is
-- Mindenhol, ahol Container Registry-t kell megadni, adjuk meg a teljes login server címet. Ugyanígy, ahol Azure SQL szerver címet kell megadni, adjuk meg a teljes FQDN címet
+- Mindenhol, ahol Container Registry-t kell megadni, adjuk meg a teljes login server címet. Ugyanígy, ahol Azure SQL szerver címet kell megadni, adjuk meg a teljes FQDN címet, de `tcp:` nélkül
 - Minden docker compose taszknál legyen kiválasztva a container registry (különben nem taggeli be a push-hoz az image-et)
 - Az agent legyen hosted (Azure Pipelines), a database deployment lépésnél windows agent kell, a többi lehet linuxos
 - A kubectl paramcsoknál töltsük ki a névteret: legyen a saját névterünk
