@@ -48,16 +48,9 @@ A hivatalos Azure DevOps labor anyagot követi: <https://www.azuredevopslabs.com
     - `Initial Catalog=mhcdb` helyett `Initial Catalog=__SQLDB__`
 - ne felejtsünk el commitolni!
 
-## Kitérő: terraform és multitenant infrastruktúra
-
-- [terraform file](https://autsoft.sharepoint.com/:f:/g/shared/AUT/EumyvuEMcWVBlSvpxxtcnL4BThMYJ8D1yyfXQQAv1DjzAQ?e=UN9eiY) main.tf
-    - Jelszó: a laborgép jelszava
-
 ## 0. feladat Azure és Azure DevOps összekötése
 
 - Project Settings -> Pipelines részen belül Service Connection -> New Service Connection -> Azure Resource Manager -> alul váltsunk a linkkel a teljes verzióra (full version)
-- Töltsük ki a terraform file alapján
-    - Subscription Name: **VSEai**
 
 ## 1. feladat
 
