@@ -54,6 +54,7 @@ A hivatalos [Azure DevOps k8s labor anyagot](https://www.azuredevopslabs.com/lab
 ## 1. feladat
 
 A laboranyag alapján, továbbá
+
 - A build pipeline változók közé vegyük fel az SQLDB-t is
 - Mindenhol, ahol Container Registry-t kell megadni, adjuk meg a teljes login server címet. Ugyanígy, ahol Azure SQL szerver címet kell megadni, adjuk meg a teljes FQDN címet, de `tcp:` és portszám nélkül
 - Minden docker compose taszknál legyen kiválasztva a container registry (különben nem taggeli be a push-hoz az image-et)
