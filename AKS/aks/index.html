@@ -823,14 +823,16 @@
 <li>Project Settings -&gt; Pipelines részen belül Service Connection -&gt; New Service Connection -&gt; Azure Resource Manager -&gt; Service principal (manual)</li>
 </ul>
 <h2 id="1-feladat">1. feladat<a class="headerlink" href="#1-feladat" title="Permanent link">&para;</a></h2>
-<p>A laboranyag alapján, továbbá
-- A build pipeline változók közé vegyük fel az SQLDB-t is
-- Mindenhol, ahol Container Registry-t kell megadni, adjuk meg a teljes login server címet. Ugyanígy, ahol Azure SQL szerver címet kell megadni, adjuk meg a teljes FQDN címet, de <code>tcp:</code> és portszám nélkül
-- Minden docker compose taszknál legyen kiválasztva a container registry (különben nem taggeli be a push-hoz az image-et)
-- A release pipeline kubectl-es taszkjainál a <code>Secrets</code> részen is adjuk meg az ACR kapcsolathoz a Service Connection-t 
-- Az agent legyen hosted (Azure Pipelines), a database deployment lépésnél windows agent kell, a többi lehet linuxos
-- A kubectl paramcsoknál töltsük ki a névteret: legyen a saját névterünk
-- A release pipeline utolsó (<code>Update image in AKS</code>) lépésében az <code>Arguments</code> részen </p>
+<p>A laboranyag alapján, továbbá</p>
+<ul>
+<li>A build pipeline változók közé vegyük fel az SQLDB-t is</li>
+<li>Mindenhol, ahol Container Registry-t kell megadni, adjuk meg a teljes login server címet. Ugyanígy, ahol Azure SQL szerver címet kell megadni, adjuk meg a teljes FQDN címet, de <code>tcp:</code> és portszám nélkül</li>
+<li>Minden docker compose taszknál legyen kiválasztva a container registry (különben nem taggeli be a push-hoz az image-et)</li>
+<li>A release pipeline kubectl-es taszkjainál a <code>Secrets</code> részen is adjuk meg az ACR kapcsolathoz a Service Connection-t </li>
+<li>Az agent legyen hosted (Azure Pipelines), a database deployment lépésnél windows agent kell, a többi lehet linuxos</li>
+<li>A kubectl paramcsoknál töltsük ki a névteret: legyen a saját névterünk</li>
+<li>A release pipeline utolsó (<code>Update image in AKS</code>) lépésében az <code>Arguments</code> részen </li>
+</ul>
 <p><code>image deployments/mhc-front mhc-front=$(ACR)/myhealth.web:$(Build.BuildId)</code> helyett</p>
 <p><strong><code>image deployments/mhc-front mhc-front=$(ACR)/&lt;edu-s azonosító&gt;.myhealth.web:$(Build.BuildId)</code></strong></p>
 <h2 id="2-feladat">2. feladat<a class="headerlink" href="#2-feladat" title="Permanent link">&para;</a></h2>
