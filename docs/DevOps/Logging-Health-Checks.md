@@ -4,25 +4,7 @@
 
 [Naplózás, Health Checks](https://edu.vik.bme.hu/mod/resource/view.php?id=22408)
 
-??? "Előző alkalmak cheatsheet"
-
-    * Docker
-        * `docker rm -f $(docker ps -aq)`
-    * K8S dashboard
-        * `kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v1.10.1/src/deploy/alternative/kubernetes-dashboard.yaml`
-        * `kubectl proxy`
-        * http://localhost:8001/api/v1/namespaces/kube-system/services/kubernetes-dashboard:/proxy
-    * Traefic
-        * `helm version`
-        * `helm init`
-        * `helm install stable/traefik --name traefik --version "1.78.3" --set rbac.enabled=true --set logLevel=debug --set dashboard.enabled=true --set service.nodePorts.http=30080 --set serviceType=NodePort`
-    * DB
-        * `kubectl apply -f db`
-    * App
-        * `kubectl apply -f app`
-        * `$env:IMAGE_TAG="v1"` vagy írjuk át a yml-ben latest-re ideiglenesen
-        * `docker-compose build`
-        * http://localhost:30080
+A labor előkövetelménye az [Alkalmazás telepítése Kubernetes klaszterbe](https://bmeviauav42.github.io/jegyzetek/Kubernetes/Kubernetes-alkalmazas-telepites/) gyakorlaton látott infrastrukturális feladatok elvégzése (Helm, kubernetes dashboard, Traefic telepítés, stb), mert a Healt Check fejezet a kubernetes alapú infrastruktúrára épül.
 
 ## Naplózás
 
@@ -202,14 +184,14 @@ Mivel Kubernetes-hez még nem konfiguráltuk fel a loggolás szolgáltatásait, 
 ```bash
 git branch logging
 git commit -m "naplózás kész"
-git checkout kiindulóTODO
+git checkout master
 ```
 
 Előző órák mintájára üzemeljük be a kubernetes verzióját az alkalmazásnak. Nézzük meg a dashboardon a rendszer állapotát és próbáljuk ki az alkalmazást.
 
 ### Health Check implementáció
 
-Készítsünk readiness és liveness próbákat a kubernetes számára. Ehhez használjuk fel az ASP.NET Core 2.2 óta rendelkezésre álló beépített Health Check API-kat.
+Készítsünk readiness és liveness próbákat a kubernetes számára. Ehhez használjuk fel az ASP.NET Core beépített Health Check API-kat.
 
 #### Liveness
 
@@ -242,7 +224,8 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 A health check UI-hoz az alábbi NuGet csomagot kell felvegyük a projektbe.
 
 ```xml
-<PackageReference Include="AspNetCore.HealthChecks.UI" Version="3.0.4" />
+<PackageReference Include="AspNetCore.HealthChecks.UI" Version="3.1.3" />
+<PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="3.1.2" />
 ```
 
 Mi most csak a sorosító komponensét fogjuk használni belőle (`UIResponseWriter`), idő hiányában a UI komponenst most nem üzemeljük be.
@@ -251,17 +234,14 @@ Próbáljuk ki az új végpontot (F5).
 
 #### Readiness
 
-Vegyünk fel HC-t a külső szolgáltatásainkhoz is (Elasticsearch, Redis), majd ezt publikáljuk ki egy külön végponton.
+Vegyünk fel HC-et a külső szolgáltatásainkhoz is (Elasticsearch, Redis), majd ezt publikáljuk ki egy külön végponton.
 
 Vegyük fel az következő csomagokat a Todos.Api projekthez.
 
 ```xml
-<PackageReference Include="AspNetCore.HealthChecks.Elasticsearch" Version="3.0.0" />
-<PackageReference Include="AspNetCore.HealthChecks.Redis" Version="2.2.1" />
+<PackageReference Include="AspNetCore.HealthChecks.Elasticsearch" Version="3.1.1" />
+<PackageReference Include="AspNetCore.HealthChecks.Redis" Version="3.1.2" />
 ```
-
-!!! important "Verzió fontos"
-    `AspNetCore.HealthChecks.Redis` csomag direkt a 2.2.1-es mert összeakadna a `Microsoft.Extensions.Caching.Redis` csomaggal az újabb verzió.
 
 Vegyük fel a csekkolásokat.
 
@@ -360,6 +340,11 @@ Engedélyezzük kívülről ezt a végpontot is.
               servicePort: http # A service-ben a port neve (lehet a port szama is)
 ```
 
-Telepítsük ki, majd rontsuk el a működést a végpontunkkal. Közben figyeljük a podok állapotát. Egy idő után láthatjuk, hogy a próba sérült, és a k8s megpróbálja újraindítani a pod-ot, mivel ott már az `IsLive` property érteke igaz lesz.
+Telepítsük ki, majd rontsuk el a működést a végpontunkkal. Közben figyeljük a podok állapotát. Egy idő után láthatjuk, hogy a próba sérült, és a k8s megpróbálja újraindítani a pod-ot, és mivel ott már az `IsLive` property érteke igaz lesz, működőképes lesz az új pod.
 
 Érdemes minden health check definiálása során megtervezni azt, hogy az most melyik próbába illik bele jobban. Ha van esély, hogy magától megjavuljon, akkor a readiness próbába érdemes rakni (pl. valamilyen külső szolgáltatás nem elérhető, persze ez lehet konfigurációs hiba is, ahogy láttuk), ha pedig újraindítás tud segíteni akkor a liveness próbába rakjuk.
+
+# Startup probe
+
+Startup próbát most külön nem fogunk készíteni, de ez K8S szempontból funkciójában egy liveness próba. Ha sikeres a startup, akkor startup próba helyett már a liveness-t fogja hívni az orchesztrátor.
+Különbség abból adódik, hogy tipikusan a startup próbában máshogy szoktuk vizsgálni az alkalmazás állapotát. Fentebb láthattuk, hogy a liveness esetben az alkalmazást önmagában szoktuk vizsgálni, míg startup esetben a külső függőségek vizsgálatának is van értelme.
