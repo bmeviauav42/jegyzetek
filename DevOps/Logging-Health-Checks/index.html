@@ -899,7 +899,7 @@
 </ul>
 </details>
 <h2 id="naplozas">Naplózás<a class="headerlink" href="#naplozas" title="Permanent link">&para;</a></h2>
-<p>Az ASP.NET Core TODO webalkalmazásunkban implementáljunk szemantikus naplózást. A naplóbejegyzéseket az úgynevezett ELK technológiai stackkel fogjuk feldolgozni.</p>
+<p>Az ASP.NET Core TODO webalkalmazásunkban implementáljunk strukturált naplózást. A naplóbejegyzéseket az úgynevezett <a href="https://www.elastic.co/what-is/elk-stack">ELK</a> technológiai stackkel fogjuk feldolgozni.</p>
 <ul>
 <li><strong>E</strong>: Elasticsearch<ul>
 <li>A naplóbejegyzések tárolásáért és indexeléséért/kereshetőség biztosításáért felelős</li>
@@ -917,20 +917,20 @@
 <p>A labor keretében most a Logstash transzformációs komponenst kihagyjuk a képből idő hiányában, és közvetlenül az Elasticsearch-be fog írni az alkalmazás.</p>
 <div class="admonition note">
 <p class="admonition-title">Azure Application Insights</p>
-<p>Ha az alkalmazásunkat Azure PaaS szolgáltatásokra építjük, akkor az ajánlott megoldás az <em>Azure Application Insights</em>. ELK-t akkor érdemes használni, ha az architektúránkat felhő szolgáltató függetlennek szeretnénk tartani (ami viszonylag ritka).</p>
+<p>Ha az alkalmazásunkat Azure PaaS szolgáltatásokra építjük, akkor az ajánlott megoldás az <a href="https://docs.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview"><em>Azure Application Insights</em></a> és <a href="https://docs.microsoft.com/en-us/azure/azure-monitor/overview"><em>Azure Monitor</em></a>. ELK-t akkor érdemes használni, ha az architektúránkat felhő szolgáltató függetlennek szeretnénk tartani.</p>
 </div>
-<p>Az (ASP).NET Core kiváló absztrakciós réteget nyújt nekünk a naplózáshoz az <code>ILogger&lt;T&gt;</code> és kapcsolódó interfészein keresztül. Egyszerűbb implementációi a keretrendszerben is megtalálhatóak, de ezek nem elégítik ki a szemantikus naplózáshoz kapcsolódó igényeket: mégpedig, hogy egyszerűen és egységesen parsolhatóak legyenek a naplóbejegyzések.</p>
-<p>Használjuk a Serilog külső osztálykönyvtárat a naplózásra, ami a a fenti absztrakcióra épül rá. Seriloghoz több nyelő (Sink) implementáció is készült, és van kifejezetten Elasticsearch-be naplózó csomag is.</p>
+<p>Az (ASP).NET Core kiváló absztrakciós réteget nyújt nekünk a naplózáshoz az <code>ILogger&lt;T&gt;</code> és kapcsolódó interfészein keresztül. Egyszerűbb implementációi a keretrendszerben is megtalálhatóak, de ezek nem elégítik ki a strukturált naplózáshoz kapcsolódó igényeket: mégpedig, hogy egyszerűen és egységesen parsolhatóak legyenek a naplóbejegyzések.</p>
+<p>Használjuk a <a href="https://github.com/serilog/serilog">Serilog</a> külső osztálykönyvtárat a naplózásra, ami a a fenti absztrakcióra épül rá. Seriloghoz több nyelő (Sink) implementáció is készült, és van kifejezetten Elasticsearch-be naplózó csomag is.</p>
 <h3 id="elokeszulet">Előkészület<a class="headerlink" href="#elokeszulet" title="Permanent link">&para;</a></h3>
-<p>Klónozzuk le a kiinduló projektet, ami ASP.NET Core 3.0-ra lett felmigrálva az előző alkalmakhoz képest.</p>
+<p>Klónozzuk le a kiinduló projektet.</p>
 <div class="highlight"><pre><span></span><code>git clone https://github.com/bmeviauav42/todoapp-logging-hc.git
 </code></pre></div>
 
 <p>Próbáljuk ki, hogy docker-compose-zal elindul-e az alkalmazásunk, és teszteljük az API GW-en keresztül a működést.</p>
 <h3 id="elk">ELK<a class="headerlink" href="#elk" title="Permanent link">&para;</a></h3>
-<p>Vegyünk fel a docker-compose.yml-be két új konténert az Elasticsearch-nek és a Kibana-nak. Fontos, hogy ne az OSS verziót használjuk az ES-ből, mert abban nincsenek alapértelmezetten a Kibana-hoz szükséges komponensek feltelepítve.</p>
+<p>Vegyünk fel a docker-compose.yml-be két új konténert az Elasticsearch-nek és a Kibana-nak.</p>
 <div class="highlight"><pre><span></span><code>  <span class="nt">logs</span><span class="p">:</span>
-    <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">docker.elastic.co/elasticsearch/elasticsearch:7.4.2</span>
+    <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">docker.elastic.co/elasticsearch/elasticsearch-oss:7.8.0</span>
     <span class="nt">container_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">logs</span>
     <span class="nt">environment</span><span class="p">:</span>
       <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">cluster.name=logs</span> <span class="c1"># Settings to start Elasticsearch in a single-node development environment</span>
@@ -945,7 +945,7 @@
       <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">todoapp-network</span>
 
   <span class="nt">kibana</span><span class="p">:</span>
-    <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">docker.elastic.co/kibana/kibana:7.4.2</span>
+    <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">docker.elastic.co/kibana/kibana-oss:7.8.0</span>
     <span class="nt">container_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">kibana</span>
     <span class="nt">environment</span><span class="p">:</span> 
       <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ELASTICSEARCH_HOSTS=http://logs:9200</span>
@@ -969,11 +969,10 @@
 
 <h3 id="serilog">Serilog<a class="headerlink" href="#serilog" title="Permanent link">&para;</a></h3>
 <p>Vegyük fel az alábbi csomagokat a Todos.Api projektbe.</p>
-<div class="highlight"><pre><span></span><code><span class="nt">&lt;PackageReference</span> <span class="na">Include=</span><span class="s">&quot;Serilog&quot;</span> <span class="na">Version=</span><span class="s">&quot;2.9.0&quot;</span> <span class="nt">/&gt;</span>
-<span class="nt">&lt;PackageReference</span> <span class="na">Include=</span><span class="s">&quot;Serilog.AspNetCore&quot;</span> <span class="na">Version=</span><span class="s">&quot;3.2.0&quot;</span> <span class="nt">/&gt;</span>
-<span class="nt">&lt;PackageReference</span> <span class="na">Include=</span><span class="s">&quot;Serilog.Exceptions&quot;</span> <span class="na">Version=</span><span class="s">&quot;5.3.1&quot;</span> <span class="nt">/&gt;</span>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;PackageReference</span> <span class="na">Include=</span><span class="s">&quot;Serilog.AspNetCore&quot;</span> <span class="na">Version=</span><span class="s">&quot;3.4.0&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;PackageReference</span> <span class="na">Include=</span><span class="s">&quot;Serilog.Exceptions&quot;</span> <span class="na">Version=</span><span class="s">&quot;6.0.0&quot;</span> <span class="nt">/&gt;</span>
 <span class="nt">&lt;PackageReference</span> <span class="na">Include=</span><span class="s">&quot;Serilog.Settings.Configuration&quot;</span> <span class="na">Version=</span><span class="s">&quot;3.1.0&quot;</span> <span class="nt">/&gt;</span>
-<span class="nt">&lt;PackageReference</span> <span class="na">Include=</span><span class="s">&quot;Serilog.Sinks.Elasticsearch&quot;</span> <span class="na">Version=</span><span class="s">&quot;8.0.1&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;PackageReference</span> <span class="na">Include=</span><span class="s">&quot;Serilog.Sinks.Elasticsearch&quot;</span> <span class="na">Version=</span><span class="s">&quot;8.4.1&quot;</span> <span class="nt">/&gt;</span>
 </code></pre></div>
 
 <p>A Program.cs-ben konfiguráljuk be a Serilog-ot.</p>
@@ -1039,14 +1038,14 @@
 <span class="p">}</span>
 </code></pre></div>
 
-<p>Figyeljük meg, hogy nem használtuk a C# string interpoláció funkcióját (<code>$"{userid}"</code>)! <strong>Ez szándékos szemantikus naplózás esetén!</strong> Ha szemantikus logolást akarunk megvalósítani, akkor ne csak a log bejegyzés szövegében gondolkodjunk, hanem minden kapcsolódó információban. A fenti esetben az úgynevezett log message template természetesen ki lesz értékelve és be lesz helyettesítve a placeholderekre a paraméterek, de így a logger komponensnek lehetősége van ezeket a paramétereket nem csak a log üzenetbe belerakni, hanem a mi esetünkben az Elasticsearch-ben kereshetően eltárolni.</p>
+<p>Figyeljük meg, hogy nem használtuk a C# string interpoláció funkcióját (<code>$"{userid}"</code>)! <strong>Ez szándékos strukturált naplózás esetén!</strong> Ha strukturált logolást akarunk megvalósítani, akkor ne csak a log bejegyzés szövegében gondolkodjunk, hanem minden kapcsolódó információban. A fenti esetben az úgynevezett log message template természetesen ki lesz értékelve, és be lesz helyettesítve a placeholderekre a paraméterek, de így a logger komponensnek lehetősége van ezeket a paramétereket nem csak a log üzenetbe belerakni, hanem a mi esetünkben az Elasticsearch-ben kereshetően eltárolni.</p>
 <p>A template-ek esetében csak nem egyszerű <code>ToString()</code> hívást lehet végezni, hanem a fenti példában a <code>{@todoitem}</code> placeholder esetében a <code>@</code> jelentése az objektum sorosítására vonatkozik. lásd: <a href="https://github.com/serilog/serilog/wiki/Structured-Data">https://github.com/serilog/serilog/wiki/Structured-Data</a></p>
-<p>Oda kell figyelni, hogy a template-ben lévő propertyknek a JSON típusa (<code>int, string, obj, array</code> stb) első beszúráskor fixálva lesznek az ES sémájában. Ha refaktoráljuk a template-et és mást próbálunk logolni, akkor szimplán nem fog beszúródni az ES-be.</p>
+<p>Oda kell figyelni, hogy a template-ben lévő propertyknek a JSON típusa (<code>int, string, obj, array</code> stb) első beszúráskor lesznek megkötve az ES sémájában (<code>AutoRegisterTemplate = true</code>). Ha refaktoráljuk a template-et és mást próbálunk logolni, akkor szimplán nem fog beszúródni az ES-be.</p>
 <h3 id="kibana">Kibana<a class="headerlink" href="#kibana" title="Permanent link">&para;</a></h3>
 <p>Futtassuk az alkalmazásunkat és generáljunk egy bejegyzést a fenti funkcióval.</p>
 <p>Nyissuk meg a Kibana-t.</p>
-<p>A log nézetben még nem látunk semmit. A kibanának mondjuk meg, hogy milyen index-en keresse a bejegyzéseket. Esetünkben ez alapértelmezetten a <code>logstash-*</code> mintára fog illeszkedni. Második lépésként válasszuk ki a <code>@timestamp</code> mezőt a szűréshez.</p>
-<p>Vizsgáljuk meg a logbejegyzéseket, kitüntetetten a saját TODO létrehozásával kapcsolatos bejegyzést. Figyeljük meg, hogy szinte minden mező kereshető és szépen strukturáltan kerülnek a bejegyzés adatai lementésre.</p>
+<p>A Discover nézetben még nem látunk semmit. A kibanának mondjuk meg, hogy milyen index-en keresse a bejegyzéseket. Esetünkben ez alapértelmezetten a <code>logstash-*</code> mintára fog illeszkedni. Második lépésként válasszuk ki a <code>@timestamp</code> mezőt a szűréshez.</p>
+<p>Vizsgáljuk meg a logbejegyzéseket, kitüntetetten a saját TODO létrehozásával kapcsolatos bejegyzést. Figyeljük meg, hogy szinte minden mező kereshető és szépen strukturáltan kerülnek a bejegyzés adatai lementésre. Próbáljunk meg az általunk készített bejegyzés message template-jére keresni.</p>
 <h2 id="health-checks">Health Checks<a class="headerlink" href="#health-checks" title="Permanent link">&para;</a></h2>
 <p>Implementáljunk a Todos.Api projektünkhöz health check-et, amit majd a kubernetes fog elsősorban felhasználni.</p>
 <h3 id="elokeszulet_1">Előkészület<a class="headerlink" href="#elokeszulet_1" title="Permanent link">&para;</a></h3>
