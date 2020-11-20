@@ -868,36 +868,7 @@
                 <h1 id="naplozas-health-check">Naplózás, health check<a class="headerlink" href="#naplozas-health-check" title="Permanent link">&para;</a></h1>
 <h2 id="eloadas">Előadás<a class="headerlink" href="#eloadas" title="Permanent link">&para;</a></h2>
 <p><a href="https://edu.vik.bme.hu/mod/resource/view.php?id=22408">Naplózás, Health Checks</a></p>
-<details><summary>Előző alkalmak cheatsheet</summary><ul>
-<li>Docker<ul>
-<li><code>docker rm -f $(docker ps -aq)</code></li>
-</ul>
-</li>
-<li>K8S dashboard<ul>
-<li><code>kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v1.10.1/src/deploy/alternative/kubernetes-dashboard.yaml</code></li>
-<li><code>kubectl proxy</code></li>
-<li><a href="http://localhost:8001/api/v1/namespaces/kube-system/services/kubernetes-dashboard:/proxy">http://localhost:8001/api/v1/namespaces/kube-system/services/kubernetes-dashboard:/proxy</a></li>
-</ul>
-</li>
-<li>Traefic<ul>
-<li><code>helm version</code></li>
-<li><code>helm init</code></li>
-<li><code>helm install stable/traefik --name traefik --version "1.78.3" --set rbac.enabled=true --set logLevel=debug --set dashboard.enabled=true --set service.nodePorts.http=30080 --set serviceType=NodePort</code></li>
-</ul>
-</li>
-<li>DB<ul>
-<li><code>kubectl apply -f db</code></li>
-</ul>
-</li>
-<li>App<ul>
-<li><code>kubectl apply -f app</code></li>
-<li><code>$env:IMAGE_TAG="v1"</code> vagy írjuk át a yml-ben latest-re ideiglenesen</li>
-<li><code>docker-compose build</code></li>
-<li><a href="http://localhost:30080">http://localhost:30080</a></li>
-</ul>
-</li>
-</ul>
-</details>
+<p>A labor előkövetelménye az <a href="https://bmeviauav42.github.io/jegyzetek/Kubernetes/Kubernetes-alkalmazas-telepites/">Alkalmazás telepítése Kubernetes klaszterbe</a> gyakorlaton látott infrastrukturális feladatok elvégzése (Helm, kubernetes dashboard, Traefic telepítés, stb), mert a Healt Check fejezet a kubernetes alapú infrastruktúrára épül.</p>
 <h2 id="naplozas">Naplózás<a class="headerlink" href="#naplozas" title="Permanent link">&para;</a></h2>
 <p>Az ASP.NET Core TODO webalkalmazásunkban implementáljunk strukturált naplózást. A naplóbejegyzéseket az úgynevezett <a href="https://www.elastic.co/what-is/elk-stack">ELK</a> technológiai stackkel fogjuk feldolgozni.</p>
 <ul>
@@ -1052,12 +1023,12 @@
 <p>Mivel Kubernetes-hez még nem konfiguráltuk fel a loggolás szolgáltatásait, ezért a jelenlegi munkánkat commitoljuk egy külön ágra, majd álljunk vissza a kiinduló ágra.</p>
 <div class="highlight"><pre><span></span><code>git branch logging
 git commit -m <span class="s2">&quot;naplózás kész&quot;</span>
-git checkout kiindulóTODO
+git checkout master
 </code></pre></div>
 
 <p>Előző órák mintájára üzemeljük be a kubernetes verzióját az alkalmazásnak. Nézzük meg a dashboardon a rendszer állapotát és próbáljuk ki az alkalmazást.</p>
 <h3 id="health-check-implementacio">Health Check implementáció<a class="headerlink" href="#health-check-implementacio" title="Permanent link">&para;</a></h3>
-<p>Készítsünk readiness és liveness próbákat a kubernetes számára. Ehhez használjuk fel az ASP.NET Core 2.2 óta rendelkezésre álló beépített Health Check API-kat.</p>
+<p>Készítsünk readiness és liveness próbákat a kubernetes számára. Ehhez használjuk fel az ASP.NET Core beépített Health Check API-kat.</p>
 <h4 id="liveness">Liveness<a class="headerlink" href="#liveness" title="Permanent link">&para;</a></h4>
 <p>Kezdjük az egyszerűbbel. Akkor lesz live egy szolgáltatás, ha az app felált és ki tudja szolgálni külső függőségek nélkül a liveness próbát. Ehhez vegyünk fel egy üres health checket a <code>/health/live</code> végpontra.</p>
 <div class="highlight"><pre><span></span><code><span class="k">public</span> <span class="k">void</span> <span class="nf">ConfigureServices</span><span class="p">(</span><span class="n">IServiceCollection</span> <span class="n">services</span><span class="p">)</span>
@@ -1083,22 +1054,19 @@ git checkout kiindulóTODO
 </code></pre></div>
 
 <p>A health check UI-hoz az alábbi NuGet csomagot kell felvegyük a projektbe.</p>
-<div class="highlight"><pre><span></span><code><span class="nt">&lt;PackageReference</span> <span class="na">Include=</span><span class="s">&quot;AspNetCore.HealthChecks.UI&quot;</span> <span class="na">Version=</span><span class="s">&quot;3.0.4&quot;</span> <span class="nt">/&gt;</span>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;PackageReference</span> <span class="na">Include=</span><span class="s">&quot;AspNetCore.HealthChecks.UI&quot;</span> <span class="na">Version=</span><span class="s">&quot;3.1.3&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;PackageReference</span> <span class="na">Include=</span><span class="s">&quot;AspNetCore.HealthChecks.UI.Client&quot;</span> <span class="na">Version=</span><span class="s">&quot;3.1.2&quot;</span> <span class="nt">/&gt;</span>
 </code></pre></div>
 
 <p>Mi most csak a sorosító komponensét fogjuk használni belőle (<code>UIResponseWriter</code>), idő hiányában a UI komponenst most nem üzemeljük be.</p>
 <p>Próbáljuk ki az új végpontot (F5).</p>
 <h4 id="readiness">Readiness<a class="headerlink" href="#readiness" title="Permanent link">&para;</a></h4>
-<p>Vegyünk fel HC-t a külső szolgáltatásainkhoz is (Elasticsearch, Redis), majd ezt publikáljuk ki egy külön végponton.</p>
+<p>Vegyünk fel HC-et a külső szolgáltatásainkhoz is (Elasticsearch, Redis), majd ezt publikáljuk ki egy külön végponton.</p>
 <p>Vegyük fel az következő csomagokat a Todos.Api projekthez.</p>
-<div class="highlight"><pre><span></span><code><span class="nt">&lt;PackageReference</span> <span class="na">Include=</span><span class="s">&quot;AspNetCore.HealthChecks.Elasticsearch&quot;</span> <span class="na">Version=</span><span class="s">&quot;3.0.0&quot;</span> <span class="nt">/&gt;</span>
-<span class="nt">&lt;PackageReference</span> <span class="na">Include=</span><span class="s">&quot;AspNetCore.HealthChecks.Redis&quot;</span> <span class="na">Version=</span><span class="s">&quot;2.2.1&quot;</span> <span class="nt">/&gt;</span>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;PackageReference</span> <span class="na">Include=</span><span class="s">&quot;AspNetCore.HealthChecks.Elasticsearch&quot;</span> <span class="na">Version=</span><span class="s">&quot;3.1.1&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;PackageReference</span> <span class="na">Include=</span><span class="s">&quot;AspNetCore.HealthChecks.Redis&quot;</span> <span class="na">Version=</span><span class="s">&quot;3.1.2&quot;</span> <span class="nt">/&gt;</span>
 </code></pre></div>
 
-<div class="admonition important">
-<p class="admonition-title">Verzió fontos</p>
-<p><code>AspNetCore.HealthChecks.Redis</code> csomag direkt a 2.2.1-es mert összeakadna a <code>Microsoft.Extensions.Caching.Redis</code> csomaggal az újabb verzió.</p>
-</div>
 <p>Vegyük fel a csekkolásokat.</p>
 <div class="highlight"><pre><span></span><code><span class="n">services</span><span class="p">.</span><span class="n">AddHealthChecks</span><span class="p">()</span>
     <span class="p">.</span><span class="n">AddCheck</span><span class="p">(</span><span class="s">&quot;liveness&quot;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="n">HealthCheckResult</span><span class="p">.</span><span class="n">Healthy</span><span class="p">())</span>
@@ -1179,8 +1147,11 @@ git checkout kiindulóTODO
               <span class="nt">servicePort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">http</span> <span class="c1"># A service-ben a port neve (lehet a port szama is)</span>
 </code></pre></div>
 
-<p>Telepítsük ki, majd rontsuk el a működést a végpontunkkal. Közben figyeljük a podok állapotát. Egy idő után láthatjuk, hogy a próba sérült, és a k8s megpróbálja újraindítani a pod-ot, mivel ott már az <code>IsLive</code> property érteke igaz lesz.</p>
+<p>Telepítsük ki, majd rontsuk el a működést a végpontunkkal. Közben figyeljük a podok állapotát. Egy idő után láthatjuk, hogy a próba sérült, és a k8s megpróbálja újraindítani a pod-ot, és mivel ott már az <code>IsLive</code> property érteke igaz lesz, működőképes lesz az új pod.</p>
 <p>Érdemes minden health check definiálása során megtervezni azt, hogy az most melyik próbába illik bele jobban. Ha van esély, hogy magától megjavuljon, akkor a readiness próbába érdemes rakni (pl. valamilyen külső szolgáltatás nem elérhető, persze ez lehet konfigurációs hiba is, ahogy láttuk), ha pedig újraindítás tud segíteni akkor a liveness próbába rakjuk.</p>
+<h1 id="startup-probe">Startup probe<a class="headerlink" href="#startup-probe" title="Permanent link">&para;</a></h1>
+<p>Startup próbát most külön nem fogunk készíteni, de ez K8S szempontból funkciójában egy liveness próba. Ha sikeres a startup, akkor startup próba helyett már a liveness-t fogja hívni az orchesztrátor.
+Különbség abból adódik, hogy tipikusan a startup próbában máshogy szoktuk vizsgálni az alkalmazás állapotát. Fentebb láthattuk, hogy a liveness esetben az alkalmazást önmagában szoktuk vizsgálni, míg startup esetben a külső függőségek vizsgálatának is van értelme.</p>
                 
               
               
