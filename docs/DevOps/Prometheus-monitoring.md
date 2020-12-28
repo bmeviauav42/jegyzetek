@@ -25,15 +25,21 @@ A Prometheus architektúrája a hivatalos dokumentációból:
 
 ## Prometheus telepítése
 
-A Prometheus csak egy metrikagyűjtő szerver. Ahhoz, hogy Kubernetes alatt monitorozni tudjuk, számos további komponensre van szükség. Ezek telepítését fogja össze több projekt is (amelyek zavarbaejtően hasonló nevűek, ezért vigyázzunk, ha rákeresünk). Ezek közül a [prometheus-operator helm chart](https://github.com/helm/charts/tree/master/stable/prometheus-operator) telepítése a legegyszerűbb számunka.
+A Prometheus csak egy metrikagyűjtő szerver. Ahhoz, hogy Kubernetes alatt monitorozni tudjuk, számos további komponensre van szükség. Ezek telepítését fogja össze több projekt is (amelyek zavarbaejtően hasonló nevűek, ezért vigyázzunk, ha rákeresünk). Ezek közül a [kube-prometheus-stack helm chart](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack) telepítése a legegyszerűbb számunka.
 
 Helm segítségével regisztráljuk a chart repository-ját, majd telepítsük a chart-ot:
 
 ```bash
-helm repo add stable https://kubernetes-charts.storage.googleapis.com
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo add stable https://charts.helm.sh/stable
 helm repo update
-helm install prometheus stable/prometheus-operator
+helm install prometheus prometheus-community/kube-prometheus-stack
 ```
+
+Hagyjunk időt a telepítésnek. A helm chart sikeres telepítése után még az operátor maga is telepíteni fog további komponenseket, ezek is kis időbe tellnek.
+
+!!! note ""
+    A helm chartot korábban [_stable/prometheus-operator_](<https://github.com/helm/charts/tree/master/stable/prometheus-operator>)-nak hívták. A _kube-prometheus-stack_ ennek az "új" változata.
 
 ## Prometheus webfelület és Grafana
 
@@ -45,11 +51,11 @@ A Prometheus saját webfelülete nem túl felhasználóbarát, de célratörő e
 
 1. Tegyük elérhetővé a Grafana-t is az előzőhöz hasonlóan egy **új** terminálban kiadott paranccsal: `kubectl port-forward $(kubectl get pods --selector "app.kubernetes.io/name=grafana" --output=name) 3000:3000`
 
-1. A Grafana a <http://localhost:3000> címen lesz elérhető. Nyissuk meg és lépjünk be az `admin / prom-operator` felhasználónévvel és jelszóval, majd nézzünk meg pár kész dashboard-ot. Ezeket mind a prometheus-operator helm chart telepítette számunkra.
+1. A Grafana a <http://localhost:3000> címen lesz elérhető. Nyissuk meg és lépjünk be az `admin / prom-operator` felhasználónévvel és jelszóval, majd nézzünk meg pár kész dashboard-ot. Ezeket mind a helm chart telepítette számunkra.
 
 ## Saját komponensek monitorozása
 
-A _prometheus-operator_ chart előre konfigurál számos monitorozott célt, ezek többnyire a Kubernetes saját működését segítik láthatóvá tenni. Ha a saját alkalmazásunkat szeretnénk monitorozni, három lehetőségünk van.
+A chart előre konfigurál számos monitorozott célt, ezek többnyire a Kubernetes saját működését segítik láthatóvá tenni. Ha a saját alkalmazásunkat szeretnénk monitorozni, három lehetőségünk van.
 
 1. Több eszköz támogatja a Prometheus monitorozást, csak engedélyezni kell. Erre példa a Traefik, amelyben egy [kapcsolóval engedélyezhetjük](https://docs.traefik.io/observability/metrics/prometheus/), hogy a Prometheus számára scrapelhetővé tegye a metrikáit. Ezen metrikákra gyakran találunk kész [Grafana dashboard-ot](https://grafana.com/grafana/dashboards/10902) is, amit csak importálnunk kell.
 
