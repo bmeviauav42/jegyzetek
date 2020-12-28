@@ -1,6 +1,4 @@
 
-
-
 <!doctype html>
 <html lang="hu" class="no-js">
   <head>
@@ -12,8 +10,9 @@
       
         <meta name="author" content="Dudás Ákos">
       
-      <link rel="shortcut icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.4.0">
+      
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.2.2">
     
     
       
@@ -21,20 +20,22 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.fe0cca5b.min.css">
-      
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.a46bcfb3.min.css">
-      
+      <link rel="stylesheet" href="../../assets/stylesheets/main.73f7c429.min.css">
       
         
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.39b8e14a.min.css">
         
-        <meta name="theme-color" content="#ef5350">
+          
+          
+          <meta name="theme-color" content="#ef5552">
+        
       
     
     
     
       
-        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
         <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
       
@@ -53,7 +54,10 @@
     
     
     
+    
+    
     <body dir="ltr" data-md-color-scheme="" data-md-color-primary="red" data-md-color-accent="red">
+      
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -71,30 +75,33 @@
       
     </div>
     
-      <header class="md-header" data-md-component="header">
+      
+
+<header class="md-header" data-md-component="header">
   <nav class="md-header-nav md-grid" aria-label="Header">
     <a href="../.." title="BME AUT Mikroszolgáltatások és konténeralapú szoftverfejlesztés" class="md-header-nav__button md-logo" aria-label="BME AUT Mikroszolgáltatások és konténeralapú szoftverfejlesztés">
       
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+  <img src="../../logo-bme-aut.png" alt="logo">
 
     </a>
     <label class="md-header-nav__button md-icon" for="__drawer">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
     </label>
     <div class="md-header-nav__title" data-md-component="header-title">
-      
-        <div class="md-header-nav__ellipsis">
-          <span class="md-header-nav__topic md-ellipsis">
+      <div class="md-header-nav__ellipsis">
+        <div class="md-header-nav__topic">
+          <span class="md-ellipsis">
             BME AUT Mikroszolgáltatások és konténeralapú szoftverfejlesztés
           </span>
-          <span class="md-header-nav__topic md-ellipsis">
+        </div>
+        <div class="md-header-nav__topic">
+          <span class="md-ellipsis">
             
               Naplózás, health check
             
           </span>
         </div>
-      
+      </div>
     </div>
     
       <label class="md-header-nav__button md-icon" for="__search">
@@ -105,7 +112,7 @@
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="Keresés" placeholder="Keresés" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <input type="text" class="md-search__input" name="query" aria-label="Keresés" placeholder="Keresés" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
       <label class="md-search__icon md-icon" for="__search">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
@@ -146,39 +153,49 @@
     
     <div class="md-container" data-md-component="container">
       
-        
-      
       
         
           
-
-  
-
-<nav class="md-tabs md-tabs--active" aria-label="Tabs" data-md-component="tabs">
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
   <div class="md-tabs__inner md-grid">
     <ul class="md-tabs__list">
       
         
+  
+  
+
+
   <li class="md-tabs__item">
-    
-      <a href="../.." class="md-tabs__link">
-        Tárgy ismertető
-      </a>
-    
+    <a href="../.." class="md-tabs__link">
+      Tárgy ismertető
+    </a>
   </li>
 
       
         
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../hazi-feladat/" class="md-tabs__link">
+      Házi feladat
+    </a>
+  </li>
+
       
         
   
   
+
+
+  
+  
+  
     <li class="md-tabs__item">
-      
-        <a href="../../Docker/Docker-alapok/" class="md-tabs__link">
-          Docker
-        </a>
-      
+      <a href="../../Docker/Docker-alapok/" class="md-tabs__link">
+        Docker
+      </a>
     </li>
   
 
@@ -186,12 +203,15 @@
         
   
   
+
+
+  
+  
+  
     <li class="md-tabs__item">
-      
-        <a href="../../Architektura/AdatbazisApiGateway/" class="md-tabs__link">
-          Architektúra
-        </a>
-      
+      <a href="../../Architektura/AdatbazisApiGateway/" class="md-tabs__link">
+        Architektúra
+      </a>
     </li>
   
 
@@ -199,12 +219,17 @@
         
   
   
+    
+  
+
+
+  
+  
+  
     <li class="md-tabs__item">
-      
-        <a href="../Nyomkovetes/" class="md-tabs__link md-tabs__link--active">
-          DevOps
-        </a>
-      
+      <a href="../Nyomkovetes/" class="md-tabs__link md-tabs__link--active">
+        DevOps
+      </a>
     </li>
   
 
@@ -212,12 +237,15 @@
         
   
   
+
+
+  
+  
+  
     <li class="md-tabs__item">
-      
-        <a href="../../Kubernetes/Kubernetes-alapok/" class="md-tabs__link">
-          Kubernetes
-        </a>
-      
+      <a href="../../Kubernetes/Kubernetes-alapok/" class="md-tabs__link">
+        Kubernetes
+      </a>
     </li>
   
 
@@ -225,12 +253,15 @@
         
   
   
+
+
+  
+  
+  
     <li class="md-tabs__item">
-      
-        <a href="../../Serverless/serverless/" class="md-tabs__link">
-          Serverless
-        </a>
-      
+      <a href="../../Serverless/serverless/" class="md-tabs__link">
+        Serverless
+      </a>
     </li>
   
 
@@ -244,15 +275,22 @@
         <div class="md-main__inner md-grid">
           
             
-              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation" >
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
-                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+                    
+
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
     <a href="../.." title="BME AUT Mikroszolgáltatások és konténeralapú szoftverfejlesztés" class="md-nav__button md-logo" aria-label="BME AUT Mikroszolgáltatások és konténeralapú szoftverfejlesztés">
       
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+  <img src="../../logo-bme-aut.png" alt="logo">
 
     </a>
     BME AUT Mikroszolgáltatások és konténeralapú szoftverfejlesztés
@@ -278,8 +316,9 @@
       
 
 
+
   <li class="md-nav__item">
-    <a href="../.." title="Tárgy ismertető" class="md-nav__link">
+    <a href="../.." class="md-nav__link">
       Tárgy ismertető
     </a>
   </li>
@@ -290,9 +329,10 @@
       
 
 
+
   <li class="md-nav__item">
-    <a href="../../hazi-feladat/" title="Házi feladat leírása és megszerezhető pontok" class="md-nav__link">
-      Házi feladat leírása és megszerezhető pontok
+    <a href="../../hazi-feladat/" class="md-nav__link">
+      Házi feladat
     </a>
   </li>
 
@@ -302,21 +342,20 @@
       
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" >
     
     <label class="md-nav__link" for="nav-3">
       Docker
-      <span class="md-nav__icon md-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
-      </span>
+      <span class="md-nav__icon md-icon"></span>
     </label>
     <nav class="md-nav" aria-label="Docker" data-md-level="1">
       <label class="md-nav__title" for="nav-3">
-        <span class="md-nav__icon md-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-        </span>
+        <span class="md-nav__icon md-icon"></span>
         Docker
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -327,8 +366,9 @@
           
 
 
+
   <li class="md-nav__item">
-    <a href="../../Docker/Docker-alapok/" title="Docker alapok" class="md-nav__link">
+    <a href="../../Docker/Docker-alapok/" class="md-nav__link">
       Docker alapok
     </a>
   </li>
@@ -339,8 +379,9 @@
           
 
 
+
   <li class="md-nav__item">
-    <a href="../../Docker/Dockerfile-compose/" title="Dockerfile és docker-compose" class="md-nav__link">
+    <a href="../../Docker/Dockerfile-compose/" class="md-nav__link">
       Dockerfile és docker-compose
     </a>
   </li>
@@ -356,21 +397,20 @@
       
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" >
     
     <label class="md-nav__link" for="nav-4">
       Architektúra
-      <span class="md-nav__icon md-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
-      </span>
+      <span class="md-nav__icon md-icon"></span>
     </label>
     <nav class="md-nav" aria-label="Architektúra" data-md-level="1">
       <label class="md-nav__title" for="nav-4">
-        <span class="md-nav__icon md-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-        </span>
+        <span class="md-nav__icon md-icon"></span>
         Architektúra
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -381,8 +421,9 @@
           
 
 
+
   <li class="md-nav__item">
-    <a href="../../Architektura/AdatbazisApiGateway/" title="Adattárolás és Api Gateway" class="md-nav__link">
+    <a href="../../Architektura/AdatbazisApiGateway/" class="md-nav__link">
       Adattárolás és Api Gateway
     </a>
   </li>
@@ -393,8 +434,9 @@
           
 
 
+
   <li class="md-nav__item">
-    <a href="../../Architektura/Kommunikacio/" title="Kommunikáció" class="md-nav__link">
+    <a href="../../Architektura/Kommunikacio/" class="md-nav__link">
       Kommunikáció
     </a>
   </li>
@@ -409,24 +451,23 @@
       
       
 
+
   
 
 
+  
   <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
     
       <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" checked>
     
     <label class="md-nav__link" for="nav-5">
       DevOps
-      <span class="md-nav__icon md-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
-      </span>
+      <span class="md-nav__icon md-icon"></span>
     </label>
     <nav class="md-nav" aria-label="DevOps" data-md-level="1">
       <label class="md-nav__title" for="nav-5">
-        <span class="md-nav__icon md-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-        </span>
+        <span class="md-nav__icon md-icon"></span>
         DevOps
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -437,8 +478,9 @@
           
 
 
+
   <li class="md-nav__item">
-    <a href="../Nyomkovetes/" title="Elosztott nyomkövetés" class="md-nav__link">
+    <a href="../Nyomkovetes/" class="md-nav__link">
       Elosztott nyomkövetés
     </a>
   </li>
@@ -447,6 +489,7 @@
           
           
           
+
 
   
 
@@ -460,12 +503,10 @@
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
         Naplózás, health check
-        <span class="md-nav__icon md-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9h14V7H3v2m0 4h14v-2H3v2m0 4h14v-2H3v2m16 0h2v-2h-2v2m0-10v2h2V7h-2m0 6h2v-2h-2v2z"/></svg>
-        </span>
+        <span class="md-nav__icon md-icon"></span>
       </label>
     
-    <a href="./" title="Naplózás, health check" class="md-nav__link md-nav__link--active">
+    <a href="./" class="md-nav__link md-nav__link--active">
       Naplózás, health check
     </a>
     
@@ -477,9 +518,7 @@
   
   
     <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-      </span>
+      <span class="md-nav__icon md-icon"></span>
       Tartalomjegyzék
     </label>
     <ul class="md-nav__list" data-md-scrollfix>
@@ -598,8 +637,9 @@
           
 
 
+
   <li class="md-nav__item">
-    <a href="../Prometheus-monitoring/" title="Prometheus monitorozás Kubernetes-ben" class="md-nav__link">
+    <a href="../Prometheus-monitoring/" class="md-nav__link">
       Prometheus monitorozás Kubernetes-ben
     </a>
   </li>
@@ -615,21 +655,20 @@
       
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6" >
     
     <label class="md-nav__link" for="nav-6">
       Kubernetes
-      <span class="md-nav__icon md-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
-      </span>
+      <span class="md-nav__icon md-icon"></span>
     </label>
     <nav class="md-nav" aria-label="Kubernetes" data-md-level="1">
       <label class="md-nav__title" for="nav-6">
-        <span class="md-nav__icon md-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-        </span>
+        <span class="md-nav__icon md-icon"></span>
         Kubernetes
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -640,8 +679,9 @@
           
 
 
+
   <li class="md-nav__item">
-    <a href="../../Kubernetes/Kubernetes-alapok/" title="Kubernetes alapok" class="md-nav__link">
+    <a href="../../Kubernetes/Kubernetes-alapok/" class="md-nav__link">
       Kubernetes alapok
     </a>
   </li>
@@ -652,8 +692,9 @@
           
 
 
+
   <li class="md-nav__item">
-    <a href="../../Kubernetes/Kubernetes-alkalmazas-telepites/" title="Alkalmazás telepítése Kubernetes klaszterbe" class="md-nav__link">
+    <a href="../../Kubernetes/Kubernetes-alkalmazas-telepites/" class="md-nav__link">
       Alkalmazás telepítése Kubernetes klaszterbe
     </a>
   </li>
@@ -664,8 +705,9 @@
           
 
 
+
   <li class="md-nav__item">
-    <a href="../../AKS/aks/" title="K8S DevOps Azure DevOps-ban és Azure Kubernetes Service-szel" class="md-nav__link">
+    <a href="../../AKS/aks/" class="md-nav__link">
       K8S DevOps Azure DevOps-ban és Azure Kubernetes Service-szel
     </a>
   </li>
@@ -681,21 +723,20 @@
       
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7" >
     
     <label class="md-nav__link" for="nav-7">
       Serverless
-      <span class="md-nav__icon md-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
-      </span>
+      <span class="md-nav__icon md-icon"></span>
     </label>
     <nav class="md-nav" aria-label="Serverless" data-md-level="1">
       <label class="md-nav__title" for="nav-7">
-        <span class="md-nav__icon md-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-        </span>
+        <span class="md-nav__icon md-icon"></span>
         Serverless
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -706,8 +747,9 @@
           
 
 
+
   <li class="md-nav__item">
-    <a href="../../Serverless/serverless/" title="Mikroszolgáltatások serverless architektúra fölött" class="md-nav__link">
+    <a href="../../Serverless/serverless/" class="md-nav__link">
       Mikroszolgáltatások serverless architektúra fölött
     </a>
   </li>
@@ -725,7 +767,8 @@
               </div>
             
             
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc" >
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
@@ -736,9 +779,7 @@
   
   
     <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-      </span>
+      <span class="md-nav__icon md-icon"></span>
       Tartalomjegyzék
     </label>
     <ul class="md-nav__list" data-md-scrollfix>
@@ -862,9 +903,6 @@
                   </a>
                 
                 
-                  
-                
-                
                 <h1 id="naplozas-health-check">Naplózás, health check<a class="headerlink" href="#naplozas-health-check" title="Permanent link">&para;</a></h1>
 <h2 id="eloadas">Előadás<a class="headerlink" href="#eloadas" title="Permanent link">&para;</a></h2>
 <p><a href="https://edu.vik.bme.hu/mod/resource/view.php?id=22408">Naplózás, Health Checks</a></p>
@@ -896,7 +934,6 @@
 <p>Klónozzuk le a kiinduló projektet.</p>
 <div class="highlight"><pre><span></span><code>git clone https://github.com/bmeviauav42/todoapp-logging-hc.git
 </code></pre></div>
-
 <p>Próbáljuk ki, hogy docker-compose-zal elindul-e az alkalmazásunk, és teszteljük az API GW-en keresztül a működést.</p>
 <h3 id="elk">ELK<a class="headerlink" href="#elk" title="Permanent link">&para;</a></h3>
 <p>Vegyünk fel a docker-compose.yml-be két új konténert az Elasticsearch-nek és a Kibana-nak.</p>
@@ -927,7 +964,6 @@
     <span class="nt">networks</span><span class="p">:</span>
       <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">todoapp-network</span>
 </code></pre></div>
-
 <p>A kötetek közé is fel kell vennünk egy bejegyzést.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">volumes</span><span class="p">:</span> <span class="c1"># The volumes will store the database data; kept even after the containers are deleted</span>
   <span class="nt">todoapp-mongo-data</span><span class="p">:</span>
@@ -937,7 +973,6 @@
   <span class="nt">logs-elastic-data</span><span class="p">:</span>
     <span class="nt">driver</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">local</span>
 </code></pre></div>
-
 <h3 id="serilog">Serilog<a class="headerlink" href="#serilog" title="Permanent link">&para;</a></h3>
 <p>Vegyük fel az alábbi csomagokat a Todos.Api projektbe.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">&lt;PackageReference</span> <span class="na">Include=</span><span class="s">&quot;Serilog.AspNetCore&quot;</span> <span class="na">Version=</span><span class="s">&quot;3.4.0&quot;</span> <span class="nt">/&gt;</span>
@@ -945,7 +980,6 @@
 <span class="nt">&lt;PackageReference</span> <span class="na">Include=</span><span class="s">&quot;Serilog.Settings.Configuration&quot;</span> <span class="na">Version=</span><span class="s">&quot;3.1.0&quot;</span> <span class="nt">/&gt;</span>
 <span class="nt">&lt;PackageReference</span> <span class="na">Include=</span><span class="s">&quot;Serilog.Sinks.Elasticsearch&quot;</span> <span class="na">Version=</span><span class="s">&quot;8.4.1&quot;</span> <span class="nt">/&gt;</span>
 </code></pre></div>
-
 <p>A Program.cs-ben konfiguráljuk be a Serilog-ot.</p>
 <div class="highlight"><pre><span></span><code><span class="k">public</span> <span class="k">static</span> <span class="n">IHostBuilder</span> <span class="nf">CreateWebHostBuilder</span><span class="p">(</span><span class="kt">string</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span> <span class="p">=&gt;</span>
     <span class="n">Host</span><span class="p">.</span><span class="n">CreateDefaultBuilder</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
@@ -963,7 +997,6 @@
             <span class="n">c</span><span class="p">.</span><span class="n">UseStartup</span><span class="p">&lt;</span><span class="n">Startup</span><span class="p">&gt;();</span>
         <span class="p">});</span>
 </code></pre></div>
-
 <div class="admonition note">
 <p class="admonition-title">Hibakezelés az indulás közben</p>
 <p>A Serilog ajánlások szerint a Main függvényben lenne érdemes a Serilog-ot inicializálni, hogy az app indulása során fellépő kivételeket is le lehessen logolni. Most ettől az aspektustól eltekintünk az egyszerűség kedvéért.</p>
@@ -984,7 +1017,6 @@
 <p>Fentebb is láthatjuk, hogy az Elasticsearch URL-jét  a konfigurációból nyerjük. Adjuk most ezt meg környezeti változóként a docker-compose.cs.debug.yml állományban.</p>
 <div class="highlight"><pre><span></span><code>      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ASPNETCORE_LogsUrl=http://logs:9200</span>
 </code></pre></div>
-
 <div class="admonition note">
 <p>A Serilog az appsetting.json és az appsettings.Development.json-ből nem használja fel a Logging szekciót. Ezeket az igényesség kedvéért törölhetjük. Ezek csak a Microsoft-os <code>ILogger</code> implementáció számára kellenek.</p>
 </div>
@@ -997,7 +1029,6 @@
     <span class="n">_logger</span> <span class="p">=</span> <span class="n">logger</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>
-
 <p>Naplózzuk info szinten a todo létrehozását.</p>
 <div class="highlight"><pre><span></span><code><span class="k">public</span> <span class="k">async</span> <span class="n">Task</span><span class="p">&lt;</span><span class="n">TodoItem</span><span class="p">&gt;</span> <span class="n">Insert</span><span class="p">(</span><span class="n">CreateNewTodoRequest</span> <span class="k">value</span><span class="p">)</span>
 <span class="p">{</span>
@@ -1008,7 +1039,6 @@
     <span class="k">return</span> <span class="n">todo</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>
-
 <p>Figyeljük meg, hogy nem használtuk a C# string interpoláció funkcióját (<code>$"{userid}"</code>)! <strong>Ez szándékos strukturált naplózás esetén!</strong> Ha strukturált logolást akarunk megvalósítani, akkor ne csak a log bejegyzés szövegében gondolkodjunk, hanem minden kapcsolódó információban. A fenti esetben az úgynevezett log message template természetesen ki lesz értékelve, és be lesz helyettesítve a placeholderekre a paraméterek, de így a logger komponensnek lehetősége van ezeket a paramétereket nem csak a log üzenetbe belerakni, hanem a mi esetünkben az Elasticsearch-ben kereshetően eltárolni.</p>
 <p>A template-ek esetében csak nem egyszerű <code>ToString()</code> hívást lehet végezni, hanem a fenti példában a <code>{@todoitem}</code> placeholder esetében a <code>@</code> jelentése az objektum sorosítására vonatkozik. lásd: <a href="https://github.com/serilog/serilog/wiki/Structured-Data">https://github.com/serilog/serilog/wiki/Structured-Data</a></p>
 <p>Oda kell figyelni, hogy a template-ben lévő propertyknek a JSON típusa (<code>int, string, obj, array</code> stb) első beszúráskor lesznek megkötve az ES sémájában (<code>AutoRegisterTemplate = true</code>). Ha refaktoráljuk a template-et és mást próbálunk logolni, akkor szimplán nem fog beszúródni az ES-be.</p>
@@ -1025,7 +1055,6 @@
 git commit -m <span class="s2">&quot;naplózás kész&quot;</span>
 git checkout master
 </code></pre></div>
-
 <p>Előző órák mintájára üzemeljük be a kubernetes verzióját az alkalmazásnak. Nézzük meg a dashboardon a rendszer állapotát és próbáljuk ki az alkalmazást.</p>
 <h3 id="health-check-implementacio">Health Check implementáció<a class="headerlink" href="#health-check-implementacio" title="Permanent link">&para;</a></h3>
 <p>Készítsünk readiness és liveness próbákat a kubernetes számára. Ehhez használjuk fel az ASP.NET Core beépített Health Check API-kat.</p>
@@ -1038,7 +1067,6 @@ git checkout master
         <span class="p">.</span><span class="n">AddCheck</span><span class="p">(</span><span class="s">&quot;liveness&quot;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="n">HealthCheckResult</span><span class="p">.</span><span class="n">Healthy</span><span class="p">());</span>
 <span class="p">}</span>
 </code></pre></div>
-
 <div class="highlight"><pre><span></span><code><span class="k">public</span> <span class="k">void</span> <span class="nf">Configure</span><span class="p">(</span><span class="n">IApplicationBuilder</span> <span class="n">app</span><span class="p">,</span> <span class="n">IWebHostEnvironment</span> <span class="n">env</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="c1">//...</span>
@@ -1052,12 +1080,10 @@ git checkout master
         <span class="p">});</span>
     <span class="p">}</span>
 </code></pre></div>
-
 <p>A health check UI-hoz az alábbi NuGet csomagot kell felvegyük a projektbe.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">&lt;PackageReference</span> <span class="na">Include=</span><span class="s">&quot;AspNetCore.HealthChecks.UI&quot;</span> <span class="na">Version=</span><span class="s">&quot;3.1.3&quot;</span> <span class="nt">/&gt;</span>
 <span class="nt">&lt;PackageReference</span> <span class="na">Include=</span><span class="s">&quot;AspNetCore.HealthChecks.UI.Client&quot;</span> <span class="na">Version=</span><span class="s">&quot;3.1.2&quot;</span> <span class="nt">/&gt;</span>
 </code></pre></div>
-
 <p>Mi most csak a sorosító komponensét fogjuk használni belőle (<code>UIResponseWriter</code>), idő hiányában a UI komponenst most nem üzemeljük be.</p>
 <p>Próbáljuk ki az új végpontot (F5).</p>
 <h4 id="readiness">Readiness<a class="headerlink" href="#readiness" title="Permanent link">&para;</a></h4>
@@ -1066,14 +1092,12 @@ git checkout master
 <div class="highlight"><pre><span></span><code><span class="nt">&lt;PackageReference</span> <span class="na">Include=</span><span class="s">&quot;AspNetCore.HealthChecks.Elasticsearch&quot;</span> <span class="na">Version=</span><span class="s">&quot;3.1.1&quot;</span> <span class="nt">/&gt;</span>
 <span class="nt">&lt;PackageReference</span> <span class="na">Include=</span><span class="s">&quot;AspNetCore.HealthChecks.Redis&quot;</span> <span class="na">Version=</span><span class="s">&quot;3.1.2&quot;</span> <span class="nt">/&gt;</span>
 </code></pre></div>
-
 <p>Vegyük fel a csekkolásokat.</p>
 <div class="highlight"><pre><span></span><code><span class="n">services</span><span class="p">.</span><span class="n">AddHealthChecks</span><span class="p">()</span>
     <span class="p">.</span><span class="n">AddCheck</span><span class="p">(</span><span class="s">&quot;liveness&quot;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="n">HealthCheckResult</span><span class="p">.</span><span class="n">Healthy</span><span class="p">())</span>
     <span class="p">.</span><span class="n">AddRedis</span><span class="p">(</span><span class="n">Configuration</span><span class="p">.</span><span class="n">GetValue</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;(</span><span class="s">&quot;RedisUrl&quot;</span><span class="p">)</span> <span class="p">??</span> <span class="s">&quot;redis:6379&quot;</span><span class="p">,</span> <span class="n">tags</span><span class="p">:</span> <span class="k">new</span><span class="p">[]</span> <span class="p">{</span> <span class="s">&quot;readiness&quot;</span> <span class="p">})</span>
     <span class="p">.</span><span class="n">AddElasticsearch</span><span class="p">(</span><span class="n">Configuration</span><span class="p">.</span><span class="n">GetValue</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;(</span><span class="s">&quot;ElasticsearchUrl&quot;</span><span class="p">)</span> <span class="p">??</span> <span class="s">&quot;http://elasticsearch:9200&quot;</span><span class="p">,</span> <span class="n">tags</span><span class="p">:</span> <span class="k">new</span><span class="p">[]</span> <span class="p">{</span> <span class="s">&quot;readiness&quot;</span> <span class="p">});</span>
 </code></pre></div>
-
 <div class="admonition note">
 <p class="admonition-title"><code>IOptions&lt;T&gt;</code> használata</p>
 <p>Az ASP.NET Core-os konfigurációk kezelésére itt is célszerűbb lenne az <code>IOptions&lt;T&gt;</code> mintát használni, de most az egyszerűség kedvéért ettől eltekintünk.</p>
@@ -1085,7 +1109,6 @@ git checkout master
     <span class="n">ResponseWriter</span> <span class="p">=</span> <span class="n">UIResponseWriter</span><span class="p">.</span><span class="n">WriteHealthCheckUIResponse</span>
 <span class="p">});</span>
 </code></pre></div>
-
 <p>Próbáljuk ki!</p>
 <h3 id="kubernetes-probes">Kubernetes probes<a class="headerlink" href="#kubernetes-probes" title="Permanent link">&para;</a></h3>
 <p>Vegyük fel a kubernetes konfigurációba a liveness és a readiness próbákat.</p>
@@ -1107,7 +1130,6 @@ git checkout master
             <span class="nt">initialDelaySeconds</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">5</span>
             <span class="nt">periodSeconds</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">10</span>
 </code></pre></div>
-
 <p>Ha mi kívülről is meg akarjuk hívni a <code>/health</code> végpontokat, akkor vegyük fel őket az ingress konfigurációba.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">spec</span><span class="p">:</span>
   <span class="nt">rules</span><span class="p">:</span>
@@ -1122,31 +1144,26 @@ git checkout master
               <span class="nt">serviceName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">todos</span> <span class="c1"># A service neve</span>
               <span class="nt">servicePort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">http</span> <span class="c1"># A service-ben a port neve (lehet a port szama is)</span>
 </code></pre></div>
-
 <p>Próbáljuk ki!</p>
 <p>Rontsuk el a readiness próbát úgy, hogy elírjuk az elasticsearch connection string-jét a környezeti változóban. Azt tapasztalhatjuk, hogy az új konténer elindult, de mivel nem ready ezért a régi szerepét nem tudja átvenni addig, amíg ready nem lesz. Sajnos ez a hiba nem tud kijavulni magától, így a kijavított config után fog indulni a pod.</p>
 <p>Készítsünk egy egyszerű módszert a liveness próba elrontására a <code>Startup</code> osztályban a healthcheck létrehozásakor.</p>
 <div class="highlight"><pre><span></span><code><span class="k">public</span> <span class="kt">bool</span> <span class="n">IsLive</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">private</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span> <span class="p">=</span> <span class="k">true</span><span class="p">;</span>
 </code></pre></div>
-
 <div class="highlight"><pre><span></span><code><span class="n">services</span><span class="p">.</span><span class="n">AddHealthChecks</span><span class="p">()</span>
     <span class="p">.</span><span class="n">AddCheck</span><span class="p">(</span><span class="s">&quot;liveness&quot;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="n">IsLive</span> <span class="p">?</span> <span class="n">HealthCheckResult</span><span class="p">.</span><span class="n">Healthy</span><span class="p">()</span> <span class="p">:</span> <span class="n">HealthCheckResult</span><span class="p">.</span><span class="n">Unhealthy</span><span class="p">())</span>
 </code></pre></div>
-
 <div class="highlight"><pre><span></span><code><span class="n">endpoints</span><span class="p">.</span><span class="n">MapGet</span><span class="p">(</span><span class="s">&quot;/health/switch&quot;</span><span class="p">,</span> <span class="k">async</span> <span class="n">r</span> <span class="p">=&gt;</span>
 <span class="p">{</span>
     <span class="n">IsLive</span> <span class="p">=</span> <span class="p">!</span><span class="n">IsLive</span><span class="p">;</span>
     <span class="k">await</span> <span class="n">r</span><span class="p">.</span><span class="n">Response</span><span class="p">.</span><span class="n">WriteAsync</span><span class="p">(</span><span class="err">$</span><span class="s">&quot;IsLive is now {IsLive}&quot;</span><span class="p">);</span>
 <span class="p">});</span>
 </code></pre></div>
-
 <p>Engedélyezzük kívülről ezt a végpontot is.</p>
 <div class="highlight"><pre><span></span><code>          <span class="p p-Indicator">-</span> <span class="nt">path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/health/switch</span>
             <span class="nt">backend</span><span class="p">:</span>
               <span class="nt">serviceName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">todos</span> <span class="c1"># A service neve</span>
               <span class="nt">servicePort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">http</span> <span class="c1"># A service-ben a port neve (lehet a port szama is)</span>
 </code></pre></div>
-
 <p>Telepítsük ki, majd rontsuk el a működést a végpontunkkal. Közben figyeljük a podok állapotát. Egy idő után láthatjuk, hogy a próba sérült, és a k8s megpróbálja újraindítani a pod-ot, és mivel ott már az <code>IsLive</code> property érteke igaz lesz, működőképes lesz az új pod.</p>
 <p>Érdemes minden health check definiálása során megtervezni azt, hogy az most melyik próbába illik bele jobban. Ha van esély, hogy magától megjavuljon, akkor a readiness próbába érdemes rakni (pl. valamilyen külső szolgáltatás nem elérhető, persze ez lehet konfigurációs hiba is, ahogy láttuk), ha pedig újraindítás tud segíteni akkor a liveness próbába rakjuk.</p>
 <h1 id="startup-probe">Startup probe<a class="headerlink" href="#startup-probe" title="Permanent link">&para;</a></h1>
@@ -1164,7 +1181,29 @@ Különbség abból adódik, hogy tipikusan a startup próbában máshogy szoktu
         </div>
       </main>
       
-        
+        <!--
+  Copyright (c) 2016-2020 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+
 
 <!-- Application footer -->
 <footer class="md-footer">
@@ -1188,15 +1227,15 @@ Különbség abból adódik, hogy tipikusan a startup próbában máshogy szoktu
       
     </div>
     
-      <script src="../../assets/javascripts/vendor.d710d30a.min.js"></script>
-      <script src="../../assets/javascripts/bundle.b39636ac.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "M\u00e1sol\u00e1s v\u00e1g\u00f3lapra", "clipboard.copied": "V\u00e1g\u00f3lapra m\u00e1solva", "search.config.lang": "hu", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Keres\u00e9shez \u00edrj ide valamit", "search.result.none": "Nincs tal\u00e1lat", "search.result.one": "1 egyez\u0151 dokumentum", "search.result.other": "# egyez\u0151 dokumentum"}</script>
+      <script src="../../assets/javascripts/vendor.08c56446.min.js"></script>
+      <script src="../../assets/javascripts/bundle.6ced434e.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "M\u00e1sol\u00e1s v\u00e1g\u00f3lapra", "clipboard.copied": "V\u00e1g\u00f3lapra m\u00e1solva", "search.config.lang": "hu", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Keres\u00e9s", "search.result.placeholder": "Keres\u00e9shez \u00edrj ide valamit", "search.result.none": "Nincs tal\u00e1lat", "search.result.one": "1 egyez\u0151 dokumentum", "search.result.other": "# egyez\u0151 dokumentum", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
       
       <script>
         app = initialize({
           base: "../..",
-          features: ["tabs"],
+          features: ['navigation.tabs'],
           search: Object.assign({
-            worker: "../../assets/javascripts/worker/search.a68abb33.min.js"
+            worker: "../../assets/javascripts/worker/search.8c7e0a7e.min.js"
           }, typeof search !== "undefined" && search)
         })
       </script>

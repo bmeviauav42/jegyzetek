@@ -1,6 +1,4 @@
 
-
-
 <!doctype html>
 <html lang="hu" class="no-js">
   <head>
@@ -12,8 +10,9 @@
       
         <meta name="author" content="Dudás Ákos">
       
-      <link rel="shortcut icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.4.0">
+      
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.2.2">
     
     
       
@@ -21,20 +20,22 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.fe0cca5b.min.css">
-      
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.a46bcfb3.min.css">
-      
+      <link rel="stylesheet" href="../../assets/stylesheets/main.73f7c429.min.css">
       
         
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.39b8e14a.min.css">
         
-        <meta name="theme-color" content="#ef5350">
+          
+          
+          <meta name="theme-color" content="#ef5552">
+        
       
     
     
     
       
-        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
         <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
       
@@ -53,7 +54,10 @@
     
     
     
+    
+    
     <body dir="ltr" data-md-color-scheme="" data-md-color-primary="red" data-md-color-accent="red">
+      
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -71,30 +75,33 @@
       
     </div>
     
-      <header class="md-header" data-md-component="header">
+      
+
+<header class="md-header" data-md-component="header">
   <nav class="md-header-nav md-grid" aria-label="Header">
     <a href="../.." title="BME AUT Mikroszolgáltatások és konténeralapú szoftverfejlesztés" class="md-header-nav__button md-logo" aria-label="BME AUT Mikroszolgáltatások és konténeralapú szoftverfejlesztés">
       
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+  <img src="../../logo-bme-aut.png" alt="logo">
 
     </a>
     <label class="md-header-nav__button md-icon" for="__drawer">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
     </label>
     <div class="md-header-nav__title" data-md-component="header-title">
-      
-        <div class="md-header-nav__ellipsis">
-          <span class="md-header-nav__topic md-ellipsis">
+      <div class="md-header-nav__ellipsis">
+        <div class="md-header-nav__topic">
+          <span class="md-ellipsis">
             BME AUT Mikroszolgáltatások és konténeralapú szoftverfejlesztés
           </span>
-          <span class="md-header-nav__topic md-ellipsis">
+        </div>
+        <div class="md-header-nav__topic">
+          <span class="md-ellipsis">
             
               Prometheus monitorozás Kubernetes-ben
             
           </span>
         </div>
-      
+      </div>
     </div>
     
       <label class="md-header-nav__button md-icon" for="__search">
@@ -105,7 +112,7 @@
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="Keresés" placeholder="Keresés" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <input type="text" class="md-search__input" name="query" aria-label="Keresés" placeholder="Keresés" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
       <label class="md-search__icon md-icon" for="__search">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
@@ -146,39 +153,49 @@
     
     <div class="md-container" data-md-component="container">
       
-        
-      
       
         
           
-
-  
-
-<nav class="md-tabs md-tabs--active" aria-label="Tabs" data-md-component="tabs">
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
   <div class="md-tabs__inner md-grid">
     <ul class="md-tabs__list">
       
         
+  
+  
+
+
   <li class="md-tabs__item">
-    
-      <a href="../.." class="md-tabs__link">
-        Tárgy ismertető
-      </a>
-    
+    <a href="../.." class="md-tabs__link">
+      Tárgy ismertető
+    </a>
   </li>
 
       
         
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../hazi-feladat/" class="md-tabs__link">
+      Házi feladat
+    </a>
+  </li>
+
       
         
   
   
+
+
+  
+  
+  
     <li class="md-tabs__item">
-      
-        <a href="../../Docker/Docker-alapok/" class="md-tabs__link">
-          Docker
-        </a>
-      
+      <a href="../../Docker/Docker-alapok/" class="md-tabs__link">
+        Docker
+      </a>
     </li>
   
 
@@ -186,12 +203,15 @@
         
   
   
+
+
+  
+  
+  
     <li class="md-tabs__item">
-      
-        <a href="../../Architektura/AdatbazisApiGateway/" class="md-tabs__link">
-          Architektúra
-        </a>
-      
+      <a href="../../Architektura/AdatbazisApiGateway/" class="md-tabs__link">
+        Architektúra
+      </a>
     </li>
   
 
@@ -199,12 +219,17 @@
         
   
   
+    
+  
+
+
+  
+  
+  
     <li class="md-tabs__item">
-      
-        <a href="../Nyomkovetes/" class="md-tabs__link md-tabs__link--active">
-          DevOps
-        </a>
-      
+      <a href="../Nyomkovetes/" class="md-tabs__link md-tabs__link--active">
+        DevOps
+      </a>
     </li>
   
 
@@ -212,12 +237,15 @@
         
   
   
+
+
+  
+  
+  
     <li class="md-tabs__item">
-      
-        <a href="../../Kubernetes/Kubernetes-alapok/" class="md-tabs__link">
-          Kubernetes
-        </a>
-      
+      <a href="../../Kubernetes/Kubernetes-alapok/" class="md-tabs__link">
+        Kubernetes
+      </a>
     </li>
   
 
@@ -225,12 +253,15 @@
         
   
   
+
+
+  
+  
+  
     <li class="md-tabs__item">
-      
-        <a href="../../Serverless/serverless/" class="md-tabs__link">
-          Serverless
-        </a>
-      
+      <a href="../../Serverless/serverless/" class="md-tabs__link">
+        Serverless
+      </a>
     </li>
   
 
@@ -244,15 +275,22 @@
         <div class="md-main__inner md-grid">
           
             
-              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation" >
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
-                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+                    
+
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
     <a href="../.." title="BME AUT Mikroszolgáltatások és konténeralapú szoftverfejlesztés" class="md-nav__button md-logo" aria-label="BME AUT Mikroszolgáltatások és konténeralapú szoftverfejlesztés">
       
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+  <img src="../../logo-bme-aut.png" alt="logo">
 
     </a>
     BME AUT Mikroszolgáltatások és konténeralapú szoftverfejlesztés
@@ -278,8 +316,9 @@
       
 
 
+
   <li class="md-nav__item">
-    <a href="../.." title="Tárgy ismertető" class="md-nav__link">
+    <a href="../.." class="md-nav__link">
       Tárgy ismertető
     </a>
   </li>
@@ -290,9 +329,10 @@
       
 
 
+
   <li class="md-nav__item">
-    <a href="../../hazi-feladat/" title="Házi feladat leírása és megszerezhető pontok" class="md-nav__link">
-      Házi feladat leírása és megszerezhető pontok
+    <a href="../../hazi-feladat/" class="md-nav__link">
+      Házi feladat
     </a>
   </li>
 
@@ -302,21 +342,20 @@
       
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" >
     
     <label class="md-nav__link" for="nav-3">
       Docker
-      <span class="md-nav__icon md-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
-      </span>
+      <span class="md-nav__icon md-icon"></span>
     </label>
     <nav class="md-nav" aria-label="Docker" data-md-level="1">
       <label class="md-nav__title" for="nav-3">
-        <span class="md-nav__icon md-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-        </span>
+        <span class="md-nav__icon md-icon"></span>
         Docker
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -327,8 +366,9 @@
           
 
 
+
   <li class="md-nav__item">
-    <a href="../../Docker/Docker-alapok/" title="Docker alapok" class="md-nav__link">
+    <a href="../../Docker/Docker-alapok/" class="md-nav__link">
       Docker alapok
     </a>
   </li>
@@ -339,8 +379,9 @@
           
 
 
+
   <li class="md-nav__item">
-    <a href="../../Docker/Dockerfile-compose/" title="Dockerfile és docker-compose" class="md-nav__link">
+    <a href="../../Docker/Dockerfile-compose/" class="md-nav__link">
       Dockerfile és docker-compose
     </a>
   </li>
@@ -356,21 +397,20 @@
       
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" >
     
     <label class="md-nav__link" for="nav-4">
       Architektúra
-      <span class="md-nav__icon md-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
-      </span>
+      <span class="md-nav__icon md-icon"></span>
     </label>
     <nav class="md-nav" aria-label="Architektúra" data-md-level="1">
       <label class="md-nav__title" for="nav-4">
-        <span class="md-nav__icon md-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-        </span>
+        <span class="md-nav__icon md-icon"></span>
         Architektúra
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -381,8 +421,9 @@
           
 
 
+
   <li class="md-nav__item">
-    <a href="../../Architektura/AdatbazisApiGateway/" title="Adattárolás és Api Gateway" class="md-nav__link">
+    <a href="../../Architektura/AdatbazisApiGateway/" class="md-nav__link">
       Adattárolás és Api Gateway
     </a>
   </li>
@@ -393,8 +434,9 @@
           
 
 
+
   <li class="md-nav__item">
-    <a href="../../Architektura/Kommunikacio/" title="Kommunikáció" class="md-nav__link">
+    <a href="../../Architektura/Kommunikacio/" class="md-nav__link">
       Kommunikáció
     </a>
   </li>
@@ -409,24 +451,23 @@
       
       
 
+
   
 
 
+  
   <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
     
       <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" checked>
     
     <label class="md-nav__link" for="nav-5">
       DevOps
-      <span class="md-nav__icon md-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
-      </span>
+      <span class="md-nav__icon md-icon"></span>
     </label>
     <nav class="md-nav" aria-label="DevOps" data-md-level="1">
       <label class="md-nav__title" for="nav-5">
-        <span class="md-nav__icon md-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-        </span>
+        <span class="md-nav__icon md-icon"></span>
         DevOps
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -437,8 +478,9 @@
           
 
 
+
   <li class="md-nav__item">
-    <a href="../Nyomkovetes/" title="Elosztott nyomkövetés" class="md-nav__link">
+    <a href="../Nyomkovetes/" class="md-nav__link">
       Elosztott nyomkövetés
     </a>
   </li>
@@ -449,8 +491,9 @@
           
 
 
+
   <li class="md-nav__item">
-    <a href="../Logging-Health-Checks/" title="Naplózás, health check" class="md-nav__link">
+    <a href="../Logging-Health-Checks/" class="md-nav__link">
       Naplózás, health check
     </a>
   </li>
@@ -459,6 +502,7 @@
           
           
           
+
 
   
 
@@ -472,12 +516,10 @@
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
         Prometheus monitorozás Kubernetes-ben
-        <span class="md-nav__icon md-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9h14V7H3v2m0 4h14v-2H3v2m0 4h14v-2H3v2m16 0h2v-2h-2v2m0-10v2h2V7h-2m0 6h2v-2h-2v2z"/></svg>
-        </span>
+        <span class="md-nav__icon md-icon"></span>
       </label>
     
-    <a href="./" title="Prometheus monitorozás Kubernetes-ben" class="md-nav__link md-nav__link--active">
+    <a href="./" class="md-nav__link md-nav__link--active">
       Prometheus monitorozás Kubernetes-ben
     </a>
     
@@ -489,9 +531,7 @@
   
   
     <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-      </span>
+      <span class="md-nav__icon md-icon"></span>
       Tartalomjegyzék
     </label>
     <ul class="md-nav__list" data-md-scrollfix>
@@ -555,21 +595,20 @@
       
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6" >
     
     <label class="md-nav__link" for="nav-6">
       Kubernetes
-      <span class="md-nav__icon md-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
-      </span>
+      <span class="md-nav__icon md-icon"></span>
     </label>
     <nav class="md-nav" aria-label="Kubernetes" data-md-level="1">
       <label class="md-nav__title" for="nav-6">
-        <span class="md-nav__icon md-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-        </span>
+        <span class="md-nav__icon md-icon"></span>
         Kubernetes
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -580,8 +619,9 @@
           
 
 
+
   <li class="md-nav__item">
-    <a href="../../Kubernetes/Kubernetes-alapok/" title="Kubernetes alapok" class="md-nav__link">
+    <a href="../../Kubernetes/Kubernetes-alapok/" class="md-nav__link">
       Kubernetes alapok
     </a>
   </li>
@@ -592,8 +632,9 @@
           
 
 
+
   <li class="md-nav__item">
-    <a href="../../Kubernetes/Kubernetes-alkalmazas-telepites/" title="Alkalmazás telepítése Kubernetes klaszterbe" class="md-nav__link">
+    <a href="../../Kubernetes/Kubernetes-alkalmazas-telepites/" class="md-nav__link">
       Alkalmazás telepítése Kubernetes klaszterbe
     </a>
   </li>
@@ -604,8 +645,9 @@
           
 
 
+
   <li class="md-nav__item">
-    <a href="../../AKS/aks/" title="K8S DevOps Azure DevOps-ban és Azure Kubernetes Service-szel" class="md-nav__link">
+    <a href="../../AKS/aks/" class="md-nav__link">
       K8S DevOps Azure DevOps-ban és Azure Kubernetes Service-szel
     </a>
   </li>
@@ -621,21 +663,20 @@
       
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7" >
     
     <label class="md-nav__link" for="nav-7">
       Serverless
-      <span class="md-nav__icon md-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
-      </span>
+      <span class="md-nav__icon md-icon"></span>
     </label>
     <nav class="md-nav" aria-label="Serverless" data-md-level="1">
       <label class="md-nav__title" for="nav-7">
-        <span class="md-nav__icon md-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-        </span>
+        <span class="md-nav__icon md-icon"></span>
         Serverless
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -646,8 +687,9 @@
           
 
 
+
   <li class="md-nav__item">
-    <a href="../../Serverless/serverless/" title="Mikroszolgáltatások serverless architektúra fölött" class="md-nav__link">
+    <a href="../../Serverless/serverless/" class="md-nav__link">
       Mikroszolgáltatások serverless architektúra fölött
     </a>
   </li>
@@ -665,7 +707,8 @@
               </div>
             
             
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc" >
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
@@ -676,9 +719,7 @@
   
   
     <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-      </span>
+      <span class="md-nav__icon md-icon"></span>
       Tartalomjegyzék
     </label>
     <ul class="md-nav__list" data-md-scrollfix>
@@ -742,9 +783,6 @@
                   </a>
                 
                 
-                  
-                
-                
                 <h1 id="prometheus-monitorozas-kubernetes-ben">Prometheus monitorozás Kubernetes-ben<a class="headerlink" href="#prometheus-monitorozas-kubernetes-ben" title="Permanent link">&para;</a></h1>
 <h2 id="cel">Cél<a class="headerlink" href="#cel" title="Permanent link">&para;</a></h2>
 <p>A labor célja egy példán keresztül megismerni a Prometheus-alapú monitorozást Kubernetes környezetben.</p>
@@ -770,13 +808,17 @@
 <p>A Prometheus architektúrája a hivatalos dokumentációból:</p>
 <p><img alt="Prometheus architektúra" src="https://prometheus.io/assets/architecture.png" /></p>
 <h2 id="prometheus-telepitese">Prometheus telepítése<a class="headerlink" href="#prometheus-telepitese" title="Permanent link">&para;</a></h2>
-<p>A Prometheus csak egy metrikagyűjtő szerver. Ahhoz, hogy Kubernetes alatt monitorozni tudjuk, számos további komponensre van szükség. Ezek telepítését fogja össze több projekt is (amelyek zavarbaejtően hasonló nevűek, ezért vigyázzunk, ha rákeresünk). Ezek közül a <a href="https://github.com/helm/charts/tree/master/stable/prometheus-operator">prometheus-operator helm chart</a> telepítése a legegyszerűbb számunka.</p>
+<p>A Prometheus csak egy metrikagyűjtő szerver. Ahhoz, hogy Kubernetes alatt monitorozni tudjuk, számos további komponensre van szükség. Ezek telepítését fogja össze több projekt is (amelyek zavarbaejtően hasonló nevűek, ezért vigyázzunk, ha rákeresünk). Ezek közül a <a href="https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack">kube-prometheus-stack helm chart</a> telepítése a legegyszerűbb számunka.</p>
 <p>Helm segítségével regisztráljuk a chart repository-ját, majd telepítsük a chart-ot:</p>
-<div class="highlight"><pre><span></span><code>helm repo add stable https://kubernetes-charts.storage.googleapis.com
+<div class="highlight"><pre><span></span><code>helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo add stable https://charts.helm.sh/stable
 helm repo update
-helm install prometheus stable/prometheus-operator
+helm install prometheus prometheus-community/kube-prometheus-stack
 </code></pre></div>
-
+<p>Hagyjunk időt a telepítésnek. A helm chart sikeres telepítése után még az operátor magais telepíteni fog további komponenseket, ezek is kis időbe tellnek.</p>
+<div class="admonition note">
+<p>A helm chartot korábban <a href="https://github.com/helm/charts/tree/master/stable/prometheus-operator"><em>stable/prometheus-operator</em></a>-nak hívták. A <em>kube-prometheus-stack</em> ennek az "új" változata.</p>
+</div>
 <h2 id="prometheus-webfelulet-es-grafana">Prometheus webfelület és Grafana<a class="headerlink" href="#prometheus-webfelulet-es-grafana" title="Permanent link">&para;</a></h2>
 <p>A Prometheus saját webfelülete nem túl felhasználóbarát, de célratörő eszköz. A Grafana a már jól összeállított rendszerünk metrikáinak grafikus megjelenítéséért felel.</p>
 <ol>
@@ -790,11 +832,11 @@ helm install prometheus stable/prometheus-operator
 <p>Tegyük elérhetővé a Grafana-t is az előzőhöz hasonlóan egy <strong>új</strong> terminálban kiadott paranccsal: <code>kubectl port-forward $(kubectl get pods --selector "app.kubernetes.io/name=grafana" --output=name) 3000:3000</code></p>
 </li>
 <li>
-<p>A Grafana a <a href="http://localhost:3000">http://localhost:3000</a> címen lesz elérhető. Nyissuk meg és lépjünk be az <code>admin / prom-operator</code> felhasználónévvel és jelszóval, majd nézzünk meg pár kész dashboard-ot. Ezeket mind a prometheus-operator helm chart telepítette számunkra.</p>
+<p>A Grafana a <a href="http://localhost:3000">http://localhost:3000</a> címen lesz elérhető. Nyissuk meg és lépjünk be az <code>admin / prom-operator</code> felhasználónévvel és jelszóval, majd nézzünk meg pár kész dashboard-ot. Ezeket mind a helm chart telepítette számunkra.</p>
 </li>
 </ol>
 <h2 id="sajat-komponensek-monitorozasa">Saját komponensek monitorozása<a class="headerlink" href="#sajat-komponensek-monitorozasa" title="Permanent link">&para;</a></h2>
-<p>A <em>prometheus-operator</em> chart előre konfigurál számos monitorozott célt, ezek többnyire a Kubernetes saját működését segítik láthatóvá tenni. Ha a saját alkalmazásunkat szeretnénk monitorozni, három lehetőségünk van.</p>
+<p>A chart előre konfigurál számos monitorozott célt, ezek többnyire a Kubernetes saját működését segítik láthatóvá tenni. Ha a saját alkalmazásunkat szeretnénk monitorozni, három lehetőségünk van.</p>
 <ol>
 <li>
 <p>Több eszköz támogatja a Prometheus monitorozást, csak engedélyezni kell. Erre példa a Traefik, amelyben egy <a href="https://docs.traefik.io/observability/metrics/prometheus/">kapcsolóval engedélyezhetjük</a>, hogy a Prometheus számára scrapelhetővé tegye a metrikáit. Ezen metrikákra gyakran találunk kész <a href="https://grafana.com/grafana/dashboards/10902">Grafana dashboard-ot</a> is, amit csak importálnunk kell.</p>
@@ -818,7 +860,29 @@ helm install prometheus stable/prometheus-operator
         </div>
       </main>
       
-        
+        <!--
+  Copyright (c) 2016-2020 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+
 
 <!-- Application footer -->
 <footer class="md-footer">
@@ -842,15 +906,15 @@ helm install prometheus stable/prometheus-operator
       
     </div>
     
-      <script src="../../assets/javascripts/vendor.d710d30a.min.js"></script>
-      <script src="../../assets/javascripts/bundle.b39636ac.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "M\u00e1sol\u00e1s v\u00e1g\u00f3lapra", "clipboard.copied": "V\u00e1g\u00f3lapra m\u00e1solva", "search.config.lang": "hu", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Keres\u00e9shez \u00edrj ide valamit", "search.result.none": "Nincs tal\u00e1lat", "search.result.one": "1 egyez\u0151 dokumentum", "search.result.other": "# egyez\u0151 dokumentum"}</script>
+      <script src="../../assets/javascripts/vendor.08c56446.min.js"></script>
+      <script src="../../assets/javascripts/bundle.6ced434e.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "M\u00e1sol\u00e1s v\u00e1g\u00f3lapra", "clipboard.copied": "V\u00e1g\u00f3lapra m\u00e1solva", "search.config.lang": "hu", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Keres\u00e9s", "search.result.placeholder": "Keres\u00e9shez \u00edrj ide valamit", "search.result.none": "Nincs tal\u00e1lat", "search.result.one": "1 egyez\u0151 dokumentum", "search.result.other": "# egyez\u0151 dokumentum", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
       
       <script>
         app = initialize({
           base: "../..",
-          features: ["tabs"],
+          features: ['navigation.tabs'],
           search: Object.assign({
-            worker: "../../assets/javascripts/worker/search.a68abb33.min.js"
+            worker: "../../assets/javascripts/worker/search.8c7e0a7e.min.js"
           }, typeof search !== "undefined" && search)
         })
       </script>
