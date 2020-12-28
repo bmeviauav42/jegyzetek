@@ -15,7 +15,7 @@ theme:
     text: Roboto
     code: Roboto Mono
   features:
-    - tabs
+    - navigation.tabs
 
 extra_css:
   - extra-material-theme.css
