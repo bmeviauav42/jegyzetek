@@ -13,19 +13,20 @@ theme:
       primary: red
       accent: red
       toggle:
-        icon: material/lightbulb
-        name: Világos téma
+        icon: material/lightbulb-outline
+        name: Váltás sötét témára
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
       primary: red
       toggle:
-        icon: material/lightbulb-outline
-        name: Sötét téma
+        icon: material/lightbulb
+        name: Váltás világos témára
   font:
     text: Roboto
     code: Roboto Mono
   features:
     - navigation.tabs
+    - navigation.instant
     - navigation.top
     - search.suggest
   logo: logo-bme-aut.png
