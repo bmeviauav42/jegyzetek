@@ -88,7 +88,7 @@ Az adatbázisainkat saját magunk által megírt yaml leíróval telepítjük. E
 1. Telepítsük az adatbázisokat: `kubectl apply -f db`
 1. Kapcsolódjunk a Kubernetes Dashboard-hoz a korábban ismertetett módon (ill. telepítsük a klaszterbe, ha nem lenne).
 1. Ellenőrizzük, hogy az adatbázis podok elindulnak-e. Minden a _default_ névtérbe kellett települjön.
-1. Nézzük meg a _Persistent Volume_ és _Persistent Volumen Claim_-eket.
+1. Nézzük meg a _Persistent Volume_ és _Persistent Volume Claim_-eket.
 
 ### Alkalmazásunk telepítése
 
