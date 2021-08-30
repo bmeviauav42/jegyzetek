@@ -1,0 +1,1 @@
+FROM squidfunk/mkdocs-material:7.2.5

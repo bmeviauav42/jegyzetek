@@ -6,12 +6,14 @@ Jegyzetek, feladatok és példa kódok [BMEVIAUAV42 Mikroszolgáltatások és ko
 
 A jegyzetek MkDocs segítségével készülnek és GitHub Pages-en kerülnek publikálásra: <https://bmeviauav42.github.io/jegyzetek>.
 
-#### Helyi gépen történő renderelés
+### Helyi gépen történő renderelés
 
-1. Powershell konzol nyitása a repository gyökerébe
+- Visual Studio Code és [Remote Containers](https://aka.ms/vscode-remote/download/extension)
+  1. VS Code-ban `Remote-Containers: Open Folder in Container...` paranccsal kell megnyitni a könyvtárat
+  1. VS Code-on belül egy új terminálban: `mkdocs serve`
 
-1. `docker run -it --rm -p 8000:8000 -v ${PWD}:/docs squidfunk/mkdocs-material:7.2.5`
+- Konzolból
+  1. Powershell konzol nyitása a repository gyökerébe
+  1. `docker run -it --rm -p 8000:8000 -v ${PWD}:/docs squidfunk/mkdocs-material:7.2.5`
 
-1. <http://localhost:8000> megnyitása böngészőből.
-
-1. Markdown szerkesztése és mentése után automatikusan frissül a weboldal
+A helyi verzió <http://localhost:8000> címen érhető el böngészőben. A Markdown forrás szerkesztése és mentése után automatikusan frissül a weboldal.

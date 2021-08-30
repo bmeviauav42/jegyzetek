@@ -1,0 +1,16 @@
+{
+	"name": "MkDocs Material editor",
+	"dockerFile": "Dockerfile",
+	"workspaceMount": "source=${localWorkspaceFolder},target=/docs,type=bind",
+	"workspaceFolder": "/docs",
+	"settings": {
+		"terminal.integrated.shell.linux": "/bin/sh"
+	},
+	"extensions": [
+		"davidanson.vscode-markdownlint",
+		"ban.spellright"
+	],
+	"forwardPorts": [
+		8000
+	]
+}
