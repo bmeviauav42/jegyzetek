@@ -9,13 +9,25 @@ theme:
   custom_dir: theme-overrides
   language: hu
   palette:
-    primary: red
-    accent: red
+    - media: "(prefers-color-scheme: light)"
+      primary: red
+      accent: red
+      toggle:
+        icon: material/lightbulb
+        name: Világos téma
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: red
+      toggle:
+        icon: material/lightbulb-outline
+        name: Sötét téma
   font:
     text: Roboto
     code: Roboto Mono
   features:
     - navigation.tabs
+    - navigation.top
+    - search.suggest
   logo: logo-bme-aut.png
   favicon: favicon.ico
 
