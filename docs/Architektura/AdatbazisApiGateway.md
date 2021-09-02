@@ -2,9 +2,9 @@
 
 ## Előadás
 
-[Adattárolás mikroszolgáltatásokban](https://edu.vik.bme.hu/mod/resource/view.php?id=22404)
+[Adattárolás mikroszolgáltatásokban](https://edu.vik.bme.hu/mod/resource/view.php?id=42040)
 
-[Api Gateway](https://edu.vik.bme.hu/mod/resource/view.php?id=22402)
+[Api Gateway](https://edu.vik.bme.hu/mod/resource/view.php?id=42041)
 
 ## Cél
 

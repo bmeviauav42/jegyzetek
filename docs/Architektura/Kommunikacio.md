@@ -2,7 +2,7 @@
 
 ## Előadás
 
-[Kommunikációs lehetőségek](https://edu.vik.bme.hu/mod/resource/view.php?id=22409)
+[Kommunikációs lehetőségek](https://edu.vik.bme.hu/mod/resource/view.php?id=42042)
 
 ## Cél
 

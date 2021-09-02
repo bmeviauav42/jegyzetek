@@ -4,7 +4,7 @@ Jegyzetek, feladatok és példa kódok [BMEVIAUAV42 Mikroszolgáltatások és ko
 
 A tárgy előadás anyagai [Moodle](https://edu.vik.bme.hu)-ön vannak.
 
-[Bevezető előadás](https://edu.vik.bme.hu/mod/resource/view.php?id=22407): motiváció, architektúra alapjai.
+[Bevezető előadás](https://edu.vik.bme.hu/mod/resource/view.php?id=42038): motiváció, architektúra alapjai.
 
 ---
 

@@ -2,7 +2,7 @@
 
 ## Előadás
 
-[Naplózás, Health Checks](https://edu.vik.bme.hu/mod/resource/view.php?id=22408)
+[Naplózás, Health Checks](https://edu.vik.bme.hu/mod/resource/view.php?id=42045)
 
 A labor előkövetelménye az [Alkalmazás telepítése Kubernetes klaszterbe](https://bmeviauav42.github.io/jegyzetek/Kubernetes/Kubernetes-alkalmazas-telepites/) gyakorlaton látott infrastrukturális feladatok elvégzése (Helm, kubernetes dashboard, Traefic telepítés, stb), mert a Healt Check fejezet a kubernetes alapú infrastruktúrára épül.
 

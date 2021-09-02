@@ -2,7 +2,7 @@
 
 ## Előadás
 
-[Kubernetes bevezető](https://edu.vik.bme.hu/mod/resource/view.php?id=22403)
+[Kubernetes bevezető](https://edu.vik.bme.hu/mod/resource/view.php?id=42044)
 
 ## Cél
 

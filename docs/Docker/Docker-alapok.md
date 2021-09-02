@@ -2,7 +2,7 @@
 
 ## Előadás
 
-[Konténer-technológiák és Docker alapok](https://edu.vik.bme.hu/mod/resource/view.php?id=22405)
+[Konténer-technológiák és Docker alapok](https://edu.vik.bme.hu/mod/resource/view.php?id=42039)
 
 ## Cél
 

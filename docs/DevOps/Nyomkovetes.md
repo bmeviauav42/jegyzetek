@@ -2,7 +2,7 @@
 
 ## Előadás
 
-[Elosztott nyomkövetés](https://edu.vik.bme.hu/mod/resource/view.php?id=22406)
+[Elosztott nyomkövetés](https://edu.vik.bme.hu/mod/resource/view.php?id=42043)
 
 ## Cél
 
