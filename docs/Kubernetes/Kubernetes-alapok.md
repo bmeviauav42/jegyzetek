@@ -354,3 +354,4 @@ Használjuk a dashboard-ot a következőkhöz. A feladatban végig a _kubernetes
 
 - [The twelve-factor app](https://12factor.net/): modern webszolgáltatások fejlesztése (nem csak Kubernetes)
 - Bilgin Ibryam, Roland Huss - Kubernetes Patterns: Reusable Elements for Designing Cloud Native Applications, O'Reilly, 2019
+- [Phippy Goes To The Zoo](https://azure.microsoft.com/en-us/resources/phippy-goes-to-the-zoo/en-us/): Kubernetes koncepciók "magyarázata" meseszerűen
