@@ -679,6 +679,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#telepitas-aks-be" class="md-nav__link">
+    Telepítás AKS-be
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#elokeszuletek" class="md-nav__link">
     Előkészületek
   </a>
@@ -809,6 +816,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#telepitas-aks-be" class="md-nav__link">
+    Telepítás AKS-be
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#elokeszuletek" class="md-nav__link">
     Előkészületek
   </a>
@@ -863,6 +877,11 @@
                 <h1 id="k8s-azure-ban-platformszolgaltataskent-paas-aks">K8S Azure-ban platformszolgáltatásként (PaaS) - AKS<a class="headerlink" href="#k8s-azure-ban-platformszolgaltataskent-paas-aks" title="Permanent link">&para;</a></h1>
 <h2 id="a-labor-menete">A labor menete<a class="headerlink" href="#a-labor-menete" title="Permanent link">&para;</a></h2>
 <p>A hivatalos <a href="https://docs.microsoft.com/en-us/learn/paths/intro-to-kubernetes-on-azure/">Azure AKS oktatóanyagot</a> követi. Itt csak a kiegészítéseket, ill. egy vázlatot írunk le.</p>
+<h2 id="telepitas-aks-be">Telepítás AKS-be<a class="headerlink" href="#telepitas-aks-be" title="Permanent link">&para;</a></h2>
+<p><a href="https://docs.microsoft.com/en-us/learn/modules/aks-deploy-container-app/">https://docs.microsoft.com/en-us/learn/modules/aks-deploy-container-app/</a></p>
+<div class="highlight"><pre><span></span><code>az group create -l westeurope -n $RESOURCE_GROUP
+</code></pre></div>
+<p><code>az aks create</code>-nél ha hibás RSA kulcs: a windows user profil <em>.ssh</em> könyvtárából az id_rsa-t mozgassuk el.</p>
 <h2 id="elokeszuletek">Előkészületek<a class="headerlink" href="#elokeszuletek" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Azure DevOps<ul>
