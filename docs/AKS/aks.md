@@ -22,3 +22,8 @@ az aks create --resource-group $RESOURCE_GROUP --name $CLUSTER_NAME --node-count
 ```bash
 kubectl --kubeconfig ./.kube/config get nodes
 ```
+
+## Extrák Azure Portálon
+
+- Node pool scaling
+- Log Analytics Workspace létrehozása, naplók vizsgálata
