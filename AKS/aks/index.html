@@ -685,41 +685,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#elokeszuletek" class="md-nav__link">
-    Előkészületek
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#-1-feladat-egyedi-image-nev-es-adatbazis-nev" class="md-nav__link">
-    -1. feladat - egyedi image név és adatbázis név
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#0-feladat-azure-es-azure-devops-osszekotese" class="md-nav__link">
-    0. feladat Azure és Azure DevOps összekötése
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#1-feladat" class="md-nav__link">
-    1. feladat
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2-feladat" class="md-nav__link">
-    2. feladat
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -822,41 +787,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#elokeszuletek" class="md-nav__link">
-    Előkészületek
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#-1-feladat-egyedi-image-nev-es-adatbazis-nev" class="md-nav__link">
-    -1. feladat - egyedi image név és adatbázis név
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#0-feladat-azure-es-azure-devops-osszekotese" class="md-nav__link">
-    0. feladat Azure és Azure DevOps összekötése
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#1-feladat" class="md-nav__link">
-    1. feladat
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2-feladat" class="md-nav__link">
-    2. feladat
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -879,69 +809,14 @@
 <p>A hivatalos <a href="https://docs.microsoft.com/en-us/learn/paths/intro-to-kubernetes-on-azure/">Azure AKS oktatóanyagot</a> követi. Itt csak a kiegészítéseket, ill. egy vázlatot írunk le.</p>
 <h2 id="telepites-aks-be">Telepítés AKS-be<a class="headerlink" href="#telepites-aks-be" title="Permanent link">&para;</a></h2>
 <p><a href="https://docs.microsoft.com/en-us/learn/modules/aks-deploy-container-app/">https://docs.microsoft.com/en-us/learn/modules/aks-deploy-container-app/</a></p>
-<div class="highlight"><pre><span></span><code>az group create -l westeurope -n $RESOURCE_GROUP
+<div class="highlight"><pre><span></span><code>az group create -l westeurope -n <span class="nv">$RESOURCE_GROUP</span>
 </code></pre></div>
-<p><code>az aks create</code>-nél ha hibás RSA kulcs: a windows user profil <em>.ssh</em> könyvtárából az id_rsa-t mozgassuk el.</p>
-<h2 id="elokeszuletek">Előkészületek<a class="headerlink" href="#elokeszuletek" title="Permanent link">&para;</a></h2>
-<ul>
-<li>Azure DevOps<ul>
-<li>szervezet létrehozása</li>
-<li>be fog kérni nevet, emailt, országot (nem kell hozzájárulni az emailküldéshez)</li>
-<li>Utána <strong>Get started with Azure DevOps</strong> dialógus jelenik meg -&gt; Continue (nem kell hozzájárulni az emailküldéshez)</li>
-<li>Ha bejön az új projekt készítő felület, akkor nem kell használatba venni</li>
-<li>... helyette Azure DevOps projekt generálása a laboranyag alapján</li>
-<li>Azure Repos: projekt felfedezése konténer szempontból<ul>
-<li><code>docker-compose.yml</code></li>
-<li><code>mhc-aks.yaml</code></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>legyen az <strong>edu-s azonosító</strong> ez: a <code>@edu.bme.hu</code> előtti rész pontok nélkül</li>
-<li>Azure portálra lépjünk be az edu.bme.hu-s címünkkel, válasszuk az autsoft.hu tenantot. Nézzünk szét a resource group-ban. Az AKS namespace-ek közé vegyük fel az edu-s azonosító szerintit
-    <div class="highlight"><pre><span></span><code><span class="p">{</span>
-  <span class="s2">&quot;apiVersion&quot;</span><span class="o">:</span> <span class="s2">&quot;v1&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;kind&quot;</span><span class="o">:</span> <span class="s2">&quot;Namespace&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;metadata&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;&lt;edu-s azonosító&gt;&quot;</span> <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div></li>
-</ul>
-<h2 id="-1-feladat-egyedi-image-nev-es-adatbazis-nev">-1. feladat - egyedi image név és adatbázis név<a class="headerlink" href="#-1-feladat-egyedi-image-nev-es-adatbazis-nev" title="Permanent link">&para;</a></h2>
-<ul>
-<li>az image neve elé tegyük az edu-s azonosítónkat</li>
-<li>docker-compose.yml-ban<ul>
-<li><code>image: myhealth.web</code> -&gt; <code>image: &lt;edu-s azonosító&gt;.myhealth.web</code></li>
-</ul>
-</li>
-<li>mhc-aks.yaml-ban 93. sor körül<ul>
-<li><code>image: __ACR__/myhealth.web:latest</code> -&gt; <code>image: __ACR__/&lt;edu-s azonosító&gt;.myhealth.web:latest</code></li>
-</ul>
-</li>
-<li>src/MyHealth.Web/appsettings.json a connection string-ben<ul>
-<li><code>Initial Catalog=mhcdb</code> helyett <code>Initial Catalog=__SQLDB__</code></li>
-</ul>
-</li>
-<li>ne felejtsünk el commitolni!</li>
-</ul>
-<h2 id="0-feladat-azure-es-azure-devops-osszekotese">0. feladat Azure és Azure DevOps összekötése<a class="headerlink" href="#0-feladat-azure-es-azure-devops-osszekotese" title="Permanent link">&para;</a></h2>
-<ul>
-<li>Project Settings -&gt; Pipelines részen belül Service Connection -&gt; New Service Connection -&gt; Azure Resource Manager -&gt; Service principal (manual)</li>
-</ul>
-<h2 id="1-feladat">1. feladat<a class="headerlink" href="#1-feladat" title="Permanent link">&para;</a></h2>
-<p>A laboranyag alapján, továbbá</p>
-<ul>
-<li>A build pipeline változók közé vegyük fel az SQLDB-t is</li>
-<li>Mindenhol, ahol Container Registry-t kell megadni, adjuk meg a teljes login server címet. Ugyanígy, ahol Azure SQL szerver címet kell megadni, adjuk meg a teljes FQDN címet, de <code>tcp:</code> és portszám nélkül</li>
-<li>Minden docker compose taszknál legyen kiválasztva a container registry (különben nem taggeli be a push-hoz az image-et)</li>
-<li>A release pipeline kubectl-es taszkjainál a <code>Secrets</code> részen is adjuk meg az ACR kapcsolathoz a Service Connection-t </li>
-<li>Az agent legyen hosted (Azure Pipelines), a database deployment lépésnél windows agent kell, a többi lehet linuxos</li>
-<li>A kubectl paramcsoknál töltsük ki a névteret: legyen a saját névterünk</li>
-<li>A release pipeline utolsó (<code>Update image in AKS</code>) lépésében az <code>Arguments</code> részen </li>
-</ul>
-<p><code>image deployments/mhc-front mhc-front=$(ACR)/myhealth.web:$(Build.BuildId)</code> helyett</p>
-<p><strong><code>image deployments/mhc-front mhc-front=$(ACR)/&lt;edu-s azonosító&gt;.myhealth.web:$(Build.BuildId)</code></strong></p>
-<h2 id="2-feladat">2. feladat<a class="headerlink" href="#2-feladat" title="Permanent link">&para;</a></h2>
-<p>A laboranyag alapján, viszont ne a k8s dashboard-ot használjuk</p>
+<div class="highlight"><pre><span></span><code>az aks create --resource-group <span class="nv">$RESOURCE_GROUP</span> --name <span class="nv">$CLUSTER_NAME</span> --node-count <span class="m">1</span> --enable-addons http_application_routing --generate-ssh-keys --node-vm-size Standard_A2_v2 --network-plugin azure
+</code></pre></div>
+<p><code>az aks create</code>-nél ha hibás RSA kulcs: a windows user profil <em>.ssh</em> könyvtárából az id_rsa-t mozgassuk el. A <em>System</em> mode node pool létrehozása kb. 5 perc. A <em>User</em> mode node pool létrehozása kb. 3 perc</p>
+<p><code>kubectl</code> WSL bash-ben a windows user könyvtárában állva
+<div class="highlight"><pre><span></span><code>kubectl --kubeconfig ./.kube/config get nodes
+</code></pre></div></p>
                 
               
               
