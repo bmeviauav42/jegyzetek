@@ -4,7 +4,7 @@
 
 A hivatalos [Azure AKS oktatóanyagot](https://docs.microsoft.com/en-us/learn/paths/intro-to-kubernetes-on-azure/) követi. Itt csak a kiegészítéseket, ill. egy vázlatot írunk le.
 
-## Telepítás AKS-be
+## Telepítés AKS-be
 
 https://docs.microsoft.com/en-us/learn/modules/aks-deploy-container-app/
 
