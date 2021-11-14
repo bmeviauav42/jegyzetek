@@ -1,19 +1,8 @@
-# K8S DevOps Azure DevOps-ban és Azure Kubernetes Service-szel
-
-## Témakörök
-
-- Azure szolgáltatások
-    - Azure DevOps
-    - Azure Kubernetes Service (multitenant)
-    - Azure SQL (multitenant)
-- DevOps műveletek Azure DevOps-ban
-    - Forráskód kezelés Azure Repos-szal
-    - CI+CD Azure Pipelines-szal
-    - Monitorozás Azure Monitor-ral
+# K8S Azure-ban platformszolgáltatásként (PaaS) - AKS
 
 ## A labor menete
 
-A hivatalos [Azure DevOps k8s labor anyagot](https://www.azuredevopslabs.com/labs/vstsextend/kubernetes/) követi. Itt csak a kiegészítéseket, ill. egy vázlatot írunk le.
+A hivatalos [Azure AKS oktatóanyagot](https://docs.microsoft.com/en-us/learn/paths/intro-to-kubernetes-on-azure/) követi. Itt csak a kiegészítéseket, ill. egy vázlatot írunk le.
 
 ## Előkészületek
 
