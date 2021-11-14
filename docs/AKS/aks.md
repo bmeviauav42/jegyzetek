@@ -4,6 +4,17 @@
 
 A hivatalos [Azure AKS oktatóanyagot](https://docs.microsoft.com/en-us/learn/paths/intro-to-kubernetes-on-azure/) követi. Itt csak a kiegészítéseket, ill. egy vázlatot írunk le.
 
+## Telepítás AKS-be
+
+https://docs.microsoft.com/en-us/learn/modules/aks-deploy-container-app/
+
+```
+az group create -l westeurope -n $RESOURCE_GROUP
+```
+
+`az aks create`-nél ha hibás RSA kulcs: a windows user profil *.ssh* könyvtárából az id_rsa-t mozgassuk el.
+
+
 ## Előkészületek
 
 - Azure DevOps
