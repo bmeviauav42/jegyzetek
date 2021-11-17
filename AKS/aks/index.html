@@ -823,18 +823,31 @@
 <p>A hivatalos <a href="https://docs.microsoft.com/en-us/learn/paths/intro-to-kubernetes-on-azure/">Azure AKS oktatóanyagot</a> követi. Itt csak a kiegészítéseket, ill. egy vázlatot írunk le.</p>
 <h2 id="telepites-aks-be">Telepítés AKS-be<a class="headerlink" href="#telepites-aks-be" title="Permanent link">&para;</a></h2>
 <p><a href="https://docs.microsoft.com/en-us/learn/modules/aks-deploy-container-app/">https://docs.microsoft.com/en-us/learn/modules/aks-deploy-container-app/</a></p>
+<p>Változók beállítása</p>
+<div class="highlight"><pre><span></span><code><span class="nv">$RESOURCE_GROUP</span><span class="o">=</span><span class="s2">&quot;autaks&quot;</span>
+<span class="nv">$CLUSTER_NAME</span><span class="o">=</span><span class="s2">&quot;aks-contoso-video&quot;</span>
+</code></pre></div>
+<p>Alapértelmezett előfizetés beállítása</p>
+<div class="highlight"><pre><span></span><code>az account show
+az account <span class="nb">set</span> -s &lt;id&gt;
+</code></pre></div>
+<p>Alapértelmezett régió</p>
+<div class="highlight"><pre><span></span><code>az configure --defaults <span class="nv">location</span><span class="o">=</span>westeurope
+</code></pre></div>
+<p>Új resource group</p>
 <div class="highlight"><pre><span></span><code>az group create -l westeurope -n <span class="nv">$RESOURCE_GROUP</span>
 </code></pre></div>
+<p>AKS létrehozás</p>
 <div class="highlight"><pre><span></span><code>az aks create --resource-group <span class="nv">$RESOURCE_GROUP</span> --name <span class="nv">$CLUSTER_NAME</span> --node-count <span class="m">1</span> --enable-addons http_application_routing --generate-ssh-keys --node-vm-size Standard_A2_v2 --network-plugin azure
 </code></pre></div>
-<p><code>az aks create</code>-nél ha hibás RSA kulcs: a windows user profil <em>.ssh</em> könyvtárából az id_rsa-t mozgassuk el. A <em>System</em> mode node pool létrehozása kb. 5 perc. A <em>User</em> mode node pool létrehozása kb. 3 perc</p>
-<p><code>kubectl</code> WSL bash-ben a windows user könyvtárában állva
+<p><code>az aks create</code>-nél <strong>ha</strong> hibás RSA kulcs: a windows user profil <em>.ssh</em> könyvtárából az id_rsa-t mozgassuk el. A <em>System</em> mode node pool létrehozása kb. 5 perc. A <em>User</em> mode node pool létrehozása kb. 3 perc</p>
 <div class="highlight"><pre><span></span><code>kubectl --kubeconfig ./.kube/config get nodes
-</code></pre></div></p>
+</code></pre></div>
 <p>Opcionális a cluster létrejötte után: Log Analytics Workspace létrehozása és összekötése</p>
 <h2 id="extrak-azure-portalon">Extrák Azure Portálon<a class="headerlink" href="#extrak-azure-portalon" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Node pool scaling</li>
+<li>Analytics Workspace létrehozás <code>az monitor log-analytics workspace create -g $RESOURCE_GROUP -n aksaw</code></li>
 <li>naplók vizsgálata</li>
 </ul>
                 
