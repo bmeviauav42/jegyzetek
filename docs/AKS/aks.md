@@ -53,3 +53,8 @@ Opcionális a cluster létrejötte után: Log Analytics Workspace létrehozása 
 - Node pool scaling
 - Analytics Workspace létrehozás `az monitor log-analytics workspace create -g $RESOURCE_GROUP -n aksaw`
 - naplók vizsgálata
+
+
+## Takarítás
+
+https://docs.microsoft.com/en-us/learn/modules/aks-deploy-container-app/8-summary
