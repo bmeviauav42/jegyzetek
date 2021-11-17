@@ -42,10 +42,6 @@ az aks create --resource-group $RESOURCE_GROUP --name $CLUSTER_NAME --node-count
 
 `az aks create`-nél **ha** hibás RSA kulcs: a windows user profil *.ssh* könyvtárából az id_rsa-t mozgassuk el. A *System* mode node pool létrehozása kb. 5 perc. A *User* mode node pool létrehozása kb. 3 perc
 
-```bash
-kubectl --kubeconfig ./.kube/config get nodes
-```
-
 Opcionális a cluster létrejötte után: Log Analytics Workspace létrehozása és összekötése
 
 ## Extrák Azure Portálon
@@ -57,4 +53,23 @@ Opcionális a cluster létrejötte után: Log Analytics Workspace létrehozása 
 
 ## Takarítás
 
-https://docs.microsoft.com/en-us/learn/modules/aks-deploy-container-app/8-summary
+Kubectl context törlés
+
+```bash
+kubectl config delete-context aks-contoso-video
+```
+
+Docker desktop context legyen a default context
+
+```bash
+kubectl config use-context docker-desktop
+```
+
+Context-ek listázása (csak visszaellenőrzés)
+
+```bash
+kubectl config get-contexts
+```
+
+
+
