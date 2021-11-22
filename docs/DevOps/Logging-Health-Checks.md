@@ -42,7 +42,7 @@ Vegyünk fel a docker-compose.yml-be két új konténert az Elasticsearch-nek é
 
 ```yaml
   logs:
-    image: docker.elastic.co/elasticsearch/elasticsearch-oss:7.8.0
+    image: docker.elastic.co/elasticsearch/elasticsearch-oss:7.10.2
     container_name: logs
     environment:
       - cluster.name=logs # Settings to start Elasticsearch in a single-node development environment
@@ -57,7 +57,7 @@ Vegyünk fel a docker-compose.yml-be két új konténert az Elasticsearch-nek é
       - todoapp-network
 
   kibana:
-    image: docker.elastic.co/kibana/kibana-oss:7.8.0
+    image: docker.elastic.co/kibana/kibana-oss:7.10.2
     container_name: kibana
     environment: 
       - ELASTICSEARCH_HOSTS=http://logs:9200
@@ -86,9 +86,9 @@ volumes: # The volumes will store the database data; kept even after the contain
 Vegyük fel az alábbi csomagokat a Todos.Api projektbe.
 
 ```xml
-<PackageReference Include="Serilog.AspNetCore" Version="3.4.0" />
-<PackageReference Include="Serilog.Exceptions" Version="6.0.0" />
-<PackageReference Include="Serilog.Settings.Configuration" Version="3.1.0" />
+<PackageReference Include="Serilog.AspNetCore" Version="4.1.0" />
+<PackageReference Include="Serilog.Exceptions" Version="8.0.0" />
+<PackageReference Include="Serilog.Settings.Configuration" Version="3.3.0" />
 <PackageReference Include="Serilog.Sinks.Elasticsearch" Version="8.4.1" />
 ```
 
@@ -298,14 +298,13 @@ spec:
   rules:
     - http:
         paths:
-          - path: /health/live
+          - path: /health
+            pathType: Prefix
             backend:
-              serviceName: todos # A service neve
-              servicePort: http # A service-ben a port neve (lehet a port szama is)
-          - path: /health/ready
-            backend:
-              serviceName: todos # A service neve
-              servicePort: http # A service-ben a port neve (lehet a port szama is)
+              service:
+                name: todos # A service neve
+                port:
+                  name: http # A service-ben a port neve (lehet a port szama is number nevvel)
 ```
 
 Próbáljuk ki!
@@ -329,15 +328,6 @@ endpoints.MapGet("/health/switch", async r =>
     IsLive = !IsLive;
     await r.Response.WriteAsync($"IsLive is now {IsLive}");
 });
-```
-
-Engedélyezzük kívülről ezt a végpontot is.
-
-```yaml
-          - path: /health/switch
-            backend:
-              serviceName: todos # A service neve
-              servicePort: http # A service-ben a port neve (lehet a port szama is)
 ```
 
 Telepítsük ki, majd rontsuk el a működést a végpontunkkal. Közben figyeljük a podok állapotát. Egy idő után láthatjuk, hogy a próba sérült, és a k8s megpróbálja újraindítani a pod-ot, és mivel ott már az `IsLive` property érteke igaz lesz, működőképes lesz az új pod.
