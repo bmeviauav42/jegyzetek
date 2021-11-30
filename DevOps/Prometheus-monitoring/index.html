@@ -900,7 +900,7 @@ helm install prometheus prometheus-community/kube-prometheus-stack
 <p>A Prometheus saját webfelülete nem túl felhasználóbarát, de célratörő eszköz. A Grafana a már jól összeállított rendszerünk metrikáinak grafikus megjelenítéséért felel.</p>
 <ol>
 <li>
-<p>A Prometheus saját webfelületét a prometheus-t futtató pod 9090-es porján érjük el. Különösebb bonyolítás nélkül továbbítsuk ezt egy helyi portra egy <strong>új</strong> terminálban kiadott parancssal: <code>kubectl port-forward $(kubectl get pods --selector "app=prometheus" --output=name) 9090:9090</code></p>
+<p>A Prometheus saját webfelületét a prometheus-t futtató pod 9090-es porján érjük el. Különösebb bonyolítás nélkül továbbítsuk ezt egy helyi portra egy <strong>új</strong> terminálban kiadott parancssal: <code>kubectl port-forward $(kubectl get pods --selector "app.kubernetes.io/name=prometheus" --output=name) 9090:9090</code></p>
 </li>
 <li>
 <p>Nyissuk meg böngészőben a <a href="http://localhost:9090">http://localhost:9090</a> címen. Nézzük meg a megtalált <em>target</em>-eket és az <em>alert</em>-eket is.</p>
