@@ -45,7 +45,7 @@ Hagyjunk időt a telepítésnek. A helm chart sikeres telepítése után még az
 
 A Prometheus saját webfelülete nem túl felhasználóbarát, de célratörő eszköz. A Grafana a már jól összeállított rendszerünk metrikáinak grafikus megjelenítéséért felel.
 
-1. A Prometheus saját webfelületét a prometheus-t futtató pod 9090-es porján érjük el. Különösebb bonyolítás nélkül továbbítsuk ezt egy helyi portra egy **új** terminálban kiadott parancssal: `kubectl port-forward $(kubectl get pods --selector "app=prometheus" --output=name) 9090:9090`
+1. A Prometheus saját webfelületét a prometheus-t futtató pod 9090-es porján érjük el. Különösebb bonyolítás nélkül továbbítsuk ezt egy helyi portra egy **új** terminálban kiadott parancssal: `kubectl port-forward $(kubectl get pods --selector "app.kubernetes.io/name=prometheus" --output=name) 9090:9090`
 
 1. Nyissuk meg böngészőben a <http://localhost:9090> címen. Nézzük meg a megtalált _target_-eket és az _alert_-eket is.
 
