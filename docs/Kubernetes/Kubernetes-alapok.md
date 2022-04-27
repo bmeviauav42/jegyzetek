@@ -209,25 +209,48 @@ A dashboard alapvetően felhasználó authentikáció után érhető el. Az egys
 
 1. Telepítsük a dashboard-ot:
 
-    - Telepítsük alapbeállításokkal: `kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/aio/deploy/alternative.yaml`
+    `kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.5.1/aio/deploy/recommended.yaml`
+
+1. A dashboard egy webes felület, ami minden kérésünket a Kubernetes API felé továbbítja. A Kubernetes API eléréséhez viszont authentikációra van szükségünk. Ezt most szeretnénk [megkerülni](https://github.com/kubernetes/dashboard/blob/8831eaa602c571e8ba3619ff256a7fd7e8162326/docs/user/access-control/README.md) az egyszerűség végett.
+
+    !!! warning "Csak fejlesztői gépen"
+        Az alábbiak csak helyi működési módban javasoltak! Most szándékosan kikerüljük az authentikációt!
 
     - Szerkesszünk bele a konténer argumentumaiba, hogy engedélyezzük az anonim belépést: `kubectl edit deployment kubernetes-dashboard --namespace kubernetes-dashboard`
 
         A parancs letölti és megnyitja a _deployment_ leíróját. Keressük meg a konténer indítási argumentumait, és adjunk hozzá még két sort (ügyeljünk a megfelelő behúzásra):
 
-        ```yaml hl_lines="4-5"
+        ```yaml hl_lines="4"
         - args:
+          - --auto-generate-certificates
           - --namespace=kubernetes-dashboard
-          - --enable-insecure-login
           - --enable-skip-login
-          - --authentication-mode=basic
         ```
 
-        !!! warning "Csak fejlesztői gépen"
-            Ez csak helyi működési módban javasolt! Most szándékosan kikerültük az authentikációt!
+    - Hozzunk létre egy olyan szerepkört, ami adminisztrátori jogosultsággal rendelkezik. A dashboard ennek a szerepkörnek a nevében fog futni, így minden művelet adminisztrátorként hajtódik végre. Egy yaml fájlba másoljuk be az alábbit:
 
-    !!! note ""
-        Értelemszerűen a dashboard-ot csak egyszer kell egy klaszterbe telepíteni.
+        ```yaml
+        apiVersion: rbac.authorization.k8s.io/v1
+        kind: ClusterRoleBinding
+        metadata:
+          name: kubernetes-dashboard
+          namespace: kubernetes-dashboard
+        roleRef:
+          apiGroup: rbac.authorization.k8s.io
+          kind: ClusterRole
+          name: cluster-admin
+        subjects:
+          - kind: ServiceAccount
+            name: kubernetes-dashboard
+            namespace: kubernetes-dashboard
+        ```
+
+        Ezzel kell felülírni a már létező szerepkört, amihez először törölni kell, majd létrehozni a yaml-ben szereplő erőforrást:
+
+        ```bash
+        kubectl delete -f <fájlnév>
+        kubectl apply -f <fájlnév>
+        ```
 
 1. Adjunk egy pár másodpercet a felállásra. Nézzük meg, hogy rendben fut-e: `kubectl get pods -n kubernetes-dashboard`
 
@@ -240,21 +263,26 @@ A dashboard alapvetően felhasználó authentikáció után érhető el. Az egys
 
     - Ez a proxy nem csak helyben futtatott klaszterrel használható. Ha a felhőben, tőlünk távol fut a klaszter, ugyanígy tudunk vele kommunikálni.
 
-1. Nyissuk meg böngészőben: <http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/kubernetes-dashboard:/proxy/>
+1. Nyissuk meg böngészőben: <http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy>
 
     - Értelmezzük az URL-t:
 
         - `localhost:8001`: a proxy helyi portja
         - `/api/v1`: Kubernetes Api verzió, ez mindig így néz ki
         - `/namespaces/kubernetes-dashboard`: a _kubernetes-dashboard_ névtérben szeretnénk elérni egy elemet
-        - `/services/kubernetes-dashboard:` a névtéren belül a service-ek közül a _kubernetes-dashboard_ nevű szolgáltatást szeretnénk elérni
+        - `/services/https:kubernetes-dashboard:` a névtéren belül a service-ek közül a _kubernetes-dashboard_ nevű szolgáltatást szeretnénk elérni
         - `/proxy`: kérjük az erőforrás proxy-zását (ez mindig így néz ki)
+
+1. A dashboard nyitőfelületén a _Skip_ gombot nyomjuk meg. (Ennek hatására a kérések a korábban létrehozott szerepkörrel, és nem a bejelentkezett felhasználó nevében fognak futni. Hiszen pont, hogy nem akarunk bejelentkezni most.)
 
 1. Ismerkedjünk meg a dashboard webes felületével:
 
     - Nézzük meg a bal oldali menü elemeit.
     - Válasszunk névteret.
     - Nézzük meg a podokat.
+
+!!! tip "Lens"
+    A dashboard hátránya, hogy a klaszteren belül fut, így az eléréséhez publikálni kell a klaszteren kívülre. Léteznek alternatív kliens szoftverek is, például a [Lens](https://k8slens.dev/), amivel kényelmesen tudunk klasztereket adminisztrálni.
 
 ### Pod - ReplicaSet - Deployment - Service kapcsolata
 
@@ -326,9 +354,11 @@ Használjuk a dashboard-ot a következőkhöz. A feladatban végig a _kubernetes
           spec:
             containers: # leírja a podban a konténert
               - name: kubernetes-dashboard
-                image: "kubernetesui/dashboard:v2.0.3"
+                image: "kubernetesui/dashboard:v2.5.1"
                 args:
-                  - "--namespace=kubernetes-dashboard"
+                  - '--auto-generate-certificates'
+                  - '--namespace=kubernetes-dashboard'
+                  - '--enable-skip-login'
                 ports:
                   - containerPort: 9090
                     protocol: TCP
