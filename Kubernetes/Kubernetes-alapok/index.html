@@ -12,7 +12,7 @@
       
       
       <link rel="icon" href="../../favicon.ico">
-      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.3.0">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-7.3.6">
     
     
       
@@ -20,7 +20,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.8b42a75e.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.a57b2b03.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.3f5d1f46.min.css">
@@ -630,6 +630,8 @@
       </a>
       
         
+
+
 <nav class="md-nav md-nav--secondary" aria-label="Tartalomjegyzék">
   
   
@@ -857,6 +859,8 @@
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
+
+
 <nav class="md-nav md-nav--secondary" aria-label="Tartalomjegyzék">
   
   
@@ -1230,28 +1234,46 @@ spec:
 <ol>
 <li>
 <p>Telepítsük a dashboard-ot:</p>
-<ul>
-<li>
-<p>Telepítsük alapbeállításokkal: <code>kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/aio/deploy/alternative.yaml</code></p>
+<p><code>kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.5.1/aio/deploy/recommended.yaml</code></p>
 </li>
+<li>
+<p>A dashboard egy webes felület, ami minden kérésünket a Kubernetes API felé továbbítja. A Kubernetes API eléréséhez viszont authentikációra van szükségünk. Ezt most szeretnénk <a href="https://github.com/kubernetes/dashboard/blob/8831eaa602c571e8ba3619ff256a7fd7e8162326/docs/user/access-control/README.md">megkerülni</a> az egyszerűség végett.</p>
+<div class="admonition warning">
+<p class="admonition-title">Csak fejlesztői gépen</p>
+<p>Az alábbiak csak helyi működési módban javasoltak! Most szándékosan kikerüljük az authentikációt!</p>
+</div>
+<ul>
 <li>
 <p>Szerkesszünk bele a konténer argumentumaiba, hogy engedélyezzük az anonim belépést: <code>kubectl edit deployment kubernetes-dashboard --namespace kubernetes-dashboard</code></p>
 <p>A parancs letölti és megnyitja a <em>deployment</em> leíróját. Keressük meg a konténer indítási argumentumait, és adjunk hozzá még két sort (ügyeljünk a megfelelő behúzásra):</p>
 <div class="highlight"><pre><span></span><code><span class="p p-Indicator">-</span> <span class="nt">args</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">--auto-generate-certificates</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">--namespace=kubernetes-dashboard</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">--enable-insecure-login</span>
 <span class="hll">  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">--enable-skip-login</span>
-</span><span class="hll">  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">--authentication-mode=basic</span>
 </span></code></pre></div>
-<div class="admonition warning">
-<p class="admonition-title">Csak fejlesztői gépen</p>
-<p>Ez csak helyi működési módban javasolt! Most szándékosan kikerültük az authentikációt!</p>
-</div>
+</li>
+<li>
+<p>Hozzunk létre egy olyan szerepkört, ami adminisztrátori jogosultsággal rendelkezik. A dashboard ennek a szerepkörnek a nevében fog futni, így minden művelet adminisztrátorként hajtódik végre. Egy yaml fájlba másoljuk be az alábbit:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">rbac.authorization.k8s.io/v1</span>
+<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ClusterRoleBinding</span>
+<span class="nt">metadata</span><span class="p">:</span>
+  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">kubernetes-dashboard</span>
+  <span class="nt">namespace</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">kubernetes-dashboard</span>
+<span class="nt">roleRef</span><span class="p">:</span>
+  <span class="nt">apiGroup</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">rbac.authorization.k8s.io</span>
+  <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ClusterRole</span>
+  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">cluster-admin</span>
+<span class="nt">subjects</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ServiceAccount</span>
+    <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">kubernetes-dashboard</span>
+    <span class="nt">namespace</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">kubernetes-dashboard</span>
+</code></pre></div>
+<p>Ezzel kell felülírni a már létező szerepkört, amihez először törölni kell, majd létrehozni a yaml-ben szereplő erőforrást:</p>
+<div class="highlight"><pre><span></span><code>kubectl delete -f &lt;fájlnév&gt;
+kubectl apply -f &lt;fájlnév&gt;
+</code></pre></div>
 </li>
 </ul>
-<div class="admonition note">
-<p>Értelemszerűen a dashboard-ot csak egyszer kell egy klaszterbe telepíteni.</p>
-</div>
 </li>
 <li>
 <p>Adjunk egy pár másodpercet a felállásra. Nézzük meg, hogy rendben fut-e: <code>kubectl get pods -n kubernetes-dashboard</code></p>
@@ -1271,7 +1293,7 @@ spec:
 </ul>
 </li>
 <li>
-<p>Nyissuk meg böngészőben: <a href="http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/kubernetes-dashboard:/proxy/">http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/kubernetes-dashboard:/proxy/</a></p>
+<p>Nyissuk meg böngészőben: <a href="http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy">http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy</a></p>
 <ul>
 <li>
 <p>Értelmezzük az URL-t:</p>
@@ -1279,11 +1301,14 @@ spec:
 <li><code>localhost:8001</code>: a proxy helyi portja</li>
 <li><code>/api/v1</code>: Kubernetes Api verzió, ez mindig így néz ki</li>
 <li><code>/namespaces/kubernetes-dashboard</code>: a <em>kubernetes-dashboard</em> névtérben szeretnénk elérni egy elemet</li>
-<li><code>/services/kubernetes-dashboard:</code> a névtéren belül a service-ek közül a <em>kubernetes-dashboard</em> nevű szolgáltatást szeretnénk elérni</li>
+<li><code>/services/https:kubernetes-dashboard:</code> a névtéren belül a service-ek közül a <em>kubernetes-dashboard</em> nevű szolgáltatást szeretnénk elérni</li>
 <li><code>/proxy</code>: kérjük az erőforrás proxy-zását (ez mindig így néz ki)</li>
 </ul>
 </li>
 </ul>
+</li>
+<li>
+<p>A dashboard nyitőfelületén a <em>Skip</em> gombot nyomjuk meg. (Ennek hatására a kérések a korábban létrehozott szerepkörrel, és nem a bejelentkezett felhasználó nevében fognak futni. Hiszen pont, hogy nem akarunk bejelentkezni most.)</p>
 </li>
 <li>
 <p>Ismerkedjünk meg a dashboard webes felületével:</p>
@@ -1294,6 +1319,10 @@ spec:
 </ul>
 </li>
 </ol>
+<div class="admonition tip">
+<p class="admonition-title">Lens</p>
+<p>A dashboard hátránya, hogy a klaszteren belül fut, így az eléréséhez publikálni kell a klaszteren kívülre. Léteznek alternatív kliens szoftverek is, például a <a href="https://k8slens.dev/">Lens</a>, amivel kényelmesen tudunk klasztereket adminisztrálni.</p>
+</div>
 <h3 id="pod-replicaset-deployment-service-kapcsolata">Pod - ReplicaSet - Deployment - Service kapcsolata<a class="headerlink" href="#pod-replicaset-deployment-service-kapcsolata" title="Permanent link">&para;</a></h3>
 <p>Használjuk a dashboard-ot a következőkhöz. A feladatban végig a <em>kubernetes-dashboard</em> névtérben dolgozunk.</p>
 <ol>
@@ -1367,9 +1396,11 @@ spec:
     <span class="nt">spec</span><span class="p">:</span>
       <span class="nt">containers</span><span class="p">:</span> <span class="c1"># leírja a podban a konténert</span>
         <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">kubernetes-dashboard</span>
-          <span class="nt">image</span><span class="p">:</span> <span class="s">&quot;kubernetesui/dashboard:v2.0.3&quot;</span>
+          <span class="nt">image</span><span class="p">:</span> <span class="s">&quot;kubernetesui/dashboard:v2.5.1&quot;</span>
           <span class="nt">args</span><span class="p">:</span>
-            <span class="p p-Indicator">-</span> <span class="s">&quot;--namespace=kubernetes-dashboard&quot;</span>
+            <span class="p p-Indicator">-</span> <span class="s">&#39;--auto-generate-certificates&#39;</span>
+            <span class="p p-Indicator">-</span> <span class="s">&#39;--namespace=kubernetes-dashboard&#39;</span>
+            <span class="p p-Indicator">-</span> <span class="s">&#39;--enable-skip-login&#39;</span>
           <span class="nt">ports</span><span class="p">:</span>
             <span class="p p-Indicator">-</span> <span class="nt">containerPort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">9090</span>
               <span class="nt">protocol</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">TCP</span>
@@ -1480,10 +1511,10 @@ spec:
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.instant", "navigation.top", "search.suggest"], "translations": {"clipboard.copy": "M\u00e1sol\u00e1s v\u00e1g\u00f3lapra", "clipboard.copied": "V\u00e1g\u00f3lapra m\u00e1solva", "search.config.lang": "hu", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Keres\u00e9s", "search.result.placeholder": "Keres\u00e9shez \u00edrj ide valamit", "search.result.none": "Nincs tal\u00e1lat", "search.result.one": "1 egyez\u0151 dokumentum", "search.result.other": "# egyez\u0151 dokumentum", "search.result.more.one": "1 tov\u00e1bbi tal\u00e1lat az oldalon", "search.result.more.other": "# tov\u00e1bbi tal\u00e1lat az oldalon", "search.result.term.missing": "\u00dcres", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.f8263e09.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.instant", "navigation.top", "search.suggest"], "translations": {"clipboard.copy": "M\u00e1sol\u00e1s v\u00e1g\u00f3lapra", "clipboard.copied": "V\u00e1g\u00f3lapra m\u00e1solva", "search.config.lang": "hu", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Keres\u00e9s", "search.result.placeholder": "Keres\u00e9shez \u00edrj ide valamit", "search.result.none": "Nincs tal\u00e1lat", "search.result.one": "1 egyez\u0151 dokumentum", "search.result.other": "# egyez\u0151 dokumentum", "search.result.more.one": "1 tov\u00e1bbi tal\u00e1lat az oldalon", "search.result.more.other": "# tov\u00e1bbi tal\u00e1lat az oldalon", "search.result.term.missing": "\u00dcres", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.fcfe8b6d.min.js", "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.4fc53ad4.min.js"></script>
+      <script src="../../assets/javascripts/bundle.b1047164.min.js"></script>
       
     
   </body>

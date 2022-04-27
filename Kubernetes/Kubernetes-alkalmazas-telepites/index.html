@@ -12,7 +12,7 @@
       
       
       <link rel="icon" href="../../favicon.ico">
-      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.3.0">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-7.3.6">
     
     
       
@@ -20,7 +20,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.8b42a75e.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.a57b2b03.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.3f5d1f46.min.css">
@@ -644,6 +644,8 @@
       </a>
       
         
+
+
 <nav class="md-nav md-nav--secondary" aria-label="Tartalomjegyzék">
   
   
@@ -822,6 +824,8 @@
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
+
+
 <nav class="md-nav md-nav--secondary" aria-label="Tartalomjegyzék">
   
   
@@ -990,11 +994,14 @@ helm repo update
 </code></pre></div>
 </li>
 <li>
-<p>Telepítsük: <code>helm install traefik traefik/traefik --set ports.web.nodePort=32080 --set service.type=NodePort</code></p>
+<p>Telepítsük:</p>
+<div class="highlight"><pre><span></span><code>helm install traefik traefik/traefik --set ports.web.nodePort<span class="o">=</span><span class="m">32080</span> --set service.type<span class="o">=</span>NodePort --version <span class="m">10</span>.19.4<span class="sb">`</span>
+</code></pre></div>
 <ul>
 <li>A legelső <code>traefik</code> a Helm release nevét adja meg. Ezzel tudunk rá hivatkozni a jövőben.</li>
 <li>A <code>traefik/traefik</code> azonosítha a telepítendő chartot (repository/chartnév).</li>
 <li>A <code>--set</code> kapcsolóval a chart változóit állítjuk be.</li>
+<li>A <code>--verzió</code> a Helm chart verzióját adja meg.</li>
 </ul>
 <div class="admonition info">
 <p class="admonition-title">Publikus eléréshez</p>
@@ -1008,7 +1015,7 @@ helm repo update
 </ul>
 </li>
 <li>
-<p>A Traefik dashboard-ja nem elérhető "kívülről". A dashboard segít minket látni a Traefik konfigurációját és működését. Mivel ez a klaszter belső állapotát publikálja, production üzemben valamilyen módon authentikálnunk kellene. Ezt most megkerülve <code>kubect</code> segítségével egy helyi portra továbbítjuk a Traefik dashboard-ot. A következő parancsot egy <strong>új</strong> konzolban adjuk ki, és utána hagyjuk nyitva a konzolt:</p>
+<p>A Traefik dashboard-ja nem elérhető "kívülről". A dashboard segít minket látni a Traefik konfigurációját és működését. Mivel ez a klaszter belső állapotát publikálja, production üzemben valamilyen módon authentikálnunk kellene. Ezt most megkerülve <code>kubectl</code> segítségével egy helyi portra továbbítjuk a Traefik dashboard-ot. A következő parancsot egy <strong>új</strong> konzolban adjuk ki, és utána hagyjuk nyitva a konzolt:</p>
 <div class="highlight"><pre><span></span><code>kubectl port-forward <span class="k">$(</span>kubectl get pods --selector <span class="s2">&quot;app.kubernetes.io/name=traefik&quot;</span> --output<span class="o">=</span>name<span class="k">)</span> <span class="m">9000</span>:9000
 </code></pre></div>
 </li>
@@ -1225,10 +1232,10 @@ docker-compose build
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.instant", "navigation.top", "search.suggest"], "translations": {"clipboard.copy": "M\u00e1sol\u00e1s v\u00e1g\u00f3lapra", "clipboard.copied": "V\u00e1g\u00f3lapra m\u00e1solva", "search.config.lang": "hu", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Keres\u00e9s", "search.result.placeholder": "Keres\u00e9shez \u00edrj ide valamit", "search.result.none": "Nincs tal\u00e1lat", "search.result.one": "1 egyez\u0151 dokumentum", "search.result.other": "# egyez\u0151 dokumentum", "search.result.more.one": "1 tov\u00e1bbi tal\u00e1lat az oldalon", "search.result.more.other": "# tov\u00e1bbi tal\u00e1lat az oldalon", "search.result.term.missing": "\u00dcres", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.f8263e09.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.instant", "navigation.top", "search.suggest"], "translations": {"clipboard.copy": "M\u00e1sol\u00e1s v\u00e1g\u00f3lapra", "clipboard.copied": "V\u00e1g\u00f3lapra m\u00e1solva", "search.config.lang": "hu", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Keres\u00e9s", "search.result.placeholder": "Keres\u00e9shez \u00edrj ide valamit", "search.result.none": "Nincs tal\u00e1lat", "search.result.one": "1 egyez\u0151 dokumentum", "search.result.other": "# egyez\u0151 dokumentum", "search.result.more.one": "1 tov\u00e1bbi tal\u00e1lat az oldalon", "search.result.more.other": "# tov\u00e1bbi tal\u00e1lat az oldalon", "search.result.term.missing": "\u00dcres", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.fcfe8b6d.min.js", "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.4fc53ad4.min.js"></script>
+      <script src="../../assets/javascripts/bundle.b1047164.min.js"></script>
       
     
   </body>
