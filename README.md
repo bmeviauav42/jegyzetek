@@ -14,6 +14,6 @@ A jegyzetek MkDocs segítségével készülnek és GitHub Pages-en kerülnek pub
 
 - Konzolból
   1. Powershell konzol nyitása a repository gyökerébe
-  1. `docker run -it --rm -p 8000:8000 -v ${PWD}:/docs squidfunk/mkdocs-material:7.3.0`
+  1. `docker run -it --rm -p 8000:8000 -v ${PWD}:/docs squidfunk/mkdocs-material:7.3.6`
 
 A helyi verzió <http://localhost:8000> címen érhető el böngészőben. A Markdown forrás szerkesztése és mentése után automatikusan frissül a weboldal.
