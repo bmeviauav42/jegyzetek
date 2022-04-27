@@ -56,11 +56,16 @@ A Traefik-et [Helm charttal](https://github.com/containous/traefik-helm-chart) f
     helm repo update
     ```
 
-1. Telepítsük: `helm install traefik traefik/traefik --set ports.web.nodePort=32080 --set service.type=NodePort`
+1. Telepítsük:
+
+    ```bash
+    helm install traefik traefik/traefik --set ports.web.nodePort=32080 --set service.type=NodePort --version 10.19.4`
+    ```
 
      - A legelső `traefik` a Helm release nevét adja meg. Ezzel tudunk rá hivatkozni a jövőben.
      - A `traefik/traefik` azonosítha a telepítendő chartot (repository/chartnév).
      - A `--set` kapcsolóval a chart változóit állítjuk be.
+     - A `--verzió` a Helm chart verzióját adja meg.
 
     !!! info "Publikus eléréshez"
         A Traefik jelen konfigurációban _NodePort_ service típussal van konfigurálva, ami azt jelenti, lokálisan, helyben a megadott porton lesz csak elérhető. Ha publikusan elérhető klaszterben dolgozunk, akkor tipikusan _LoadBalancer_ service típust fogunk kérni, hogy publikus IP címet is kapjon a Traefik.
@@ -69,7 +74,7 @@ A Traefik-et [Helm charttal](https://github.com/containous/traefik-helm-chart) f
 
      - Látunk kell egy traefik kezdetű podot.
 
-1. A Traefik dashboard-ja nem elérhető "kívülről". A dashboard segít minket látni a Traefik konfigurációját és működését. Mivel ez a klaszter belső állapotát publikálja, production üzemben valamilyen módon authentikálnunk kellene. Ezt most megkerülve `kubect` segítségével egy helyi portra továbbítjuk a Traefik dashboard-ot. A következő parancsot egy **új** konzolban adjuk ki, és utána hagyjuk nyitva a konzolt:
+1. A Traefik dashboard-ja nem elérhető "kívülről". A dashboard segít minket látni a Traefik konfigurációját és működését. Mivel ez a klaszter belső állapotát publikálja, production üzemben valamilyen módon authentikálnunk kellene. Ezt most megkerülve `kubectl` segítségével egy helyi portra továbbítjuk a Traefik dashboard-ot. A következő parancsot egy **új** konzolban adjuk ki, és utána hagyjuk nyitva a konzolt:
 
     ```bash
     kubectl port-forward $(kubectl get pods --selector "app.kubernetes.io/name=traefik" --output=name) 9000:9000
